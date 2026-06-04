@@ -2,7 +2,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1A1A2E;
 }
 
 @theme inline {
@@ -10,17 +10,99 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* AxenOne Brand Palette */
+  --color-gold:        #D4AF37;
+  --color-gold-muted:  #C5A059;
+  --color-gold-light:  #F5EDD3;
+  --color-gold-dark:   #A8892E;
+  --color-surface:     #F8F9FA;
+  --color-surface-2:   #F1F3F5;
+  --color-axen-dark:   #1A1A2E;
+  --color-axen-navy:   #16213E;
+  --color-line:        #E8E8E8;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom range input styling for sliders.
+   The track gradient is applied via inline style in SliderRow — this class
+   only handles the thumb and resets the native appearance. */
+input[type="range"].gold-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 9999px;
+  outline: none;
+}
+input[type="range"].gold-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid #D4AF37;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  transition: box-shadow 0.15s ease;
+}
+input[type="range"].gold-slider::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 0 4px rgba(212,175,55,0.2);
+}
+input[type="range"].gold-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid #D4AF37;
+  cursor: pointer;
+}
+
+/* Smooth fade-in for modal overlay */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in   { animation: fade-in 0.2s ease forwards; }
+.animate-slide-up  { animation: slide-up 0.25s cubic-bezier(0.16,1,0.3,1) forwards; }
+
+/* Thin scrollbar for kanban column cards */
+.overflow-y-auto::-webkit-scrollbar { width: 3px; }
+.overflow-y-auto::-webkit-scrollbar-track { background: transparent; }
+.overflow-y-auto::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 9999px; }
+
+/* Leaflet popup — strip default chrome, let PropertyCard own all styling */
+.leaflet-popup-content-wrapper {
+  padding: 0 !important;
+  border-radius: 16px !important;
+  overflow: hidden;
+  border: none !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18) !important;
+}
+.leaflet-popup-content {
+  margin: 0 !important;
+  line-height: normal;
+}
+.leaflet-popup-tip-container { display: none; }
+.leaflet-popup-close-button  { display: none !important; }
+/* Remove Leaflet attribution clutter on small screens */
+.leaflet-control-attribution { font-size: 9px !important; }
+
+/* Card hover lift */
+.card-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
 }

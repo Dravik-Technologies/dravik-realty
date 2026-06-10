@@ -1,6 +1,7 @@
 # DRAVIK Platform — Implementation Specification
 
 > Status: Draft for approval · Date: 2026-06-10
+> **Living phase status & roadmap:** [../planning/phases.md](../planning/phases.md).
 > Supersedes the `apps/web` frontend layout in [platform-foundation.md](platform-foundation.md) per
 > approved product direction: single entry point `app.dravikrealty.com`, DRAVIK Command Center as
 > the host application, feature modules as workspace packages. All other foundation decisions

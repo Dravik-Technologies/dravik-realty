@@ -1,9 +1,11 @@
 # DRAVIK Platform Foundation — Architecture Design
 
-> Status: Proposed · Date: 2026-06-10
+> Status: Proposed (superseded in key areas) · Date: 2026-06-10
+> **See [../planning/phases.md](../planning/phases.md) for the current reconciled phase model and status.**
 > Scope: identity, multi-tenancy, authorization, entitlements, API, database, deployment, and the
 > extraction path for CRM, Realty, Lending, Marketing, Referrals, Broker Suite, and Client Portal.
 > Companion to the repository assessment (frontend prototype, clean domain boundaries, no backend).
+> Note: implementation-spec.md + phases.md supersede the phase numbering and `apps/web` layout details here.
 
 **Key decisions up front:** one Entra External ID tenant for all end users (brokerage = *application*
 tenant, never an Entra tenant); a single shared Postgres database with one schema per module,

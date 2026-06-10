@@ -1,8 +1,9 @@
 # DRAVIK Phase 1 — Repository Reorganization: Execution Backlog
 
 > Status: Ready for execution · Date: 2026-06-10
+> **Living phase status & roadmap:** [docs/planning/phases.md](./phases.md) (single source of truth for sequencing + current state).
 > Source of truth for *what* we build: [implementation-spec.md](../architecture/implementation-spec.md) (§1, §2, §16, §17).
-> This document is the *how and when*. No architecture decisions are made here.
+> This document is the *how and when* for the re-org. No architecture decisions are made here.
 >
 > **Phase 1 scope guardrails (hard):** preserve all existing functionality · keep all mock data ·
 > keep all current routes working (redirects allowed) · no database code · no authentication ·

@@ -5,6 +5,7 @@ import {
   Plus, ChevronDown, Globe, FileText, Printer, Home, Edit, Eye,
 } from "lucide-react";
 import type { Campaign, MarketingTab, PageTemplate } from "@dravik/contracts/marketing";
+import type { Property } from "@dravik/contracts/realty";
 import { SAMPLE_CAMPAIGNS, PAGE_TEMPLATES } from "../data/marketing";
 import CampaignDashboard from "../components/CampaignDashboard";
 import TemplateGallery from "../components/TemplateGallery";
@@ -137,7 +138,7 @@ const CREATE_OPTIONS = [
 type CreateAction = (typeof CREATE_OPTIONS)[number]["action"];
 
 // ─── Marketing page ───────────────────────────────────────────
-export default function MarketingPage() {
+export default function MarketingPage({ properties }: { properties: Property[] }) {
   const [tab, setTab] = useState<MarketingTab>("campaigns");
 
   const [flyerOpen,    setFlyerOpen]    = useState(false);
@@ -299,6 +300,7 @@ export default function MarketingPage() {
       <PropertyPagePreview
         open={propPageOpen}
         onClose={() => setPropPageOpen(false)}
+        properties={properties}
       />
     </>
   );

@@ -5,7 +5,8 @@
   "exports": {
     "./crm": "./src/crm/index.ts",
     "./realty": "./src/realty/index.ts",
-    "./lending": "./src/lending/index.ts"
+    "./lending": "./src/lending/index.ts",
+    "./marketing": "./src/marketing/index.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit"

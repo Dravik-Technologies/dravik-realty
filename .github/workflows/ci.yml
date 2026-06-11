@@ -31,6 +31,9 @@ jobs:
       - name: Lint, typecheck, build
         run: pnpm turbo run lint typecheck build
 
+      - name: Boundary report (warn mode)
+        run: pnpm boundaries
+
   e2e:
     name: characterization (playwright)
     runs-on: ubuntu-latest

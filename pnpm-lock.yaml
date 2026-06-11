@@ -35,6 +35,9 @@ importers:
       '@dravik/crm':
         specifier: workspace:*
         version: link:../../packages/crm
+      '@dravik/lending':
+        specifier: workspace:*
+        version: link:../../packages/lending
       '@dravik/realty':
         specifier: workspace:*
         version: link:../../packages/realty
@@ -151,6 +154,43 @@ importers:
       '@types/leaflet':
         specifier: ^1.9.21
         version: 1.9.21
+      '@types/react':
+        specifier: ^19
+        version: 19.2.17
+      next:
+        specifier: 16.2.6
+        version: 16.2.6(@babel/core@7.29.7)(@playwright/test@1.60.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react:
+        specifier: 19.2.4
+        version: 19.2.4
+      react-dom:
+        specifier: 19.2.4
+        version: 19.2.4(react@19.2.4)
+      typescript:
+        specifier: ^5
+        version: 5.9.3
+
+  packages/lending:
+    dependencies:
+      '@dnd-kit/core':
+        specifier: ^6.3.1
+        version: 6.3.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@dnd-kit/sortable':
+        specifier: ^10.0.0
+        version: 10.0.0(@dnd-kit/core@6.3.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)
+      '@dnd-kit/utilities':
+        specifier: ^3.2.2
+        version: 3.2.2(react@19.2.4)
+      '@dravik/contracts':
+        specifier: workspace:*
+        version: link:../contracts
+      '@dravik/shared':
+        specifier: workspace:*
+        version: link:../shared
+      lucide-react:
+        specifier: ^1.16.0
+        version: 1.17.0(react@19.2.4)
+    devDependencies:
       '@types/react':
         specifier: ^19
         version: 19.2.17

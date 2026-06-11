@@ -6,7 +6,7 @@ import Link from "next/link";
 import { SAMPLE_LEADS } from "@dravik/crm";
 import { AGENTS } from "@/data/agents";
 import { SAMPLE_TRANSACTIONS } from "@dravik/realty";
-import { MORTGAGE_APPS } from "@/data/mortgage";
+import { MORTGAGE_APPS } from "@dravik/lending";
 import { cn } from "@dravik/shared";
 
 type ResultCat = "Lead" | "Agent" | "Transaction" | "Mortgage";

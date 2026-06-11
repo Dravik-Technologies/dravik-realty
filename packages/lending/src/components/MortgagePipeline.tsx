@@ -18,7 +18,7 @@ import {
   verticalListSortingStrategy,
   arrayMove,
 } from "@dnd-kit/sortable";
-import type { MortgageApplication, LoanStage } from "@/types/mortgage";
+import type { MortgageApplication, LoanStage } from "@dravik/contracts/lending";
 import ApplicationCard, { ApplicationCardContent } from "./ApplicationCard";
 import { formatCurrency } from "@dravik/shared";
 import { cn } from "@dravik/shared";

@@ -6,8 +6,8 @@ import {
   TrendingUp, Landmark, Search, X, Calculator, Kanban,
   AlertTriangle,
 } from "lucide-react";
-import type { MortgageApplication, LoanView } from "@/types/mortgage";
-import { MORTGAGE_APPS } from "@/data/mortgage";
+import type { MortgageApplication, LoanView } from "@dravik/contracts/lending";
+import { MORTGAGE_APPS } from "../data/mortgage";
 import MortgagePipeline    from "./MortgagePipeline";
 import MortgageDetailPanel from "./MortgageDetailPanel";
 import PreQualCalculator   from "./PreQualCalculator";

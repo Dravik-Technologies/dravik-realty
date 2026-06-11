@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { SAMPLE_LEADS } from "@dravik/crm";
 import { SAMPLE_TRANSACTIONS } from "@dravik/realty";
-import { MORTGAGE_APPS } from "@/data/mortgage";
+import { MORTGAGE_APPS } from "@dravik/lending";
 import { formatCurrency, cn } from "@dravik/shared";
 
 // ─── Module-level precomputed data ────────────────────────────

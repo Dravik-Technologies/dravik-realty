@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "@dravik/ui/tokens.css";
+@source "../../../../packages/ui";
 
 :root {
   --background: #ffffff;
@@ -10,17 +12,6 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-
-  /* AxenOne Brand Palette */
-  --color-gold:        #D4AF37;
-  --color-gold-muted:  #C5A059;
-  --color-gold-light:  #F5EDD3;
-  --color-gold-dark:   #A8892E;
-  --color-surface:     #F8F9FA;
-  --color-surface-2:   #F1F3F5;
-  --color-axen-dark:   #1A1A2E;
-  --color-axen-navy:   #16213E;
-  --color-line:        #E8E8E8;
 }
 
 body {

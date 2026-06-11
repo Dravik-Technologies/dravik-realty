@@ -10,3 +10,7 @@ packages:
 allowBuilds:
   sharp: true
   unrs-resolver: true
+
+# Supply-chain guard: refuse packages published less than 24h ago, matching
+# the policy CI enforces, so local installs fail the same way CI would.
+minimumReleaseAge: 1440

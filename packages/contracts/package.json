@@ -4,7 +4,8 @@
   "private": true,
   "exports": {
     "./crm": "./src/crm/index.ts",
-    "./realty": "./src/realty/index.ts"
+    "./realty": "./src/realty/index.ts",
+    "./lending": "./src/lending/index.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit"

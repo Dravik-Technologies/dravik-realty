@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Upload, Building2 } from "lucide-react";
 import { COMPANY_INFO } from "@/data/settings";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 // ─── Shared input style ───────────────────────────────────────
 const inputCls =

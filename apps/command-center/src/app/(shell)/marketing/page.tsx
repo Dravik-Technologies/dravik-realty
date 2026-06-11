@@ -11,7 +11,7 @@ import TemplateGallery from "@/components/marketing/TemplateGallery";
 import FlyerDesigner from "@/components/marketing/FlyerDesigner";
 import PropertyPagePreview from "@/components/marketing/PropertyPagePreview";
 import PageBuilder from "@/components/marketing/PageBuilder";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 // ─── Status badge (module level) ─────────────────────────────
 function StatusPill({ status }: { status: Campaign["status"] }) {

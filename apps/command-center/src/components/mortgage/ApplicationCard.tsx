@@ -3,7 +3,7 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS }         from "@dnd-kit/utilities";
 import type { MortgageApplication } from "@/types/mortgage";
-import { cn, formatCurrency } from "@/lib/utils";
+import { cn, formatCurrency } from "@dravik/shared";
 
 // ─── Loan type badge ──────────────────────────────────────────
 const LOAN_TYPE_COLOR: Record<string, string> = {

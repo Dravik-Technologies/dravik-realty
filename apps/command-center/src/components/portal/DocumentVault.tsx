@@ -7,7 +7,7 @@ import {
   Upload, Eye,
 } from "lucide-react";
 import type { ClientDocument, ClientTransaction } from "@/types/client-portal";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 // ─── Icon map ─────────────────────────────────────────────────
 const DOC_ICON: Record<ClientDocument["type"], React.ElementType> = {

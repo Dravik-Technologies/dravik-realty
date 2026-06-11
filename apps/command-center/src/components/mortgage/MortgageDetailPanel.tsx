@@ -8,8 +8,8 @@ import {
   Phone, Mail, Building2, TrendingUp, DollarSign, ExternalLink,
 } from "lucide-react";
 import type { MortgageApplication, DetailTab, DocStatus, CondStatus } from "@/types/mortgage";
-import { formatCurrency } from "@/lib/utils";
-import { cn } from "@/lib/utils";
+import { formatCurrency } from "@dravik/shared";
+import { cn } from "@dravik/shared";
 
 // ─── Tab config ───────────────────────────────────────────────
 const TABS: { id: DetailTab; label: string; icon: React.ElementType }[] = [

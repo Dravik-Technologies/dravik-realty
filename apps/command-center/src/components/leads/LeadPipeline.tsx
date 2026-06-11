@@ -21,7 +21,7 @@ import {
 import type { Lead, LeadStatus, KanbanColumn } from "@/types/lead";
 import { KANBAN_COLUMNS } from "@/types/lead";
 import LeadCard, { LeadCardContent } from "./LeadCard";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 // ─── Single kanban column ─────────────────────────────────────
 function KanbanCol({

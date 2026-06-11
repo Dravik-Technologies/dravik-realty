@@ -1,0 +1,12 @@
+@theme inline {
+  /* AxenOne Brand Palette */
+  --color-gold:        #D4AF37;
+  --color-gold-muted:  #C5A059;
+  --color-gold-light:  #F5EDD3;
+  --color-gold-dark:   #A8892E;
+  --color-surface:     #F8F9FA;
+  --color-surface-2:   #F1F3F5;
+  --color-axen-dark:   #1A1A2E;
+  --color-axen-navy:   #16213E;
+  --color-line:        #E8E8E8;
+}

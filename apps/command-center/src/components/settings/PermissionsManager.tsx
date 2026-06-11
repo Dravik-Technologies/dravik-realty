@@ -5,7 +5,7 @@ import { UserPlus, X, ExternalLink, Mail, Shield } from "lucide-react";
 import type { SettingsUser, UserRole, UserStatus } from "@/types/settings";
 import { SETTINGS_USERS } from "@/data/settings";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 // ─── Role badge ───────────────────────────────────────────────
 const ROLE_STYLE: Record<UserRole, string> = {

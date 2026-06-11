@@ -12,8 +12,8 @@ import {
 } from "lucide-react";
 import type { DateRange, ViewMode, ReportTab, AnalyticsSnapshot, CampaignStat, MortgageMonthStat } from "@/types/analytics";
 import { ANALYTICS_DATA } from "@/data/analytics";
-import { formatCurrency } from "@/lib/utils";
-import { cn } from "@/lib/utils";
+import { formatCurrency } from "@dravik/shared";
+import { cn } from "@dravik/shared";
 
 // ─── Dynamic chart imports (ssr: false — Recharts uses ResizeObserver) ──
 const ProductionChart = dynamic(() => import("./ProductionChart"), {

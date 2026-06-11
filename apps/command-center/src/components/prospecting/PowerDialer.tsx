@@ -15,7 +15,7 @@ import {
   UserRound,
 } from "lucide-react";
 import type { CallDisposition, CallLogEntry, SellerLead } from "@/types/prospecting";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 const DISPOSITIONS: CallDisposition[] = [
   "No Answer",

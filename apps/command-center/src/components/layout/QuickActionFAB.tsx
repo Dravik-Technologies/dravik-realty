@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Plus, Users, Receipt, Globe, Megaphone } from "lucide-react";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 const ACTIONS = [
   { label: "Create Campaign",  icon: Megaphone, href: "/marketing",        bg: "bg-violet-500" },

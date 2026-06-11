@@ -3,8 +3,8 @@
 import { CheckCircle2, Circle, Clock } from "lucide-react";
 import type { ClientMortgage } from "@/types/client-portal";
 import { MORTGAGE_STAGES } from "@/types/client-portal";
-import { formatCurrency } from "@/lib/utils";
-import { cn } from "@/lib/utils";
+import { formatCurrency } from "@dravik/shared";
+import { cn } from "@dravik/shared";
 
 const STATUS_COLOR: Record<string, string> = {
   "Pre-Approval":          "#F59E0B",

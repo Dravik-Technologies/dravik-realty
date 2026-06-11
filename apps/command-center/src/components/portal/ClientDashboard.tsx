@@ -11,8 +11,8 @@ import type { ClientPortalData, ClientMessage, ActivityEntry, SavedProperty } fr
 import ClientTransactionCard from "./ClientTransactionCard";
 import MortgageProgressCard from "./MortgageProgressCard";
 import DocumentVault from "./DocumentVault";
-import { formatCurrency } from "@/lib/utils";
-import { cn } from "@/lib/utils";
+import { formatCurrency } from "@dravik/shared";
+import { cn } from "@dravik/shared";
 
 // ─── Types ─────────────────────────────────────────────────
 type PortalTab = "dashboard" | "transactions" | "properties" | "mortgage" | "documents" | "messages";

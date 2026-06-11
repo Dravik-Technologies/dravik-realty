@@ -4,7 +4,7 @@ import Link from "next/link";
 import { AlertTriangle, CheckCircle2, XCircle, ShieldCheck, FileText } from "lucide-react";
 import { LICENSE_RECORDS } from "@/data/settings";
 import type { LicenseStatus } from "@/types/settings";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 // ─── License status config ────────────────────────────────────
 const LIC_STATUS: Record<LicenseStatus, { icon: React.ElementType; cls: string; badge: string; label: string }> = {

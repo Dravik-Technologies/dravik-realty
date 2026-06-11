@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import { SELLER_LEADS } from "@/data/prospecting";
 import type { LeadType, SellerLead } from "@/types/prospecting";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 // ─── Geo helpers ──────────────────────────────────────────────
 function haversine(lat1: number, lng1: number, lat2: number, lng2: number): number {

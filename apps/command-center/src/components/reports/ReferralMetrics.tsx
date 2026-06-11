@@ -4,8 +4,8 @@ import {
   PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend,
 } from "recharts";
 import type { ReferralPartner } from "@/types/analytics";
-import { formatCurrency } from "@/lib/utils";
-import { cn } from "@/lib/utils";
+import { formatCurrency } from "@dravik/shared";
+import { cn } from "@dravik/shared";
 import { Users, Building2, User, TrendingUp } from "lucide-react";
 
 // ─── Pie tooltip ─────────────────────────────────────────────

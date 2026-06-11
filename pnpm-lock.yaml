@@ -26,6 +26,12 @@ importers:
       '@dnd-kit/utilities':
         specifier: ^3.2.2
         version: 3.2.2(react@19.2.4)
+      '@dravik/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
+      '@dravik/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       '@radix-ui/react-dialog':
         specifier: ^1.1.15
         version: 1.1.16(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -47,9 +53,6 @@ importers:
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
-      clsx:
-        specifier: ^2.1.1
-        version: 2.1.1
       leaflet:
         specifier: ^1.9.4
         version: 1.9.4
@@ -71,9 +74,6 @@ importers:
       recharts:
         specifier: ^3.8.1
         version: 3.8.1(@types/react@19.2.17)(react-dom@19.2.4(react@19.2.4))(react-is@16.13.1)(react@19.2.4)(redux@5.0.1)
-      tailwind-merge:
-        specifier: ^3.6.0
-        version: 3.6.0
     devDependencies:
       '@tailwindcss/postcss':
         specifier: ^4
@@ -96,6 +96,35 @@ importers:
       tailwindcss:
         specifier: ^4
         version: 4.3.0
+      typescript:
+        specifier: ^5
+        version: 5.9.3
+
+  packages/shared:
+    dependencies:
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+      tailwind-merge:
+        specifier: ^3.6.0
+        version: 3.6.0
+    devDependencies:
+      typescript:
+        specifier: ^5
+        version: 5.9.3
+
+  packages/ui:
+    dependencies:
+      '@dravik/shared':
+        specifier: workspace:*
+        version: link:../shared
+    devDependencies:
+      '@types/react':
+        specifier: ^19
+        version: 19.2.17
+      react:
+        specifier: 19.2.4
+        version: 19.2.4
       typescript:
         specifier: ^5
         version: 5.9.3

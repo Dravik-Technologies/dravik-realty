@@ -6,8 +6,8 @@ import {
   ResponsiveContainer, Legend,
 } from "recharts";
 import type { AgentStat, TimeSeriesPoint, ViewMode } from "@/types/analytics";
-import { formatCurrency } from "@/lib/utils";
-import { cn } from "@/lib/utils";
+import { formatCurrency } from "@dravik/shared";
+import { cn } from "@dravik/shared";
 import { TrendingUp, Award } from "lucide-react";
 
 // ─── Custom tooltips (module level) ──────────────────────────

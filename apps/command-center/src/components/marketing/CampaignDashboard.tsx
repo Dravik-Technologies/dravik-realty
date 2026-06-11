@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import type { Campaign, CampaignType } from "@/types/marketing";
 import { SAMPLE_CAMPAIGNS } from "@/data/marketing";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 // ─── Status badge ─────────────────────────────────────────────
 function StatusBadge({ status }: { status: Campaign["status"] }) {

@@ -12,8 +12,8 @@ import type {
 } from "@/types/transaction";
 import { STAGE_COLOR } from "./TransactionCard";
 import CommissionBreakdown from "./CommissionBreakdown";
-import { formatCurrency } from "@/lib/utils";
-import { cn } from "@/lib/utils";
+import { formatCurrency } from "@dravik/shared";
+import { cn } from "@dravik/shared";
 
 // ─── Shared helpers (module level) ───────────────────────────
 const TAB_CONFIG: { id: TransactionTab; label: string; icon: React.ElementType }[] = [

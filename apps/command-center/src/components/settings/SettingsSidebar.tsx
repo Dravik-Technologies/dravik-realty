@@ -5,7 +5,7 @@ import {
   Paintbrush, Bell, Lock,
 } from "lucide-react";
 import type { SettingsSection } from "@/types/settings";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 // ─── Nav items ────────────────────────────────────────────────
 const ITEMS: { id: SettingsSection; label: string; icon: React.ElementType }[] = [

@@ -2,7 +2,7 @@
 
 import { Users, ChevronRight } from "lucide-react";
 import type { Agent, TeamGroup, AgentStatus, LicenseType } from "@/types/team";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 // ─── Badge colours ────────────────────────────────────────────
 const STATUS_DOT: Record<AgentStatus, string> = {

@@ -4,7 +4,7 @@ import {
   ChevronUp, ChevronDown, Eye, ArrowUpDown,
 } from "lucide-react";
 import type { Agent, SortField, LicenseType, AgentStatus } from "@/types/team";
-import { cn, timeAgo } from "@/lib/utils";
+import { cn, timeAgo } from "@dravik/shared";
 
 // ─── Badge helpers (module level) ────────────────────────────
 const LICENSE_STYLE: Record<LicenseType, string> = {

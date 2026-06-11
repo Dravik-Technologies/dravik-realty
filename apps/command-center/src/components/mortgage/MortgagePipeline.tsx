@@ -20,8 +20,8 @@ import {
 } from "@dnd-kit/sortable";
 import type { MortgageApplication, LoanStage } from "@/types/mortgage";
 import ApplicationCard, { ApplicationCardContent } from "./ApplicationCard";
-import { formatCurrency } from "@/lib/utils";
-import { cn } from "@/lib/utils";
+import { formatCurrency } from "@dravik/shared";
+import { cn } from "@dravik/shared";
 
 // ─── Stage config ─────────────────────────────────────────────
 interface StageConfig {

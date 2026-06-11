@@ -2,7 +2,7 @@
 
 import { MapPin, Star, ArrowUpRight, BadgeCheck } from "lucide-react";
 import { Agent } from "@/types/referral";
-import { cn, formatCurrency } from "@/lib/utils";
+import { cn, formatCurrency } from "@dravik/shared";
 
 // ──────────────────────────────────────────────
 // Certification badge config

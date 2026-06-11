@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import type { Conversation, Message, Channel } from "@/types/communication";
 import MessageComposer from "./MessageComposer";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 // ─── Channel badge ────────────────────────────────────────────
 const CHANNEL_ICON: Record<Channel, React.ElementType> = {

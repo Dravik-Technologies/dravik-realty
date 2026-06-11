@@ -4,7 +4,7 @@ import {
   Inbox, BellDot, Users, FileText, Globe, UsersRound, Building2,
 } from "lucide-react";
 import type { InboxFolder, Conversation } from "@/types/communication";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 const FOLDERS: { id: InboxFolder; label: string; icon: React.ElementType }[] = [
   { id: "all",          label: "All Messages",  icon: Inbox      },

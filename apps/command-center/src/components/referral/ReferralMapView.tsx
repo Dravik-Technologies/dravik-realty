@@ -10,7 +10,7 @@ import { Search, X, MapPin, ChevronRight, Target, SlidersHorizontal } from "luci
 import { AGENTS } from "@/data/agents";
 import { MILITARY_BASES, BRANCH_COLOR, type MilitaryBase } from "@/data/militaryBases";
 import type { Agent, CertificationType } from "@/types/referral";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 // ─── Geo helpers ──────────────────────────────────────────────
 function haversine(lat1: number, lng1: number, lat2: number, lng2: number): number {

@@ -24,8 +24,8 @@ import {
 } from "lucide-react";
 import type { Lead, ActivityType } from "@/types/lead";
 import { SOURCE_STYLES } from "@/types/lead";
-import { cn, formatCurrency } from "@/lib/utils";
-import RelativeTime from "@/components/ui/RelativeTime";
+import { cn, formatCurrency } from "@dravik/shared";
+import { RelativeTime } from "@dravik/ui";
 
 // ─── Activity icon map ────────────────────────────────────────
 const ACTIVITY_ICONS: Record<ActivityType, React.ElementType> = {

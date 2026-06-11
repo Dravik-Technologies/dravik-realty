@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import type { Integration, IntegStatus } from "@/types/settings";
 import { INTEGRATIONS } from "@/data/settings";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 // ─── Status config ────────────────────────────────────────────
 const STATUS_CFG: Record<IntegStatus, { icon: React.ElementType; label: string; cls: string; dot: string }> = {

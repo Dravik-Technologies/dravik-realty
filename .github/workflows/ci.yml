@@ -28,14 +28,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Lint
-        run: pnpm lint
-
-      - name: Typecheck
-        run: pnpm exec tsc --noEmit
-
-      - name: Build
-        run: pnpm build
+      - name: Lint, typecheck, build
+        run: pnpm turbo run lint typecheck build
 
   e2e:
     name: characterization (playwright)

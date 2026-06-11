@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import ProspectingDashboard from "@/components/prospecting/ProspectingDashboard";
+import { ProspectingPage } from "@dravik/crm";
 
 export const metadata: Metadata = { title: "Prospecting & Seller Leads Center" };
 
-export default function ProspectingPage() {
-  return <ProspectingDashboard />;
-}
+export default ProspectingPage;

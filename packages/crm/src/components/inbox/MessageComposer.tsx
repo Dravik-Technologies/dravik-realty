@@ -4,8 +4,8 @@ import { useState } from "react";
 import {
   MessageSquare, Mail, Paperclip, Sparkles, Send, ChevronDown, ChevronUp,
 } from "lucide-react";
-import type { Channel, ConversationTag } from "@/types/communication";
-import { AI_SUGGESTIONS } from "@/data/communications";
+import type { Channel, ConversationTag } from "@dravik/contracts/crm";
+import { AI_SUGGESTIONS } from "../../data/communications";
 import { cn } from "@dravik/shared";
 
 // ─── Quick-reply templates ────────────────────────────────────

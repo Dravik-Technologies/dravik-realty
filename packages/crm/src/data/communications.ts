@@ -1,4 +1,4 @@
-import type { Conversation, Message } from "@/types/communication";
+import type { Conversation, Message } from "@dravik/contracts/crm";
 
 // ─── Helpers ──────────────────────────────────────────────────
 function msg(

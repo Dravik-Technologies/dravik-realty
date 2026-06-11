@@ -22,8 +22,8 @@ import {
   ArrowRightLeft,
   Info,
 } from "lucide-react";
-import type { Lead, ActivityType } from "@/types/lead";
-import { SOURCE_STYLES } from "@/types/lead";
+import type { Lead, ActivityType } from "@dravik/contracts/crm";
+import { SOURCE_STYLES } from "@dravik/contracts/crm";
 import { cn, formatCurrency } from "@dravik/shared";
 import { RelativeTime } from "@dravik/ui";
 

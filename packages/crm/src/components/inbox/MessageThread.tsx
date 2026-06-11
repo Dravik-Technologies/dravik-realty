@@ -5,7 +5,7 @@ import {
   MessageSquare, Mail, Phone, Zap, Settings2,
   Plus, Activity, Link2, PhoneCall, ChevronLeft,
 } from "lucide-react";
-import type { Conversation, Message, Channel } from "@/types/communication";
+import type { Conversation, Message, Channel } from "@dravik/contracts/crm";
 import MessageComposer from "./MessageComposer";
 import { cn } from "@dravik/shared";
 

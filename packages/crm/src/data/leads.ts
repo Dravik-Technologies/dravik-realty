@@ -1,4 +1,4 @@
-import type { Lead } from "@/types/lead";
+import type { Lead } from "@dravik/contracts/crm";
 
 // All timestamps are relative to 2026-05-25 (project demo date)
 const T = {

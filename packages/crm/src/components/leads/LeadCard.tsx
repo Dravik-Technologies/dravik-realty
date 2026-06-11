@@ -3,8 +3,8 @@
 import { Phone, MessageSquare, Mail, Landmark } from "lucide-react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import type { Lead } from "@/types/lead";
-import { SOURCE_STYLES } from "@/types/lead";
+import type { Lead } from "@dravik/contracts/crm";
+import { SOURCE_STYLES } from "@dravik/contracts/crm";
 import { cn } from "@dravik/shared";
 import { RelativeTime } from "@dravik/ui";
 

@@ -11,8 +11,8 @@ import {
   Layers, Crosshair, Hexagon, Trash2, Check, X,
   RefreshCw, MapPin,
 } from "lucide-react";
-import { SELLER_LEADS } from "@/data/prospecting";
-import type { LeadType, SellerLead } from "@/types/prospecting";
+import { SELLER_LEADS } from "../../data/prospecting";
+import type { LeadType, SellerLead } from "@dravik/contracts/crm";
 import { cn } from "@dravik/shared";
 
 // ─── Geo helpers ──────────────────────────────────────────────

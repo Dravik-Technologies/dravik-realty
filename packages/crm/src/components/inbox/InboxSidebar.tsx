@@ -3,7 +3,7 @@
 import {
   Inbox, BellDot, Users, FileText, Globe, UsersRound, Building2,
 } from "lucide-react";
-import type { InboxFolder, Conversation } from "@/types/communication";
+import type { InboxFolder, Conversation } from "@dravik/contracts/crm";
 import { cn } from "@dravik/shared";
 
 const FOLDERS: { id: InboxFolder; label: string; icon: React.ElementType }[] = [

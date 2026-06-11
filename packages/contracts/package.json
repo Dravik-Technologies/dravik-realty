@@ -1,0 +1,14 @@
+{
+  "name": "@dravik/contracts",
+  "version": "0.1.0",
+  "private": true,
+  "exports": {
+    "./crm": "./src/crm/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5"
+  }
+}

@@ -14,7 +14,7 @@ import {
   SkipForward,
   UserRound,
 } from "lucide-react";
-import type { CallDisposition, CallLogEntry, SellerLead } from "@/types/prospecting";
+import type { CallDisposition, CallLogEntry, SellerLead } from "@dravik/contracts/crm";
 import { cn } from "@dravik/shared";
 
 const DISPOSITIONS: CallDisposition[] = [

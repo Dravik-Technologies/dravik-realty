@@ -7,7 +7,7 @@ import {
   Inbox, DollarSign, TrendingUp, ArrowRight, Activity, Settings,
   X, HelpCircle, CheckCircle2, LayoutDashboard, Target,
 } from "lucide-react";
-import { SAMPLE_LEADS } from "@/data/leads";
+import { SAMPLE_LEADS } from "@dravik/crm";
 import { SAMPLE_TRANSACTIONS } from "@/data/transactions";
 import { MORTGAGE_APPS } from "@/data/mortgage";
 import { formatCurrency, cn } from "@dravik/shared";

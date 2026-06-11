@@ -1,8 +1,16 @@
 # pnpm settings (pnpm v11 reads settings from this file, not package.json).
 # The `packages:` workspace globs arrive with the monorepo scaffold (Phase 1, E3).
 
+packages:
+  - apps/*
+  - packages/*
+
 # Postinstall build scripts are blocked by default; allow the two we need:
 # sharp = Next.js image optimization, unrs-resolver = eslint import resolver.
 allowBuilds:
   sharp: true
   unrs-resolver: true
+
+# Supply-chain guard: refuse packages published less than 24h ago, matching
+# the policy CI enforces, so local installs fail the same way CI would.
+minimumReleaseAge: 1440

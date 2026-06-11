@@ -1,0 +1,14 @@
+{
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
+    "lint": {
+      "outputs": []
+    },
+    "typecheck": {
+      "outputs": []
+    }
+  }
+}

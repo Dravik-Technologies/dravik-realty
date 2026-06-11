@@ -3,7 +3,7 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Calendar, User, Tag } from "lucide-react";
-import type { Transaction, PipelineStage } from "@/types/transaction";
+import type { Transaction, PipelineStage } from "@dravik/contracts/realty";
 import { formatCurrency } from "@dravik/shared";
 import { cn } from "@dravik/shared";
 

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ChevronUp, ChevronDown, Bed, Bath, Square, Clock, Bookmark, BookmarkCheck, ArrowRight } from "lucide-react";
-import type { Property, SortField, SortDir } from "@/types/property";
+import type { Property, SortField, SortDir } from "@dravik/contracts/realty";
 import { cn, formatCurrency } from "@dravik/shared";
 import { StatusBadge, LeadScoreBadge } from "./PropertyCard";
 

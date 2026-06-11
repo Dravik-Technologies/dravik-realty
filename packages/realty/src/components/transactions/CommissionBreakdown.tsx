@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { DollarSign, Users, Building2, User, ArrowRight } from "lucide-react";
-import type { CommissionInfo } from "@/types/transaction";
+import type { CommissionInfo } from "@dravik/contracts/realty";
 import { formatCurrency, formatCurrencyFull } from "@dravik/shared";
 import { cn } from "@dravik/shared";
 

@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { SlidersHorizontal, X, ChevronDown } from "lucide-react";
-import type { PropertyFilters, PropertyType, ListingStatus } from "@/types/property";
-import { DEFAULT_FILTERS } from "@/types/property";
+import type { PropertyFilters, PropertyType, ListingStatus } from "@dravik/contracts/realty";
+import { DEFAULT_FILTERS } from "@dravik/contracts/realty";
 import { cn, formatCurrency } from "@dravik/shared";
 
 const TYPES: PropertyType[] = ["Single Family", "Condo", "Townhouse", "Luxury Estate", "Multi-Family"];

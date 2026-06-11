@@ -7,7 +7,7 @@ import {
   Link2, CheckCircle2, Clock, AlertCircle, XCircle,
   Phone, Mail, Building2, TrendingUp, DollarSign, ExternalLink,
 } from "lucide-react";
-import type { MortgageApplication, DetailTab, DocStatus, CondStatus } from "@/types/mortgage";
+import type { MortgageApplication, DetailTab, DocStatus, CondStatus } from "@dravik/contracts/lending";
 import { formatCurrency } from "@dravik/shared";
 import { cn } from "@dravik/shared";
 

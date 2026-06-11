@@ -1,4 +1,4 @@
-import type { MortgageApplication } from "@/types/mortgage";
+import type { MortgageApplication } from "@dravik/contracts/lending";
 
 // ─── Helpers ──────────────────────────────────────────────────
 function docs(stage: string) {

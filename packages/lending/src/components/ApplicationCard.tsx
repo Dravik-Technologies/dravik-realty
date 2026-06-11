@@ -2,7 +2,7 @@
 
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS }         from "@dnd-kit/utilities";
-import type { MortgageApplication } from "@/types/mortgage";
+import type { MortgageApplication } from "@dravik/contracts/lending";
 import { cn, formatCurrency } from "@dravik/shared";
 
 // ─── Loan type badge ──────────────────────────────────────────

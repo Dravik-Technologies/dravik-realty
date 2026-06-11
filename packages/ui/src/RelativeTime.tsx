@@ -1,7 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import { timeAgo } from "@/lib/utils";
+import { timeAgo } from "@dravik/shared";
 
 // useSyncExternalStore lets us return an empty string from the server
 // snapshot (so static HTML contains no clock-dependent text) while the

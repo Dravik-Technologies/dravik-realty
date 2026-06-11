@@ -16,8 +16,8 @@ import {
   verticalListSortingStrategy, sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import type { BuilderSection, SectionType, PageTemplate } from "@/types/marketing";
-import { SECTION_DEFAULTS, BLANK_PAGE_SECTIONS } from "@/data/marketing";
+import type { BuilderSection, SectionType, PageTemplate } from "@dravik/contracts/marketing";
+import { SECTION_DEFAULTS, BLANK_PAGE_SECTIONS } from "../data/marketing";
 import { cn } from "@dravik/shared";
 
 // ─── Section type metadata ────────────────────────────────────

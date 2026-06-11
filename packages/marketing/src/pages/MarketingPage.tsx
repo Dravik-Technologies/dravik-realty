@@ -4,13 +4,13 @@ import { useState, useRef, useEffect } from "react";
 import {
   Plus, ChevronDown, Globe, FileText, Printer, Home, Edit, Eye,
 } from "lucide-react";
-import type { Campaign, MarketingTab, PageTemplate } from "@/types/marketing";
-import { SAMPLE_CAMPAIGNS, PAGE_TEMPLATES } from "@/data/marketing";
-import CampaignDashboard from "@/components/marketing/CampaignDashboard";
-import TemplateGallery from "@/components/marketing/TemplateGallery";
-import FlyerDesigner from "@/components/marketing/FlyerDesigner";
-import PropertyPagePreview from "@/components/marketing/PropertyPagePreview";
-import PageBuilder from "@/components/marketing/PageBuilder";
+import type { Campaign, MarketingTab, PageTemplate } from "@dravik/contracts/marketing";
+import { SAMPLE_CAMPAIGNS, PAGE_TEMPLATES } from "../data/marketing";
+import CampaignDashboard from "../components/CampaignDashboard";
+import TemplateGallery from "../components/TemplateGallery";
+import FlyerDesigner from "../components/FlyerDesigner";
+import PropertyPagePreview from "../components/PropertyPagePreview";
+import PageBuilder from "../components/PageBuilder";
 import { cn } from "@dravik/shared";
 
 // ─── Status badge (module level) ─────────────────────────────

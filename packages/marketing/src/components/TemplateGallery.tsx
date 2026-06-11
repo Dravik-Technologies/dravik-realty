@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { Star, Zap, ChevronRight } from "lucide-react";
-import type { PageTemplate, TemplateCategory } from "@/types/marketing";
-import { PAGE_TEMPLATES } from "@/data/marketing";
+import type { PageTemplate, TemplateCategory } from "@dravik/contracts/marketing";
+import { PAGE_TEMPLATES } from "../data/marketing";
 import { cn } from "@dravik/shared";
 
 const CATEGORIES: ("All" | TemplateCategory)[] = [

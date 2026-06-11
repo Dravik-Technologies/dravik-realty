@@ -9,11 +9,11 @@ import {
   Search,
   X,
 } from "lucide-react";
-import LeadPipeline from "@/components/leads/LeadPipeline";
-import LeadDetailPanel from "@/components/leads/LeadDetailPanel";
-import { SAMPLE_LEADS } from "@/data/leads";
-import type { Lead, SubNavTab } from "@/types/lead";
-import { SUBNAV_TABS } from "@/types/lead";
+import LeadPipeline from "../components/leads/LeadPipeline";
+import LeadDetailPanel from "../components/leads/LeadDetailPanel";
+import { SAMPLE_LEADS } from "../data/leads";
+import type { Lead, SubNavTab } from "@dravik/contracts/crm";
+import { SUBNAV_TABS } from "@dravik/contracts/crm";
 import { cn } from "@dravik/shared";
 
 // ─── KPI card ─────────────────────────────────────────────────

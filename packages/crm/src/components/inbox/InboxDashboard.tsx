@@ -2,8 +2,8 @@
 
 import { useState, useCallback } from "react";
 import { Pencil } from "lucide-react";
-import type { Conversation, InboxFolder, Channel } from "@/types/communication";
-import { CONVERSATIONS } from "@/data/communications";
+import type { Conversation, InboxFolder, Channel } from "@dravik/contracts/crm";
+import { CONVERSATIONS } from "../../data/communications";
 import InboxSidebar     from "./InboxSidebar";
 import ConversationList from "./ConversationList";
 import MessageThread    from "./MessageThread";

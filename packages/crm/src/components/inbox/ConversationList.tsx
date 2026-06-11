@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import type {
   Conversation, InboxFolder, QuickFilter, Channel, ConversationTag,
-} from "@/types/communication";
+} from "@dravik/contracts/crm";
 import { cn } from "@dravik/shared";
 
 // ─── Channel icon ─────────────────────────────────────────────

@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "@dravik/ui/tokens.css";
-@source "../../../../packages/ui";
+@source "../../../../packages";
 
 :root {
   --background: #ffffff;

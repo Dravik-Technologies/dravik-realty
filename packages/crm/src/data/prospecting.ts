@@ -1,4 +1,4 @@
-import type { SellerLead, CampaignTemplate } from "@/types/prospecting";
+import type { SellerLead, CampaignTemplate } from "@dravik/contracts/crm";
 
 export const SELLER_LEADS: SellerLead[] = [
   // ── EXPIREDS (10) ─────────────────────────────────────────────

@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import InboxDashboard from "@/components/inbox/InboxDashboard";
+import { InboxPage } from "@dravik/crm";
 
 export const metadata: Metadata = { title: "Unified Inbox" };
 
-export default function InboxPage() {
-  return <InboxDashboard />;
-}
+export default InboxPage;

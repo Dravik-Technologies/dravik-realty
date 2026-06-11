@@ -7,13 +7,15 @@ import {
   CheckCircle2, SlidersHorizontal, X, Phone, ExternalLink,
   PhoneCall, Megaphone,
 } from "lucide-react";
-import { SELLER_LEADS } from "@/data/prospecting";
+import { SELLER_LEADS } from "../../data/prospecting";
 import type {
-  SellerLead, LeadType, LeadStatus, SortKey, SortDir,
-} from "@/types/prospecting";
+  SellerLead, LeadType, SortKey, SortDir,
+} from "@dravik/contracts/crm";
 import { formatCurrency, cn } from "@dravik/shared";
 
 // ─── Config maps ──────────────────────────────────────────────
+type LeadStatus = SellerLead["status"];
+
 const LEAD_TYPE_CFG: Record<LeadType, { cls: string; dot: string }> = {
   "Expired":         { cls: "bg-rose-50 text-rose-700 border-rose-200",       dot: "bg-rose-400"   },
   "FSBO":            { cls: "bg-orange-50 text-orange-700 border-orange-200",  dot: "bg-orange-400" },

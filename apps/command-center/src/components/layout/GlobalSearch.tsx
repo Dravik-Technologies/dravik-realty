@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Search, X, Users, Globe, Receipt, Landmark, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { SAMPLE_LEADS } from "@/data/leads";
+import { SAMPLE_LEADS } from "@dravik/crm";
 import { AGENTS } from "@/data/agents";
 import { SAMPLE_TRANSACTIONS } from "@/data/transactions";
 import { MORTGAGE_APPS } from "@/data/mortgage";

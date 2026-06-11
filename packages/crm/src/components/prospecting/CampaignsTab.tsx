@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { ArrowRight, Mail, Megaphone, PhoneCall, Sparkles } from "lucide-react";
-import { CAMPAIGN_TEMPLATES } from "@/data/prospecting";
-import type { CampaignTemplate, SellerLead } from "@/types/prospecting";
+import { CAMPAIGN_TEMPLATES } from "../../data/prospecting";
+import type { CampaignTemplate, SellerLead } from "@dravik/contracts/crm";
 
 function TemplateCard({
   template,

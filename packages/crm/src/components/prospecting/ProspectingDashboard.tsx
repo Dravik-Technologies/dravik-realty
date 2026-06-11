@@ -19,8 +19,8 @@ import {
 import SellerLeadsTable from "./SellerLeadsTable";
 import PowerDialer from "./PowerDialer";
 import CampaignsTab from "./CampaignsTab";
-import { SELLER_LEADS } from "@/data/prospecting";
-import type { SellerLead } from "@/types/prospecting";
+import { SELLER_LEADS } from "../../data/prospecting";
+import type { SellerLead } from "@dravik/contracts/crm";
 import { cn } from "@dravik/shared";
 
 const GeoFarmingMap = dynamic(() => import("./GeoFarmingMap"), {

@@ -18,8 +18,8 @@ import {
   verticalListSortingStrategy,
   arrayMove,
 } from "@dnd-kit/sortable";
-import type { Lead, LeadStatus, KanbanColumn } from "@/types/lead";
-import { KANBAN_COLUMNS } from "@/types/lead";
+import type { Lead, LeadStatus, KanbanColumn } from "@dravik/contracts/crm";
+import { KANBAN_COLUMNS } from "@dravik/contracts/crm";
 import LeadCard, { LeadCardContent } from "./LeadCard";
 import { cn } from "@dravik/shared";
 

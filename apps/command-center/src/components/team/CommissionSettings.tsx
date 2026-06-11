@@ -2,7 +2,7 @@
 
 import { DollarSign, Info, TrendingUp } from "lucide-react";
 import type { Agent } from "@/types/team";
-import { cn, formatCurrency } from "@/lib/utils";
+import { cn, formatCurrency } from "@dravik/shared";
 
 // ─── Split ring visual ────────────────────────────────────────
 function SplitRing({ agent }: { agent: number }) {

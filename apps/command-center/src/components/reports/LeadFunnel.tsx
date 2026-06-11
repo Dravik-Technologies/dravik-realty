@@ -6,7 +6,7 @@ import {
   ResponsiveContainer, Cell, FunnelChart, Funnel, LabelList,
 } from "recharts";
 import type { LeadSourceStat, FunnelStep } from "@/types/analytics";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 import { Filter, X } from "lucide-react";
 
 // ─── Custom tooltip ───────────────────────────────────────────

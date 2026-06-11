@@ -10,7 +10,7 @@ import {
 import { SAMPLE_LEADS } from "@/data/leads";
 import { SAMPLE_TRANSACTIONS } from "@/data/transactions";
 import { MORTGAGE_APPS } from "@/data/mortgage";
-import { formatCurrency, cn } from "@/lib/utils";
+import { formatCurrency, cn } from "@dravik/shared";
 
 // ─── Module-level precomputed data ────────────────────────────
 const totalLeads  = SAMPLE_LEADS.length;

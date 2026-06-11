@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import type { Channel, ConversationTag } from "@/types/communication";
 import { AI_SUGGESTIONS } from "@/data/communications";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 // ─── Quick-reply templates ────────────────────────────────────
 const TEMPLATES: Record<ConversationTag | "default", { label: string; text: string }[]> = {

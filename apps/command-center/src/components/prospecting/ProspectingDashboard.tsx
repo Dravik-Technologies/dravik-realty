@@ -21,7 +21,7 @@ import PowerDialer from "./PowerDialer";
 import CampaignsTab from "./CampaignsTab";
 import { SELLER_LEADS } from "@/data/prospecting";
 import type { SellerLead } from "@/types/prospecting";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 const GeoFarmingMap = dynamic(() => import("./GeoFarmingMap"), {
   ssr: false,

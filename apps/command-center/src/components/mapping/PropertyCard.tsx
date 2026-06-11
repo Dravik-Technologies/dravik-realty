@@ -2,7 +2,7 @@
 
 import { Bed, Bath, Square, Bookmark, Send, UserPlus, MapPin, TrendingDown } from "lucide-react";
 import type { Property } from "@/types/property";
-import { cn, formatCurrency } from "@/lib/utils";
+import { cn, formatCurrency } from "@dravik/shared";
 
 // ─── Status badge ──────────────────────────────────────────────
 export function StatusBadge({ status }: { status: Property["status"] }) {

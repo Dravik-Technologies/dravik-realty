@@ -11,7 +11,7 @@ import AgentDirectory from "./AgentDirectory";
 import AgentPanel     from "./AgentPanel";
 import OnboardingForm from "./OnboardingForm";
 import HierarchyView  from "./HierarchyView";
-import { cn, formatCurrency } from "@/lib/utils";
+import { cn, formatCurrency } from "@dravik/shared";
 
 // ─── KPI card ─────────────────────────────────────────────────
 function KpiCard({ icon: Icon, label, value, accent, sub }: {

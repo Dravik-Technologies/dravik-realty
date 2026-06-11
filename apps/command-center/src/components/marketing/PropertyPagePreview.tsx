@@ -6,7 +6,7 @@ import {
   Phone, Mail, DollarSign, MapPin, ExternalLink, ChevronDown,
 } from "lucide-react";
 import { SAMPLE_PROPERTIES } from "@/data/properties";
-import { cn, formatCurrency } from "@/lib/utils";
+import { cn, formatCurrency } from "@dravik/shared";
 
 // ─── Mini property page preview (rendered inside panel) ───────
 interface PagePreviewProps {

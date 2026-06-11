@@ -14,8 +14,8 @@ import {
 import type { Transaction, PipelineStage } from "@/types/transaction";
 import { PIPELINE_STAGES, STAGE_PROGRESS } from "@/types/transaction";
 import TransactionCard, { STAGE_COLOR } from "./TransactionCard";
-import { formatCurrency } from "@/lib/utils";
-import { cn } from "@/lib/utils";
+import { formatCurrency } from "@dravik/shared";
+import { cn } from "@dravik/shared";
 
 // ─── Column label map ─────────────────────────────────────────
 const STAGE_LABEL: Record<PipelineStage, string> = {

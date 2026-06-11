@@ -5,8 +5,8 @@ import {
   Calculator, TrendingUp, Home, DollarSign,
   ChevronRight,
 } from "lucide-react";
-import { formatCurrency } from "@/lib/utils";
-import { cn } from "@/lib/utils";
+import { formatCurrency } from "@dravik/shared";
+import { cn } from "@dravik/shared";
 
 // ─── Slider row ───────────────────────────────────────────────
 function SliderRow({

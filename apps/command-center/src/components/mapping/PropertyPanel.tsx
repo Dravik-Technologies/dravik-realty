@@ -7,7 +7,7 @@ import {
   Zap, CheckCircle, Clock, Layers, Eye, ChevronLeft, ChevronRight,
 } from "lucide-react";
 import type { Property } from "@/types/property";
-import { cn, formatCurrency } from "@/lib/utils";
+import { cn, formatCurrency } from "@dravik/shared";
 import { StatusBadge, LeadScoreBadge } from "./PropertyCard";
 
 type Tab = "overview" | "photos" | "mortgage" | "comps" | "outreach";

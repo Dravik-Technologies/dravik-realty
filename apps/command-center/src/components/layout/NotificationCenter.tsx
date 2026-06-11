@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Bell, X, CheckCheck, Users, Receipt, Landmark, MessageSquare, Settings, AlertTriangle } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 type NotifCat = "lead" | "transaction" | "mortgage" | "message" | "system" | "alert";
 

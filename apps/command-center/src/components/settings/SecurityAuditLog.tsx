@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { AUDIT_LOG } from "@/data/settings";
 import type { AuditSeverity } from "@/types/settings";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 // ─── Toggle switch (reused here) ─────────────────────────────
 function Toggle({ enabled, onChange, label }: {

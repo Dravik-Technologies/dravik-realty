@@ -22,7 +22,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { useShell } from "./ShellProvider";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 // ─── Navigation tree ──────────────────────────────────────────
 interface NavItem {

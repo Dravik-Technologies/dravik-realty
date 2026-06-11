@@ -6,8 +6,8 @@ import {
   Clock, FileText, ArrowRight,
 } from "lucide-react";
 import type { ClientTransaction } from "@/types/client-portal";
-import { formatCurrency } from "@/lib/utils";
-import { cn } from "@/lib/utils";
+import { formatCurrency } from "@dravik/shared";
+import { cn } from "@dravik/shared";
 
 const STAGE_COLOR: Record<string, string> = {
   "Under Contract":    "#3B82F6",

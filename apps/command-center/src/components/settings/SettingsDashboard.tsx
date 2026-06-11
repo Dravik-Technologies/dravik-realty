@@ -12,7 +12,7 @@ import CompliancePanel    from "./CompliancePanel";
 import BrandingCustomizer from "./BrandingCustomizer";
 import NotificationsPanel from "./NotificationsPanel";
 import SecurityAuditLog   from "./SecurityAuditLog";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 // ─── Section title map ────────────────────────────────────────
 const SECTION_TITLES: Record<SettingsSection, { title: string; sub: string }> = {

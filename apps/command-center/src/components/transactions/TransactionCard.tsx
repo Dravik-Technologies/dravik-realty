@@ -4,8 +4,8 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Calendar, User, Tag } from "lucide-react";
 import type { Transaction, PipelineStage } from "@/types/transaction";
-import { formatCurrency } from "@/lib/utils";
-import { cn } from "@/lib/utils";
+import { formatCurrency } from "@dravik/shared";
+import { cn } from "@dravik/shared";
 
 // ─── Stage accent color map ───────────────────────────────────
 export const STAGE_COLOR: Record<PipelineStage, string> = {

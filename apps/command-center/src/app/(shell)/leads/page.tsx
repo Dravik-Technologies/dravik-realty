@@ -14,7 +14,7 @@ import LeadDetailPanel from "@/components/leads/LeadDetailPanel";
 import { SAMPLE_LEADS } from "@/data/leads";
 import type { Lead, SubNavTab } from "@/types/lead";
 import { SUBNAV_TABS } from "@/types/lead";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 // ─── KPI card ─────────────────────────────────────────────────
 function KpiCard({

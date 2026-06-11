@@ -11,8 +11,8 @@ import { MORTGAGE_APPS } from "@/data/mortgage";
 import MortgagePipeline    from "./MortgagePipeline";
 import MortgageDetailPanel from "./MortgageDetailPanel";
 import PreQualCalculator   from "./PreQualCalculator";
-import { formatCurrency }  from "@/lib/utils";
-import { cn } from "@/lib/utils";
+import { formatCurrency }  from "@dravik/shared";
+import { cn } from "@dravik/shared";
 
 // ─── KPI card ─────────────────────────────────────────────────
 function KpiCard({

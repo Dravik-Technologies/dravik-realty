@@ -11,7 +11,7 @@ import { SAMPLE_PROPERTIES } from "@/data/properties";
 import MapFilters from "@/components/mapping/MapFilters";
 import ListView from "@/components/mapping/ListView";
 import PropertyPanel from "@/components/mapping/PropertyPanel";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 // Leaflet must only run in the browser — dynamic import with ssr:false
 const PropertyMap = dynamic(() => import("@/components/mapping/PropertyMap"), {

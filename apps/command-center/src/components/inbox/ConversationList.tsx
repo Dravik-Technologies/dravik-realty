@@ -7,7 +7,7 @@ import {
 import type {
   Conversation, InboxFolder, QuickFilter, Channel, ConversationTag,
 } from "@/types/communication";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 // ─── Channel icon ─────────────────────────────────────────────
 const CHANNEL_ICON: Record<Channel, React.ElementType> = {

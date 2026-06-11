@@ -8,7 +8,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { formatCurrencyFull } from "@/lib/utils";
+import { formatCurrencyFull } from "@dravik/shared";
 
 const GOLD  = "#D4AF37";
 const TEAL  = "#4A90A4";

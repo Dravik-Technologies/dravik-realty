@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Bell, Mail, MessageSquare, Smartphone } from "lucide-react";
 import { NOTIF_PREFS } from "@/data/settings";
 import type { NotifPref } from "@/types/settings";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 // ─── Toggle switch ────────────────────────────────────────────
 function Toggle({ enabled, onChange, label }: {

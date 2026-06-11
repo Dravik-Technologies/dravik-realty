@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { DollarSign, Users, Building2, User, ArrowRight } from "lucide-react";
 import type { CommissionInfo } from "@/types/transaction";
-import { formatCurrency, formatCurrencyFull } from "@/lib/utils";
-import { cn } from "@/lib/utils";
+import { formatCurrency, formatCurrencyFull } from "@dravik/shared";
+import { cn } from "@dravik/shared";
 
 // ─── SliderRow ────────────────────────────────────────────────
 interface SliderRowProps {

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Users } from "lucide-react";
 import ClientDashboard from "@/components/portal/ClientDashboard";
 import { ALL_CLIENTS } from "@/data/client-portal";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 export default function PortalPage() {
   const [clientIdx, setClientIdx] = useState(0);

@@ -2,7 +2,7 @@
 
 import { Clock, MapPin, TrendingUp } from "lucide-react";
 import { ReferralPipeline, ReferralStatus } from "@/types/referral";
-import { cn, formatCurrency, formatCurrencyFull } from "@/lib/utils";
+import { cn, formatCurrency, formatCurrencyFull } from "@dravik/shared";
 
 // ──────────────────────────────────────────────
 // Status config

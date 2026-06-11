@@ -18,7 +18,7 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 import type { BuilderSection, SectionType, PageTemplate } from "@/types/marketing";
 import { SECTION_DEFAULTS, BLANK_PAGE_SECTIONS } from "@/data/marketing";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 // ─── Section type metadata ────────────────────────────────────
 const SECTION_META: Record<SectionType, { label: string; icon: React.ElementType; color: string }> = {

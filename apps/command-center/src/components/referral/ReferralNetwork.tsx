@@ -14,7 +14,7 @@ import ReferralModal from "./ReferralModal";
 const ReferralMapView = dynamic(() => import("./ReferralMapView"), { ssr: false });
 import { AGENTS, PIPELINE } from "@/data/agents";
 import type { Agent, CertificationType, Region, Specialization } from "@/types/referral";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 type View = "directory" | "map";
 

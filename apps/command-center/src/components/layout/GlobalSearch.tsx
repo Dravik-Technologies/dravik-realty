@@ -7,7 +7,7 @@ import { SAMPLE_LEADS } from "@/data/leads";
 import { AGENTS } from "@/data/agents";
 import { SAMPLE_TRANSACTIONS } from "@/data/transactions";
 import { MORTGAGE_APPS } from "@/data/mortgage";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 type ResultCat = "Lead" | "Agent" | "Transaction" | "Mortgage";
 

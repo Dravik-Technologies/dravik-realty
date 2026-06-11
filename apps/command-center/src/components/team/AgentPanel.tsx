@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import type { Agent, AgentTab, AgentActivity } from "@/types/team";
 import CommissionSettings from "./CommissionSettings";
-import { cn, formatCurrency, timeAgo } from "@/lib/utils";
+import { cn, formatCurrency, timeAgo } from "@dravik/shared";
 
 // ─── Shared within this file ──────────────────────────────────
 const TABS: { id: AgentTab; label: string; icon: React.ElementType }[] = [

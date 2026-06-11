@@ -10,8 +10,8 @@ import { SAMPLE_TRANSACTIONS } from "@/data/transactions";
 import TransactionPipeline from "@/components/transactions/TransactionPipeline";
 import TransactionPanel from "@/components/transactions/TransactionPanel";
 import { STAGE_COLOR } from "@/components/transactions/TransactionCard";
-import { formatCurrency } from "@/lib/utils";
-import { cn } from "@/lib/utils";
+import { formatCurrency } from "@dravik/shared";
+import { cn } from "@dravik/shared";
 
 // ─── KPI card (module level) ──────────────────────────────────
 function KpiCard({

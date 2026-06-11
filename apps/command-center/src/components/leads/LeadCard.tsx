@@ -5,7 +5,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import type { Lead } from "@/types/lead";
 import { SOURCE_STYLES } from "@/types/lead";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 import RelativeTime from "@/components/ui/RelativeTime";
 
 // ─── Behavior score badge ─────────────────────────────────────

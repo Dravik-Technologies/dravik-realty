@@ -11,7 +11,7 @@ import { SELLER_LEADS } from "@/data/prospecting";
 import type {
   SellerLead, LeadType, LeadStatus, SortKey, SortDir,
 } from "@/types/prospecting";
-import { formatCurrency, cn } from "@/lib/utils";
+import { formatCurrency, cn } from "@dravik/shared";
 
 // ─── Config maps ──────────────────────────────────────────────
 const LEAD_TYPE_CFG: Record<LeadType, { cls: string; dot: string }> = {

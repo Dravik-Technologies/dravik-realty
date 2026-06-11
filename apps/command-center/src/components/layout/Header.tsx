@@ -7,7 +7,7 @@ import { Menu, Search, ChevronDown, User, LogOut } from "lucide-react";
 import { useShell } from "./ShellProvider";
 import GlobalSearch       from "./GlobalSearch";
 import NotificationCenter from "./NotificationCenter";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 const PAGE_TITLES: Record<string, string> = {
   "/dashboard":        "Dashboard",

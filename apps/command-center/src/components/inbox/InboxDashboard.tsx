@@ -7,7 +7,7 @@ import { CONVERSATIONS } from "@/data/communications";
 import InboxSidebar     from "./InboxSidebar";
 import ConversationList from "./ConversationList";
 import MessageThread    from "./MessageThread";
-import { cn } from "@/lib/utils";
+import { cn } from "@dravik/shared";
 
 export default function InboxDashboard() {
   const [conversations, setConversations] = useState<Conversation[]>(CONVERSATIONS);

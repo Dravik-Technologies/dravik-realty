@@ -6,7 +6,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { Pen, X, Check, Users } from "lucide-react";
 import type { Property } from "@/types/property";
-import { cn, formatCurrency } from "@/lib/utils";
+import { cn, formatCurrency } from "@dravik/shared";
 import PropertyCard from "./PropertyCard";
 
 // ─── Point-in-polygon (ray casting) ──────────────────────────

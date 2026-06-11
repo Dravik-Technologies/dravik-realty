@@ -5,7 +5,7 @@ import {
   X, Rocket, Check, Edit, Bed, Bath, Square,
   Phone, Mail, DollarSign, MapPin, ExternalLink, ChevronDown,
 } from "lucide-react";
-import { SAMPLE_PROPERTIES } from "@/data/properties";
+import { SAMPLE_PROPERTIES } from "@dravik/realty";
 import { cn, formatCurrency } from "@dravik/shared";
 
 // ─── Mini property page preview (rendered inside panel) ───────

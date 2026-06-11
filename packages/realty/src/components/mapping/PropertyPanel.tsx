@@ -6,7 +6,7 @@ import {
   Bookmark, Send, UserPlus, Calculator, Home, BarChart3, Users,
   Zap, CheckCircle, Clock, Layers, Eye, ChevronLeft, ChevronRight,
 } from "lucide-react";
-import type { Property } from "@/types/property";
+import type { Property } from "@dravik/contracts/realty";
 import { cn, formatCurrency } from "@dravik/shared";
 import { StatusBadge, LeadScoreBadge } from "./PropertyCard";
 

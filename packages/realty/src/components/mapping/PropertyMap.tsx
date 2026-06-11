@@ -5,7 +5,7 @@ import { MapContainer, TileLayer, Marker, Popup, Polygon, Polyline, useMapEvents
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { Pen, X, Check, Users } from "lucide-react";
-import type { Property } from "@/types/property";
+import type { Property } from "@dravik/contracts/realty";
 import { cn, formatCurrency } from "@dravik/shared";
 import PropertyCard from "./PropertyCard";
 

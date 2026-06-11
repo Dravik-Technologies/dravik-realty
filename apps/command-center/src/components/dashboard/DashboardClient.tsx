@@ -8,7 +8,7 @@ import {
   X, HelpCircle, CheckCircle2, LayoutDashboard, Target,
 } from "lucide-react";
 import { SAMPLE_LEADS } from "@dravik/crm";
-import { SAMPLE_TRANSACTIONS } from "@/data/transactions";
+import { SAMPLE_TRANSACTIONS } from "@dravik/realty";
 import { MORTGAGE_APPS } from "@/data/mortgage";
 import { formatCurrency, cn } from "@dravik/shared";
 

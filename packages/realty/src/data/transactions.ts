@@ -1,7 +1,7 @@
 import type {
   Transaction, TransactionDocument, TransactionTask,
   TransactionParty, ActivityEntry, MortgageInfo, CommissionInfo,
-} from "@/types/transaction";
+} from "@dravik/contracts/realty";
 
 // ─── Helpers ──────────────────────────────────────────────────
 function doc(

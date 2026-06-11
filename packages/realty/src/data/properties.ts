@@ -1,4 +1,4 @@
-import type { Property } from "@/types/property";
+import type { Property } from "@dravik/contracts/realty";
 
 export const SAMPLE_PROPERTIES: Property[] = [
   {

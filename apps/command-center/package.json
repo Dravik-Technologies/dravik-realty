@@ -15,6 +15,7 @@
     "@dnd-kit/utilities": "^3.2.2",
     "@dravik/contracts": "workspace:*",
     "@dravik/crm": "workspace:*",
+    "@dravik/realty": "workspace:*",
     "@dravik/shared": "workspace:*",
     "@dravik/ui": "workspace:*",
     "@radix-ui/react-dialog": "^1.1.15",

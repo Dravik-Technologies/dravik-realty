@@ -5,11 +5,11 @@ import {
   Plus, TrendingUp, DollarSign, Clock, Award,
   Calendar, Tag, ExternalLink,
 } from "lucide-react";
-import type { Transaction } from "@/types/transaction";
-import { SAMPLE_TRANSACTIONS } from "@/data/transactions";
-import TransactionPipeline from "@/components/transactions/TransactionPipeline";
-import TransactionPanel from "@/components/transactions/TransactionPanel";
-import { STAGE_COLOR } from "@/components/transactions/TransactionCard";
+import type { Transaction } from "@dravik/contracts/realty";
+import { SAMPLE_TRANSACTIONS } from "../data/transactions";
+import TransactionPipeline from "../components/transactions/TransactionPipeline";
+import TransactionPanel from "../components/transactions/TransactionPanel";
+import { STAGE_COLOR } from "../components/transactions/TransactionCard";
 import { formatCurrency } from "@dravik/shared";
 import { cn } from "@dravik/shared";
 

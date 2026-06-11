@@ -11,8 +11,8 @@ import {
   SortableContext, arrayMove,
   verticalListSortingStrategy, sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
-import type { Transaction, PipelineStage } from "@/types/transaction";
-import { PIPELINE_STAGES, STAGE_PROGRESS } from "@/types/transaction";
+import type { Transaction, PipelineStage } from "@dravik/contracts/realty";
+import { PIPELINE_STAGES, STAGE_PROGRESS } from "@dravik/contracts/realty";
 import TransactionCard, { STAGE_COLOR } from "./TransactionCard";
 import { formatCurrency } from "@dravik/shared";
 import { cn } from "@dravik/shared";

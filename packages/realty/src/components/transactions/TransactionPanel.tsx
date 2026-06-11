@@ -9,7 +9,7 @@ import {
 import type {
   Transaction, TransactionTab, TransactionDocument, TransactionTask,
   TransactionParty, ActivityEntry, MortgageInfo,
-} from "@/types/transaction";
+} from "@dravik/contracts/realty";
 import { STAGE_COLOR } from "./TransactionCard";
 import CommissionBreakdown from "./CommissionBreakdown";
 import { formatCurrency } from "@dravik/shared";

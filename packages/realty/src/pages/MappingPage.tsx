@@ -5,16 +5,16 @@ import dynamic from "next/dynamic";
 import {
   Search, Map, List, Wifi, WifiOff, X,
 } from "lucide-react";
-import type { Property, PropertyFilters, ViewMode, SortField, SortDir } from "@/types/property";
-import { DEFAULT_FILTERS } from "@/types/property";
-import { SAMPLE_PROPERTIES } from "@/data/properties";
-import MapFilters from "@/components/mapping/MapFilters";
-import ListView from "@/components/mapping/ListView";
-import PropertyPanel from "@/components/mapping/PropertyPanel";
+import type { Property, PropertyFilters, ViewMode, SortField, SortDir } from "@dravik/contracts/realty";
+import { DEFAULT_FILTERS } from "@dravik/contracts/realty";
+import { SAMPLE_PROPERTIES } from "../data/properties";
+import MapFilters from "../components/mapping/MapFilters";
+import ListView from "../components/mapping/ListView";
+import PropertyPanel from "../components/mapping/PropertyPanel";
 import { cn } from "@dravik/shared";
 
 // Leaflet must only run in the browser — dynamic import with ssr:false
-const PropertyMap = dynamic(() => import("@/components/mapping/PropertyMap"), {
+const PropertyMap = dynamic(() => import("../components/mapping/PropertyMap"), {
   ssr: false,
   loading: () => (
     <div className="w-full h-full bg-surface-2 flex items-center justify-center">

@@ -5,7 +5,7 @@ import {
   ChevronDown, ChevronUp, Calendar, CheckCircle2,
   Clock, FileText, ArrowRight,
 } from "lucide-react";
-import type { ClientTransaction } from "@/types/client-portal";
+import type { ClientTransaction } from "@dravik/contracts/portal";
 import { formatCurrency } from "@dravik/shared";
 import { cn } from "@dravik/shared";
 

@@ -1,7 +1,7 @@
 import type {
   ClientPortalData, ClientTransaction,
   ClientMessage, ActivityEntry,
-} from "@/types/client-portal";
+} from "@dravik/contracts/portal";
 
 // ─── Shared agent ─────────────────────────────────────────────
 const AGENT_CHRIS = {

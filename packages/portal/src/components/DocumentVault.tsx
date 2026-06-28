@@ -6,7 +6,7 @@ import {
   User, Landmark, CheckCircle2, Clock, AlertTriangle,
   Upload, Eye,
 } from "lucide-react";
-import type { ClientDocument, ClientTransaction } from "@/types/client-portal";
+import type { ClientDocument, ClientTransaction } from "@dravik/contracts/portal";
 import { cn } from "@dravik/shared";
 
 // ─── Icon map ─────────────────────────────────────────────────

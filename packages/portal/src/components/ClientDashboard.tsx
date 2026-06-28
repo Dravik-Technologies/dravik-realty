@@ -7,7 +7,7 @@ import {
   Bed, Bath, Ruler, Bookmark, Share2, AlertCircle,
   ArrowRight, Building2,
 } from "lucide-react";
-import type { ClientPortalData, ClientMessage, ActivityEntry, SavedProperty } from "@/types/client-portal";
+import type { ClientPortalData, ClientMessage, ActivityEntry, SavedProperty } from "@dravik/contracts/portal";
 import ClientTransactionCard from "./ClientTransactionCard";
 import MortgageProgressCard from "./MortgageProgressCard";
 import DocumentVault from "./DocumentVault";

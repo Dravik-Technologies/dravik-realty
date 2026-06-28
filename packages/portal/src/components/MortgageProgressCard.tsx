@@ -1,8 +1,8 @@
 "use client";
 
 import { CheckCircle2, Circle, Clock } from "lucide-react";
-import type { ClientMortgage } from "@/types/client-portal";
-import { MORTGAGE_STAGES } from "@/types/client-portal";
+import type { ClientMortgage } from "@dravik/contracts/portal";
+import { MORTGAGE_STAGES } from "@dravik/contracts/portal";
 import { formatCurrency } from "@dravik/shared";
 import { cn } from "@dravik/shared";
 

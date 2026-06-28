@@ -32,4 +32,45 @@ test.describe("shell chrome", () => {
     await page.locator("aside").getByRole("link", { name: "Transactions", exact: true }).click();
     await expect(page).toHaveURL(/\/transactions$/);
   });
+
+  // E9.3: data-driven nav completeness -- derived from NAV_SECTIONS in modules/registry.ts.
+  // When the registry changes, update this list to keep it in sync.
+  const NAV_LABELS = [
+    "Dashboard",
+    "Lead Engine & Smart CRM",
+    "Prospecting & Seller Leads",
+    "Global Referral Network",
+    "Interactive Mapping & IDX",
+    "Marketing & Landing Pages",
+    "Transactions",
+    "Unified Inbox",
+    "Client Portal",
+    "Reports & Analytics",
+    "Team Management",
+    "Mortgage Tools",
+    "Settings",
+  ];
+
+  test("sidebar renders all nav items from the module registry", async ({ page }) => {
+    const sidebar = page.locator("aside");
+    for (const label of NAV_LABELS) {
+      await expect(sidebar.getByText(label)).toBeVisible();
+    }
+  });
+
+  // Dashboard module tiles -- derived from DASHBOARD_MODULES in modules/registry.ts.
+  const DASHBOARD_MODULE_HREFS = [
+    "/referrals",
+    "/crm/leads",
+    "/broker/reports",
+    "/lending",
+    "/realty/transactions",
+    "/marketing",
+  ];
+
+  test("dashboard renders all module tiles from the registry", async ({ page }) => {
+    for (const href of DASHBOARD_MODULE_HREFS) {
+      await expect(page.locator(`a[href="${href}"]`).first()).toBeVisible();
+    }
+  });
 });

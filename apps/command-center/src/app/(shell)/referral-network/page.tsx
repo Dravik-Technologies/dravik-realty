@@ -1,7 +1,5 @@
-import ReferralNetwork from "@/components/referral/ReferralNetwork";
+import type { Metadata } from "next";
+import { ReferralNetworkPage } from "@dravik/referrals";
 
-export const metadata = { title: "Global Referral Network · AxenOne" };
-
-export default function ReferralNetworkPage() {
-  return <ReferralNetwork />;
-}
+export const metadata: Metadata = { title: "Global Referral Network · AxenOne" };
+export default ReferralNetworkPage;

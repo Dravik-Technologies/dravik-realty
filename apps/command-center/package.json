@@ -17,6 +17,7 @@
     "@dravik/crm": "workspace:*",
     "@dravik/lending": "workspace:*",
     "@dravik/marketing": "workspace:*",
+    "@dravik/referrals": "workspace:*",
     "@dravik/realty": "workspace:*",
     "@dravik/shared": "workspace:*",
     "@dravik/ui": "workspace:*",

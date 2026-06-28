@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { Search, X, Users, Globe, Receipt, Landmark, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { SAMPLE_LEADS } from "@dravik/crm";
-import { AGENTS } from "@/data/agents";
+import { AGENTS } from "@dravik/referrals";
 import { SAMPLE_TRANSACTIONS } from "@dravik/realty";
 import { MORTGAGE_APPS } from "@dravik/lending";
 import { cn } from "@dravik/shared";

@@ -1,7 +1,7 @@
 "use client";
 
 import { Clock, MapPin, TrendingUp } from "lucide-react";
-import { ReferralPipeline, ReferralStatus } from "@/types/referral";
+import { ReferralPipeline, ReferralStatus } from "@dravik/contracts/referrals";
 import { cn, formatCurrency, formatCurrencyFull } from "@dravik/shared";
 
 // ──────────────────────────────────────────────

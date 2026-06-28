@@ -1,4 +1,4 @@
-import { Agent, ReferralPipeline } from "@/types/referral";
+import { Agent, ReferralPipeline } from "@dravik/contracts/referrals";
 
 export const AGENTS: Agent[] = [
   // ── Original network agents ──────────────────────────────────

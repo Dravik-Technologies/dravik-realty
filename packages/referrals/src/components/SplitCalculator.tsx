@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import type { ReactNode } from "react";
 import dynamic from "next/dynamic";
 import { Info, CheckCircle } from "lucide-react";
-import { Agent, SplitBreakdown } from "@/types/referral";
+import { Agent, SplitBreakdown } from "@dravik/contracts/referrals";
 import { formatCurrency, formatCurrencyFull } from "@dravik/shared";
 
 const PieChartSection = dynamic(() => import("./PieChartSection"), {

@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
-import TeamDashboard from "@/components/team/TeamDashboard";
+import { TeamPage } from "@dravik/broker";
 
 export const metadata: Metadata = { title: "Team Management" };
-
-export default function TeamPage() {
-  return <TeamDashboard />;
-}
+export default TeamPage;

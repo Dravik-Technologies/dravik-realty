@@ -29,6 +29,9 @@ importers:
       '@dnd-kit/utilities':
         specifier: ^3.2.2
         version: 3.2.2(react@19.2.4)
+      '@dravik/broker':
+        specifier: workspace:*
+        version: link:../../packages/broker
       '@dravik/contracts':
         specifier: workspace:*
         version: link:../../packages/contracts
@@ -41,6 +44,9 @@ importers:
       '@dravik/marketing':
         specifier: workspace:*
         version: link:../../packages/marketing
+      '@dravik/portal':
+        specifier: workspace:*
+        version: link:../../packages/portal
       '@dravik/realty':
         specifier: workspace:*
         version: link:../../packages/realty
@@ -117,6 +123,37 @@ importers:
       tailwindcss:
         specifier: ^4
         version: 4.3.0
+      typescript:
+        specifier: ^5
+        version: 5.9.3
+
+  packages/broker:
+    dependencies:
+      '@dravik/contracts':
+        specifier: workspace:*
+        version: link:../contracts
+      '@dravik/shared':
+        specifier: workspace:*
+        version: link:../shared
+      lucide-react:
+        specifier: ^1.16.0
+        version: 1.17.0(react@19.2.4)
+      recharts:
+        specifier: ^3.8.1
+        version: 3.8.1(@types/react@19.2.17)(react-dom@19.2.4(react@19.2.4))(react-is@16.13.1)(react@19.2.4)(redux@5.0.1)
+    devDependencies:
+      '@types/react':
+        specifier: ^19
+        version: 19.2.17
+      next:
+        specifier: 16.2.6
+        version: 16.2.6(@babel/core@7.29.7)(@playwright/test@1.60.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react:
+        specifier: 19.2.4
+        version: 19.2.4
+      react-dom:
+        specifier: 19.2.4
+        version: 19.2.4(react@19.2.4)
       typescript:
         specifier: ^5
         version: 5.9.3
@@ -240,6 +277,31 @@ importers:
       next:
         specifier: 16.2.6
         version: 16.2.6(@babel/core@7.29.7)(@playwright/test@1.60.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react:
+        specifier: 19.2.4
+        version: 19.2.4
+      react-dom:
+        specifier: 19.2.4
+        version: 19.2.4(react@19.2.4)
+      typescript:
+        specifier: ^5
+        version: 5.9.3
+
+  packages/portal:
+    dependencies:
+      '@dravik/contracts':
+        specifier: workspace:*
+        version: link:../contracts
+      '@dravik/shared':
+        specifier: workspace:*
+        version: link:../shared
+      lucide-react:
+        specifier: ^1.16.0
+        version: 1.17.0(react@19.2.4)
+    devDependencies:
+      '@types/react':
+        specifier: ^19
+        version: 19.2.17
       react:
         specifier: 19.2.4
         version: 19.2.4

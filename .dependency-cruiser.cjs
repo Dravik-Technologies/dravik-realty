@@ -2,7 +2,7 @@ module.exports = {
   forbidden: [
     {
       name: "R1-no-feature-package-cross-imports",
-      severity: "warn",
+      severity: "error",
       from: {
         path: "^packages/(crm|realty|lending|marketing|referrals|broker|billing|portal)/",
       },
@@ -13,7 +13,7 @@ module.exports = {
     },
     {
       name: "R2-shared-contracts-no-workspace-imports",
-      severity: "warn",
+      severity: "error",
       from: {
         path: "^packages/shared/",
       },
@@ -23,7 +23,7 @@ module.exports = {
     },
     {
       name: "R2-shared-contracts-no-workspace-imports",
-      severity: "warn",
+      severity: "error",
       from: {
         path: "^packages/contracts/",
       },
@@ -33,7 +33,7 @@ module.exports = {
     },
     {
       name: "R3-ui-only-imports-shared",
-      severity: "warn",
+      severity: "error",
       from: {
         path: "^packages/ui/",
       },
@@ -43,7 +43,7 @@ module.exports = {
     },
     {
       name: "R4-packages-no-app-imports",
-      severity: "warn",
+      severity: "error",
       from: {
         path: "^packages/",
       },
@@ -53,7 +53,7 @@ module.exports = {
     },
     {
       name: "R5-packages-no-app-alias",
-      severity: "warn",
+      severity: "error",
       from: {
         path: "^packages/",
       },

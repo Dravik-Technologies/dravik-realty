@@ -7,7 +7,9 @@
     "./realty": "./src/realty/index.ts",
     "./lending": "./src/lending/index.ts",
     "./marketing": "./src/marketing/index.ts",
-    "./referrals": "./src/referrals/index.ts"
+    "./referrals": "./src/referrals/index.ts",
+    "./broker": "./src/broker/index.ts",
+    "./portal": "./src/portal/index.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit"

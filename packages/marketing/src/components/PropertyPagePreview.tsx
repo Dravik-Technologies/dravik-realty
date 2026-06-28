@@ -5,19 +5,20 @@ import {
   X, Rocket, Check, Edit, Bed, Bath, Square,
   Phone, Mail, DollarSign, MapPin, ExternalLink, ChevronDown,
 } from "lucide-react";
-import { SAMPLE_PROPERTIES } from "@dravik/realty";
+import type { Property } from "@dravik/contracts/realty";
 import { cn, formatCurrency } from "@dravik/shared";
 
 // ─── Mini property page preview (rendered inside panel) ───────
 interface PagePreviewProps {
+  properties: Property[];
   propertyId: string;
   headline: string;
   agentName: string;
   agentTitle: string;
 }
 
-function MiniPropertyPage({ propertyId, headline, agentName, agentTitle }: PagePreviewProps) {
-  const property = SAMPLE_PROPERTIES.find((p) => p.id === propertyId) ?? SAMPLE_PROPERTIES[0];
+function MiniPropertyPage({ properties, propertyId, headline, agentName, agentTitle }: PagePreviewProps) {
+  const property = properties.find((p) => p.id === propertyId) ?? properties[0];
   const p = property;
 
   return (
@@ -113,15 +114,16 @@ function MiniPropertyPage({ propertyId, headline, agentName, agentTitle }: PageP
 interface PropertyPagePreviewProps {
   open: boolean;
   onClose: () => void;
+  properties: Property[];
 }
 
-export default function PropertyPagePreview({ open, onClose }: PropertyPagePreviewProps) {
+export default function PropertyPagePreview({ open, onClose, properties }: PropertyPagePreviewProps) {
   const panelRef  = useRef<HTMLDivElement>(null);
   const closeRef  = useRef<HTMLButtonElement>(null);
   const prevRef   = useRef<HTMLElement | null>(null);
 
   const [trackedOpen, setTrackedOpen] = useState(false);
-  const [propertyId, setPropertyId] = useState(SAMPLE_PROPERTIES[0].id);
+  const [propertyId, setPropertyId] = useState(properties[0].id);
   const [headline, setHeadline]     = useState("Discover Exclusive Waterfront Living");
   const [agentName, setAgentName]   = useState("Chris Macabugao");
   const [agentTitle, setAgentTitle] = useState("Principal Broker · Axen Realty");
@@ -131,7 +133,7 @@ export default function PropertyPagePreview({ open, onClose }: PropertyPagePrevi
   // Derived state: reset when panel opens
   if (open && !trackedOpen) {
     setTrackedOpen(true);
-    setPropertyId(SAMPLE_PROPERTIES[0].id);
+    setPropertyId(properties[0].id);
     setHeadline("Discover Exclusive Waterfront Living");
     setAgentName("Chris Macabugao");
     setAgentTitle("Principal Broker · Axen Realty");
@@ -142,7 +144,7 @@ export default function PropertyPagePreview({ open, onClose }: PropertyPagePrevi
     setTrackedOpen(false);
   }
 
-  const selectedProperty = SAMPLE_PROPERTIES.find((p) => p.id === propertyId) ?? SAMPLE_PROPERTIES[0];
+  const selectedProperty = properties.find((p) => p.id === propertyId) ?? properties[0];
 
   useEffect(() => {
     if (open) {
@@ -225,7 +227,7 @@ export default function PropertyPagePreview({ open, onClose }: PropertyPagePrevi
                   onChange={(e) => setPropertyId(e.target.value)}
                   className="w-full pl-3 pr-8 py-2.5 bg-surface-2 border border-transparent rounded-xl text-sm text-axen-dark focus:outline-none focus:border-gold appearance-none cursor-pointer"
                 >
-                  {SAMPLE_PROPERTIES.map((p) => (
+                  {properties.map((p) => (
                     <option key={p.id} value={p.id}>
                       {p.address} — {formatCurrency(p.price)}
                     </option>
@@ -327,6 +329,7 @@ export default function PropertyPagePreview({ open, onClose }: PropertyPagePrevi
           </div>
           <div className="flex-1 overflow-y-auto p-6">
             <MiniPropertyPage
+              properties={properties}
               propertyId={propertyId}
               headline={headline}
               agentName={agentName}

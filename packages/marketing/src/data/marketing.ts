@@ -1,4 +1,4 @@
-import type { Campaign, PageTemplate, FlyerTemplate, BuilderSection } from "@/types/marketing";
+import type { Campaign, PageTemplate, FlyerTemplate, BuilderSection } from "@dravik/contracts/marketing";
 
 export const SAMPLE_CAMPAIGNS: Campaign[] = [
   {

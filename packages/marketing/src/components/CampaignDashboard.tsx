@@ -5,8 +5,8 @@ import {
   Eye, Edit, ExternalLink, Pause, Play,
   Globe, FileText, Home, Printer,
 } from "lucide-react";
-import type { Campaign, CampaignType } from "@/types/marketing";
-import { SAMPLE_CAMPAIGNS } from "@/data/marketing";
+import type { Campaign, CampaignType } from "@dravik/contracts/marketing";
+import { SAMPLE_CAMPAIGNS } from "../data/marketing";
 import { cn } from "@dravik/shared";
 
 // ─── Status badge ─────────────────────────────────────────────

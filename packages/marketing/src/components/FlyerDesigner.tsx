@@ -2,8 +2,8 @@
 
 import { useRef, useEffect, useState } from "react";
 import { X, Download, Share2, QrCode, Phone, Mail, Check } from "lucide-react";
-import type { FlyerContent } from "@/types/marketing";
-import { FLYER_TEMPLATES } from "@/data/marketing";
+import type { FlyerContent } from "@dravik/contracts/marketing";
+import { FLYER_TEMPLATES } from "../data/marketing";
 import { cn } from "@dravik/shared";
 
 // ─── Flyer live preview (module-level) ───────────────────────

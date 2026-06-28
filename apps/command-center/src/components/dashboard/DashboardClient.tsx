@@ -11,6 +11,7 @@ import { SAMPLE_LEADS } from "@dravik/crm";
 import { SAMPLE_TRANSACTIONS } from "@dravik/realty";
 import { MORTGAGE_APPS } from "@dravik/lending";
 import { formatCurrency, cn } from "@dravik/shared";
+import { DASHBOARD_MODULES } from "@/modules/registry";
 
 // ─── Module-level precomputed data ────────────────────────────
 const totalLeads  = SAMPLE_LEADS.length;
@@ -64,15 +65,6 @@ const ACTIVITY: ActivityItem[] = [
   { id:"a6", icon:Receipt,   accent:"#4A7A4A", module:"Transactions", href:"/realty/transactions",   text:"Inspection report delivered for 580 Sunset Isle Dr", time:"5h ago"    },
   { id:"a7", icon:Megaphone, accent:"#7C6A9E", module:"Marketing",    href:"/marketing",        text:"Spring Listings 2026 sent to 148 contacts",          time:"6h ago"    },
   { id:"a8", icon:Landmark,  accent:"#C0786C", module:"Mortgage",     href:"/lending",               text:"New pre-qual application: Evan & Rachel Torres",     time:"Yesterday" },
-];
-
-const MODULES = [
-  { label:"Global Referral Network", desc:"Manage and initiate agent referrals across the network.", icon:Globe,     href:"/referrals",             accent:"#D4AF37" },
-  { label:"Lead Engine & Smart CRM", desc:"Track, nurture, and convert leads with AI scoring.",      icon:Users,     href:"/crm/leads",             accent:"#4A90A4" },
-  { label:"Reports & Analytics",     desc:"Production reports, team metrics, and revenue forecasts.",icon:BarChart3, href:"/broker/reports",     accent:"#7C6A9E" },
-  { label:"Mortgage Tools",          desc:"Rate sheets, loan calculators, and pipeline tracking.",   icon:Landmark,  href:"/lending",               accent:"#C0786C" },
-  { label:"Transactions",            desc:"End-to-end transaction management and document tracking.",icon:Receipt,   href:"/realty/transactions",   accent:"#4A7A4A" },
-  { label:"Marketing & Pages",       desc:"Landing pages, email campaigns, and flyer designer.",     icon:Megaphone, href:"/marketing",        accent:"#B87333" },
 ];
 
 const HELP_LINKS = [
@@ -440,7 +432,7 @@ export default function DashboardClient() {
           <h3 className="text-base font-bold text-axen-dark">Platform Modules</h3>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {MODULES.map(({ label, desc, icon: Icon, href, accent }) => (
+          {DASHBOARD_MODULES.map(({ label, desc, icon: Icon, href, accent }) => (
             <Link
               key={label}
               href={href}

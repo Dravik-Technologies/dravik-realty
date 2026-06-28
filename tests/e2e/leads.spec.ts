@@ -16,7 +16,7 @@ async function columnCount(col: Locator): Promise<number> {
 
 test.describe("leads pipeline", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/leads");
+    await page.goto("/crm/leads");
   });
 
   test("KPI strip and all five kanban columns render", async ({ page }) => {

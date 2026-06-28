@@ -2,7 +2,7 @@ import { test, expect } from "./fixtures";
 
 test.describe("interactive mapping", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/mapping");
+    await page.goto("/realty/mapping");
   });
 
   test("map view mounts its container (no tile assertions)", async ({ page }) => {

@@ -2,7 +2,7 @@ import { test, expect } from "./fixtures";
 
 test.describe("mortgage tools", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/mortgage");
+    await page.goto("/lending");
   });
 
   test("pipeline stages render", async ({ page }) => {

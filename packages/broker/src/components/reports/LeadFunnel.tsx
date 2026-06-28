@@ -5,7 +5,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, Cell, FunnelChart, Funnel, LabelList,
 } from "recharts";
-import type { LeadSourceStat, FunnelStep } from "@/types/analytics";
+import type { LeadSourceStat, FunnelStep } from "@dravik/contracts/broker";
 import { cn } from "@dravik/shared";
 import { Filter, X } from "lucide-react";
 

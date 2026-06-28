@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { Bell, Mail, MessageSquare, Smartphone } from "lucide-react";
-import { NOTIF_PREFS } from "@/data/settings";
-import type { NotifPref } from "@/types/settings";
+import { NOTIF_PREFS } from "../../data/settings";
+import type { NotifPref } from "@dravik/contracts/broker";
 import { cn } from "@dravik/shared";
 
 // ─── Toggle switch ────────────────────────────────────────────

@@ -1,7 +1,7 @@
 import type {
   SettingsUser, CompanyInfo, Integration,
   LicenseRecord, AuditEntry, CommissionTier, NotifPref, ColorTheme,
-} from "@/types/settings";
+} from "@dravik/contracts/broker";
 
 // ─── Company ──────────────────────────────────────────────────
 export const COMPANY_INFO: CompanyInfo = {

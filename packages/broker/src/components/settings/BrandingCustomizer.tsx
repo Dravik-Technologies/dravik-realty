@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { Check, Mail, Palette } from "lucide-react";
-import { COLOR_THEMES } from "@/data/settings";
-import type { ColorTheme } from "@/types/settings";
+import { COLOR_THEMES } from "../../data/settings";
+import type { ColorTheme } from "@dravik/contracts/broker";
 import { cn } from "@dravik/shared";
 
 // ─── Color swatch ─────────────────────────────────────────────

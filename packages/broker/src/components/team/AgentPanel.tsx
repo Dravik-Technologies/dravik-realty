@@ -6,7 +6,7 @@ import {
   Mail, Phone, MapPin, Award, Calendar, Shield, CheckCircle,
   AlertTriangle, Clock, Briefcase, ArrowUpRight, ArrowDownLeft,
 } from "lucide-react";
-import type { Agent, AgentTab, AgentActivity } from "@/types/team";
+import type { Agent, AgentTab, AgentActivity } from "@dravik/contracts/broker";
 import CommissionSettings from "./CommissionSettings";
 import { cn, formatCurrency, timeAgo } from "@dravik/shared";
 

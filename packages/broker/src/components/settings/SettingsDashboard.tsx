@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { Save, RotateCcw, CheckCircle2, Settings } from "lucide-react";
-import type { SettingsSection } from "@/types/settings";
+import type { SettingsSection } from "@dravik/contracts/broker";
 import SettingsSidebar    from "./SettingsSidebar";
 import GeneralSettings    from "./GeneralSettings";
 import PermissionsManager from "./PermissionsManager";

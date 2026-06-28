@@ -1,4 +1,4 @@
-import type { AnalyticsData, AgentStat, ReferralPartner, CampaignStat } from "@/types/analytics";
+import type { AnalyticsData, AgentStat, ReferralPartner, CampaignStat } from "@dravik/contracts/broker";
 
 // ─── Shared reference data (same across periods) ──────────────
 const AGENTS: AgentStat[] = [

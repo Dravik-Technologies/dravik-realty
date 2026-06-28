@@ -1,7 +1,7 @@
 "use client";
 
 import { Users, ChevronRight } from "lucide-react";
-import type { Agent, TeamGroup, AgentStatus, LicenseType } from "@/types/team";
+import type { Agent, TeamGroup, AgentStatus, LicenseType } from "@dravik/contracts/broker";
 import { cn } from "@dravik/shared";
 
 // ─── Badge colours ────────────────────────────────────────────

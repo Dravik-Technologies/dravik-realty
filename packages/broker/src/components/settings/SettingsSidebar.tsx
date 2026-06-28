@@ -4,7 +4,7 @@ import {
   Building2, Users, DollarSign, Plug2, ShieldCheck,
   Paintbrush, Bell, Lock,
 } from "lucide-react";
-import type { SettingsSection } from "@/types/settings";
+import type { SettingsSection } from "@dravik/contracts/broker";
 import { cn } from "@dravik/shared";
 
 // ─── Nav items ────────────────────────────────────────────────

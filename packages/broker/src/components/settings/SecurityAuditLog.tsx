@@ -5,8 +5,8 @@ import {
   Lock, ShieldCheck, AlertTriangle, Info,
   XCircle, Monitor, Clock, ChevronDown,
 } from "lucide-react";
-import { AUDIT_LOG } from "@/data/settings";
-import type { AuditSeverity } from "@/types/settings";
+import { AUDIT_LOG } from "../../data/settings";
+import type { AuditSeverity } from "@dravik/contracts/broker";
 import { cn } from "@dravik/shared";
 
 // ─── Toggle switch (reused here) ─────────────────────────────

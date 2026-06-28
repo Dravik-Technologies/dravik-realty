@@ -5,8 +5,8 @@ import {
   CheckCircle2, XCircle, Clock, AlertTriangle,
   RefreshCw, Plug, Key, Eye, EyeOff,
 } from "lucide-react";
-import type { Integration, IntegStatus } from "@/types/settings";
-import { INTEGRATIONS } from "@/data/settings";
+import type { Integration, IntegStatus } from "@dravik/contracts/broker";
+import { INTEGRATIONS } from "../../data/settings";
 import { cn } from "@dravik/shared";
 
 // ─── Status config ────────────────────────────────────────────

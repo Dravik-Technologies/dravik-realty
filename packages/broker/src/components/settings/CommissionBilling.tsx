@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { DollarSign, CreditCard, Users, TrendingUp } from "lucide-react";
-import { COMMISSION_TIERS } from "@/data/settings";
-import type { CommissionTier } from "@/types/settings";
+import { COMMISSION_TIERS } from "../../data/settings";
+import type { CommissionTier } from "@dravik/contracts/broker";
 import { cn } from "@dravik/shared";
 
 // ─── Split ring visual ────────────────────────────────────────

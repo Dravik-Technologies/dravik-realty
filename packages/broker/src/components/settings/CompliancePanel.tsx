@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { AlertTriangle, CheckCircle2, XCircle, ShieldCheck, FileText } from "lucide-react";
-import { LICENSE_RECORDS } from "@/data/settings";
-import type { LicenseStatus } from "@/types/settings";
+import { LICENSE_RECORDS } from "../../data/settings";
+import type { LicenseStatus } from "@dravik/contracts/broker";
 import { cn } from "@dravik/shared";
 
 // ─── License status config ────────────────────────────────────

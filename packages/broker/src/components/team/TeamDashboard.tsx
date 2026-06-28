@@ -5,8 +5,8 @@ import {
   Users, UserCheck, Clock, TrendingUp, DollarSign,
   Search, X, UserPlus, Download, Mail, LayoutList, Network,
 } from "lucide-react";
-import type { Agent, DirectoryFilter, DirectoryView, SortField } from "@/types/team";
-import { AGENTS, TEAMS } from "@/data/team";
+import type { Agent, DirectoryFilter, DirectoryView, SortField } from "@dravik/contracts/broker";
+import { AGENTS, TEAMS } from "../../data/team";
 import AgentDirectory from "./AgentDirectory";
 import AgentPanel     from "./AgentPanel";
 import OnboardingForm from "./OnboardingForm";

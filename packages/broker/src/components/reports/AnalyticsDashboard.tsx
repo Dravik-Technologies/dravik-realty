@@ -10,8 +10,8 @@ import {
   DollarSign, TrendingUp, Clock, Users, Award, BarChart3,
   Download, FileText, Calendar, ChevronDown, Building2,
 } from "lucide-react";
-import type { DateRange, ViewMode, ReportTab, AnalyticsSnapshot, CampaignStat, MortgageMonthStat } from "@/types/analytics";
-import { ANALYTICS_DATA } from "@/data/analytics";
+import type { DateRange, ViewMode, ReportTab, AnalyticsSnapshot, CampaignStat, MortgageMonthStat } from "@dravik/contracts/broker";
+import { ANALYTICS_DATA } from "../../data/analytics";
 import { formatCurrency } from "@dravik/shared";
 import { cn } from "@dravik/shared";
 

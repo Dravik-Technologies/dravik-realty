@@ -2,8 +2,8 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { UserPlus, X, ExternalLink, Mail, Shield } from "lucide-react";
-import type { SettingsUser, UserRole, UserStatus } from "@/types/settings";
-import { SETTINGS_USERS } from "@/data/settings";
+import type { SettingsUser, UserRole, UserStatus } from "@dravik/contracts/broker";
+import { SETTINGS_USERS } from "../../data/settings";
 import Link from "next/link";
 import { cn } from "@dravik/shared";
 

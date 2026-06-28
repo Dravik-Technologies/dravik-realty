@@ -1,4 +1,4 @@
-import type { Agent, AgentActivity, CommissionRule, TeamGroup } from "@/types/team";
+import type { Agent, AgentActivity, CommissionRule, TeamGroup } from "@dravik/contracts/broker";
 
 // ─── Helpers ──────────────────────────────────────────────────
 function act(id: string, type: AgentActivity["type"], description: string, date: string): AgentActivity {

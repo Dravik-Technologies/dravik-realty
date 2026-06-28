@@ -5,7 +5,7 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, Legend,
 } from "recharts";
-import type { AgentStat, TimeSeriesPoint, ViewMode } from "@/types/analytics";
+import type { AgentStat, TimeSeriesPoint, ViewMode } from "@dravik/contracts/broker";
 import { formatCurrency } from "@dravik/shared";
 import { cn } from "@dravik/shared";
 import { TrendingUp, Award } from "lucide-react";

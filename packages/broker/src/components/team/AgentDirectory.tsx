@@ -3,7 +3,7 @@
 import {
   ChevronUp, ChevronDown, Eye, ArrowUpDown,
 } from "lucide-react";
-import type { Agent, SortField, LicenseType, AgentStatus } from "@/types/team";
+import type { Agent, SortField, LicenseType, AgentStatus } from "@dravik/contracts/broker";
 import { cn, timeAgo } from "@dravik/shared";
 
 // ─── Badge helpers (module level) ────────────────────────────

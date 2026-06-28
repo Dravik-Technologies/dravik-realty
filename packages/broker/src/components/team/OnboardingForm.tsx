@@ -5,8 +5,8 @@ import {
   X, ChevronRight, ChevronLeft, Check,
   User, Shield, DollarSign, ClipboardList,
 } from "lucide-react";
-import type { Agent, LicenseType, AgentRole } from "@/types/team";
-import { TEAMS } from "@/data/team";
+import type { Agent, LicenseType, AgentRole } from "@dravik/contracts/broker";
+import { TEAMS } from "../../data/team";
 import { cn } from "@dravik/shared";
 
 // ─── Form state ───────────────────────────────────────────────

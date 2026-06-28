@@ -1,7 +1,7 @@
 "use client";
 
 import { DollarSign, Info, TrendingUp } from "lucide-react";
-import type { Agent } from "@/types/team";
+import type { Agent } from "@dravik/contracts/broker";
 import { cn, formatCurrency } from "@dravik/shared";
 
 // ─── Split ring visual ────────────────────────────────────────

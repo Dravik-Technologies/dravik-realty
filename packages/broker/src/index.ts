@@ -5,3 +5,4 @@ export { default as SettingsPage } from "./components/settings/SettingsDashboard
 export * from "./data/team";
 export * from "./data/analytics";
 export * from "./data/settings";
+export { manifest } from "./manifest";

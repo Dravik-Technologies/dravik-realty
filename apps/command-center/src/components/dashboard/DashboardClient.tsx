@@ -56,36 +56,36 @@ interface ActivityItem {
 }
 
 const ACTIVITY: ActivityItem[] = [
-  { id:"a1", icon:Users,     accent:"#4A90A4", module:"Leads",        href:"/leads",            text:"Sarah Johnson moved to Under Contract",              time:"2m ago"    },
-  { id:"a2", icon:Receipt,   accent:"#4A7A4A", module:"Transactions", href:"/transactions",     text:"Document signed: Purchase Agreement on 12 Ocean Dr", time:"14m ago"   },
-  { id:"a3", icon:Landmark,  accent:"#C0786C", module:"Mortgage",     href:"/mortgage",         text:"Chloe Nguyen's FHA loan approved — Closing stage",   time:"1h ago"    },
-  { id:"a4", icon:Globe,     accent:"#D4AF37", module:"Referrals",    href:"/referral-network", text:"Marcus Thompson sent referral: David & Amy Park",    time:"2h ago"    },
-  { id:"a5", icon:Users,     accent:"#4A90A4", module:"Leads",        href:"/leads",            text:"5 new leads added from Zillow Spring campaign",      time:"3h ago"    },
-  { id:"a6", icon:Receipt,   accent:"#4A7A4A", module:"Transactions", href:"/transactions",     text:"Inspection report delivered for 580 Sunset Isle Dr", time:"5h ago"    },
+  { id:"a1", icon:Users,     accent:"#4A90A4", module:"Leads",        href:"/crm/leads",             text:"Sarah Johnson moved to Under Contract",              time:"2m ago"    },
+  { id:"a2", icon:Receipt,   accent:"#4A7A4A", module:"Transactions", href:"/realty/transactions",   text:"Document signed: Purchase Agreement on 12 Ocean Dr", time:"14m ago"   },
+  { id:"a3", icon:Landmark,  accent:"#C0786C", module:"Mortgage",     href:"/lending",               text:"Chloe Nguyen's FHA loan approved — Closing stage",   time:"1h ago"    },
+  { id:"a4", icon:Globe,     accent:"#D4AF37", module:"Referrals",    href:"/referrals",             text:"Marcus Thompson sent referral: David & Amy Park",    time:"2h ago"    },
+  { id:"a5", icon:Users,     accent:"#4A90A4", module:"Leads",        href:"/crm/leads",             text:"5 new leads added from Zillow Spring campaign",      time:"3h ago"    },
+  { id:"a6", icon:Receipt,   accent:"#4A7A4A", module:"Transactions", href:"/realty/transactions",   text:"Inspection report delivered for 580 Sunset Isle Dr", time:"5h ago"    },
   { id:"a7", icon:Megaphone, accent:"#7C6A9E", module:"Marketing",    href:"/marketing",        text:"Spring Listings 2026 sent to 148 contacts",          time:"6h ago"    },
-  { id:"a8", icon:Landmark,  accent:"#C0786C", module:"Mortgage",     href:"/mortgage",         text:"New pre-qual application: Evan & Rachel Torres",     time:"Yesterday" },
+  { id:"a8", icon:Landmark,  accent:"#C0786C", module:"Mortgage",     href:"/lending",               text:"New pre-qual application: Evan & Rachel Torres",     time:"Yesterday" },
 ];
 
 const MODULES = [
-  { label:"Global Referral Network", desc:"Manage and initiate agent referrals across the network.", icon:Globe,     href:"/referral-network", accent:"#D4AF37" },
-  { label:"Lead Engine & Smart CRM", desc:"Track, nurture, and convert leads with AI scoring.",      icon:Users,     href:"/leads",            accent:"#4A90A4" },
-  { label:"Reports & Analytics",     desc:"Production reports, team metrics, and revenue forecasts.",icon:BarChart3, href:"/reports",          accent:"#7C6A9E" },
-  { label:"Mortgage Tools",          desc:"Rate sheets, loan calculators, and pipeline tracking.",   icon:Landmark,  href:"/mortgage",         accent:"#C0786C" },
-  { label:"Transactions",            desc:"End-to-end transaction management and document tracking.",icon:Receipt,   href:"/transactions",     accent:"#4A7A4A" },
+  { label:"Global Referral Network", desc:"Manage and initiate agent referrals across the network.", icon:Globe,     href:"/referrals",             accent:"#D4AF37" },
+  { label:"Lead Engine & Smart CRM", desc:"Track, nurture, and convert leads with AI scoring.",      icon:Users,     href:"/crm/leads",             accent:"#4A90A4" },
+  { label:"Reports & Analytics",     desc:"Production reports, team metrics, and revenue forecasts.",icon:BarChart3, href:"/broker/reports",     accent:"#7C6A9E" },
+  { label:"Mortgage Tools",          desc:"Rate sheets, loan calculators, and pipeline tracking.",   icon:Landmark,  href:"/lending",               accent:"#C0786C" },
+  { label:"Transactions",            desc:"End-to-end transaction management and document tracking.",icon:Receipt,   href:"/realty/transactions",   accent:"#4A7A4A" },
   { label:"Marketing & Pages",       desc:"Landing pages, email campaigns, and flyer designer.",     icon:Megaphone, href:"/marketing",        accent:"#B87333" },
 ];
 
 const HELP_LINKS = [
   { label:"Dashboard",        icon:LayoutDashboard, href:"/dashboard"        },
-  { label:"Lead Engine",      icon:Users,           href:"/leads"            },
-  { label:"Referral Network", icon:Globe,           href:"/referral-network" },
-  { label:"Mapping & IDX",    icon:Map,             href:"/mapping"          },
+  { label:"Lead Engine",      icon:Users,           href:"/crm/leads"        },
+  { label:"Referral Network", icon:Globe,           href:"/referrals"        },
+  { label:"Mapping & IDX",    icon:Map,             href:"/realty/mapping"   },
   { label:"Marketing",        icon:Megaphone,       href:"/marketing"        },
-  { label:"Transactions",     icon:Receipt,         href:"/transactions"     },
-  { label:"Inbox",            icon:Inbox,           href:"/inbox"            },
-  { label:"Mortgage Tools",   icon:Landmark,        href:"/mortgage"         },
-  { label:"Reports",          icon:BarChart3,       href:"/reports"          },
-  { label:"Settings",         icon:Settings,        href:"/settings"         },
+  { label:"Transactions",     icon:Receipt,         href:"/realty/transactions" },
+  { label:"Inbox",            icon:Inbox,           href:"/crm/inbox"        },
+  { label:"Mortgage Tools",   icon:Landmark,        href:"/lending"          },
+  { label:"Reports",          icon:BarChart3,       href:"/broker/reports"   },
+  { label:"Settings",         icon:Settings,        href:"/broker/settings"  },
 ];
 
 const GOAL     = 10_000_000;
@@ -296,7 +296,7 @@ export default function DashboardClient() {
               <span className="w-1 h-4 rounded-full bg-blue-400 inline-block" />
               <p className="text-sm font-bold text-axen-dark">Lead Pipeline</p>
             </div>
-            <Link href="/leads" className="flex items-center gap-1 text-[11px] font-semibold text-gold hover:text-gold-dark transition-colors">
+            <Link href="/crm/leads" className="flex items-center gap-1 text-[11px] font-semibold text-gold hover:text-gold-dark transition-colors">
               View all <ArrowRight size={11} />
             </Link>
           </div>
@@ -317,7 +317,7 @@ export default function DashboardClient() {
               <span className="w-1 h-4 rounded-full bg-amber-400 inline-block" />
               <p className="text-sm font-bold text-axen-dark">Mortgage Pipeline</p>
             </div>
-            <Link href="/mortgage" className="flex items-center gap-1 text-[11px] font-semibold text-gold hover:text-gold-dark transition-colors">
+            <Link href="/lending" className="flex items-center gap-1 text-[11px] font-semibold text-gold hover:text-gold-dark transition-colors">
               View all <ArrowRight size={11} />
             </Link>
           </div>

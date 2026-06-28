@@ -40,22 +40,22 @@ const NAV_SECTIONS: NavSection[] = [
     title: "Core Platform",
     items: [
       { label: "Dashboard",                  icon: LayoutDashboard, href: "/dashboard"        },
-      { label: "Lead Engine & Smart CRM",    icon: Users,           href: "/leads"            },
-      { label: "Prospecting & Seller Leads", icon: Target,          href: "/prospecting"      },
-      { label: "Global Referral Network",    icon: Globe,           href: "/referral-network" },
-      { label: "Interactive Mapping & IDX",  icon: Map,             href: "/mapping"          },
+      { label: "Lead Engine & Smart CRM",    icon: Users,           href: "/crm/leads"        },
+      { label: "Prospecting & Seller Leads", icon: Target,          href: "/crm/prospecting"  },
+      { label: "Global Referral Network",    icon: Globe,           href: "/referrals"        },
+      { label: "Interactive Mapping & IDX",  icon: Map,             href: "/realty/mapping"   },
       { label: "Marketing & Landing Pages",  icon: Megaphone,       href: "/marketing"        },
-      { label: "Transactions",               icon: Receipt,         href: "/transactions"     },
-      { label: "Unified Inbox",             icon: Inbox,           href: "/inbox"            },
+      { label: "Transactions",               icon: Receipt,         href: "/realty/transactions" },
+      { label: "Unified Inbox",             icon: Inbox,           href: "/crm/inbox"        },
       { label: "Client Portal",              icon: ShieldCheck,     href: "/portal"           },
     ],
   },
   {
     title: "Intelligence",
     items: [
-      { label: "Reports & Analytics", icon: BarChart3,   href: "/reports"  },
-      { label: "Team Management",     icon: UsersRound,  href: "/team"     },
-      { label: "Mortgage Tools",      icon: Landmark,    href: "/mortgage" },
+      { label: "Reports & Analytics", icon: BarChart3,   href: "/broker/reports" },
+      { label: "Team Management",     icon: UsersRound,  href: "/broker/team"    },
+      { label: "Mortgage Tools",      icon: Landmark,    href: "/lending"        },
     ],
   },
 ];
@@ -202,8 +202,8 @@ export default function Sidebar() {
         <div className="flex-shrink-0 border-t border-white/10 py-3 px-2 space-y-0.5">
           {/* Settings link */}
           <NavLink
-            item={{ label: "Settings", icon: Settings, href: "/settings" }}
-            isActive={pathname.startsWith("/settings")}
+            item={{ label: "Settings", icon: Settings, href: "/broker/settings" }}
+            isActive={pathname.startsWith("/broker/settings")}
             collapsed={sidebarCollapsed}
             onClick={closeMobileSidebar}
           />

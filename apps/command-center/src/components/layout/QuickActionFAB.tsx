@@ -7,9 +7,9 @@ import { cn } from "@dravik/shared";
 
 const ACTIONS = [
   { label: "Create Campaign",  icon: Megaphone, href: "/marketing",        bg: "bg-violet-500" },
-  { label: "Send Referral",    icon: Globe,     href: "/referral-network", bg: "bg-gold"       },
-  { label: "New Transaction",  icon: Receipt,   href: "/transactions",     bg: "bg-emerald-500"},
-  { label: "New Lead",         icon: Users,     href: "/leads",            bg: "bg-blue-500"   },
+  { label: "Send Referral",    icon: Globe,     href: "/referrals",             bg: "bg-gold"       },
+  { label: "New Transaction",  icon: Receipt,   href: "/realty/transactions",   bg: "bg-emerald-500"},
+  { label: "New Lead",         icon: Users,     href: "/crm/leads",             bg: "bg-blue-500"   },
 ];
 
 // ─── ActionItem ───────────────────────────────────────────────

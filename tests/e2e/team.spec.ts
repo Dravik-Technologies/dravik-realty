@@ -4,7 +4,7 @@ import { test, expect } from "./fixtures";
 // are matched by prefix, never exactly.
 test.describe("team management", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/team");
+    await page.goto("/broker/team");
   });
 
   test("directory filter tabs and Add Agent affordance render", async ({ page }) => {

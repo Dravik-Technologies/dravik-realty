@@ -2,7 +2,7 @@ import { test, expect } from "./fixtures";
 
 test.describe("settings", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/settings");
+    await page.goto("/broker/settings");
   });
 
   test("section navigation switches panels", async ({ page }) => {

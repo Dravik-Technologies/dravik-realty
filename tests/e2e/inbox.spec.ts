@@ -7,7 +7,7 @@ const CLOCK_TIME = /\d{1,2}:\d{2} [AP]M/;
 
 test.describe("unified inbox", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/inbox");
+    await page.goto("/crm/inbox");
   });
 
   test("conversation list renders with timestamps", async ({ page }) => {

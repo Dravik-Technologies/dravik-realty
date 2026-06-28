@@ -2,7 +2,7 @@ import { test, expect } from "./fixtures";
 
 test.describe("transactions", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/transactions");
+    await page.goto("/realty/transactions");
   });
 
   test("pipeline renders with transaction cards", async ({ page }) => {

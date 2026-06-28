@@ -2,7 +2,7 @@ import { test, expect } from "./fixtures";
 
 test.describe("global referral network", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/referral-network");
+    await page.goto("/referrals");
   });
 
   test("KPIs, agent directory, and pipeline render", async ({ page }) => {

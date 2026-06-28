@@ -11,24 +11,44 @@ test("/ redirects to /dashboard", async ({ page }) => {
 
 const ROUTES: Array<{ path: string; probe: (page: import("@playwright/test").Page) => ReturnType<import("@playwright/test").Page["locator"]> }> = [
   { path: "/dashboard", probe: (p) => p.getByRole("heading", { name: /, Chris\./ }) },
-  { path: "/leads", probe: (p) => p.getByText("Total Leads", { exact: true }) },
-  { path: "/prospecting", probe: (p) => p.getByRole("heading", { name: "Prospecting & Seller Leads Center" }).first() },
-  { path: "/referral-network", probe: (p) => p.getByRole("heading", { name: "Global Referral Network" }).first() },
-  { path: "/mapping", probe: (p) => p.getByRole("button", { name: "List" }) },
+  { path: "/crm/leads", probe: (p) => p.getByText("Total Leads", { exact: true }) },
+  { path: "/crm/prospecting", probe: (p) => p.getByRole("heading", { name: "Prospecting & Seller Leads Center" }).first() },
+  { path: "/referrals", probe: (p) => p.getByRole("heading", { name: "Global Referral Network" }).first() },
+  { path: "/realty/mapping", probe: (p) => p.getByRole("button", { name: "List" }) },
   { path: "/marketing", probe: (p) => p.getByRole("heading", { name: "Marketing", exact: true }).first() },
-  { path: "/transactions", probe: (p) => p.getByRole("heading", { name: "Transactions", exact: true }).first() },
-  { path: "/inbox", probe: (p) => p.getByRole("heading", { name: "Unified Inbox" }).first() },
+  { path: "/realty/transactions", probe: (p) => p.getByRole("heading", { name: "Transactions", exact: true }).first() },
+  { path: "/crm/inbox", probe: (p) => p.getByRole("navigation", { name: "Inbox folders" }) },
   { path: "/portal", probe: (p) => p.getByText("Active Transactions", { exact: true }) },
-  { path: "/reports", probe: (p) => p.getByRole("heading", { name: "Reports & Analytics" }).first() },
-  { path: "/team", probe: (p) => p.getByRole("button", { name: "My Team" }) },
-  { path: "/mortgage", probe: (p) => p.getByRole("heading", { name: "Mortgage Tools" }).first() },
-  { path: "/settings", probe: (p) => p.getByText("Users & Permissions").first() },
+  { path: "/broker/reports", probe: (p) => p.getByRole("heading", { name: "Reports & Analytics" }).first() },
+  { path: "/broker/team", probe: (p) => p.getByRole("button", { name: "My Team" }) },
+  { path: "/lending", probe: (p) => p.getByRole("heading", { name: "Mortgage Tools" }).first() },
+  { path: "/broker/settings", probe: (p) => p.getByText("Users & Permissions").first() },
 ];
 
 for (const { path, probe } of ROUTES) {
   test(`${path} renders`, async ({ page }) => {
     await page.goto(path);
     await expect(probe(page)).toBeVisible();
+  });
+}
+
+const REDIRECTS: Array<{ from: string; to: string }> = [
+  { from: "/leads", to: "/crm/leads" },
+  { from: "/inbox", to: "/crm/inbox" },
+  { from: "/prospecting", to: "/crm/prospecting" },
+  { from: "/mapping", to: "/realty/mapping" },
+  { from: "/transactions", to: "/realty/transactions" },
+  { from: "/mortgage", to: "/lending" },
+  { from: "/referral-network", to: "/referrals" },
+  { from: "/team", to: "/broker/team" },
+  { from: "/reports", to: "/broker/reports" },
+  { from: "/settings", to: "/broker/settings" },
+];
+
+for (const { from, to } of REDIRECTS) {
+  test(`${from} permanently redirects to ${to}`, async ({ page }) => {
+    await page.goto(from);
+    await expect(page).toHaveURL(new RegExp(to.replace("/", "\\/") + "$"));
   });
 }
 

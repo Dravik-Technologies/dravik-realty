@@ -6,14 +6,14 @@ import {
   SlidersHorizontal, ChevronDown, X, List, Map,
 } from "lucide-react";
 import dynamic from "next/dynamic";
-import AgentCard     from "./AgentCard";
-import PipelineCard  from "./PipelineCard";
-import ReferralModal from "./ReferralModal";
+import AgentCard     from "../components/AgentCard";
+import PipelineCard  from "../components/PipelineCard";
+import ReferralModal from "../components/ReferralModal";
 
 // Leaflet accesses window at module load — must be client-only
-const ReferralMapView = dynamic(() => import("./ReferralMapView"), { ssr: false });
-import { AGENTS, PIPELINE } from "@/data/agents";
-import type { Agent, CertificationType, Region, Specialization } from "@/types/referral";
+const ReferralMapView = dynamic(() => import("../components/ReferralMapView"), { ssr: false });
+import { AGENTS, PIPELINE } from "../data/agents";
+import type { Agent, CertificationType, Region, Specialization } from "@dravik/contracts/referrals";
 import { cn } from "@dravik/shared";
 
 type View = "directory" | "map";

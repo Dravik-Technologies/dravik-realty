@@ -1,7 +1,7 @@
 "use client";
 
 import { MapPin, Star, ArrowUpRight, BadgeCheck } from "lucide-react";
-import { Agent } from "@/types/referral";
+import { Agent } from "@dravik/contracts/referrals";
 import { cn, formatCurrency } from "@dravik/shared";
 
 // ──────────────────────────────────────────────

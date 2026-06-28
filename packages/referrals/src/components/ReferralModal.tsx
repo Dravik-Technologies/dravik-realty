@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { X, MapPin, Star, BadgeCheck } from "lucide-react";
 import SplitCalculator from "./SplitCalculator";
-import { Agent } from "@/types/referral";
+import { Agent } from "@dravik/contracts/referrals";
 import { cn } from "@dravik/shared";
 
 // ──────────────────────────────────────────────

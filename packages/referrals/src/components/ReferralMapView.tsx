@@ -7,9 +7,9 @@ import {
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { Search, X, MapPin, ChevronRight, Target, SlidersHorizontal } from "lucide-react";
-import { AGENTS } from "@/data/agents";
-import { MILITARY_BASES, BRANCH_COLOR, type MilitaryBase } from "@/data/militaryBases";
-import type { Agent, CertificationType } from "@/types/referral";
+import { AGENTS } from "../data/agents";
+import { MILITARY_BASES, BRANCH_COLOR, type MilitaryBase } from "../data/militaryBases";
+import type { Agent, CertificationType } from "@dravik/contracts/referrals";
 import { cn } from "@dravik/shared";
 
 // ─── Geo helpers ──────────────────────────────────────────────

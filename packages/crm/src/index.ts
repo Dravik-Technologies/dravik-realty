@@ -6,3 +6,4 @@ export { default as ProspectingPage } from "./pages/ProspectingPage";
 export * from "./data/leads";
 export * from "./data/communications";
 export * from "./data/prospecting";
+export { manifest } from "./manifest";

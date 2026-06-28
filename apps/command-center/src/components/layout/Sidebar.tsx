@@ -4,61 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  LayoutDashboard,
-  Users,
-  Globe,
-  Map,
-  Megaphone,
-  Receipt,
-  ShieldCheck,
-  Inbox,
-  BarChart3,
-  UsersRound,
-  Landmark,
-  Target,
   Settings,
   PanelLeftClose,
   PanelLeft,
-  type LucideIcon,
 } from "lucide-react";
 import { useShell } from "./ShellProvider";
+import { NAV_SECTIONS } from "@/modules/registry";
+import type { NavEntry } from "@/modules/registry";
 import { cn } from "@dravik/shared";
-
-// ─── Navigation tree ──────────────────────────────────────────
-interface NavItem {
-  label: string;
-  icon: LucideIcon;
-  href: string;
-}
-interface NavSection {
-  title: string;
-  items: NavItem[];
-}
-
-const NAV_SECTIONS: NavSection[] = [
-  {
-    title: "Core Platform",
-    items: [
-      { label: "Dashboard",                  icon: LayoutDashboard, href: "/dashboard"        },
-      { label: "Lead Engine & Smart CRM",    icon: Users,           href: "/crm/leads"        },
-      { label: "Prospecting & Seller Leads", icon: Target,          href: "/crm/prospecting"  },
-      { label: "Global Referral Network",    icon: Globe,           href: "/referrals"        },
-      { label: "Interactive Mapping & IDX",  icon: Map,             href: "/realty/mapping"   },
-      { label: "Marketing & Landing Pages",  icon: Megaphone,       href: "/marketing"        },
-      { label: "Transactions",               icon: Receipt,         href: "/realty/transactions" },
-      { label: "Unified Inbox",             icon: Inbox,           href: "/crm/inbox"        },
-      { label: "Client Portal",              icon: ShieldCheck,     href: "/portal"           },
-    ],
-  },
-  {
-    title: "Intelligence",
-    items: [
-      { label: "Reports & Analytics", icon: BarChart3,   href: "/broker/reports" },
-      { label: "Team Management",     icon: UsersRound,  href: "/broker/team"    },
-      { label: "Mortgage Tools",      icon: Landmark,    href: "/lending"        },
-    ],
-  },
-];
 
 // ─── Single nav item ──────────────────────────────────────────
 function NavLink({
@@ -67,7 +20,7 @@ function NavLink({
   collapsed,
   onClick,
 }: {
-  item: NavItem;
+  item: NavEntry;
   isActive: boolean;
   collapsed: boolean;
   onClick?: () => void;

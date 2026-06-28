@@ -29,6 +29,9 @@ importers:
       '@dnd-kit/utilities':
         specifier: ^3.2.2
         version: 3.2.2(react@19.2.4)
+      '@dravik/billing':
+        specifier: workspace:*
+        version: link:../../packages/billing
       '@dravik/broker':
         specifier: workspace:*
         version: link:../../packages/broker
@@ -123,6 +126,28 @@ importers:
       tailwindcss:
         specifier: ^4
         version: 4.3.0
+      typescript:
+        specifier: ^5
+        version: 5.9.3
+
+  packages/billing:
+    dependencies:
+      lucide-react:
+        specifier: ^1.16.0
+        version: 1.17.0(react@19.2.4)
+    devDependencies:
+      '@types/react':
+        specifier: ^19
+        version: 19.2.17
+      next:
+        specifier: 16.2.6
+        version: 16.2.6(@babel/core@7.29.7)(@playwright/test@1.60.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react:
+        specifier: 19.2.4
+        version: 19.2.4
+      react-dom:
+        specifier: 19.2.4
+        version: 19.2.4(react@19.2.4)
       typescript:
         specifier: ^5
         version: 5.9.3

@@ -65,7 +65,7 @@ export default function PropertyCard({ property: p, onViewDetails, onSave }: Pro
       <div className="p-3">
         {/* Price */}
         <div className="flex items-baseline gap-1.5 mb-0.5">
-          <span className="text-lg font-bold text-axen-dark">{formatCurrency(p.price)}</span>
+          <span className="text-lg font-bold text-dravik-dark">{formatCurrency(p.price)}</span>
           <span className="text-[11px] text-gray-400">
             ${p.pricePerSqft.toLocaleString()}/sqft
           </span>
@@ -83,15 +83,15 @@ export default function PropertyCard({ property: p, onViewDetails, onSave }: Pro
         <div className="flex items-center gap-3 text-xs text-gray-500 mb-3">
           <span className="flex items-center gap-1">
             <Bed size={12} className="text-gold" />
-            <span className="font-semibold text-axen-dark">{p.beds}</span>
+            <span className="font-semibold text-dravik-dark">{p.beds}</span>
           </span>
           <span className="flex items-center gap-1">
             <Bath size={12} className="text-gold" />
-            <span className="font-semibold text-axen-dark">{p.baths}</span>
+            <span className="font-semibold text-dravik-dark">{p.baths}</span>
           </span>
           <span className="flex items-center gap-1">
             <Square size={12} className="text-gold" />
-            <span className="font-semibold text-axen-dark">{p.sqft.toLocaleString()}</span>
+            <span className="font-semibold text-dravik-dark">{p.sqft.toLocaleString()}</span>
           </span>
           <span className="ml-auto">
             <LeadScoreBadge score={p.leadScore} />
@@ -102,7 +102,7 @@ export default function PropertyCard({ property: p, onViewDetails, onSave }: Pro
         <div className="flex gap-1.5">
           <button
             onClick={() => onViewDetails(p)}
-            className="flex-1 py-2 text-xs font-bold bg-axen-dark text-white rounded-lg hover:bg-gold hover:text-axen-dark transition-all"
+            className="flex-1 py-2 text-xs font-bold bg-dravik-dark text-white rounded-lg hover:bg-gold hover:text-dravik-dark transition-all"
           >
             View Details
           </button>

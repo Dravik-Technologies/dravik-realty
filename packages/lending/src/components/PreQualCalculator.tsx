@@ -31,7 +31,7 @@ function SliderRow({
     <div className="space-y-1.5">
       <div className="flex justify-between items-center">
         <span className="text-[11px] text-gray-500">{label}</span>
-        <span className="text-[11px] font-bold text-axen-dark tabular-nums">{format(value)}</span>
+        <span className="text-[11px] font-bold text-dravik-dark tabular-nums">{format(value)}</span>
       </div>
       <input
         type="range"
@@ -58,12 +58,12 @@ function ResultChip({ label, value, accent }: { label: string; value: string; ac
   return (
     <div className={cn(
       "rounded-xl p-3 text-center",
-      accent ? "bg-gold text-axen-dark" : "bg-surface-2"
+      accent ? "bg-gold text-dravik-dark" : "bg-surface-2"
     )}>
-      <p className={cn("text-lg font-bold tabular-nums leading-none", accent ? "text-axen-dark" : "text-axen-dark")}>
+      <p className={cn("text-lg font-bold tabular-nums leading-none", accent ? "text-dravik-dark" : "text-dravik-dark")}>
         {value}
       </p>
-      <p className={cn("text-[10px] mt-1", accent ? "text-axen-dark/70" : "text-gray-400")}>{label}</p>
+      <p className={cn("text-[10px] mt-1", accent ? "text-dravik-dark/70" : "text-gray-400")}>{label}</p>
     </div>
   );
 }
@@ -128,7 +128,7 @@ function PreQualCalc() {
           <Calculator size={16} className="text-gold" />
         </div>
         <div>
-          <p className="text-sm font-bold text-axen-dark">Pre-Qual Calculator</p>
+          <p className="text-sm font-bold text-dravik-dark">Pre-Qual Calculator</p>
           <p className="text-[10px] text-gray-400">Estimate maximum loan amount</p>
         </div>
       </div>
@@ -190,7 +190,7 @@ function RateEstimator() {
           <TrendingUp size={16} className="text-blue-600" />
         </div>
         <div>
-          <p className="text-sm font-bold text-axen-dark">Rate Estimator</p>
+          <p className="text-sm font-bold text-dravik-dark">Rate Estimator</p>
           <p className="text-[10px] text-gray-400">Indicative rates by credit score</p>
         </div>
       </div>
@@ -204,8 +204,8 @@ function RateEstimator() {
             className={cn(
               "px-2.5 py-1 text-[11px] font-semibold rounded-lg border transition-colors",
               loanType === lt
-                ? "bg-axen-dark text-white border-axen-dark"
-                : "bg-surface-2 text-gray-500 border-line hover:border-axen-dark"
+                ? "bg-dravik-dark text-white border-dravik-dark"
+                : "bg-surface-2 text-gray-500 border-line hover:border-dravik-dark"
             )}
           >
             {lt}
@@ -227,7 +227,7 @@ function RateEstimator() {
               )}
             >
               <div>
-                <p className={cn("text-xs font-bold", isTop ? "text-gold-dark" : "text-axen-dark")}>
+                <p className={cn("text-xs font-bold", isTop ? "text-gold-dark" : "text-dravik-dark")}>
                   Credit {tier}
                 </p>
                 <p className="text-[10px] text-gray-400">
@@ -235,7 +235,7 @@ function RateEstimator() {
                 </p>
               </div>
               <div className="text-right">
-                <p className={cn("text-lg font-bold tabular-nums", isTop ? "text-gold" : "text-axen-dark")}>
+                <p className={cn("text-lg font-bold tabular-nums", isTop ? "text-gold" : "text-dravik-dark")}>
                   {rate.toFixed(3)}%
                 </p>
                 <p className="text-[9px] text-gray-400">30-yr fixed</p>
@@ -273,7 +273,7 @@ function AffordabilityCalc() {
           <Home size={16} className="text-emerald-600" />
         </div>
         <div>
-          <p className="text-sm font-bold text-axen-dark">Affordability Calculator</p>
+          <p className="text-sm font-bold text-dravik-dark">Affordability Calculator</p>
           <p className="text-[10px] text-gray-400">Target payment → max purchase price</p>
         </div>
       </div>
@@ -326,8 +326,8 @@ function AffordabilityCalc() {
                 className={cn(
                   "flex-1 py-1.5 text-xs font-bold rounded-lg border transition-colors",
                   term === t
-                    ? "bg-axen-dark text-white border-axen-dark"
-                    : "bg-surface-2 text-gray-500 border-line hover:border-axen-dark"
+                    ? "bg-dravik-dark text-white border-dravik-dark"
+                    : "bg-surface-2 text-gray-500 border-line hover:border-dravik-dark"
                 )}
               >
                 {t}yr
@@ -376,7 +376,7 @@ function PaymentBreakdown() {
           <DollarSign size={16} className="text-violet-600" />
         </div>
         <div>
-          <p className="text-sm font-bold text-axen-dark">Payment Breakdown</p>
+          <p className="text-sm font-bold text-dravik-dark">Payment Breakdown</p>
           <p className="text-[10px] text-gray-400">Full PITI breakdown</p>
         </div>
       </div>
@@ -422,8 +422,8 @@ function PaymentBreakdown() {
                 className={cn(
                   "flex-1 py-1.5 text-xs font-bold rounded-lg border transition-colors",
                   term === t
-                    ? "bg-axen-dark text-white border-axen-dark"
-                    : "bg-surface-2 text-gray-500 border-line hover:border-axen-dark"
+                    ? "bg-dravik-dark text-white border-dravik-dark"
+                    : "bg-surface-2 text-gray-500 border-line hover:border-dravik-dark"
                 )}
               >
                 {t}yr
@@ -434,7 +434,7 @@ function PaymentBreakdown() {
       </div>
 
       {/* Big PITI number */}
-      <div className="bg-axen-dark rounded-2xl px-5 py-4 text-center">
+      <div className="bg-dravik-dark rounded-2xl px-5 py-4 text-center">
         <p className="text-[10px] text-gray-400 mb-1">Est. Monthly PITI</p>
         <p className="text-3xl font-bold text-white tabular-nums">{totalPITI > 0 ? formatCurrency(totalPITI) : "—"}</p>
         <p className="text-[10px] text-gray-400 mt-1">
@@ -451,7 +451,7 @@ function PaymentBreakdown() {
                 <span className="w-2.5 h-2.5 rounded-full" style={{ background: item.color }} />
                 <span className="text-[11px] text-gray-500">{item.label}</span>
               </div>
-              <span className="text-[11px] font-bold text-axen-dark tabular-nums">
+              <span className="text-[11px] font-bold text-dravik-dark tabular-nums">
                 {formatCurrency(item.amount)}/mo
                 <span className="text-gray-400 font-normal ml-1">({item.pct}%)</span>
               </span>

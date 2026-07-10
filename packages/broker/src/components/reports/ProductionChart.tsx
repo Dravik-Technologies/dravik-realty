@@ -38,7 +38,7 @@ function TxTooltip({ active, payload, label }: ChartTooltipProps) {
   return (
     <div className="bg-white border border-line rounded-xl shadow-lg px-3 py-2.5">
       <p className="text-[10px] font-bold text-gray-400">{label}</p>
-      <p className="text-xs font-semibold text-axen-dark">{payload[0]?.value} transactions</p>
+      <p className="text-xs font-semibold text-dravik-dark">{payload[0]?.value} transactions</p>
     </div>
   );
 }
@@ -58,7 +58,7 @@ function AgentRow({ agent: a, rank }: { agent: AgentStat; rank: number }) {
         {a.initials}
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-xs font-semibold text-axen-dark truncate">{a.name}</p>
+        <p className="text-xs font-semibold text-dravik-dark truncate">{a.name}</p>
         <p className="text-[10px] text-gray-400">{a.transactions} deals · {a.avgDaysToClose}d avg</p>
       </div>
       <div className="text-right flex-shrink-0">
@@ -66,7 +66,7 @@ function AgentRow({ agent: a, rank }: { agent: AgentStat; rank: number }) {
         <p className="text-[10px] text-gray-400">GCI</p>
       </div>
       <div className="text-right flex-shrink-0 hidden sm:block">
-        <p className="text-xs font-semibold text-axen-dark">{formatCurrency(a.closedVolume)}</p>
+        <p className="text-xs font-semibold text-dravik-dark">{formatCurrency(a.closedVolume)}</p>
         <p className="text-[10px] text-gray-400">Volume</p>
       </div>
     </div>
@@ -91,7 +91,7 @@ export default function ProductionChart({ timeSeries, agents, viewMode }: Props)
       <div className="bg-white rounded-2xl border border-line p-5">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <p className="text-sm font-bold text-axen-dark">Closed Volume & GCI</p>
+            <p className="text-sm font-bold text-dravik-dark">Closed Volume & GCI</p>
             <p className="text-xs text-gray-400">Over selected period</p>
           </div>
           <TrendingUp size={16} className="text-gold" />
@@ -121,7 +121,7 @@ export default function ProductionChart({ timeSeries, agents, viewMode }: Props)
 
       {/* Bar chart — transactions per period */}
       <div className="bg-white rounded-2xl border border-line p-5">
-        <p className="text-sm font-bold text-axen-dark mb-4">Transactions Closed</p>
+        <p className="text-sm font-bold text-dravik-dark mb-4">Transactions Closed</p>
         <ResponsiveContainer width="100%" height={160}>
           <BarChart data={timeSeries} margin={{ top: 4, right: 4, left: 0, bottom: 0 }} barSize={28}>
             <CartesianGrid strokeDasharray="3 3" stroke="#E8E8E8" vertical={false} />
@@ -137,7 +137,7 @@ export default function ProductionChart({ timeSeries, agents, viewMode }: Props)
       <div className="bg-white rounded-2xl border border-line p-5">
         <div className="flex items-center gap-2 mb-4">
           <Award size={15} className="text-gold" />
-          <p className="text-sm font-bold text-axen-dark">
+          <p className="text-sm font-bold text-dravik-dark">
             {viewMode === "broker" ? "Agent Leaderboard" : "My Performance"}
           </p>
         </div>
@@ -154,7 +154,7 @@ export default function ProductionChart({ timeSeries, agents, viewMode }: Props)
               { label: "Avg Days/Close", value: `${agents[0].avgDaysToClose}d`               },
             ].map(({ label, value }) => (
               <div key={label} className="bg-surface rounded-xl p-3 text-center">
-                <p className="text-base font-bold text-axen-dark">{value}</p>
+                <p className="text-base font-bold text-dravik-dark">{value}</p>
                 <p className="text-[10px] text-gray-400 mt-0.5">{label}</p>
               </div>
             ))}

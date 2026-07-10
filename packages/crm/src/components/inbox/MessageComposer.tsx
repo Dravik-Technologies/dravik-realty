@@ -100,7 +100,7 @@ export default function MessageComposer({ conversationId, tag, onSend }: Props) 
               <button
                 key={i}
                 onClick={() => insertSuggestion(s)}
-                className="w-full text-left text-xs text-axen-dark bg-white rounded-xl border border-line px-3 py-2.5 hover:border-gold/40 hover:bg-gold-light transition-colors"
+                className="w-full text-left text-xs text-dravik-dark bg-white rounded-xl border border-line px-3 py-2.5 hover:border-gold/40 hover:bg-gold-light transition-colors"
               >
                 {s}
               </button>
@@ -140,8 +140,8 @@ export default function MessageComposer({ conversationId, tag, onSend }: Props) 
                   className={cn(
                     "flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-md transition-all",
                     channel === ch
-                      ? "bg-white text-axen-dark shadow-sm"
-                      : "text-gray-400 hover:text-axen-dark"
+                      ? "bg-white text-dravik-dark shadow-sm"
+                      : "text-gray-400 hover:text-dravik-dark"
                   )}
                 >
                   <Icon size={12} className={channel === ch ? "text-gold" : ""} />
@@ -157,7 +157,7 @@ export default function MessageComposer({ conversationId, tag, onSend }: Props) 
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
               placeholder="Subject…"
-              className="flex-1 px-3 py-1.5 text-sm bg-surface border border-line rounded-lg text-axen-dark placeholder:text-gray-300 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition"
+              className="flex-1 px-3 py-1.5 text-sm bg-surface border border-line rounded-lg text-dravik-dark placeholder:text-gray-300 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition"
             />
           )}
         </div>
@@ -172,7 +172,7 @@ export default function MessageComposer({ conversationId, tag, onSend }: Props) 
           placeholder={channel === "sms" ? "Type a text message… (Cmd+Enter to send)" : "Compose an email…"}
           rows={3}
           className={cn(
-            "w-full px-3 py-2.5 text-sm bg-surface border rounded-xl text-axen-dark placeholder:text-gray-300 resize-none focus:outline-none focus:ring-2 transition",
+            "w-full px-3 py-2.5 text-sm bg-surface border rounded-xl text-dravik-dark placeholder:text-gray-300 resize-none focus:outline-none focus:ring-2 transition",
             overLimit
               ? "border-rose-300 focus:ring-rose-200 focus:border-rose-400"
               : "border-line focus:border-gold focus:ring-gold/20"
@@ -188,7 +188,7 @@ export default function MessageComposer({ conversationId, tag, onSend }: Props) 
               "flex items-center gap-1 px-2.5 py-1.5 text-[11px] font-semibold rounded-lg transition-colors",
               showTemplates
                 ? "bg-gold-light text-gold"
-                : "bg-surface-2 text-gray-500 hover:text-axen-dark"
+                : "bg-surface-2 text-gray-500 hover:text-dravik-dark"
             )}
           >
             Templates {showTemplates ? <ChevronUp size={11} /> : <ChevronDown size={11} />}
@@ -227,7 +227,7 @@ export default function MessageComposer({ conversationId, tag, onSend }: Props) 
             className={cn(
               "ml-auto flex items-center gap-1.5 px-4 py-1.5 text-xs font-bold rounded-xl transition-colors",
               text.trim() && !overLimit
-                ? "bg-gold text-axen-dark hover:bg-gold-dark"
+                ? "bg-gold text-dravik-dark hover:bg-gold-dark"
                 : "bg-surface-2 text-gray-300 cursor-not-allowed"
             )}
           >

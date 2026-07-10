@@ -65,12 +65,12 @@ export default function NotificationsPanel({ onSave }: { onSave: () => void }) {
 
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-sm font-bold text-axen-dark">Notification Preferences</h3>
-          <p className="text-xs text-gray-400 mt-0.5">Control how and when AxenONE notifies you.</p>
+          <h3 className="text-sm font-bold text-dravik-dark">Notification Preferences</h3>
+          <p className="text-xs text-gray-400 mt-0.5">Control how and when Dravik Realty notifies you.</p>
         </div>
         <button
           onClick={onSave}
-          className="px-4 py-2 bg-gold text-axen-dark text-xs font-bold rounded-xl hover:bg-gold-dark transition-colors"
+          className="px-4 py-2 bg-gold text-dravik-dark text-xs font-bold rounded-xl hover:bg-gold-dark transition-colors"
         >
           Save Preferences
         </button>
@@ -108,7 +108,7 @@ export default function NotificationsPanel({ onSave }: { onSave: () => void }) {
                 {prefs.filter((p) => p.category === cat).map((pref) => (
                   <tr key={pref.id} className="border-b border-line last:border-0 hover:bg-surface/30 transition-colors">
                     <td className="px-5 py-3.5">
-                      <p className="text-xs text-axen-dark">{pref.label}</p>
+                      <p className="text-xs text-dravik-dark">{pref.label}</p>
                     </td>
                     <td className="px-4 py-3.5 text-center">
                       <div className="flex justify-center">
@@ -137,7 +137,7 @@ export default function NotificationsPanel({ onSave }: { onSave: () => void }) {
       <div className="bg-white border border-line rounded-2xl p-5">
         <div className="flex items-center gap-2 mb-4">
           <Bell size={15} className="text-gold" />
-          <h4 className="text-sm font-bold text-axen-dark">Quiet Hours</h4>
+          <h4 className="text-sm font-bold text-dravik-dark">Quiet Hours</h4>
         </div>
         <p className="text-xs text-gray-500 mb-4">Suppress non-urgent push and SMS notifications during these hours.</p>
         <div className="flex flex-wrap items-center gap-4">
@@ -146,7 +146,7 @@ export default function NotificationsPanel({ onSave }: { onSave: () => void }) {
             <select
               value={quietFrom}
               onChange={(e) => setQuietFrom(e.target.value)}
-              className="px-3 py-2 bg-surface border border-line rounded-xl text-sm text-axen-dark focus:outline-none focus:border-gold transition"
+              className="px-3 py-2 bg-surface border border-line rounded-xl text-sm text-dravik-dark focus:outline-none focus:border-gold transition"
             >
               {["8:00 PM","9:00 PM","10:00 PM","11:00 PM"].map((t) => (
                 <option key={t} value={t}>{t}</option>
@@ -158,7 +158,7 @@ export default function NotificationsPanel({ onSave }: { onSave: () => void }) {
             <select
               value={quietTo}
               onChange={(e) => setQuietTo(e.target.value)}
-              className="px-3 py-2 bg-surface border border-line rounded-xl text-sm text-axen-dark focus:outline-none focus:border-gold transition"
+              className="px-3 py-2 bg-surface border border-line rounded-xl text-sm text-dravik-dark focus:outline-none focus:border-gold transition"
             >
               {["6:00 AM","7:00 AM","8:00 AM","9:00 AM"].map((t) => (
                 <option key={t} value={t}>{t}</option>

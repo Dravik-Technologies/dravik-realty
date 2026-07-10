@@ -30,7 +30,7 @@ function resolveTitle(pathname: string): string {
   for (const [href, title] of Object.entries(PAGE_TITLES)) {
     if (pathname === href || pathname.startsWith(href + "/")) return title;
   }
-  return "AxenOne";
+  return "Dravik Realty";
 }
 
 export default function Header() {
@@ -72,7 +72,7 @@ export default function Header() {
         <button
           aria-label="Open navigation"
           onClick={openMobileSidebar}
-          className="lg:hidden p-2 rounded-xl text-gray-400 hover:bg-surface hover:text-axen-dark transition-colors flex-shrink-0"
+          className="lg:hidden p-2 rounded-xl text-gray-400 hover:bg-surface hover:text-dravik-dark transition-colors flex-shrink-0"
         >
           <Menu size={20} />
         </button>
@@ -80,8 +80,8 @@ export default function Header() {
         {/* Mobile logo mark */}
         <div className="lg:hidden flex items-center flex-shrink-0">
           <Image
-            src="/axen-realty-logo.webp"
-            alt="Axen Realty"
+            src="/dravik-realty-logo.webp"
+            alt="Dravik Realty"
             height={36}
             width={80}
             className="object-contain"
@@ -90,7 +90,7 @@ export default function Header() {
         </div>
 
         {/* Page title — desktop */}
-        <h1 className="hidden lg:block text-sm font-bold text-axen-dark flex-shrink-0">{pageTitle}</h1>
+        <h1 className="hidden lg:block text-sm font-bold text-dravik-dark flex-shrink-0">{pageTitle}</h1>
 
         {/* Search trigger — opens GlobalSearch overlay */}
         <button
@@ -117,11 +117,11 @@ export default function Header() {
               onClick={() => setUserMenuOpen(v => !v)}
               className="flex items-center gap-2 pl-1.5 pr-2.5 py-1.5 rounded-xl hover:bg-surface-2 transition-colors"
             >
-              <div className="w-8 h-8 rounded-lg bg-axen-dark flex items-center justify-center flex-shrink-0">
+              <div className="w-8 h-8 rounded-lg bg-dravik-dark flex items-center justify-center flex-shrink-0">
                 <span className="text-gold text-xs font-bold leading-none">CM</span>
               </div>
               <div className="hidden sm:block text-left">
-                <p className="text-xs font-semibold text-axen-dark leading-tight">Chris M.</p>
+                <p className="text-xs font-semibold text-dravik-dark leading-tight">Chris M.</p>
                 <p className="text-[10px] text-gray-400 leading-tight">Principal Broker</p>
               </div>
               <ChevronDown
@@ -133,11 +133,11 @@ export default function Header() {
             {userMenuOpen && (
               <div className="absolute right-0 top-full mt-2 w-56 bg-white border border-line rounded-2xl shadow-xl overflow-hidden animate-fade-in z-50">
                 <div className="px-4 py-3.5 border-b border-line">
-                  <p className="text-sm font-bold text-axen-dark">Chris Macabugao</p>
-                  <p className="text-xs text-gray-400 mt-0.5">Principal Broker · Axen Realty</p>
+                  <p className="text-sm font-bold text-dravik-dark">Chris Macabugao</p>
+                  <p className="text-xs text-gray-400 mt-0.5">Principal Broker · Dravik Realty</p>
                 </div>
                 <div className="py-1">
-                  <button className="flex items-center gap-3 w-full px-4 py-2.5 text-sm text-gray-600 hover:bg-surface hover:text-axen-dark transition-colors">
+                  <button className="flex items-center gap-3 w-full px-4 py-2.5 text-sm text-gray-600 hover:bg-surface hover:text-dravik-dark transition-colors">
                     <User size={14} className="text-gray-400" /> My Profile
                   </button>
                 </div>

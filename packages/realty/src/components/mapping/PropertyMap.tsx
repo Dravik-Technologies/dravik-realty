@@ -114,7 +114,7 @@ function ZoomButtons() {
           key={label}
           aria-label={delta > 0 ? "Zoom in" : "Zoom out"}
           onClick={() => map.setZoom(map.getZoom() + delta)}
-          className="w-8 h-8 bg-white border border-line rounded-lg font-bold text-axen-dark hover:bg-gold-light hover:text-gold shadow-sm flex items-center justify-center transition-colors text-sm"
+          className="w-8 h-8 bg-white border border-line rounded-lg font-bold text-dravik-dark hover:bg-gold-light hover:text-gold shadow-sm flex items-center justify-center transition-colors text-sm"
         >
           {label}
         </button>
@@ -229,7 +229,7 @@ export default function PropertyMap({ properties, selectedId, onSelect }: Proper
         {!drawing && !closedPoly && (
           <button
             onClick={startDraw}
-            className="flex items-center gap-2 px-3 py-2 bg-white text-axen-dark text-xs font-bold rounded-xl shadow-md border border-line hover:border-gold hover:bg-gold-light transition-all"
+            className="flex items-center gap-2 px-3 py-2 bg-white text-dravik-dark text-xs font-bold rounded-xl shadow-md border border-line hover:border-gold hover:bg-gold-light transition-all"
           >
             <Pen size={13} className="text-gold" />
             Draw Territory
@@ -250,7 +250,7 @@ export default function PropertyMap({ properties, selectedId, onSelect }: Proper
                 className={cn(
                   "flex items-center gap-1 px-3 py-1.5 text-xs font-bold rounded-lg transition-all",
                   polyPoints.length >= 3
-                    ? "bg-axen-dark text-white hover:bg-gold hover:text-axen-dark"
+                    ? "bg-dravik-dark text-white hover:bg-gold hover:text-dravik-dark"
                     : "bg-surface-2 text-gray-300 cursor-not-allowed"
                 )}
               >
@@ -270,7 +270,7 @@ export default function PropertyMap({ properties, selectedId, onSelect }: Proper
           <div className="flex flex-col gap-1.5 bg-white rounded-xl shadow-md border border-gold/40 p-3 min-w-[180px]">
             <div className="flex items-center gap-2">
               <Users size={13} className="text-gold" />
-              <p className="text-xs font-bold text-axen-dark">
+              <p className="text-xs font-bold text-dravik-dark">
                 {insidePoly.length} {insidePoly.length === 1 ? "property" : "properties"} inside
               </p>
             </div>
@@ -282,7 +282,7 @@ export default function PropertyMap({ properties, selectedId, onSelect }: Proper
             <div className="flex gap-1 mt-1">
               <button
                 onClick={startDraw}
-                className="flex-1 text-[10px] font-bold py-1.5 bg-gold-light text-gold-dark rounded-lg hover:bg-gold hover:text-axen-dark transition-all"
+                className="flex-1 text-[10px] font-bold py-1.5 bg-gold-light text-gold-dark rounded-lg hover:bg-gold hover:text-dravik-dark transition-all"
               >
                 Redraw
               </button>

@@ -72,7 +72,7 @@ export function ApplicationCardContent({
           {app.clientInitials}
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-bold text-axen-dark leading-tight truncate">{app.clientName}</p>
+          <p className="text-sm font-bold text-dravik-dark leading-tight truncate">{app.clientName}</p>
           <p className="text-[10px] text-gray-400 truncate mt-0.5">{app.propertyAddress}</p>
         </div>
         <span className={cn("text-[10px] font-semibold border px-1.5 py-0.5 rounded-lg flex-shrink-0", loanBadge)}>
@@ -81,7 +81,7 @@ export function ApplicationCardContent({
       </div>
 
       {/* Loan amount */}
-      <p className="text-base font-bold text-axen-dark tabular-nums mb-3">
+      <p className="text-base font-bold text-dravik-dark tabular-nums mb-3">
         {formatCurrency(app.loanAmount)}
       </p>
 
@@ -89,7 +89,7 @@ export function ApplicationCardContent({
       <div className="mb-2">
         <div className="flex justify-between items-center mb-1">
           <span className="text-[10px] text-gray-400">Progress</span>
-          <span className="text-[10px] font-semibold text-axen-dark">{app.progress}%</span>
+          <span className="text-[10px] font-semibold text-dravik-dark">{app.progress}%</span>
         </div>
         <div className="h-1.5 bg-surface-2 rounded-full overflow-hidden">
           <div

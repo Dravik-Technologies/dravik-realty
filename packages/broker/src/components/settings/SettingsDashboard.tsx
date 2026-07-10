@@ -32,7 +32,7 @@ function Toast({ show }: { show: boolean }) {
     <div
       aria-live="polite"
       className={cn(
-        "fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2.5 px-5 py-3 bg-axen-dark text-white text-sm font-semibold rounded-2xl shadow-2xl border border-white/10 transition-all duration-300",
+        "fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2.5 px-5 py-3 bg-dravik-dark text-white text-sm font-semibold rounded-2xl shadow-2xl border border-white/10 transition-all duration-300",
         show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
       )}
     >
@@ -73,20 +73,20 @@ export default function SettingsDashboard() {
               <Settings size={14} className="text-gold" />
             </div>
             <div className="min-w-0">
-              <h2 className="text-sm font-bold text-axen-dark leading-tight truncate">{title}</h2>
+              <h2 className="text-sm font-bold text-dravik-dark leading-tight truncate">{title}</h2>
               <p className="text-[11px] text-gray-400 truncate">{sub}</p>
             </div>
           </div>
           <div className="flex items-center gap-2 flex-shrink-0">
             <button
               onClick={handleDiscard}
-              className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-gray-500 border border-line rounded-xl hover:text-axen-dark hover:border-axen-dark transition-colors"
+              className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-gray-500 border border-line rounded-xl hover:text-dravik-dark hover:border-dravik-dark transition-colors"
             >
               <RotateCcw size={12} /> Discard
             </button>
             <button
               onClick={handleSave}
-              className="flex items-center gap-1.5 px-4 py-2 bg-gold text-axen-dark text-xs font-bold rounded-xl hover:bg-gold-dark transition-colors"
+              className="flex items-center gap-1.5 px-4 py-2 bg-gold text-dravik-dark text-xs font-bold rounded-xl hover:bg-gold-dark transition-colors"
             >
               <Save size={12} /> Save Changes
             </button>

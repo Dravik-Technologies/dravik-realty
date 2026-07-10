@@ -60,7 +60,7 @@ function KpiCard({
         <Icon size={18} style={{ color: accent }} />
       </div>
       <div>
-        <p className="text-xl font-bold text-axen-dark leading-none">{value}</p>
+        <p className="text-xl font-bold text-dravik-dark leading-none">{value}</p>
         <p className="text-[11px] text-gray-400 mt-0.5">{label}</p>
         {sub && <p className="text-[10px] text-gray-300 mt-0.5">{sub}</p>}
       </div>
@@ -109,7 +109,7 @@ export default function ProspectingDashboard() {
                 <Target size={18} className="text-gold" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-axen-dark">Prospecting & Seller Leads Center</h1>
+                <h1 className="text-xl font-bold text-dravik-dark">Prospecting & Seller Leads Center</h1>
                 <p className="text-xs text-gray-400 mt-0.5">
                   Seller data, geo farming, dialing sessions, and campaign launches in one workflow.
                 </p>
@@ -159,8 +159,8 @@ export default function ProspectingDashboard() {
               className={cn(
                 "flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold border-b-2 transition-colors whitespace-nowrap",
                 activeTab === id
-                  ? "border-gold text-axen-dark"
-                  : "border-transparent text-gray-400 hover:text-axen-dark"
+                  ? "border-gold text-dravik-dark"
+                  : "border-transparent text-gray-400 hover:text-dravik-dark"
               )}
             >
               <Icon size={13} />
@@ -171,7 +171,7 @@ export default function ProspectingDashboard() {
           {farmFilter && (
             <div className="ml-auto flex items-center gap-2 px-3 py-1.5 rounded-full bg-gold-light border border-gold/20 text-[11px] font-bold text-gold-dark whitespace-nowrap">
               Farm list active · {farmFilter.size} sellers
-              <button onClick={() => setFarmFilter(null)} className="text-gray-500 hover:text-axen-dark">
+              <button onClick={() => setFarmFilter(null)} className="text-gray-500 hover:text-dravik-dark">
                 Clear
               </button>
             </div>

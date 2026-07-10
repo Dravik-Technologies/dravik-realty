@@ -47,7 +47,7 @@ function SortIcon({ active, dir }: { active: boolean; dir: SortDir }) {
 
 function ScoreBadge({ score }: { score: number }) {
   if (score >= 70) return (
-    <span className="inline-flex items-center gap-0.5 text-[10px] font-bold px-2 py-0.5 rounded-full bg-gold text-axen-dark whitespace-nowrap">
+    <span className="inline-flex items-center gap-0.5 text-[10px] font-bold px-2 py-0.5 rounded-full bg-gold text-dravik-dark whitespace-nowrap">
       🔥 {score}
     </span>
   );
@@ -79,7 +79,7 @@ function EquityBar({ pct }: { pct: number }) {
       <div className="w-12 h-1.5 bg-line rounded-full overflow-hidden flex-shrink-0">
         <div className="h-full rounded-full bg-gold" style={{ width: `${pct}%` }} />
       </div>
-      <span className="text-xs font-bold text-axen-dark tabular-nums">{pct}%</span>
+      <span className="text-xs font-bold text-dravik-dark tabular-nums">{pct}%</span>
     </div>
   );
 }
@@ -88,7 +88,7 @@ function Toast({ msg, show }: { msg: string; show: boolean }) {
   return (
     <div aria-live="polite" className={cn(
       "fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2.5 px-5 py-3",
-      "bg-axen-dark text-white text-sm font-semibold rounded-2xl shadow-2xl border border-white/10",
+      "bg-dravik-dark text-white text-sm font-semibold rounded-2xl shadow-2xl border border-white/10",
       "transition-all duration-300",
       show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
     )}>
@@ -248,7 +248,7 @@ export default function SellerLeadsTable({
             className={cn(
               "flex items-center gap-1.5 px-3.5 py-2 rounded-xl border text-xs font-semibold transition-colors",
               showFilters
-                ? "bg-axen-dark text-white border-axen-dark"
+                ? "bg-dravik-dark text-white border-dravik-dark"
                 : "bg-white text-gray-600 border-line hover:bg-surface"
             )}
           >
@@ -294,7 +294,7 @@ export default function SellerLeadsTable({
                 value={statusFilter}
                 onChange={e => setStatusFilter(e.target.value as LeadStatus | "All")}
                 aria-label="Status filter"
-                className="text-xs border border-line rounded-xl px-3 py-2 text-axen-dark bg-white focus:outline-none focus:border-gold transition"
+                className="text-xs border border-line rounded-xl px-3 py-2 text-dravik-dark bg-white focus:outline-none focus:border-gold transition"
               >
                 {STATUSES.map(s => <option key={s} value={s}>{s === "All" ? "All Statuses" : s}</option>)}
               </select>
@@ -304,7 +304,7 @@ export default function SellerLeadsTable({
                   onChange={e => setMinEquity(Number(e.target.value))}
                   className="w-24 accent-yellow-500"
                 />
-                <span className="font-bold text-axen-dark w-8">{minEquity}%</span>
+                <span className="font-bold text-dravik-dark w-8">{minEquity}%</span>
               </label>
               <label className="flex items-center gap-2 text-xs text-gray-500">
                 Min Score
@@ -312,7 +312,7 @@ export default function SellerLeadsTable({
                   onChange={e => setMinScore(Number(e.target.value))}
                   className="w-24 accent-yellow-500"
                 />
-                <span className="font-bold text-axen-dark w-8">{minScore}</span>
+                <span className="font-bold text-dravik-dark w-8">{minScore}</span>
               </label>
             </div>
           </div>
@@ -321,14 +321,14 @@ export default function SellerLeadsTable({
 
       {/* ── Bulk action bar ──────────────────────────────── */}
       {selectedIds.size > 0 && (
-        <div className="flex-shrink-0 bg-axen-dark text-white px-5 py-2.5 flex items-center gap-3 animate-fade-in">
+        <div className="flex-shrink-0 bg-dravik-dark text-white px-5 py-2.5 flex items-center gap-3 animate-fade-in">
           <span className="text-xs font-bold text-gold">{selectedIds.size} selected</span>
           <button onClick={handleBulkConvert}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-gold text-axen-dark text-xs font-bold rounded-lg hover:bg-gold-dark transition-colors">
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-gold text-dravik-dark text-xs font-bold rounded-lg hover:bg-gold-dark transition-colors">
             <CheckCircle2 size={12} /> Add to Leads
           </button>
           <button onClick={handleBulkQueue}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-gold text-axen-dark text-xs font-bold rounded-lg hover:bg-gold-dark transition-colors">
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-gold text-dravik-dark text-xs font-bold rounded-lg hover:bg-gold-dark transition-colors">
             <Phone size={12} /> Queue Calls
           </button>
           <button onClick={() => { handleBulkQueue(); onStartDialing(); }}
@@ -352,7 +352,7 @@ export default function SellerLeadsTable({
             <div className="w-12 h-12 rounded-2xl bg-surface-2 flex items-center justify-center">
               <SlidersHorizontal size={20} className="text-gray-300" />
             </div>
-            <p className="font-semibold text-axen-dark">No leads match your filters</p>
+            <p className="font-semibold text-dravik-dark">No leads match your filters</p>
             <button onClick={clearFilters} className="text-sm text-gold font-semibold hover:text-gold-dark">
               Clear filters
             </button>
@@ -385,7 +385,7 @@ export default function SellerLeadsTable({
                       <button
                         type="button"
                         onClick={() => toggleSort(key)}
-                        className="flex items-center hover:text-axen-dark select-none transition-colors"
+                        className="flex items-center hover:text-dravik-dark select-none transition-colors"
                       >
                         {labels[key]}
                         <SortIcon active={sortKey === key} dir={sortDir} />
@@ -435,7 +435,7 @@ export default function SellerLeadsTable({
 
                     {/* Address */}
                     <td className="px-4 py-3">
-                      <p className="text-xs font-semibold text-axen-dark leading-tight">{lead.address}</p>
+                      <p className="text-xs font-semibold text-dravik-dark leading-tight">{lead.address}</p>
                       <p className="text-[10px] text-gray-400 mt-0.5">{lead.city}, {lead.state} {lead.zip}</p>
                     </td>
 
@@ -449,7 +449,7 @@ export default function SellerLeadsTable({
 
                     {/* Days */}
                     <td className="px-3 py-3">
-                      <span className={cn("text-xs font-bold tabular-nums", lead.daysSinceEvent <= 3 ? "text-rose-600" : "text-axen-dark")}>
+                      <span className={cn("text-xs font-bold tabular-nums", lead.daysSinceEvent <= 3 ? "text-rose-600" : "text-dravik-dark")}>
                         {lead.daysSinceEvent}d
                       </span>
                     </td>
@@ -469,7 +469,7 @@ export default function SellerLeadsTable({
 
                     {/* Price */}
                     <td className="px-3 py-3 hidden lg:table-cell">
-                      <p className="text-xs font-semibold text-axen-dark">
+                      <p className="text-xs font-semibold text-dravik-dark">
                         {formatCurrency(lead.listPrice ?? lead.estimatedValue)}
                       </p>
                       {lead.listPrice && (
@@ -479,7 +479,7 @@ export default function SellerLeadsTable({
 
                     {/* Owner */}
                     <td className="px-3 py-3 hidden md:table-cell">
-                      <p className="text-xs text-axen-dark truncate max-w-[130px]">
+                      <p className="text-xs text-dravik-dark truncate max-w-[130px]">
                         {revealedDetails ? lead.ownerName : maskOwnerName(lead.ownerName)}
                       </p>
                       {!revealedDetails && (
@@ -490,7 +490,7 @@ export default function SellerLeadsTable({
                     {/* Phone */}
                     <td className="px-3 py-3">
                       <div className="flex items-center gap-1.5">
-                        <span className="text-xs font-mono text-axen-dark">
+                        <span className="text-xs font-mono text-dravik-dark">
                           {revealedDetails ? lead.phone : "•••-•••-••••"}
                         </span>
                         <button onClick={() => togglePhone(lead.id)}
@@ -529,7 +529,7 @@ export default function SellerLeadsTable({
                             "px-2 py-1 rounded-lg border text-[10px] font-bold transition-colors",
                             converted
                               ? "bg-emerald-50 text-emerald-600 border-emerald-200 cursor-default"
-                              : "bg-gold text-axen-dark border-gold hover:bg-gold-dark"
+                              : "bg-gold text-dravik-dark border-gold hover:bg-gold-dark"
                           )}
                         >
                           {converted ? "✓" : "Convert"}

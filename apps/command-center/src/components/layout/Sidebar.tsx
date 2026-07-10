@@ -73,7 +73,7 @@ export default function Sidebar() {
       <aside
         className={cn(
           // Base
-          "fixed inset-y-0 left-0 z-50 flex flex-col bg-axen-dark flex-shrink-0",
+          "fixed inset-y-0 left-0 z-50 flex flex-col bg-dravik-dark flex-shrink-0",
           // Mobile slide
           mobileSidebarOpen ? "translate-x-0" : "-translate-x-full",
           "transition-transform duration-300 ease-in-out",
@@ -94,8 +94,8 @@ export default function Sidebar() {
           {/* Logo glyph */}
           <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center flex-shrink-0 overflow-hidden p-0.5">
             <Image
-              src="/axen-realty-logo.webp"
-              alt="Axen Realty"
+              src="/dravik-realty-logo.webp"
+              alt="Dravik Realty"
               width={28}
               height={28}
               className="object-contain"
@@ -111,7 +111,7 @@ export default function Sidebar() {
             )}
           >
             <p className="text-white font-bold text-sm leading-none whitespace-nowrap">
-              Axen<span className="text-gold">ONE</span>
+              Dravik <span className="text-gold">Realty</span>
             </p>
             <p className="text-[9px] text-gray-500 uppercase tracking-[0.2em] mt-1 whitespace-nowrap">
               The Platform

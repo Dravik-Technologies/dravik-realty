@@ -22,7 +22,7 @@ function SplitRing({ agent }: { agent: number }) {
         />
       </svg>
       <div className="text-center z-10">
-        <p className="text-lg font-bold text-axen-dark leading-none">{agent}%</p>
+        <p className="text-lg font-bold text-dravik-dark leading-none">{agent}%</p>
         <p className="text-[9px] text-gray-400">agent</p>
       </div>
     </div>
@@ -32,19 +32,19 @@ function SplitRing({ agent }: { agent: number }) {
 // ─── CommissionSettings ───────────────────────────────────────
 export default function CommissionSettings({ agent: a }: { agent: Agent }) {
   const agentShare = a.ytdGci * (a.splitPercent / 100);
-  const axenShare  = a.ytdGci * (a.axenCutPercent / 100);
+  const dravikShare  = a.ytdGci * (a.dravikCutPercent / 100);
 
   return (
     <div className="space-y-5 p-5">
       {/* Split overview */}
       <div className="bg-surface rounded-2xl border border-line p-5">
-        <p className="text-sm font-bold text-axen-dark mb-4">Current Commission Split</p>
+        <p className="text-sm font-bold text-dravik-dark mb-4">Current Commission Split</p>
         <div className="flex items-center gap-6">
           <SplitRing agent={a.splitPercent} />
           <div className="flex-1 space-y-3">
             <div>
               <div className="flex items-center justify-between mb-1">
-                <span className="text-xs font-semibold text-axen-dark">{a.name}</span>
+                <span className="text-xs font-semibold text-dravik-dark">{a.name}</span>
                 <span className="text-sm font-bold text-gold">{a.splitPercent}%</span>
               </div>
               <div className="h-2 bg-surface-2 rounded-full overflow-hidden">
@@ -53,11 +53,11 @@ export default function CommissionSettings({ agent: a }: { agent: Agent }) {
             </div>
             <div>
               <div className="flex items-center justify-between mb-1">
-                <span className="text-xs font-semibold text-axen-dark">Axen Realty</span>
-                <span className="text-sm font-bold text-gray-500">{a.axenCutPercent}%</span>
+                <span className="text-xs font-semibold text-dravik-dark">Dravik Realty</span>
+                <span className="text-sm font-bold text-gray-500">{a.dravikCutPercent}%</span>
               </div>
               <div className="h-2 bg-surface-2 rounded-full overflow-hidden">
-                <div className="h-full bg-axen-dark rounded-full opacity-30" style={{ width: `${a.axenCutPercent}%` }} />
+                <div className="h-full bg-dravik-dark rounded-full opacity-30" style={{ width: `${a.dravikCutPercent}%` }} />
               </div>
             </div>
           </div>
@@ -74,7 +74,7 @@ export default function CommissionSettings({ agent: a }: { agent: Agent }) {
           </div>
           <div className="bg-surface rounded-2xl border border-line p-4 text-center">
             <DollarSign size={16} className="text-gray-400 mx-auto mb-1" />
-            <p className="text-xl font-bold text-axen-dark">{formatCurrency(axenShare)}</p>
+            <p className="text-xl font-bold text-dravik-dark">{formatCurrency(dravikShare)}</p>
             <p className="text-[10px] text-gray-500 mt-0.5">Brokerage Cut YTD</p>
           </div>
         </div>
@@ -82,12 +82,12 @@ export default function CommissionSettings({ agent: a }: { agent: Agent }) {
 
       {/* Custom rules */}
       <div>
-        <p className="text-sm font-bold text-axen-dark mb-3">Custom Commission Rules</p>
+        <p className="text-sm font-bold text-dravik-dark mb-3">Custom Commission Rules</p>
         <div className="space-y-2">
           {a.customRules.map((rule) => (
             <div key={rule.id} className="bg-white rounded-xl border border-line p-3">
               <div className="flex items-center justify-between mb-1">
-                <p className="text-xs font-semibold text-axen-dark">{rule.name}</p>
+                <p className="text-xs font-semibold text-dravik-dark">{rule.name}</p>
                 <span className="text-xs font-bold text-gold">{rule.agentSplit}%</span>
               </div>
               <p className="text-[10px] text-gray-500 font-medium">{rule.condition}</p>
@@ -108,7 +108,7 @@ export default function CommissionSettings({ agent: a }: { agent: Agent }) {
         title="Commission adjustment coming soon"
         className={cn(
           "w-full flex items-center justify-center gap-2 py-2.5 text-sm font-bold rounded-xl",
-          "bg-gold text-axen-dark opacity-50 cursor-not-allowed"
+          "bg-gold text-dravik-dark opacity-50 cursor-not-allowed"
         )}
       >
         <DollarSign size={14} /> Adjust Commission Structure

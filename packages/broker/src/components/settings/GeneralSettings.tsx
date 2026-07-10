@@ -7,7 +7,7 @@ import { cn } from "@dravik/shared";
 
 // ─── Shared input style ───────────────────────────────────────
 const inputCls =
-  "w-full px-3 py-2.5 bg-surface border border-line rounded-xl text-sm text-axen-dark " +
+  "w-full px-3 py-2.5 bg-surface border border-line rounded-xl text-sm text-dravik-dark " +
   "placeholder:text-gray-300 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition";
 
 // ─── Field label ──────────────────────────────────────────────
@@ -19,7 +19,7 @@ function Label({ children }: { children: React.ReactNode }) {
 function SectionHead({ title, sub }: { title: string; sub: string }) {
   return (
     <div className="mb-5">
-      <h3 className="text-sm font-bold text-axen-dark">{title}</h3>
+      <h3 className="text-sm font-bold text-dravik-dark">{title}</h3>
       <p className="text-xs text-gray-400 mt-0.5">{sub}</p>
     </div>
   );
@@ -44,14 +44,14 @@ export default function GeneralSettings({ onSave }: { onSave: () => void }) {
         <div className="flex items-center gap-5 mb-6">
           <div className="w-20 h-20 rounded-2xl border-2 border-dashed border-gold/40 bg-gold-light flex flex-col items-center justify-center flex-shrink-0">
             <div className="w-10 h-10 rounded-xl border border-gold/40 bg-gold/10 flex items-center justify-center">
-              <span className="text-gold font-bold text-xl leading-none">A</span>
+              <span className="text-gold font-bold text-xl leading-none">DR</span>
             </div>
           </div>
           <div>
-            <p className="text-sm font-semibold text-axen-dark">Company Logo</p>
+            <p className="text-sm font-semibold text-dravik-dark">Company Logo</p>
             <p className="text-xs text-gray-400 mt-0.5 mb-2">PNG or SVG, min 256×256px recommended.</p>
             <label className="cursor-pointer">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold border border-line rounded-lg hover:border-gold/40 text-gray-500 hover:text-axen-dark transition-colors">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold border border-line rounded-lg hover:border-gold/40 text-gray-500 hover:text-dravik-dark transition-colors">
                 <Upload size={12} /> Upload logo
               </span>
               <input type="file" accept="image/*" className="hidden" />
@@ -165,7 +165,7 @@ export default function GeneralSettings({ onSave }: { onSave: () => void }) {
       </div>
 
       {/* Company preview card */}
-      <div className="bg-axen-dark rounded-2xl p-6 flex items-center gap-4">
+      <div className="bg-dravik-dark rounded-2xl p-6 flex items-center gap-4">
         <div className="w-12 h-12 rounded-xl border border-gold/40 bg-gold/10 flex items-center justify-center flex-shrink-0">
           <Building2 size={20} className="text-gold" />
         </div>
@@ -176,7 +176,7 @@ export default function GeneralSettings({ onSave }: { onSave: () => void }) {
         </div>
         <button
           onClick={onSave}
-          className="ml-auto flex-shrink-0 px-4 py-2 bg-gold text-axen-dark text-xs font-bold rounded-xl hover:bg-gold-dark transition-colors"
+          className="ml-auto flex-shrink-0 px-4 py-2 bg-gold text-dravik-dark text-xs font-bold rounded-xl hover:bg-gold-dark transition-colors"
         >
           Save Changes
         </button>

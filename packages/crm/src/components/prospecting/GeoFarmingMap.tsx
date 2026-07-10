@@ -97,7 +97,7 @@ function ZoomButtons() {
       {([["＋", 1], ["－", -1]] as [string, number][]).map(([lbl, d]) => (
         <button key={lbl} onClick={() => map.setZoom(map.getZoom() + d)}
           aria-label={d > 0 ? "Zoom in" : "Zoom out"}
-          className="w-8 h-8 bg-white border border-line rounded-lg text-axen-dark hover:bg-gold-light hover:text-gold shadow-sm flex items-center justify-center font-bold text-sm transition-colors">
+          className="w-8 h-8 bg-white border border-line rounded-lg text-dravik-dark hover:bg-gold-light hover:text-gold shadow-sm flex items-center justify-center font-bold text-sm transition-colors">
           {lbl}
         </button>
       ))}
@@ -282,11 +282,11 @@ export default function GeoFarmingMap({ onFarmGenerated }: Props) {
         {/* Header */}
         <div className="px-4 py-4 border-b border-line flex-shrink-0 flex items-center justify-between">
           <div>
-            <p className="text-sm font-bold text-axen-dark">Geo Farming</p>
+            <p className="text-sm font-bold text-dravik-dark">Geo Farming</p>
             <p className="text-[10px] text-gray-400 mt-0.5">{geoLeads.length} mapped leads · Miami metro</p>
           </div>
           <button onClick={() => setSidebarOpen(false)} aria-label="Close panel"
-            className="lg:hidden p-1.5 rounded-lg text-gray-400 hover:text-axen-dark hover:bg-surface-2 transition-colors">
+            className="lg:hidden p-1.5 rounded-lg text-gray-400 hover:text-dravik-dark hover:bg-surface-2 transition-colors">
             <X size={14} />
           </button>
         </div>
@@ -308,7 +308,7 @@ export default function GeoFarmingMap({ onFarmGenerated }: Props) {
                     <input type="checkbox" checked={on} onChange={() => toggleLayer(type)}
                       className="rounded border-line accent-yellow-500 flex-shrink-0" />
                     <span className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: color }} />
-                    <span className={cn("text-xs font-medium transition-colors", on ? "text-axen-dark" : "text-gray-400")}>
+                    <span className={cn("text-xs font-medium transition-colors", on ? "text-dravik-dark" : "text-gray-400")}>
                       {label}
                     </span>
                     <span className="ml-auto text-[10px] text-gray-400">
@@ -338,7 +338,7 @@ export default function GeoFarmingMap({ onFarmGenerated }: Props) {
                   showHeatmap ? "translate-x-[18px]" : "translate-x-[3px]"
                 )} />
               </button>
-              <span className="text-xs font-medium text-axen-dark">Motivation Heatmap</span>
+              <span className="text-xs font-medium text-dravik-dark">Motivation Heatmap</span>
             </label>
           </div>
 
@@ -369,7 +369,7 @@ export default function GeoFarmingMap({ onFarmGenerated }: Props) {
 
             {drawMode === "radius" && radiusCenter && (
               <div className="space-y-2">
-                <div className="flex items-center justify-between text-xs text-axen-dark">
+                <div className="flex items-center justify-between text-xs text-dravik-dark">
                   <span className="font-semibold">Radius</span>
                   <span className="font-bold text-gold">{radiusMiles} mi</span>
                 </div>
@@ -397,7 +397,7 @@ export default function GeoFarmingMap({ onFarmGenerated }: Props) {
                     className={cn(
                       "flex-1 flex items-center justify-center gap-1 py-1.5 text-xs font-bold rounded-lg transition-all",
                       polyPoints.length >= 3
-                        ? "bg-axen-dark text-white hover:bg-gold hover:text-axen-dark"
+                        ? "bg-dravik-dark text-white hover:bg-gold hover:text-dravik-dark"
                         : "bg-surface-2 text-gray-300 cursor-not-allowed"
                     )}>
                     <Check size={11} /> Close
@@ -412,7 +412,7 @@ export default function GeoFarmingMap({ onFarmGenerated }: Props) {
 
             {hasArea && drawMode === null && (
               <div className="space-y-2">
-                <p className="text-xs font-semibold text-axen-dark">
+                <p className="text-xs font-semibold text-dravik-dark">
                   {inAreaIds.size} lead{inAreaIds.size !== 1 ? "s" : ""} in area
                 </p>
                 {farmCount !== null && (
@@ -427,7 +427,7 @@ export default function GeoFarmingMap({ onFarmGenerated }: Props) {
                     className={cn(
                       "flex-1 flex items-center justify-center gap-1.5 py-2 text-xs font-bold rounded-xl transition-colors",
                       inAreaIds.size > 0
-                        ? "bg-gold text-axen-dark hover:bg-gold-dark"
+                        ? "bg-gold text-dravik-dark hover:bg-gold-dark"
                         : "bg-surface-2 text-gray-300 cursor-not-allowed"
                     )}>
                     <RefreshCw size={12} /> Generate Farm List
@@ -463,7 +463,7 @@ export default function GeoFarmingMap({ onFarmGenerated }: Props) {
         {/* Mobile toggle */}
         {!sidebarOpen && (
           <button onClick={() => setSidebarOpen(true)} aria-label="Open layers panel"
-            className="lg:hidden absolute top-3 left-3 z-[400] flex items-center gap-2 px-3 py-2 bg-white border border-line rounded-xl shadow-md text-xs font-bold text-axen-dark">
+            className="lg:hidden absolute top-3 left-3 z-[400] flex items-center gap-2 px-3 py-2 bg-white border border-line rounded-xl shadow-md text-xs font-bold text-dravik-dark">
             <Layers size={13} className="text-gold" /> Layers
           </button>
         )}
@@ -591,7 +591,7 @@ export default function GeoFarmingMap({ onFarmGenerated }: Props) {
         {hasArea && (
           <div className="absolute top-3 left-3 z-[400] bg-white border border-gold/40 rounded-xl px-3 py-2 shadow-md flex items-center gap-2 lg:left-3">
             <MapPin size={12} className="text-gold" />
-            <span className="text-xs font-bold text-axen-dark">{inAreaIds.size} leads in farm area</span>
+            <span className="text-xs font-bold text-dravik-dark">{inAreaIds.size} leads in farm area</span>
           </div>
         )}
       </div>

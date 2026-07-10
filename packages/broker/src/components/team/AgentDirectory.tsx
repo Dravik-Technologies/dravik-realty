@@ -59,7 +59,7 @@ function SortTh({
     <th
       tabIndex={0}
       className={cn(
-        "px-4 py-3 text-left text-[10px] font-bold text-gray-400 uppercase tracking-wider cursor-pointer select-none hover:text-axen-dark transition-colors",
+        "px-4 py-3 text-left text-[10px] font-bold text-gray-400 uppercase tracking-wider cursor-pointer select-none hover:text-dravik-dark transition-colors",
         className
       )}
       onClick={() => onSort(field)}
@@ -104,7 +104,7 @@ function AgentRow({
             {a.initials}
           </div>
           <div className="min-w-0">
-            <p className="text-sm font-semibold text-axen-dark truncate">{a.name}</p>
+            <p className="text-sm font-semibold text-dravik-dark truncate">{a.name}</p>
             <p className="text-[10px] text-gray-400">{a.role}</p>
           </div>
         </div>
@@ -125,12 +125,12 @@ function AgentRow({
       </td>
 
       {/* YTD Volume */}
-      <td className="px-4 py-3 text-sm font-semibold text-axen-dark">
+      <td className="px-4 py-3 text-sm font-semibold text-dravik-dark">
         {a.ytdVolume > 0 ? `$${(a.ytdVolume / 1_000_000).toFixed(1)}M` : <span className="text-gray-300">—</span>}
       </td>
 
       {/* Units */}
-      <td className="px-4 py-3 text-sm font-semibold text-axen-dark text-center">
+      <td className="px-4 py-3 text-sm font-semibold text-dravik-dark text-center">
         {a.closedUnits > 0 ? a.closedUnits : <span className="text-gray-300">—</span>}
       </td>
 
@@ -173,7 +173,7 @@ export default function AgentDirectory({ agents, onSelect, sortField, sortDir, o
         <div className="w-12 h-12 rounded-2xl bg-surface-2 flex items-center justify-center">
           <ArrowUpDown size={20} className="text-gray-300" />
         </div>
-        <p className="font-semibold text-axen-dark">No agents match your filter</p>
+        <p className="font-semibold text-dravik-dark">No agents match your filter</p>
         <p className="text-sm text-gray-400">Try a different filter or search term</p>
       </div>
     );

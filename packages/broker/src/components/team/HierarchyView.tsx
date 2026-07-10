@@ -51,7 +51,7 @@ function AgentCard({
         />
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-xs font-semibold text-axen-dark truncate">{a.name}</p>
+        <p className="text-xs font-semibold text-dravik-dark truncate">{a.name}</p>
         <div className="flex items-center gap-1.5 mt-0.5">
           <span className={cn("text-[9px] font-bold px-1.5 py-0.5 rounded-full", LICENSE_CHIP[a.licenseType])}>
             {a.licenseType}
@@ -82,7 +82,7 @@ function TeamSection({
       {/* Team header */}
       <div className="flex items-center gap-3 px-4 py-3 bg-surface-2 border-b border-line">
         <div className="w-2 h-2 rounded-full" style={{ background: team.color }} />
-        <p className="text-sm font-bold text-axen-dark">{team.name}</p>
+        <p className="text-sm font-bold text-dravik-dark">{team.name}</p>
         <span className="text-[10px] text-gray-400 ml-auto">{members.length + 1} members</span>
       </div>
 
@@ -162,7 +162,7 @@ export default function HierarchyView({ agents, teams, onSelect }: Props) {
           <div className="bg-white rounded-2xl border border-line overflow-hidden">
             <div className="flex items-center gap-3 px-4 py-3 bg-surface-2 border-b border-line">
               <Users size={13} className="text-gold" />
-              <p className="text-sm font-bold text-axen-dark">Direct Reports</p>
+              <p className="text-sm font-bold text-dravik-dark">Direct Reports</p>
               <span className="text-[10px] text-gray-400 ml-auto">{directAgents.length} agents</span>
             </div>
             <div className="p-4 space-y-1.5">

@@ -168,7 +168,7 @@ export default function LeadDetailPanel({
         )}
       >
         {/* ── Panel header ───────────────────────────────────── */}
-        <div className="flex-shrink-0 bg-axen-dark px-6 py-5">
+        <div className="flex-shrink-0 bg-dravik-dark px-6 py-5">
           <div className="flex items-start gap-4">
             {/* Avatar */}
             <div
@@ -226,7 +226,7 @@ export default function LeadDetailPanel({
                 ].map(({ icon: Icon, label }) => (
                   <button
                     key={label}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-gold hover:text-axen-dark text-white text-xs font-semibold transition-all"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-gold hover:text-dravik-dark text-white text-xs font-semibold transition-all"
                   >
                     <Icon size={13} />
                     {label}
@@ -279,7 +279,7 @@ export default function LeadDetailPanel({
                               <RelativeTime dateStr={activity.timestamp} />
                             </span>
                           </div>
-                          <p className="text-sm text-axen-dark mt-0.5 leading-relaxed">
+                          <p className="text-sm text-dravik-dark mt-0.5 leading-relaxed">
                             {activity.description}
                           </p>
                           <p className="text-[10px] text-gray-400 mt-0.5">by {activity.by}</p>
@@ -297,12 +297,12 @@ export default function LeadDetailPanel({
                 Notes
               </h3>
               <div className="bg-surface-2 rounded-xl p-3">
-                <p className="text-sm text-axen-dark leading-relaxed whitespace-pre-wrap">
+                <p className="text-sm text-dravik-dark leading-relaxed whitespace-pre-wrap">
                   {lead.notes || "No notes yet."}
                 </p>
               </div>
               <p className="text-[10px] text-gray-400 mt-2">
-                Assigned to <span className="font-semibold text-axen-dark">{lead.assignedTo || "Unassigned"}</span>
+                Assigned to <span className="font-semibold text-dravik-dark">{lead.assignedTo || "Unassigned"}</span>
                 {" · "}
                 Created <RelativeTime dateStr={lead.createdAt} />
               </p>
@@ -325,7 +325,7 @@ export default function LeadDetailPanel({
                     <DollarSign size={14} className="text-gold" />
                     Price Range
                   </div>
-                  <span className="text-sm font-bold text-axen-dark tabular-nums">
+                  <span className="text-sm font-bold text-dravik-dark tabular-nums">
                     {formatCurrency(lead.priceMin)} – {formatCurrency(lead.priceMax)}
                   </span>
                 </div>
@@ -336,7 +336,7 @@ export default function LeadDetailPanel({
                     <Bookmark size={14} className="text-gold" />
                     Saved Properties
                   </div>
-                  <span className="text-sm font-bold text-axen-dark">
+                  <span className="text-sm font-bold text-dravik-dark">
                     {lead.savedProperties}
                   </span>
                 </div>
@@ -347,7 +347,7 @@ export default function LeadDetailPanel({
                     <Eye size={14} className="text-gold" />
                     Viewed This Week
                   </div>
-                  <span className="text-sm font-bold text-axen-dark">
+                  <span className="text-sm font-bold text-dravik-dark">
                     {lead.viewedThisWeek}
                   </span>
                 </div>
@@ -388,7 +388,7 @@ export default function LeadDetailPanel({
                       <FileText size={14} className="text-gold" />
                       Credit Pull
                     </span>
-                    <span className="text-xs font-semibold text-axen-dark">
+                    <span className="text-xs font-semibold text-dravik-dark">
                       {lead.creditPull ?? "—"}
                     </span>
                   </div>
@@ -399,7 +399,7 @@ export default function LeadDetailPanel({
                       <p className="text-[10px] text-gray-500 uppercase tracking-wide font-bold">
                         Max Approved Budget
                       </p>
-                      <p className="text-lg font-bold text-axen-dark mt-0.5 tabular-nums">
+                      <p className="text-lg font-bold text-dravik-dark mt-0.5 tabular-nums">
                         {formatCurrency(lead.maxBudget)}
                       </p>
                     </div>
@@ -412,7 +412,7 @@ export default function LeadDetailPanel({
                         <User size={14} className="text-gold" />
                         Mortgage Officer
                       </span>
-                      <span className="text-xs font-bold text-axen-dark">
+                      <span className="text-xs font-bold text-dravik-dark">
                         {lead.mortgageOfficer}
                       </span>
                     </div>

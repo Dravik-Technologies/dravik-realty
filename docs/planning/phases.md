@@ -20,7 +20,7 @@
 | Characterization      | None                                        | Full Playwright suite over 14 routes + key interactions | E2  |
 | `agency-agents/`      | Present (nested git repo)                   | `.gitignore` or external (record decision) | E1.2 |
 | Routes & behavior     | Full prototype: shell (dashboard, leads, inbox, prospecting, mapping, marketing, mortgage, referral-network, reports, settings, team, transactions), portal, [module] catch-all, root→dashboard redirect | Preserve 100% (redirects allowed in Phase 1) | — (good) |
-| Naming / Branding     | Mix of "axen", "dravik", default Next README | Consistent Dravik / `@dravik/*` packages   | Hygiene |
+| Naming / Branding     | Mix of legacy branding, Dravik naming, default Next README | Consistent Dravik / `@dravik/*` packages   | Hygiene |
 | Boundary enforcement  | None                                        | dependency-cruiser or eslint-plugin-boundaries (warn → error) | E5/E7 |
 | Module manifests      | Hardcoded nav/tiles                         | Static `ModuleDescriptor` registry (E9)    | E9  |
 | Data                  | All in `src/data/*.ts` + `src/types/` fixtures | Move into owning packages (temporary fixture exports allowed Phase 1) | E5–E7 |
@@ -96,7 +96,7 @@ From implementation-spec "First safe implementation tasks" + backlog E1/E2:
 
 - **Document ownership:** This file (`phases.md`) is the status/roadmap layer. Do not duplicate detailed task lists here — reference the backlog and spec.
 - **Naming consistency:** Current package.json still says "real-estate". Spec calls for `@dravik/command-center` and `@dravik/*` packages. Resolve during E1 or E3.
-- **Branding drift:** Logos and tokens reference "axen" in places. Track as hygiene item or defer to a dedicated branding pass post-Phase 1.
+- **Branding drift:** Logos and tokens reference legacy names in places. Track as hygiene item or defer to a dedicated branding pass post-Phase 1.
 - **agency-agents integration:** The collection itself is valuable (many project-management and engineering specialists). The only issue is the nested `.git`. Once ignored/relocated, we can still consume specific agents via the scripts or manually.
 - **Extraction recipe:** The backlog requires `docs/planning/extraction-recipe.md` to be written as part of the CRM template PR (E5). This will become the checklist for E6/E7.
 - **PR template:** Must be added in E2.5 and carried by every Phase 1 PR.

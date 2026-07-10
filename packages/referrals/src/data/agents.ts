@@ -8,7 +8,7 @@ export const AGENTS: Agent[] = [
     certification: "RE Broker", specializations: ["Luxury", "Investment"],
     location: { city: "Dallas", state: "TX", region: "Southwest", avgPropertyValue: 620000, lat: 32.7767, lng: -96.7970 },
     productionScore: 4.9, totalReviews: 112, closedVolumeMTD: "$6.8M", closedTransactions: 28, avgDaysToClose: 31, activeListings: 9,
-    email: "m.thompson@axenrealty.com", phone: "(214) 555-0182", yearsExperience: 14,
+    email: "m.thompson@dravikrealty.com", phone: "(214) 555-0182", yearsExperience: 14,
     bio: "Top producer in the DFW Metroplex with a focus on luxury estate homes and high-yield investment properties.",
   },
   {
@@ -17,7 +17,7 @@ export const AGENTS: Agent[] = [
     certification: "Dual Licensed", specializations: ["Investment", "Luxury"],
     location: { city: "San Francisco", state: "CA", region: "West", avgPropertyValue: 1350000, lat: 37.7749, lng: -122.4194 },
     productionScore: 4.8, totalReviews: 89, closedVolumeMTD: "$11.2M", closedTransactions: 14, avgDaysToClose: 28, activeListings: 6,
-    email: "s.chen@axenrealty.com", phone: "(415) 555-0247", yearsExperience: 11,
+    email: "s.chen@dravikrealty.com", phone: "(415) 555-0247", yearsExperience: 11,
     bio: "Dual-licensed agent and mortgage broker navigating SF's complex market with a deep investment portfolio focus.",
   },
   {
@@ -26,7 +26,7 @@ export const AGENTS: Agent[] = [
     certification: "RE + Mortgage", specializations: ["Luxury", "Residential"],
     location: { city: "Miami", state: "FL", region: "Southeast", avgPropertyValue: 780000, lat: 25.7617, lng: -80.1918 },
     productionScore: 4.7, totalReviews: 74, closedVolumeMTD: "$8.1M", closedTransactions: 19, avgDaysToClose: 35, activeListings: 11,
-    email: "d.rivera@axenrealty.com", phone: "(305) 555-0319", yearsExperience: 9,
+    email: "d.rivera@dravikrealty.com", phone: "(305) 555-0319", yearsExperience: 9,
     bio: "Miami luxury specialist with combined RE and mortgage licensure, fluent in English, Spanish, and Portuguese.",
   },
   {
@@ -35,7 +35,7 @@ export const AGENTS: Agent[] = [
     certification: "RE Broker", specializations: ["Commercial", "Luxury"],
     location: { city: "New York", state: "NY", region: "Northeast", avgPropertyValue: 1850000, lat: 40.7128, lng: -74.0060 },
     productionScore: 4.9, totalReviews: 143, closedVolumeMTD: "$18.4M", closedTransactions: 11, avgDaysToClose: 42, activeListings: 5,
-    email: "j.okafor@axenrealty.com", phone: "(212) 555-0408", yearsExperience: 20,
+    email: "j.okafor@dravikrealty.com", phone: "(212) 555-0408", yearsExperience: 20,
     bio: "Commercial and ultra-luxury broker with two decades shaping Manhattan's skyline. Boutique hotel and multi-family specialist.",
   },
   {
@@ -44,7 +44,7 @@ export const AGENTS: Agent[] = [
     certification: "Dual Licensed", specializations: ["Residential", "First-Time Buyers"],
     location: { city: "Chicago", state: "IL", region: "Midwest", avgPropertyValue: 390000, lat: 41.8781, lng: -87.6298 },
     productionScore: 4.6, totalReviews: 68, closedVolumeMTD: "$3.9M", closedTransactions: 22, avgDaysToClose: 26, activeListings: 14,
-    email: "e.walsh@axenrealty.com", phone: "(312) 555-0573", yearsExperience: 7,
+    email: "e.walsh@dravikrealty.com", phone: "(312) 555-0573", yearsExperience: 7,
     bio: "Chicago neighborhood expert and certified first-time buyer counselor, also licensed to originate FHA and VA loans.",
   },
   {
@@ -53,7 +53,7 @@ export const AGENTS: Agent[] = [
     certification: "RE Broker", specializations: ["New Construction", "Investment"],
     location: { city: "Seattle", state: "WA", region: "Pacific Northwest", avgPropertyValue: 870000, lat: 47.6062, lng: -122.3321 },
     productionScore: 4.8, totalReviews: 91, closedVolumeMTD: "$9.3M", closedTransactions: 17, avgDaysToClose: 30, activeListings: 8,
-    email: "r.kim@axenrealty.com", phone: "(206) 555-0634", yearsExperience: 12,
+    email: "r.kim@dravikrealty.com", phone: "(206) 555-0634", yearsExperience: 12,
     bio: "Puget Sound new construction authority. Certified builder-specialist with deep tech-industry relocation expertise.",
   },
   {
@@ -62,7 +62,7 @@ export const AGENTS: Agent[] = [
     certification: "RE + Mortgage", specializations: ["Residential", "Investment"],
     location: { city: "Phoenix", state: "AZ", region: "Southwest", avgPropertyValue: 430000, lat: 33.4484, lng: -112.0740 },
     productionScore: 4.7, totalReviews: 55, closedVolumeMTD: "$5.2M", closedTransactions: 24, avgDaysToClose: 24, activeListings: 16,
-    email: "p.patel@axenrealty.com", phone: "(602) 555-0721", yearsExperience: 8,
+    email: "p.patel@dravikrealty.com", phone: "(602) 555-0721", yearsExperience: 8,
     bio: "Phoenix growth-market specialist combining purchase transactions with in-house mortgage origination for a seamless buyer experience.",
   },
   {
@@ -71,7 +71,7 @@ export const AGENTS: Agent[] = [
     certification: "Dual Licensed", specializations: ["Commercial", "Investment"],
     location: { city: "Houston", state: "TX", region: "Southwest", avgPropertyValue: 510000, lat: 29.7604, lng: -95.3698 },
     productionScore: 4.9, totalReviews: 107, closedVolumeMTD: "$12.7M", closedTransactions: 31, avgDaysToClose: 29, activeListings: 10,
-    email: "c.mendez@axenrealty.com", phone: "(713) 555-0865", yearsExperience: 16,
+    email: "c.mendez@dravikrealty.com", phone: "(713) 555-0865", yearsExperience: 16,
     bio: "Houston energy-corridor commercial broker and dual licensee. Expert in industrial, office, and multi-family assets.",
   },
 
@@ -82,7 +82,7 @@ export const AGENTS: Agent[] = [
     certification: "Dual Licensed", specializations: ["Residential", "First-Time Buyers"],
     location: { city: "Silver Spring", state: "MD", region: "Northeast", avgPropertyValue: 580000, lat: 38.9907, lng: -77.0261 },
     productionScore: 4.8, totalReviews: 84, closedVolumeMTD: "$5.6M", closedTransactions: 18, avgDaysToClose: 27, activeListings: 9,
-    email: "t.wright@axenrealty.com", phone: "(301) 555-0912", yearsExperience: 10,
+    email: "t.wright@dravikrealty.com", phone: "(301) 555-0912", yearsExperience: 10,
     bio: "DC Metro military relocation specialist with VA loan origination license. Has guided 200+ service members through PCS moves to the National Capital Region.",
   },
   {
@@ -91,7 +91,7 @@ export const AGENTS: Agent[] = [
     certification: "RE + Mortgage", specializations: ["Residential", "Investment"],
     location: { city: "Virginia Beach", state: "VA", region: "Southeast", avgPropertyValue: 420000, lat: 36.8529, lng: -75.9780 },
     productionScore: 4.9, totalReviews: 96, closedVolumeMTD: "$6.2M", closedTransactions: 26, avgDaysToClose: 23, activeListings: 13,
-    email: "a.nguyen@axenrealty.com", phone: "(757) 555-1042", yearsExperience: 12,
+    email: "a.nguyen@dravikrealty.com", phone: "(757) 555-1042", yearsExperience: 12,
     bio: "Navy veteran and Hampton Roads military relocation expert. Specializes in VA loans and PCS assistance for active-duty families arriving at Naval Station Norfolk.",
   },
   {
@@ -100,7 +100,7 @@ export const AGENTS: Agent[] = [
     certification: "Dual Licensed", specializations: ["Residential", "First-Time Buyers"],
     location: { city: "Fayetteville", state: "NC", region: "Southeast", avgPropertyValue: 290000, lat: 35.0527, lng: -78.8784 },
     productionScore: 4.7, totalReviews: 71, closedVolumeMTD: "$3.1M", closedTransactions: 24, avgDaysToClose: 22, activeListings: 11,
-    email: "b.scott@axenrealty.com", phone: "(910) 555-1183", yearsExperience: 8,
+    email: "b.scott@dravikrealty.com", phone: "(910) 555-1183", yearsExperience: 8,
     bio: "Army veteran and Fort Liberty area specialist. Dual RE and mortgage licensee focused on VA and FHA transactions for active-duty and veteran families.",
   },
   {
@@ -109,7 +109,7 @@ export const AGENTS: Agent[] = [
     certification: "RE + Mortgage", specializations: ["Residential", "First-Time Buyers"],
     location: { city: "Killeen", state: "TX", region: "Southwest", avgPropertyValue: 260000, lat: 31.1171, lng: -97.7278 },
     productionScore: 4.6, totalReviews: 58, closedVolumeMTD: "$2.8M", closedTransactions: 22, avgDaysToClose: 20, activeListings: 8,
-    email: "r.torres@axenrealty.com", phone: "(254) 555-1247", yearsExperience: 7,
+    email: "r.torres@dravikrealty.com", phone: "(254) 555-1247", yearsExperience: 7,
     bio: "Central Texas military relocation expert near Fort Cavazos. Specializes in zero-down VA purchase transactions and fast closings for PCS families on tight timelines.",
   },
   {
@@ -118,7 +118,7 @@ export const AGENTS: Agent[] = [
     certification: "Dual Licensed", specializations: ["Luxury", "Residential"],
     location: { city: "San Diego", state: "CA", region: "West", avgPropertyValue: 890000, lat: 32.7157, lng: -117.1611 },
     productionScore: 4.8, totalReviews: 103, closedVolumeMTD: "$9.8M", closedTransactions: 16, avgDaysToClose: 31, activeListings: 7,
-    email: "j.park@axenrealty.com", phone: "(619) 555-1368", yearsExperience: 13,
+    email: "j.park@dravikrealty.com", phone: "(619) 555-1368", yearsExperience: 13,
     bio: "San Diego military PCS specialist serving Naval Base San Diego and MCAS Miramar. Dual-licensed to originate VA jumbo loans in one of the nation's most competitive markets.",
   },
   {
@@ -127,7 +127,7 @@ export const AGENTS: Agent[] = [
     certification: "RE Broker", specializations: ["Residential", "Investment"],
     location: { city: "Tampa", state: "FL", region: "Southeast", avgPropertyValue: 480000, lat: 27.9506, lng: -82.4572 },
     productionScore: 4.7, totalReviews: 79, closedVolumeMTD: "$5.9M", closedTransactions: 21, avgDaysToClose: 28, activeListings: 10,
-    email: "m.chen@axenrealty.com", phone: "(813) 555-1429", yearsExperience: 9,
+    email: "m.chen@dravikrealty.com", phone: "(813) 555-1429", yearsExperience: 9,
     bio: "Tampa Bay relocation specialist serving MacDill AFB families and the broader Gulf Coast corridor. Expert in VA loans and the fast-moving Central Florida market.",
   },
   {
@@ -136,7 +136,7 @@ export const AGENTS: Agent[] = [
     certification: "RE + Mortgage", specializations: ["Residential", "First-Time Buyers"],
     location: { city: "El Paso", state: "TX", region: "Southwest", avgPropertyValue: 240000, lat: 31.7619, lng: -106.4850 },
     productionScore: 4.5, totalReviews: 62, closedVolumeMTD: "$2.4M", closedTransactions: 20, avgDaysToClose: 21, activeListings: 7,
-    email: "d.martinez@axenrealty.com", phone: "(915) 555-1537", yearsExperience: 9,
+    email: "d.martinez@dravikrealty.com", phone: "(915) 555-1537", yearsExperience: 9,
     bio: "Bilingual Fort Bliss relocation specialist fluent in English and Spanish. Expert in the US-Mexico border region for PCS families and OCONUS returnees.",
   },
   {
@@ -145,7 +145,7 @@ export const AGENTS: Agent[] = [
     certification: "Dual Licensed", specializations: ["Residential", "New Construction"],
     location: { city: "Tacoma", state: "WA", region: "Pacific Northwest", avgPropertyValue: 540000, lat: 47.2529, lng: -122.4443 },
     productionScore: 4.8, totalReviews: 88, closedVolumeMTD: "$6.7M", closedTransactions: 19, avgDaysToClose: 26, activeListings: 12,
-    email: "l.kim@axenrealty.com", phone: "(253) 555-1651", yearsExperience: 11,
+    email: "l.kim@dravikrealty.com", phone: "(253) 555-1651", yearsExperience: 11,
     bio: "JBLM relocation expert covering Pierce County. Dual-licensed with deep knowledge of new construction tracts preferred by Joint Base Lewis-McChord families.",
   },
   {
@@ -154,7 +154,7 @@ export const AGENTS: Agent[] = [
     certification: "RE + Mortgage", specializations: ["Residential", "First-Time Buyers"],
     location: { city: "Jacksonville", state: "NC", region: "Southeast", avgPropertyValue: 270000, lat: 34.7541, lng: -77.4302 },
     productionScore: 4.6, totalReviews: 53, closedVolumeMTD: "$2.6M", closedTransactions: 21, avgDaysToClose: 19, activeListings: 9,
-    email: "s.wilson@axenrealty.com", phone: "(910) 555-1784", yearsExperience: 7,
+    email: "s.wilson@dravikrealty.com", phone: "(910) 555-1784", yearsExperience: 7,
     bio: "Camp Lejeune and MCAS New River specialist. Understands Marine Corps PCS timelines and helps families find homes quickly in Jacksonville and the Crystal Coast.",
   },
   {
@@ -163,7 +163,7 @@ export const AGENTS: Agent[] = [
     certification: "Dual Licensed", specializations: ["Residential", "Investment"],
     location: { city: "Columbus", state: "GA", region: "Southeast", avgPropertyValue: 280000, lat: 32.4610, lng: -84.9877 },
     productionScore: 4.7, totalReviews: 66, closedVolumeMTD: "$3.3M", closedTransactions: 23, avgDaysToClose: 22, activeListings: 8,
-    email: "a.johnson@axenrealty.com", phone: "(706) 555-1895", yearsExperience: 10,
+    email: "a.johnson@dravikrealty.com", phone: "(706) 555-1895", yearsExperience: 10,
     bio: "Fort Moore (formerly Fort Benning) area specialist with 10 years serving Army families. Dual-licensed with expertise in VA loans and rental investment for deployed service members.",
   },
 ];

@@ -28,14 +28,14 @@ function entry(id: string, date: string, actor: string, action: string, note?: s
 
 function commission(
   rate: number, hasReferral: boolean, refAgent: string | undefined,
-  refRate: number, axenSplit: number, txFee: number
+  refRate: number, dravikSplit: number, txFee: number
 ): CommissionInfo {
   return {
     commissionRate: rate,
     hasReferral,
     referralAgent: refAgent,
     referralRate: refRate,
-    axenSplitRate: axenSplit,
+    dravikSplitRate: dravikSplit,
     transactionFee: txFee,
   };
 }
@@ -63,7 +63,7 @@ export const SAMPLE_TRANSACTIONS: Transaction[] = [
     mortgage: mortgage("Regions Bank", "Conventional", 700_000, 6.75, 175_000, "Conditionally Approved"),
     parties: [
       party("Daniel & Rosa Morales", "Buyer",         "d.morales@email.com",     "(305) 555-0171"),
-      party("Chris Macabugao",       "Buyer's Agent", "chris@axenrealty.com",    "(305) 555-0100"),
+      party("Chris Macabugao",       "Buyer's Agent", "chris@dravikrealty.com",    "(305) 555-0100"),
       party("Patricia Kim",          "Seller's Agent","p.kim@miamiprops.com",    "(305) 555-0288"),
       party("John Ericson",          "Title Officer", "j.ericson@cleartitle.com","(786) 555-0303"),
       party("Regions Bank",          "Lender",        "loans@regions.com",       "(800) 555-0900"),
@@ -100,8 +100,8 @@ export const SAMPLE_TRANSACTIONS: Transaction[] = [
     mortgage: undefined,
     parties: [
       party("Marcus & Elena Stern",  "Seller",        "m.stern@sterngroup.com", "(305) 555-0244"),
-      party("Chris Macabugao",       "Listing Agent", "chris@axenrealty.com",   "(305) 555-0100"),
-      party("Alejandra Vega",        "Co-Agent",      "a.vega@axenrealty.com",  "(305) 555-0102"),
+      party("Chris Macabugao",       "Listing Agent", "chris@dravikrealty.com",   "(305) 555-0100"),
+      party("Alejandra Vega",        "Co-Agent",      "a.vega@dravikrealty.com",  "(305) 555-0102"),
       party("Roberto Blanco",        "Buyer's Agent", "r.blanco@blancorp.com",  "(305) 555-0388"),
       party("Fidelity National",     "Title Officer", "miami@fnf.com",          "(800) 555-1111"),
     ],
@@ -137,7 +137,7 @@ export const SAMPLE_TRANSACTIONS: Transaction[] = [
     mortgage: undefined,
     parties: [
       party("Claudia Esperanza",  "Seller",        "c.esperanza@gmail.com", "(786) 555-0355"),
-      party("Chris Macabugao",    "Listing Agent", "chris@axenrealty.com",  "(305) 555-0100"),
+      party("Chris Macabugao",    "Listing Agent", "chris@dravikrealty.com",  "(305) 555-0100"),
       party("Tom Nguyen",         "Buyer's Agent", "t.nguyen@luxere.com",   "(786) 555-0471"),
       party("Doral Title Group",  "Title Officer", "closings@doral.com",    "(305) 555-0600"),
     ],
@@ -173,7 +173,7 @@ export const SAMPLE_TRANSACTIONS: Transaction[] = [
     mortgage: mortgage("Wells Fargo", "Conventional", 396_000, 7.0, 99_000, "Pre-Approved"),
     parties: [
       party("Sofia Delgado",      "Seller",        "s.delgado@wgdesign.com", "(305) 555-0519"),
-      party("Chris Macabugao",    "Listing Agent", "chris@axenrealty.com",   "(305) 555-0100"),
+      party("Chris Macabugao",    "Listing Agent", "chris@dravikrealty.com",   "(305) 555-0100"),
       party("Lena Fox",           "Buyer's Agent", "l.fox@homequest.com",    "(786) 555-0622"),
       party("Wells Fargo",        "Lender",        "closings@wf.com",        "(800) 555-3800"),
       party("Heritage Title",     "Title Officer", "ops@heritagetitle.com",  "(305) 555-0705"),
@@ -209,7 +209,7 @@ export const SAMPLE_TRANSACTIONS: Transaction[] = [
     mortgage: mortgage("Bank of America", "FHA", 534_000, 6.5, 11_000, "Clear to Close"),
     parties: [
       party("Kevin Okonkwo",       "Buyer",         "k.okonkwo@techpros.io",  "(786) 555-0638"),
-      party("Chris Macabugao",     "Buyer's Agent", "chris@axenrealty.com",   "(305) 555-0100"),
+      party("Chris Macabugao",     "Buyer's Agent", "chris@dravikrealty.com",   "(305) 555-0100"),
       party("Maricel Santos",      "Seller's Agent","m.santos@proprealty.com","(305) 555-0744"),
       party("Bank of America",     "Lender",        "closings@bofa.com",      "(800) 555-2000"),
       party("Miami Title Partners","Title Officer", "ops@mtpartners.com",     "(305) 555-0810"),
@@ -247,7 +247,7 @@ export const SAMPLE_TRANSACTIONS: Transaction[] = [
     mortgage: mortgage("Chase", "Jumbo", 784_000, 6.875, 196_000, "Conditionally Approved"),
     parties: [
       party("Helen & Roy Park",   "Buyer",         "h.park@parkco.com",     "(305) 555-0867"),
-      party("Chris Macabugao",    "Buyer's Agent", "chris@axenrealty.com",  "(305) 555-0100"),
+      party("Chris Macabugao",    "Buyer's Agent", "chris@dravikrealty.com",  "(305) 555-0100"),
       party("Natalie Cruz",       "Referring Agent","n.cruz@referrals.com", "(786) 555-0944"),
       party("Diane Wheeler",      "Seller's Agent","d.wheeler@cgrealty.com","(305) 555-0955"),
       party("Chase Mortgage",     "Lender",        "closings@chase.com",    "(800) 555-4600"),
@@ -287,8 +287,8 @@ export const SAMPLE_TRANSACTIONS: Transaction[] = [
     mortgage: mortgage("Citi Private Bank", "Jumbo", 1_760_000, 6.5, 440_000, "Clear to Close"),
     parties: [
       party("Alexander Reyes",    "Buyer & Seller",  "a.reyes@reyescap.com",  "(786) 555-1055"),
-      party("Chris Macabugao",    "Dual Agent",      "chris@axenrealty.com",  "(305) 555-0100"),
-      party("Alejandra Vega",     "Transaction Mgr", "a.vega@axenrealty.com", "(305) 555-0102"),
+      party("Chris Macabugao",    "Dual Agent",      "chris@dravikrealty.com",  "(305) 555-0100"),
+      party("Alejandra Vega",     "Transaction Mgr", "a.vega@dravikrealty.com", "(305) 555-0102"),
       party("Citi Private Bank",  "Lender",          "closings@citi.com",     "(800) 555-7000"),
       party("Premier Title Co.",  "Title Officer",   "closing@premiertl.com", "(305) 555-1120"),
     ],
@@ -328,7 +328,7 @@ export const SAMPLE_TRANSACTIONS: Transaction[] = [
     mortgage: undefined,
     parties: [
       party("Dr. Priya Nair",    "Buyer",         "p.nair@nairmd.com",      "(305) 555-1199"),
-      party("Chris Macabugao",   "Buyer's Agent", "chris@axenrealty.com",   "(305) 555-0100"),
+      party("Chris Macabugao",   "Buyer's Agent", "chris@dravikrealty.com",   "(305) 555-0100"),
       party("Thomas Wu",         "Referring Agent","t.wu@eliterefer.com",   "(786) 555-1244"),
       party("Carlos Mendez",     "Seller's Agent","c.mendez@suncoastrealty.com","(305) 555-1300"),
       party("Bayfront Title",    "Title Officer", "ops@bayfronttitle.com",  "(305) 555-1350"),
@@ -369,7 +369,7 @@ export const SAMPLE_TRANSACTIONS: Transaction[] = [
     mortgage: mortgage("SunTrust", "Conventional", 580_000, 6.875, 145_000, "Clear to Close"),
     parties: [
       party("James & Yolanda Turner","Buyer",        "j.turner@tgroup.net",   "(786) 555-1388"),
-      party("Chris Macabugao",      "Buyer's Agent", "chris@axenrealty.com",  "(305) 555-0100"),
+      party("Chris Macabugao",      "Buyer's Agent", "chris@dravikrealty.com",  "(305) 555-0100"),
       party("Grace Hoffman",        "Seller's Agent","g.hoffman@miamiagent.com","(305) 555-1455"),
       party("SunTrust Mortgage",    "Lender",        "closings@suntrust.com", "(800) 555-8000"),
       party("Grove Title LLC",      "Title Officer", "ops@grovetitle.com",    "(305) 555-1500"),
@@ -410,8 +410,8 @@ export const SAMPLE_TRANSACTIONS: Transaction[] = [
     mortgage: undefined,
     parties: [
       party("Viktor & Lena Sokolov","Buyer & Seller",  "v.sokolov@vsgroup.com","(305) 555-1600"),
-      party("Chris Macabugao",     "Dual Agent",      "chris@axenrealty.com", "(305) 555-0100"),
-      party("Alejandra Vega",      "Transaction Mgr", "a.vega@axenrealty.com","(305) 555-0102"),
+      party("Chris Macabugao",     "Dual Agent",      "chris@dravikrealty.com", "(305) 555-0100"),
+      party("Alejandra Vega",      "Transaction Mgr", "a.vega@dravikrealty.com","(305) 555-0102"),
       party("Roberto Blanco",      "Referring Agent", "r.blanco@blancorp.com","(305) 555-0388"),
       party("SB Title & Escrow",   "Title Officer",   "ops@sbtitle.com",      "(305) 555-1700"),
     ],

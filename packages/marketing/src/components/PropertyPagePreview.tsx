@@ -31,7 +31,7 @@ function MiniPropertyPage({ properties, propertyId, headline, agentName, agentTi
           ))}
         </div>
         <div className="flex-1 bg-white rounded-md px-3 py-1 text-[10px] text-gray-400 border border-line truncate">
-          axenone.co/p/{p.city.toLowerCase().replace(" ", "-")}-{p.id}
+          dravikrealty.com/p/{p.city.toLowerCase().replace(" ", "-")}-{p.id}
         </div>
       </div>
 
@@ -58,7 +58,7 @@ function MiniPropertyPage({ properties, propertyId, headline, agentName, agentTi
         ].map(({ icon: Icon, v }) => (
           <div key={v} className="flex-1 flex flex-col items-center py-1 gap-0.5">
             <Icon size={12} className="text-gold" />
-            <span className="text-[10px] font-bold text-axen-dark">{v}</span>
+            <span className="text-[10px] font-bold text-dravik-dark">{v}</span>
           </div>
         ))}
       </div>
@@ -78,22 +78,22 @@ function MiniPropertyPage({ properties, propertyId, headline, agentName, agentTi
 
         {/* CTA form mock */}
         <div className="bg-gold-light border border-gold/30 rounded-xl p-3">
-          <p className="text-[10px] font-bold text-axen-dark mb-2">Request a Private Showing</p>
+          <p className="text-[10px] font-bold text-dravik-dark mb-2">Request a Private Showing</p>
           <div className="space-y-1.5">
             {["Name","Email","Phone"].map((ph) => (
               <div key={ph} className="w-full h-6 bg-white rounded-md border border-line" />
             ))}
-            <div className="w-full h-7 bg-axen-dark rounded-md" />
+            <div className="w-full h-7 bg-dravik-dark rounded-md" />
           </div>
         </div>
 
         {/* Agent footer */}
         <div className="flex items-center gap-2 pt-1 border-t border-line">
-          <div className="w-7 h-7 rounded-full bg-axen-dark flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0">
+          <div className="w-7 h-7 rounded-full bg-dravik-dark flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0">
             {agentName.split(" ").map((w) => w[0]).join("").slice(0, 2)}
           </div>
           <div>
-            <p className="text-[10px] font-bold text-axen-dark">{agentName}</p>
+            <p className="text-[10px] font-bold text-dravik-dark">{agentName}</p>
             <p className="text-[9px] text-gray-400">{agentTitle}</p>
           </div>
           <div className="ml-auto flex gap-1">
@@ -126,7 +126,7 @@ export default function PropertyPagePreview({ open, onClose, properties }: Prope
   const [propertyId, setPropertyId] = useState(properties[0].id);
   const [headline, setHeadline]     = useState("Discover Exclusive Waterfront Living");
   const [agentName, setAgentName]   = useState("Chris Macabugao");
-  const [agentTitle, setAgentTitle] = useState("Principal Broker · Axen Realty");
+  const [agentTitle, setAgentTitle] = useState("Principal Broker · Dravik Realty");
   const [published, setPublished]   = useState(false);
   const [pubUrl, setPubUrl]         = useState("");
 
@@ -136,7 +136,7 @@ export default function PropertyPagePreview({ open, onClose, properties }: Prope
     setPropertyId(properties[0].id);
     setHeadline("Discover Exclusive Waterfront Living");
     setAgentName("Chris Macabugao");
-    setAgentTitle("Principal Broker · Axen Realty");
+    setAgentTitle("Principal Broker · Dravik Realty");
     setPublished(false);
     setPubUrl("");
   }
@@ -176,7 +176,7 @@ export default function PropertyPagePreview({ open, onClose, properties }: Prope
 
   function handlePublish() {
     const slug = selectedProperty.city.toLowerCase().replace(/\s+/g, "-") + "-" + selectedProperty.id;
-    setPubUrl(`axenone.co/p/${slug}`);
+    setPubUrl(`dravikrealty.com/p/${slug}`);
     setPublished(true);
   }
 
@@ -203,7 +203,7 @@ export default function PropertyPagePreview({ open, onClose, properties }: Prope
       >
         {/* ── Left editor ─────────────────────────────── */}
         <div className="w-[320px] flex-shrink-0 flex flex-col border-r border-line overflow-hidden">
-          <div className="flex-shrink-0 flex items-center justify-between px-5 py-4 bg-axen-dark">
+          <div className="flex-shrink-0 flex items-center justify-between px-5 py-4 bg-dravik-dark">
             <div>
               <h2 className="text-white font-bold text-base">Property Site Generator</h2>
               <p className="text-gray-400 text-xs mt-0.5">One-click from saved property</p>
@@ -225,7 +225,7 @@ export default function PropertyPagePreview({ open, onClose, properties }: Prope
                 <select
                   value={propertyId}
                   onChange={(e) => setPropertyId(e.target.value)}
-                  className="w-full pl-3 pr-8 py-2.5 bg-surface-2 border border-transparent rounded-xl text-sm text-axen-dark focus:outline-none focus:border-gold appearance-none cursor-pointer"
+                  className="w-full pl-3 pr-8 py-2.5 bg-surface-2 border border-transparent rounded-xl text-sm text-dravik-dark focus:outline-none focus:border-gold appearance-none cursor-pointer"
                 >
                   {properties.map((p) => (
                     <option key={p.id} value={p.id}>
@@ -243,7 +243,7 @@ export default function PropertyPagePreview({ open, onClose, properties }: Prope
                   <img src={selectedProperty.heroImage} alt="" className="w-full h-full object-cover" />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-xs font-bold text-axen-dark truncate">{selectedProperty.address}</p>
+                  <p className="text-xs font-bold text-dravik-dark truncate">{selectedProperty.address}</p>
                   <p className="text-[10px] text-gray-400">{selectedProperty.city} · {formatCurrency(selectedProperty.price)}</p>
                 </div>
               </div>
@@ -261,7 +261,7 @@ export default function PropertyPagePreview({ open, onClose, properties }: Prope
                   type="text"
                   value={headline}
                   onChange={(e) => setHeadline(e.target.value)}
-                  className="w-full px-3 py-2 bg-surface-2 border border-transparent rounded-lg text-sm text-axen-dark focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition"
+                  className="w-full px-3 py-2 bg-surface-2 border border-transparent rounded-lg text-sm text-dravik-dark focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition"
                 />
               </div>
 
@@ -271,7 +271,7 @@ export default function PropertyPagePreview({ open, onClose, properties }: Prope
                   type="text"
                   value={agentName}
                   onChange={(e) => setAgentName(e.target.value)}
-                  className="w-full px-3 py-2 bg-surface-2 border border-transparent rounded-lg text-sm text-axen-dark focus:outline-none focus:border-gold transition"
+                  className="w-full px-3 py-2 bg-surface-2 border border-transparent rounded-lg text-sm text-dravik-dark focus:outline-none focus:border-gold transition"
                 />
               </div>
 
@@ -281,7 +281,7 @@ export default function PropertyPagePreview({ open, onClose, properties }: Prope
                   type="text"
                   value={agentTitle}
                   onChange={(e) => setAgentTitle(e.target.value)}
-                  className="w-full px-3 py-2 bg-surface-2 border border-transparent rounded-lg text-sm text-axen-dark focus:outline-none focus:border-gold transition"
+                  className="w-full px-3 py-2 bg-surface-2 border border-transparent rounded-lg text-sm text-dravik-dark focus:outline-none focus:border-gold transition"
                 />
               </div>
             </div>
@@ -309,7 +309,7 @@ export default function PropertyPagePreview({ open, onClose, properties }: Prope
                 "flex-1 flex items-center justify-center gap-1.5 py-2.5 font-bold text-sm rounded-xl transition-all",
                 published
                   ? "bg-emerald-500 text-white hover:bg-emerald-600"
-                  : "bg-axen-dark text-white hover:bg-gold hover:text-axen-dark"
+                  : "bg-dravik-dark text-white hover:bg-gold hover:text-dravik-dark"
               )}
             >
               {published ? <><Check size={15} /> Update</> : <><Rocket size={15} /> Publish Page</>}

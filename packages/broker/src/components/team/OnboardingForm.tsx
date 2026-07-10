@@ -48,15 +48,15 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-xs font-semibold text-axen-dark mb-1.5">{label}</label>
+      <label className="block text-xs font-semibold text-dravik-dark mb-1.5">{label}</label>
       {children}
       {hint && <p className="text-[10px] text-gray-400 mt-1">{hint}</p>}
     </div>
   );
 }
 
-const inputCls = "w-full px-3 py-2 text-sm bg-surface border border-line rounded-xl text-axen-dark placeholder:text-gray-300 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition";
-const selectCls = "w-full px-3 py-2 text-sm bg-surface border border-line rounded-xl text-axen-dark focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition";
+const inputCls = "w-full px-3 py-2 text-sm bg-surface border border-line rounded-xl text-dravik-dark placeholder:text-gray-300 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition";
+const selectCls = "w-full px-3 py-2 text-sm bg-surface border border-line rounded-xl text-dravik-dark focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition";
 
 // ─── Step components (module level) ──────────────────────────
 function StepPersonal({ data, set }: { data: FormData; set: (k: keyof FormData, v: string | number) => void }) {
@@ -73,7 +73,7 @@ function StepPersonal({ data, set }: { data: FormData; set: (k: keyof FormData, 
         </Field>
       </div>
       <Field label="Email">
-        <input type="email" className={inputCls} placeholder="agent@axenrealty.com" value={data.email}
+        <input type="email" className={inputCls} placeholder="agent@dravikrealty.com" value={data.email}
           onChange={(e) => set("email", e.target.value)} />
       </Field>
       <Field label="Phone">
@@ -116,7 +116,7 @@ function StepLicensing({ data, set }: { data: FormData; set: (k: keyof FormData,
 }
 
 function StepCommission({ data, set }: { data: FormData; set: (k: keyof FormData, v: string | number) => void }) {
-  const axenCut = 100 - data.splitPercent;
+  const dravikCut = 100 - data.splitPercent;
   return (
     <div className="space-y-4">
       <Field label="Starting Role">
@@ -135,7 +135,7 @@ function StepCommission({ data, set }: { data: FormData; set: (k: keyof FormData
           ))}
         </select>
       </Field>
-      <Field label={`Agent Split: ${data.splitPercent}% / Axen: ${axenCut}%`}
+      <Field label={`Agent Split: ${data.splitPercent}% / Dravik: ${dravikCut}%`}
         hint="Drag to set the agent's commission percentage">
         <input
           type="range" min={50} max={90} step={1}
@@ -156,8 +156,8 @@ function StepCommission({ data, set }: { data: FormData; set: (k: keyof FormData
           <p className="text-[10px] text-gray-500">Agent</p>
         </div>
         <div className="bg-surface rounded-xl border border-line p-3 text-center">
-          <p className="text-xl font-bold text-axen-dark">{axenCut}%</p>
-          <p className="text-[10px] text-gray-500">Axen Realty</p>
+          <p className="text-xl font-bold text-dravik-dark">{dravikCut}%</p>
+          <p className="text-[10px] text-gray-500">Dravik Realty</p>
         </div>
       </div>
     </div>
@@ -184,7 +184,7 @@ function StepReview({ data }: { data: FormData }) {
         {rows.map(({ label, value }, i) => (
           <div key={label} className={cn("flex items-center justify-between px-4 py-2.5 text-sm", i > 0 && "border-t border-line")}>
             <span className="text-gray-400 font-medium">{label}</span>
-            <span className="font-semibold text-axen-dark">{value}</span>
+            <span className="font-semibold text-dravik-dark">{value}</span>
           </div>
         ))}
       </div>
@@ -274,7 +274,7 @@ export default function OnboardingForm({ open, onClose, onSubmit }: Props) {
       role:          data.role,
       teamId:        data.teamId,
       splitPercent:  data.splitPercent,
-      axenCutPercent: 100 - data.splitPercent,
+      dravikCutPercent: 100 - data.splitPercent,
     });
     setDone(true);
   }
@@ -297,10 +297,10 @@ export default function OnboardingForm({ open, onClose, onSubmit }: Props) {
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-line flex-shrink-0">
           <div>
-            <p id="onboarding-title" className="text-base font-bold text-axen-dark">Add New Agent</p>
+            <p id="onboarding-title" className="text-base font-bold text-dravik-dark">Add New Agent</p>
             {!done && <p className="text-xs text-gray-400">Step {step} of {STEPS.length}</p>}
           </div>
-          <button onClick={handleClose} className="p-1.5 rounded-lg hover:bg-surface-2 text-gray-400 hover:text-axen-dark transition-colors">
+          <button onClick={handleClose} className="p-1.5 rounded-lg hover:bg-surface-2 text-gray-400 hover:text-dravik-dark transition-colors">
             <X size={16} />
           </button>
         </div>
@@ -312,14 +312,14 @@ export default function OnboardingForm({ open, onClose, onSubmit }: Props) {
               <Check size={28} className="text-emerald-600" />
             </div>
             <div>
-              <p className="text-lg font-bold text-axen-dark">Agent Added!</p>
+              <p className="text-lg font-bold text-dravik-dark">Agent Added!</p>
               <p className="text-sm text-gray-500 mt-1">
                 {data.firstName} {data.lastName} has been added with Onboarding status.
               </p>
             </div>
             <button
               onClick={handleClose}
-              className="px-6 py-2.5 bg-gold text-axen-dark text-sm font-bold rounded-xl hover:bg-gold-dark transition-colors"
+              className="px-6 py-2.5 bg-gold text-dravik-dark text-sm font-bold rounded-xl hover:bg-gold-dark transition-colors"
             >
               Done
             </button>
@@ -340,7 +340,7 @@ export default function OnboardingForm({ open, onClose, onSubmit }: Props) {
                     )}>
                       <div className={cn(
                         "w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0",
-                        isActive ? "bg-gold text-axen-dark" :
+                        isActive ? "bg-gold text-dravik-dark" :
                         isDone   ? "bg-emerald-100 text-emerald-600" :
                                    "bg-surface-2 text-gray-300"
                       )}>
@@ -369,21 +369,21 @@ export default function OnboardingForm({ open, onClose, onSubmit }: Props) {
               <button
                 onClick={() => setStep((s) => s - 1)}
                 disabled={step === 1}
-                className="flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-gray-400 hover:text-axen-dark disabled:opacity-30 transition-colors"
+                className="flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-gray-400 hover:text-dravik-dark disabled:opacity-30 transition-colors"
               >
                 <ChevronLeft size={15} /> Back
               </button>
               {step < STEPS.length ? (
                 <button
                   onClick={() => setStep((s) => s + 1)}
-                  className="flex items-center gap-1.5 px-5 py-2.5 bg-gold text-axen-dark text-sm font-bold rounded-xl hover:bg-gold-dark transition-colors"
+                  className="flex items-center gap-1.5 px-5 py-2.5 bg-gold text-dravik-dark text-sm font-bold rounded-xl hover:bg-gold-dark transition-colors"
                 >
                   Continue <ChevronRight size={15} />
                 </button>
               ) : (
                 <button
                   onClick={handleSubmit}
-                  className="flex items-center gap-1.5 px-5 py-2.5 bg-axen-dark text-white text-sm font-bold rounded-xl hover:opacity-90 transition-opacity"
+                  className="flex items-center gap-1.5 px-5 py-2.5 bg-dravik-dark text-white text-sm font-bold rounded-xl hover:opacity-90 transition-opacity"
                 >
                   <Check size={15} /> Add Agent
                 </button>

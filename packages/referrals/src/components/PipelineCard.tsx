@@ -100,7 +100,7 @@ export default function PipelineCard({ referral }: PipelineCardProps) {
       {/* ── Header ── */}
       <div className="flex items-start justify-between gap-2">
         <div>
-          <p className="font-bold text-axen-dark text-sm">{referral.clientName}</p>
+          <p className="font-bold text-dravik-dark text-sm">{referral.clientName}</p>
           <p className="text-xs text-gray-400 mt-0.5 flex items-center gap-1">
             <MapPin size={10} className="text-gold" />
             {referral.agentName} · {referral.agentCity}
@@ -123,11 +123,11 @@ export default function PipelineCard({ referral }: PipelineCardProps) {
       {/* ── Property details ── */}
       <div className="grid grid-cols-3 gap-2 bg-surface rounded-xl p-3">
         <div className="text-center">
-          <p className="text-xs font-bold text-axen-dark">{formatCurrency(referral.propertyValue)}</p>
+          <p className="text-xs font-bold text-dravik-dark">{formatCurrency(referral.propertyValue)}</p>
           <p className="text-[9px] uppercase tracking-wide text-gray-400 mt-0.5">Prop. Value</p>
         </div>
         <div className="text-center border-x border-line">
-          <p className="text-xs font-bold text-axen-dark">{referral.referralFee}%</p>
+          <p className="text-xs font-bold text-dravik-dark">{referral.referralFee}%</p>
           <p className="text-[9px] uppercase tracking-wide text-gray-400 mt-0.5">Ref. Fee</p>
         </div>
         <div className="text-center">

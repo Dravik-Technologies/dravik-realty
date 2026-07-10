@@ -62,7 +62,7 @@ export default function MapFilters({ filters, onChange, resultCount }: MapFilter
         <select
           value={filters.bedsMin}
           onChange={(e) => onChange({ ...filters, bedsMin: Number(e.target.value) })}
-          className="h-8 pl-3 pr-6 text-xs font-semibold rounded-full border border-line bg-white text-axen-dark focus:outline-none focus:border-gold appearance-none cursor-pointer"
+          className="h-8 pl-3 pr-6 text-xs font-semibold rounded-full border border-line bg-white text-dravik-dark focus:outline-none focus:border-gold appearance-none cursor-pointer"
         >
           <option value={0}>Any Beds</option>
           {BED_OPTIONS.slice(1).map((b) => (
@@ -74,7 +74,7 @@ export default function MapFilters({ filters, onChange, resultCount }: MapFilter
         <select
           value={filters.bathsMin}
           onChange={(e) => onChange({ ...filters, bathsMin: Number(e.target.value) })}
-          className="h-8 pl-3 pr-6 text-xs font-semibold rounded-full border border-line bg-white text-axen-dark focus:outline-none focus:border-gold appearance-none cursor-pointer"
+          className="h-8 pl-3 pr-6 text-xs font-semibold rounded-full border border-line bg-white text-dravik-dark focus:outline-none focus:border-gold appearance-none cursor-pointer"
         >
           <option value={0}>Any Baths</option>
           {BATH_OPTIONS.slice(1).map((b) => (
@@ -89,7 +89,7 @@ export default function MapFilters({ filters, onChange, resultCount }: MapFilter
             "h-8 px-3 text-xs font-semibold rounded-full border flex items-center gap-1 whitespace-nowrap",
             filters.priceMin > 0 || filters.priceMax < DEFAULT_FILTERS.priceMax
               ? "border-gold bg-gold-light text-gold-dark"
-              : "border-line text-axen-dark hover:border-gold"
+              : "border-line text-dravik-dark hover:border-gold"
           )}
         >
           {filters.priceMin > 0 || filters.priceMax < DEFAULT_FILTERS.priceMax
@@ -107,7 +107,7 @@ export default function MapFilters({ filters, onChange, resultCount }: MapFilter
               "h-8 px-3 text-xs font-semibold rounded-full border whitespace-nowrap transition-colors",
               filters.types.includes(t)
                 ? "border-gold bg-gold-light text-gold-dark"
-                : "border-line text-gray-500 hover:border-gold hover:text-axen-dark"
+                : "border-line text-gray-500 hover:border-gold hover:text-dravik-dark"
             )}
           >
             {t}
@@ -121,7 +121,7 @@ export default function MapFilters({ filters, onChange, resultCount }: MapFilter
             "h-8 px-3 text-xs font-semibold rounded-full border whitespace-nowrap",
             filters.newConstruction
               ? "border-gold bg-gold-light text-gold-dark"
-              : "border-line text-gray-500 hover:border-gold hover:text-axen-dark"
+              : "border-line text-gray-500 hover:border-gold hover:text-dravik-dark"
           )}
         >
           New Construction
@@ -134,7 +134,7 @@ export default function MapFilters({ filters, onChange, resultCount }: MapFilter
             "h-8 px-3 text-xs font-semibold rounded-full border whitespace-nowrap",
             filters.priceReduced
               ? "border-rose-500 bg-rose-50 text-rose-600"
-              : "border-line text-gray-500 hover:border-rose-300 hover:text-axen-dark"
+              : "border-line text-gray-500 hover:border-rose-300 hover:text-dravik-dark"
           )}
         >
           Price Reduced
@@ -143,7 +143,7 @@ export default function MapFilters({ filters, onChange, resultCount }: MapFilter
         {/* spacer + result count + clear */}
         <div className="flex items-center gap-2 ml-auto flex-shrink-0">
           <span className="text-xs text-gray-400 whitespace-nowrap">
-            <span className="font-bold text-axen-dark">{resultCount}</span> results
+            <span className="font-bold text-dravik-dark">{resultCount}</span> results
           </span>
           {isDirty && (
             <button
@@ -157,7 +157,7 @@ export default function MapFilters({ filters, onChange, resultCount }: MapFilter
           <button
             onClick={() => setExpanded((v) => !v)}
             className={cn(
-              "relative flex items-center gap-1 text-xs font-semibold hover:text-axen-dark border rounded-full h-8 px-3 transition-colors",
+              "relative flex items-center gap-1 text-xs font-semibold hover:text-dravik-dark border rounded-full h-8 px-3 transition-colors",
               statusesDirty
                 ? "border-gold bg-gold-light text-gold-dark"
                 : "border-line text-gray-500"
@@ -181,7 +181,7 @@ export default function MapFilters({ filters, onChange, resultCount }: MapFilter
             <select
               value={filters.priceMin}
               onChange={(e) => onChange({ ...filters, priceMin: Number(e.target.value) })}
-              className="h-8 px-3 text-xs font-semibold rounded-lg border border-line bg-white text-axen-dark focus:outline-none focus:border-gold"
+              className="h-8 px-3 text-xs font-semibold rounded-lg border border-line bg-white text-dravik-dark focus:outline-none focus:border-gold"
             >
               {PRICE_STEPS.map((p) => (
                 <option key={p} value={p}>{p === 0 ? "No Min" : formatCurrency(p)}</option>
@@ -195,7 +195,7 @@ export default function MapFilters({ filters, onChange, resultCount }: MapFilter
             <select
               value={filters.priceMax}
               onChange={(e) => onChange({ ...filters, priceMax: Number(e.target.value) })}
-              className="h-8 px-3 text-xs font-semibold rounded-lg border border-line bg-white text-axen-dark focus:outline-none focus:border-gold"
+              className="h-8 px-3 text-xs font-semibold rounded-lg border border-line bg-white text-dravik-dark focus:outline-none focus:border-gold"
             >
               {PRICE_STEPS.slice(1).map((p) => (
                 <option key={p} value={p}>{p >= DEFAULT_FILTERS.priceMax ? "No Max" : formatCurrency(p)}</option>
@@ -215,7 +215,7 @@ export default function MapFilters({ filters, onChange, resultCount }: MapFilter
                     onChange={() => toggleStatus(s)}
                     className="accent-gold w-3.5 h-3.5"
                   />
-                  <span className="text-xs font-medium text-axen-dark">{s}</span>
+                  <span className="text-xs font-medium text-dravik-dark">{s}</span>
                 </label>
               ))}
             </div>

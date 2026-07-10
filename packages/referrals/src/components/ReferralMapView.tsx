@@ -112,7 +112,7 @@ function ZoomButtons() {
           key={lbl}
           aria-label={d > 0 ? "Zoom in" : "Zoom out"}
           onClick={() => map.setZoom(map.getZoom() + d)}
-          className="w-8 h-8 bg-white border border-line rounded-lg font-bold text-axen-dark hover:bg-gold-light hover:text-gold shadow-sm flex items-center justify-center transition-colors text-sm"
+          className="w-8 h-8 bg-white border border-line rounded-lg font-bold text-dravik-dark hover:bg-gold-light hover:text-gold shadow-sm flex items-center justify-center transition-colors text-sm"
         >
           {lbl}
         </button>
@@ -148,7 +148,7 @@ function AgentListItem({ agent, dist, onInitiate }: {
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-1.5 flex-wrap">
-          <p className="text-xs font-bold text-axen-dark truncate">{agent.name}</p>
+          <p className="text-xs font-bold text-dravik-dark truncate">{agent.name}</p>
           <span
             className="text-[9px] font-bold px-1.5 py-0.5 rounded-full flex-shrink-0"
             style={{ background: cfg.bg, color: cfg.text }}
@@ -308,12 +308,12 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
           <div className="flex items-center justify-between mb-1">
             <div className="flex items-center gap-2">
               <Target size={15} className="text-gold" />
-              <h2 className="text-sm font-bold text-axen-dark">PCS Map Search</h2>
+              <h2 className="text-sm font-bold text-dravik-dark">PCS Map Search</h2>
             </div>
             <button
               onClick={() => setMobileSidebarOpen(false)}
               aria-label="Close filters"
-              className="lg:hidden p-1.5 rounded-lg text-gray-400 hover:text-axen-dark hover:bg-surface-2 transition-colors"
+              className="lg:hidden p-1.5 rounded-lg text-gray-400 hover:text-dravik-dark hover:bg-surface-2 transition-colors"
             >
               <X size={14} />
             </button>
@@ -365,12 +365,12 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
                   }
                 }}
                 placeholder="Search base or city…"
-                className="w-full pl-9 pr-8 py-2.5 border border-line rounded-xl text-sm text-axen-dark placeholder:text-gray-400 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition"
+                className="w-full pl-9 pr-8 py-2.5 border border-line rounded-xl text-sm text-dravik-dark placeholder:text-gray-400 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition"
               />
               {searchQuery && (
                 <button
                   onClick={() => { setSearchQuery(""); inputRef.current?.focus(); }}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-axen-dark"
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-dravik-dark"
                   aria-label="Clear search"
                 >
                   <X size={13} />
@@ -400,7 +400,7 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
                     >
                       <span className="text-base flex-shrink-0">{s.isBase ? "⭐" : "📍"}</span>
                       <div className="min-w-0">
-                        <p className="text-xs font-semibold text-axen-dark truncate">{s.label}</p>
+                        <p className="text-xs font-semibold text-dravik-dark truncate">{s.label}</p>
                         <p className="text-[10px] text-gray-400 truncate">{s.sublabel}</p>
                       </div>
                     </button>
@@ -414,12 +414,12 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
               <div className="mt-2 flex items-center gap-2 bg-gold-light border border-gold/30 rounded-xl px-3 py-2">
                 <span className="text-sm">{selectedLoc.isBase ? "⭐" : "📍"}</span>
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs font-bold text-axen-dark truncate">{selectedLoc.name}</p>
+                  <p className="text-xs font-bold text-dravik-dark truncate">{selectedLoc.name}</p>
                   <p className="text-[10px] text-gray-500">
                     {inRadius.length} agent{inRadius.length !== 1 ? "s" : ""} within {radiusMiles}mi
                   </p>
                 </div>
-                <button onClick={clearLocation} aria-label="Clear selection" className="text-gray-400 hover:text-axen-dark">
+                <button onClick={clearLocation} aria-label="Clear selection" className="text-gray-400 hover:text-dravik-dark">
                   <X size={13} />
                 </button>
               </div>
@@ -437,8 +437,8 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
                   className={cn(
                     "flex-1 py-2 rounded-xl text-xs font-bold border transition-colors",
                     radiusMiles === r
-                      ? "bg-axen-dark text-white border-axen-dark"
-                      : "bg-surface-2 text-gray-500 border-line hover:border-axen-dark"
+                      ? "bg-dravik-dark text-white border-dravik-dark"
+                      : "bg-surface-2 text-gray-500 border-line hover:border-dravik-dark"
                   )}
                 >
                   {r}mi
@@ -458,8 +458,8 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
                   className={cn(
                     "px-2.5 py-1.5 rounded-lg text-[11px] font-bold border transition-colors",
                     certFilter === o.value
-                      ? "bg-axen-dark text-white border-axen-dark"
-                      : "bg-surface-2 text-gray-500 border-line hover:border-axen-dark"
+                      ? "bg-dravik-dark text-white border-dravik-dark"
+                      : "bg-surface-2 text-gray-500 border-line hover:border-dravik-dark"
                   )}
                 >
                   {o.label}
@@ -494,7 +494,7 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
                     )}
                   >
                     <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: color }} />
-                    <span className="text-[10px] font-semibold text-axen-dark leading-tight truncate">
+                    <span className="text-[10px] font-semibold text-dravik-dark leading-tight truncate">
                       {base.shortName}
                     </span>
                   </button>
@@ -548,7 +548,7 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
           <button
             onClick={() => setMobileSidebarOpen(true)}
             aria-label="Open filters"
-            className="lg:hidden absolute top-3 left-3 z-[400] flex items-center gap-2 px-3 py-2 bg-white border border-line rounded-xl shadow-md text-xs font-bold text-axen-dark"
+            className="lg:hidden absolute top-3 left-3 z-[400] flex items-center gap-2 px-3 py-2 bg-white border border-line rounded-xl shadow-md text-xs font-bold text-dravik-dark"
           >
             <SlidersHorizontal size={13} className="text-gold" />
             Filters{selectedLoc ? ` · ${inRadius.length}` : ""}
@@ -701,7 +701,7 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
           <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-2">Legend</p>
           <div className="space-y-1.5">
             <div className="flex items-center gap-2">
-              <div className="w-4 h-4 rounded-full bg-axen-dark border-2 border-gold flex items-center justify-center text-[8px]">⭐</div>
+              <div className="w-4 h-4 rounded-full bg-dravik-dark border-2 border-gold flex items-center justify-center text-[8px]">⭐</div>
               <span className="text-[10px] text-gray-600">Military Base</span>
             </div>
             <div className="flex items-center gap-2">
@@ -719,7 +719,7 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
         {selectedLoc && (
           <div className="absolute top-3 left-3 z-[400] bg-white border border-gold/40 rounded-xl px-3 py-2 shadow-md flex items-center gap-2">
             <Target size={12} className="text-gold" />
-            <span className="text-xs font-bold text-axen-dark">{radiusMiles}mi radius</span>
+            <span className="text-xs font-bold text-dravik-dark">{radiusMiles}mi radius</span>
             <span className="text-[10px] text-gray-400">·</span>
             <span className="text-[10px] font-semibold text-gold">
               {inRadius.length} agent{inRadius.length !== 1 ? "s" : ""}

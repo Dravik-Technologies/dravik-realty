@@ -60,7 +60,7 @@ function KanbanCol({
         <div className="flex items-center gap-2">
           <span className={cn("w-2 h-2 rounded-full flex-shrink-0", stage.dot)} />
           <div>
-            <p className="text-xs font-bold text-axen-dark leading-tight">{stage.label}</p>
+            <p className="text-xs font-bold text-dravik-dark leading-tight">{stage.label}</p>
             {apps.length > 0 && (
               <p className="text-[10px] text-gray-400 mt-0.5 tabular-nums">
                 {formatCurrency(total)}

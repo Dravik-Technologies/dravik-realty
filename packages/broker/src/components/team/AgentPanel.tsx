@@ -28,7 +28,7 @@ function ProfileTab({ a }: { a: Agent }) {
     <div className="space-y-5 p-5">
       {/* Contact */}
       <div className="bg-surface rounded-2xl border border-line p-4 space-y-3">
-        <p className="text-xs font-bold text-axen-dark">Contact Information</p>
+        <p className="text-xs font-bold text-dravik-dark">Contact Information</p>
         {[
           { icon: Mail,   label: "Email",   value: a.email   },
           { icon: Phone,  label: "Phone",   value: a.phone   },
@@ -40,7 +40,7 @@ function ProfileTab({ a }: { a: Agent }) {
             </div>
             <div className="min-w-0">
               <p className="text-[10px] text-gray-400">{label}</p>
-              <p className="text-xs font-semibold text-axen-dark break-all">{value || "—"}</p>
+              <p className="text-xs font-semibold text-dravik-dark break-all">{value || "—"}</p>
             </div>
           </div>
         ))}
@@ -50,13 +50,13 @@ function ProfileTab({ a }: { a: Agent }) {
       <div className="grid grid-cols-2 gap-3">
         <div className="bg-surface rounded-xl border border-line p-3">
           <Calendar size={13} className="text-gold mb-1" />
-          <p className="text-sm font-bold text-axen-dark">{a.joinDate}</p>
+          <p className="text-sm font-bold text-dravik-dark">{a.joinDate}</p>
           <p className="text-[10px] text-gray-400">Join Date</p>
         </div>
         <div className="bg-surface rounded-xl border border-line p-3">
           <Briefcase size={13} className="text-gold mb-1" />
-          <p className="text-sm font-bold text-axen-dark">Since {joinYear}</p>
-          <p className="text-[10px] text-gray-400">With Axen</p>
+          <p className="text-sm font-bold text-dravik-dark">Since {joinYear}</p>
+          <p className="text-[10px] text-gray-400">With Dravik</p>
         </div>
       </div>
 
@@ -65,7 +65,7 @@ function ProfileTab({ a }: { a: Agent }) {
         <div className="bg-surface rounded-xl border border-line p-3">
           <div className="flex items-center gap-2 mb-2">
             <Award size={13} className="text-gold" />
-            <p className="text-xs font-bold text-axen-dark">Certifications</p>
+            <p className="text-xs font-bold text-dravik-dark">Certifications</p>
           </div>
           <div className="flex flex-wrap gap-1.5">
             {a.certifications.map((c) => (
@@ -79,8 +79,8 @@ function ProfileTab({ a }: { a: Agent }) {
       {a.boardMemberships.length > 0 && (
         <div className="bg-surface rounded-xl border border-line p-3">
           <div className="flex items-center gap-2 mb-2">
-            <Shield size={13} className="text-axen-dark" />
-            <p className="text-xs font-bold text-axen-dark">Board Memberships</p>
+            <Shield size={13} className="text-dravik-dark" />
+            <p className="text-xs font-bold text-dravik-dark">Board Memberships</p>
           </div>
           <div className="flex flex-wrap gap-1.5">
             {a.boardMemberships.map((b) => (
@@ -114,7 +114,7 @@ function PerformanceTab({ a }: { a: Agent }) {
       <div className="grid grid-cols-2 gap-2">
         {kpis.map(({ label, value, accent }) => (
           <div key={label} className="bg-surface rounded-xl border border-line p-3">
-            <p className="text-base font-bold text-axen-dark" style={{ color: value === "—" ? undefined : accent }}>{value}</p>
+            <p className="text-base font-bold text-dravik-dark" style={{ color: value === "—" ? undefined : accent }}>{value}</p>
             <p className="text-[10px] text-gray-400 mt-0.5">{label}</p>
           </div>
         ))}
@@ -123,7 +123,7 @@ function PerformanceTab({ a }: { a: Agent }) {
       {/* Referral score */}
       <div className="bg-surface rounded-xl border border-line p-4">
         <div className="flex items-center justify-between mb-2">
-          <p className="text-xs font-bold text-axen-dark">Referral Score</p>
+          <p className="text-xs font-bold text-dravik-dark">Referral Score</p>
           <span className="text-lg font-bold text-gold">{a.referralScore || "—"}</span>
         </div>
         <div className="h-2 bg-surface-2 rounded-full overflow-hidden">
@@ -145,7 +145,7 @@ function PerformanceTab({ a }: { a: Agent }) {
       {/* Monthly production sparkline */}
       {maxVol > 0 && (
         <div className="bg-surface rounded-xl border border-line p-4">
-          <p className="text-xs font-bold text-axen-dark mb-3">6-Month Volume</p>
+          <p className="text-xs font-bold text-dravik-dark mb-3">6-Month Volume</p>
           <div className="flex items-end gap-1.5 h-16">
             {a.monthlyVolume.map((v, i) => (
               <div key={i} className="flex-1 flex flex-col items-center gap-1">
@@ -194,8 +194,8 @@ function ReferralsTab({ a }: { a: Agent }) {
       {total > 0 && (
         <div className="bg-surface rounded-xl border border-line p-4">
           <div className="flex items-center justify-between mb-2">
-            <p className="text-xs font-bold text-axen-dark">Received / Total</p>
-            <span className="text-sm font-bold text-axen-dark">{rate}%</span>
+            <p className="text-xs font-bold text-dravik-dark">Received / Total</p>
+            <span className="text-sm font-bold text-dravik-dark">{rate}%</span>
           </div>
           <div className="h-2 bg-surface-2 rounded-full overflow-hidden">
             <div className="h-full bg-blue-400 rounded-full" style={{ width: `${rate}%` }} />
@@ -241,7 +241,7 @@ function DocumentsTab({ a }: { a: Agent }) {
               }
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-semibold text-axen-dark">{label}</p>
+              <p className="text-xs font-semibold text-dravik-dark">{label}</p>
               <p className="text-[10px] text-gray-400">{number}</p>
             </div>
             <div className="text-right">
@@ -258,12 +258,12 @@ function DocumentsTab({ a }: { a: Agent }) {
 
       {a.boardMemberships.length > 0 && (
         <div className="bg-surface rounded-xl border border-line p-3">
-          <p className="text-xs font-bold text-axen-dark mb-2">Board Memberships</p>
+          <p className="text-xs font-bold text-dravik-dark mb-2">Board Memberships</p>
           <div className="space-y-1.5">
             {a.boardMemberships.map((b) => (
               <div key={b} className="flex items-center gap-2">
                 <CheckCircle size={12} className="text-emerald-500 flex-shrink-0" />
-                <span className="text-xs text-axen-dark">{b}</span>
+                <span className="text-xs text-dravik-dark">{b}</span>
               </div>
             ))}
           </div>
@@ -323,7 +323,7 @@ function ActivityTab({ a }: { a: Agent }) {
                   )}
                 </div>
                 <div className="flex-1 pb-4 min-w-0">
-                  <p className="text-xs font-semibold text-axen-dark leading-tight">{act.description}</p>
+                  <p className="text-xs font-semibold text-dravik-dark leading-tight">{act.description}</p>
                   <p className="text-[10px] text-gray-400 mt-0.5" suppressHydrationWarning>{timeAgo(act.date)} · {act.date}</p>
                 </div>
               </div>
@@ -380,12 +380,12 @@ export default function AgentPanel({ agent, open, onClose }: Props) {
                   {agent.initials}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-bold text-axen-dark truncate">{agent.name}</p>
+                  <p className="font-bold text-dravik-dark truncate">{agent.name}</p>
                   <p className="text-xs text-gray-400">{agent.role} · {agent.licenseType} License</p>
                 </div>
                 <button
                   onClick={onClose}
-                  className="p-2 rounded-xl hover:bg-surface-2 text-gray-400 hover:text-axen-dark transition-colors flex-shrink-0"
+                  className="p-2 rounded-xl hover:bg-surface-2 text-gray-400 hover:text-dravik-dark transition-colors flex-shrink-0"
                 >
                   <X size={16} />
                 </button>
@@ -400,8 +400,8 @@ export default function AgentPanel({ agent, open, onClose }: Props) {
                     className={cn(
                       "flex items-center gap-1.5 px-3 py-2 text-xs font-semibold border-b-2 whitespace-nowrap transition-colors",
                       tab === id
-                        ? "border-gold text-axen-dark"
-                        : "border-transparent text-gray-400 hover:text-axen-dark"
+                        ? "border-gold text-dravik-dark"
+                        : "border-transparent text-gray-400 hover:text-dravik-dark"
                     )}
                   >
                     <Icon size={12} /> {label}

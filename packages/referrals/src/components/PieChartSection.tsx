@@ -43,7 +43,7 @@ function CustomTooltip({ active, payload }: { active?: boolean; payload?: Toolti
   if (!active || !payload?.length) return null;
   return (
     <div className="bg-white border border-line rounded-xl px-4 py-2 shadow-lg text-sm">
-      <p className="font-semibold text-axen-dark">{payload[0].name}</p>
+      <p className="font-semibold text-dravik-dark">{payload[0].name}</p>
       <p className="text-gold font-bold">{formatCurrencyFull(payload[0].value)}</p>
     </div>
   );

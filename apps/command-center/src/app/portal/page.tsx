@@ -12,7 +12,7 @@ export default function PortalPage() {
   return (
     <>
       {/* Demo auth banner */}
-      <div className="sticky top-0 z-30 bg-axen-dark border-b border-white/10 px-4 py-2 flex items-center justify-between">
+      <div className="sticky top-0 z-30 bg-dravik-dark border-b border-white/10 px-4 py-2 flex items-center justify-between">
         <div className="flex items-center gap-2 text-xs text-gray-400">
           <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
           Logged in as <span className="text-white font-semibold">{data.client.name}</span>
@@ -28,7 +28,7 @@ export default function PortalPage() {
                 className={cn(
                   "px-2.5 py-1 text-[10px] font-semibold rounded-full transition-colors",
                   clientIdx === i
-                    ? "bg-gold text-axen-dark"
+                    ? "bg-gold text-dravik-dark"
                     : "bg-white/10 text-gray-400 hover:bg-white/20 hover:text-white"
                 )}
               >

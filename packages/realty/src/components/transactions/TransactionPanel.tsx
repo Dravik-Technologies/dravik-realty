@@ -46,7 +46,7 @@ function OverviewTab({ t }: { t: Transaction }) {
           <img src={t.heroImage} alt={t.address} className="w-full h-full object-cover" />
         </div>
         <div className="flex-1 min-w-0">
-          <p className="font-bold text-axen-dark text-sm">{t.address}</p>
+          <p className="font-bold text-dravik-dark text-sm">{t.address}</p>
           <p className="text-xs text-gray-400">{t.city}, {t.state} {t.zip}</p>
           {t.mlsNumber && <p className="text-[10px] text-gray-300 mt-0.5">MLS# {t.mlsNumber}</p>}
           <div className="flex items-center gap-2 mt-2">
@@ -80,7 +80,7 @@ function OverviewTab({ t }: { t: Transaction }) {
               <Icon size={11} className="text-gold" />
               <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wide">{label}</p>
             </div>
-            <p className="text-sm font-bold text-axen-dark">{value}</p>
+            <p className="text-sm font-bold text-dravik-dark">{value}</p>
           </div>
         ))}
       </div>
@@ -88,7 +88,7 @@ function OverviewTab({ t }: { t: Transaction }) {
       <div className="space-y-1">
         <div className="flex justify-between text-xs">
           <span className="text-gray-400">Pipeline Progress</span>
-          <span className="font-bold text-axen-dark">{t.progress}%</span>
+          <span className="font-bold text-dravik-dark">{t.progress}%</span>
         </div>
         <div className="h-2 bg-surface-2 rounded-full overflow-hidden">
           <div className="h-full rounded-full transition-all" style={{ width: `${t.progress}%`, background: color }} />
@@ -101,11 +101,11 @@ function OverviewTab({ t }: { t: Transaction }) {
         <div className="space-y-2">
           {t.parties.map((p: TransactionParty) => (
             <div key={p.name} className="flex items-center gap-3 px-3 py-2 bg-surface rounded-xl border border-line">
-              <div className="w-7 h-7 rounded-full bg-axen-dark flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0">
+              <div className="w-7 h-7 rounded-full bg-dravik-dark flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0">
                 {p.name.split(" ").map((w) => w[0]).join("").slice(0, 2)}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-xs font-semibold text-axen-dark truncate">{p.name}</p>
+                <p className="text-xs font-semibold text-dravik-dark truncate">{p.name}</p>
                 <p className="text-[10px] text-gray-400">{p.role}</p>
               </div>
               <div className="flex gap-1.5">
@@ -137,7 +137,7 @@ function DocumentsTab({ docs }: { docs: TransactionDocument[] }) {
         <div className="flex-1">
           <div className="flex justify-between text-xs mb-1">
             <span className="text-gray-400">{signed}/{docs.length} documents complete</span>
-            <span className="font-bold text-axen-dark">{pct}%</span>
+            <span className="font-bold text-dravik-dark">{pct}%</span>
           </div>
           <div className="h-1.5 bg-surface-2 rounded-full overflow-hidden">
             <div className="h-full bg-emerald-500 rounded-full" style={{ width: `${pct}%` }} />
@@ -155,7 +155,7 @@ function DocumentsTab({ docs }: { docs: TransactionDocument[] }) {
             <button
               disabled
               title="E-signature integration coming soon"
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-axen-dark text-white text-xs font-bold rounded-lg opacity-50 cursor-not-allowed"
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-dravik-dark text-white text-xs font-bold rounded-lg opacity-50 cursor-not-allowed"
             >
               <Send size={12} /> Send for Signature
             </button>
@@ -173,7 +173,7 @@ function DocumentsTab({ docs }: { docs: TransactionDocument[] }) {
                 <Icon size={14} className="text-gray-400" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-xs font-semibold text-axen-dark truncate">{d.name}</p>
+                <p className="text-xs font-semibold text-dravik-dark truncate">{d.name}</p>
                 <p className="text-[10px] text-gray-400">Uploaded {d.uploadedAt}</p>
               </div>
               <div className="flex items-center gap-2 flex-shrink-0">
@@ -258,7 +258,7 @@ function TasksTab({ tasks: initialTasks }: { tasks: TransactionTask[] }) {
       <div>
         <div className="flex justify-between text-xs mb-1">
           <span className="text-gray-400">{completed}/{total} tasks complete</span>
-          <span className="font-bold text-axen-dark">{pct}%</span>
+          <span className="font-bold text-dravik-dark">{pct}%</span>
         </div>
         <div className="h-1.5 bg-surface-2 rounded-full overflow-hidden">
           <div className="h-full bg-gold rounded-full transition-all" style={{ width: `${pct}%` }} />
@@ -297,7 +297,7 @@ function TasksTab({ tasks: initialTasks }: { tasks: TransactionTask[] }) {
                     className="mt-0.5 accent-gold flex-shrink-0"
                   />
                   <div className="flex-1 min-w-0">
-                    <p className={cn("text-xs font-semibold", isDone ? "line-through text-gray-400" : "text-axen-dark")}>
+                    <p className={cn("text-xs font-semibold", isDone ? "line-through text-gray-400" : "text-dravik-dark")}>
                       {t.label}
                     </p>
                     <p className="text-[10px] text-gray-400 flex items-center gap-1 mt-0.5">
@@ -320,25 +320,25 @@ function TasksTab({ tasks: initialTasks }: { tasks: TransactionTask[] }) {
             value={newLabel}
             onChange={(e) => setNewLabel(e.target.value)}
             onKeyDown={(e) => { if (e.key === "Enter") handleAddTask(); if (e.key === "Escape") setShowInput(false); }}
-            className="w-full px-3 py-1.5 text-xs text-axen-dark bg-white border border-line rounded-lg focus:outline-none focus:border-gold transition"
+            className="w-full px-3 py-1.5 text-xs text-dravik-dark bg-white border border-line rounded-lg focus:outline-none focus:border-gold transition"
           />
           <input
             type="date"
             value={newDue}
             onChange={(e) => setNewDue(e.target.value)}
-            className="w-full px-3 py-1.5 text-xs text-axen-dark bg-white border border-line rounded-lg focus:outline-none focus:border-gold transition"
+            className="w-full px-3 py-1.5 text-xs text-dravik-dark bg-white border border-line rounded-lg focus:outline-none focus:border-gold transition"
           />
           <div className="flex gap-2">
             <button
               onClick={handleAddTask}
               disabled={!newLabel.trim()}
-              className="flex-1 py-1.5 bg-axen-dark text-white text-xs font-bold rounded-lg hover:bg-gold hover:text-axen-dark transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+              className="flex-1 py-1.5 bg-dravik-dark text-white text-xs font-bold rounded-lg hover:bg-gold hover:text-dravik-dark transition-all disabled:opacity-40 disabled:cursor-not-allowed"
             >
               Add Task
             </button>
             <button
               onClick={() => { setShowInput(false); setNewLabel(""); setNewDue(""); }}
-              className="px-3 py-1.5 bg-surface-2 text-gray-400 text-xs font-semibold rounded-lg hover:text-axen-dark transition-colors"
+              className="px-3 py-1.5 bg-surface-2 text-gray-400 text-xs font-semibold rounded-lg hover:text-dravik-dark transition-colors"
             >
               Cancel
             </button>
@@ -389,7 +389,7 @@ function MortgageTab({ mortgage, contractPrice }: { mortgage: MortgageInfo | und
           <BarChart3 size={16} style={{ color: statusColor }} />
         </div>
         <div>
-          <p className="text-sm font-bold text-axen-dark">{mortgage.status}</p>
+          <p className="text-sm font-bold text-dravik-dark">{mortgage.status}</p>
           <p className="text-xs text-gray-400">{mortgage.lender}</p>
         </div>
         <span className="ml-auto text-[10px] font-bold px-2 py-0.5 rounded-full border"
@@ -410,7 +410,7 @@ function MortgageTab({ mortgage, contractPrice }: { mortgage: MortgageInfo | und
         ].map(({ label, value }) => (
           <div key={label} className="bg-surface rounded-xl p-3">
             <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wide">{label}</p>
-            <p className="text-sm font-bold text-axen-dark mt-0.5">{value}</p>
+            <p className="text-sm font-bold text-dravik-dark mt-0.5">{value}</p>
           </div>
         ))}
       </div>
@@ -446,7 +446,7 @@ function CommunicationsTab({ activity: initialActivity }: { activity: ActivityEn
             </div>
             <div className="pb-4 flex-1 min-w-0">
               <p className="text-[10px] text-gray-400 mb-0.5">{a.date} · {a.actor}</p>
-              <p className="text-xs font-semibold text-axen-dark leading-snug">{a.action}</p>
+              <p className="text-xs font-semibold text-dravik-dark leading-snug">{a.action}</p>
               {a.note && (
                 <p className="text-[10px] text-gray-500 mt-0.5 bg-surface-2 rounded-lg px-2 py-1 border border-line">
                   {a.note}
@@ -465,12 +465,12 @@ function CommunicationsTab({ activity: initialActivity }: { activity: ActivityEn
           value={noteText}
           onChange={(e) => setNoteText(e.target.value)}
           placeholder="Add a note or update to the activity log..."
-          className="w-full px-3 py-2 text-xs text-axen-dark bg-surface-2 border border-line rounded-xl resize-none focus:outline-none focus:border-gold transition"
+          className="w-full px-3 py-2 text-xs text-dravik-dark bg-surface-2 border border-line rounded-xl resize-none focus:outline-none focus:border-gold transition"
         />
         <button
           onClick={handlePost}
           disabled={!noteText.trim()}
-          className="flex items-center gap-2 px-4 py-2 bg-axen-dark text-white text-xs font-bold rounded-xl hover:bg-gold hover:text-axen-dark transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+          className="flex items-center gap-2 px-4 py-2 bg-dravik-dark text-white text-xs font-bold rounded-xl hover:bg-gold hover:text-dravik-dark transition-all disabled:opacity-40 disabled:cursor-not-allowed"
         >
           <MessageSquare size={12} /> Post Update
         </button>
@@ -560,7 +560,7 @@ export default function TransactionPanel({ transaction, onClose }: TransactionPa
         )}
       >
         {/* Header */}
-        <div className="flex-shrink-0 bg-axen-dark px-5 py-4">
+        <div className="flex-shrink-0 bg-dravik-dark px-5 py-4">
           <div className="flex items-start gap-3">
             <button ref={closeRef} onClick={onClose} aria-label="Close"
               className="text-gray-400 hover:text-white p-1 transition-colors mt-0.5 flex-shrink-0">
@@ -625,7 +625,7 @@ export default function TransactionPanel({ transaction, onClose }: TransactionPa
               "flex items-center gap-1.5 px-4 py-2.5 font-bold text-sm rounded-xl transition-all flex-1 justify-center",
               advanced
                 ? "bg-emerald-500 text-white cursor-default"
-                : "bg-axen-dark text-white hover:bg-gold hover:text-axen-dark"
+                : "bg-dravik-dark text-white hover:bg-gold hover:text-dravik-dark"
             )}
           >
             <CheckCircle2 size={14} />
@@ -638,7 +638,7 @@ export default function TransactionPanel({ transaction, onClose }: TransactionPa
           <button
             onClick={() => setTab("communications")}
             title="Send update to all parties"
-            className="flex items-center gap-1.5 px-4 py-2.5 bg-surface-2 text-axen-dark font-semibold text-sm rounded-xl hover:bg-gold-light hover:text-gold transition-all"
+            className="flex items-center gap-1.5 px-4 py-2.5 bg-surface-2 text-dravik-dark font-semibold text-sm rounded-xl hover:bg-gold-light hover:text-gold transition-all"
           >
             <Send size={14} /> Send Update
           </button>

@@ -19,7 +19,7 @@ function SliderRow({ label, min, max, step, value, onChange, display }: SliderRo
   return (
     <div className="space-y-1.5">
       <div className="flex items-center justify-between">
-        <span className="text-xs font-semibold text-axen-dark">{label}</span>
+        <span className="text-xs font-semibold text-dravik-dark">{label}</span>
         <span className="text-xs font-bold text-gold tabular-nums">{display}</span>
       </div>
       <input
@@ -52,21 +52,21 @@ function BreakdownRow({ icon: Icon, label, amount, sub, accent, deduction, bold 
   return (
     <div className={cn(
       "flex items-center gap-3 px-4 py-2.5 rounded-xl",
-      bold ? "bg-axen-dark" : "bg-surface"
+      bold ? "bg-dravik-dark" : "bg-surface"
     )}>
       <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
         style={{ background: accent ? `${accent}18` : "#F1F3F5" }}>
         <Icon size={13} style={{ color: accent ?? "#9CA3AF" }} />
       </div>
       <div className="flex-1 min-w-0">
-        <p className={cn("text-xs font-semibold", bold ? "text-white" : "text-axen-dark")}>{label}</p>
+        <p className={cn("text-xs font-semibold", bold ? "text-white" : "text-dravik-dark")}>{label}</p>
         {sub && <p className={cn("text-[10px]", bold ? "text-gray-400" : "text-gray-400")}>{sub}</p>}
       </div>
       <p className={cn(
         "text-sm font-bold tabular-nums",
         bold      ? "text-gold" :
         deduction ? "text-rose-500" :
-        "text-axen-dark"
+        "text-dravik-dark"
       )}>
         {deduction ? "−" : ""}{formatCurrency(Math.abs(amount))}
       </p>
@@ -89,8 +89,8 @@ export default function CommissionBreakdown({ contractPrice, commission: c }: Co
   const gross        = contractPrice * (rate / 100);
   const refDeduction = hasReferral ? gross * (refRate / 100) : 0;
   const postRef      = gross - refDeduction;
-  const axenShare    = postRef * (c.axenSplitRate / 100);
-  const agentGross   = postRef - axenShare;
+  const dravikShare    = postRef * (c.dravikSplitRate / 100);
+  const agentGross   = postRef - dravikShare;
   const agentNet     = agentGross - txFee;
 
   return (
@@ -122,7 +122,7 @@ export default function CommissionBreakdown({ contractPrice, commission: c }: Co
                 hasReferral ? "translate-x-4" : "translate-x-0.5"
               )} />
             </div>
-            <span className="text-xs font-semibold text-axen-dark">Referral Fee</span>
+            <span className="text-xs font-semibold text-dravik-dark">Referral Fee</span>
           </label>
           {c.referralAgent && (
             <span className="text-[10px] text-gray-400 ml-auto">{c.referralAgent}</span>
@@ -170,9 +170,9 @@ export default function CommissionBreakdown({ contractPrice, commission: c }: Co
 
         <BreakdownRow
           icon={Building2}
-          label="Axen Company Split"
-          sub={`${c.axenSplitRate}% of net commission`}
-          amount={axenShare}
+          label="Dravik Company Split"
+          sub={`${c.dravikSplitRate}% of net commission`}
+          amount={dravikShare}
           accent="#8B5CF6"
           deduction
         />
@@ -206,11 +206,11 @@ export default function CommissionBreakdown({ contractPrice, commission: c }: Co
       <div className="grid grid-cols-3 gap-2">
         {[
           { label: "Gross",       value: formatCurrency(gross)      },
-          { label: "Axen Cut",    value: formatCurrency(axenShare)  },
+          { label: "Dravik Cut",    value: formatCurrency(dravikShare)  },
           { label: "You Net",     value: formatCurrency(agentNet)   },
         ].map(({ label, value }) => (
           <div key={label} className="bg-surface rounded-xl p-3 text-center">
-            <p className="text-base font-bold text-axen-dark tabular-nums">{value}</p>
+            <p className="text-base font-bold text-dravik-dark tabular-nums">{value}</p>
             <p className="text-[10px] text-gray-400 mt-0.5">{label}</p>
           </div>
         ))}

@@ -9,14 +9,14 @@ import { cn } from "@dravik/shared";
 // ─── Flyer live preview (module-level) ───────────────────────
 function LuxuryFlyer({ c }: { c: FlyerContent }) {
   return (
-    <div className="w-full aspect-[8.5/11] bg-axen-dark text-white overflow-hidden relative font-sans select-none">
+    <div className="w-full aspect-[8.5/11] bg-dravik-dark text-white overflow-hidden relative font-sans select-none">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={`https://picsum.photos/seed/${c.imageSeed}/680/400`} alt=""
         className="w-full h-[46%] object-cover opacity-80" />
-      <div className="absolute inset-x-0 top-[38%] h-20 bg-gradient-to-b from-transparent to-axen-dark" />
+      <div className="absolute inset-x-0 top-[38%] h-20 bg-gradient-to-b from-transparent to-dravik-dark" />
       <div className="px-8 py-5 space-y-4">
         <div>
-          <p className="text-gold text-xs font-bold uppercase tracking-[0.2em] mb-1">Exclusively Presented By Axen Realty</p>
+          <p className="text-gold text-xs font-bold uppercase tracking-[0.2em] mb-1">Exclusively Presented By Dravik Realty</p>
           <h1 className="text-2xl font-bold leading-tight">{c.headline}</h1>
           <p className="text-gray-400 text-sm mt-1">{c.address}</p>
         </div>
@@ -49,12 +49,12 @@ function ModernFlyer({ c }: { c: FlyerContent }) {
       <div className="px-7 py-5">
         <div className="flex items-start justify-between mb-3">
           <div>
-            <p className="text-2xl font-black text-axen-dark">{c.price}</p>
-            <h1 className="text-base font-bold text-axen-dark leading-tight mt-0.5">{c.headline}</h1>
+            <p className="text-2xl font-black text-dravik-dark">{c.price}</p>
+            <h1 className="text-base font-bold text-dravik-dark leading-tight mt-0.5">{c.headline}</h1>
             <p className="text-xs text-gray-400 mt-0.5">{c.address}</p>
           </div>
           <div className="text-right">
-            <p className="text-2xl font-black text-axen-dark">{c.beds}</p>
+            <p className="text-2xl font-black text-dravik-dark">{c.beds}</p>
             <p className="text-[10px] text-gray-400 uppercase tracking-wide">Beds</p>
           </div>
         </div>
@@ -62,7 +62,7 @@ function ModernFlyer({ c }: { c: FlyerContent }) {
           <span>{c.baths} Baths</span>
           <span>{c.sqft} Sqft</span>
         </div>
-        <div className="flex items-center gap-3 bg-axen-dark text-white rounded-xl px-4 py-2.5">
+        <div className="flex items-center gap-3 bg-dravik-dark text-white rounded-xl px-4 py-2.5">
           <div className="flex-1">
             <p className="font-bold text-sm">{c.agentName}</p>
             <p className="text-[10px] text-white/60">{c.agentPhone}</p>
@@ -78,7 +78,7 @@ function ClassicFlyer({ c }: { c: FlyerContent }) {
   return (
     <div className="w-full aspect-[8.5/11] bg-white overflow-hidden relative font-sans select-none border-2 border-[#4A90A4]">
       <div className="bg-[#4A90A4] text-white text-center py-3 px-4">
-        <p className="text-[10px] font-bold uppercase tracking-[0.3em]">Axen Realty · For Sale</p>
+        <p className="text-[10px] font-bold uppercase tracking-[0.3em]">Dravik Realty · For Sale</p>
       </div>
       <div className="h-[44%] overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -86,7 +86,7 @@ function ClassicFlyer({ c }: { c: FlyerContent }) {
           className="w-full h-full object-cover" />
       </div>
       <div className="px-6 py-4 text-center">
-        <h1 className="text-xl font-bold text-axen-dark">{c.headline}</h1>
+        <h1 className="text-xl font-bold text-dravik-dark">{c.headline}</h1>
         <p className="text-gray-500 text-sm mt-0.5">{c.address}</p>
         <p className="text-2xl font-black text-[#4A90A4] mt-2">{c.price}</p>
         <div className="flex justify-center gap-4 text-sm text-gray-600 mt-1">
@@ -119,12 +119,12 @@ function MinimalFlyer({ c }: { c: FlyerContent }) {
       </div>
       <div className="px-8 py-5 flex flex-col justify-between h-[35%]">
         <div>
-          <h1 className="text-base font-bold text-axen-dark">{c.headline}</h1>
+          <h1 className="text-base font-bold text-dravik-dark">{c.headline}</h1>
           <p className="text-xs text-gray-400 mt-0.5">{c.address}</p>
         </div>
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-xs font-bold text-axen-dark">{c.agentName}</p>
+            <p className="text-xs font-bold text-dravik-dark">{c.agentName}</p>
             <div className="flex items-center gap-3 text-[10px] text-gray-400 mt-0.5">
               <span className="flex items-center gap-1"><Phone size={9} />{c.agentPhone}</span>
               <span className="flex items-center gap-1"><Mail size={9} />{c.agentEmail}</span>
@@ -160,7 +160,7 @@ function Field({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full px-3 py-2 bg-surface-2 border border-transparent rounded-lg text-sm text-axen-dark placeholder:text-gray-300 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition"
+        className="w-full px-3 py-2 bg-surface-2 border border-transparent rounded-lg text-sm text-dravik-dark placeholder:text-gray-300 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition"
       />
     </div>
   );
@@ -170,7 +170,7 @@ function Field({
 const INITIAL_FLYER: FlyerContent = {
   templateId:  "f1",
   headline:    "Stunning Oceanfront Villa",
-  subheadline: "Offered exclusively through Axen Realty",
+  subheadline: "Offered exclusively through Dravik Realty",
   price:       "$3,250,000",
   address:     "1450 Ocean Dr, Miami Beach, FL 33139",
   beds:        "3",
@@ -178,9 +178,9 @@ const INITIAL_FLYER: FlyerContent = {
   sqft:        "2,196",
   agentName:   "Chris Macabugao",
   agentPhone:  "(305) 555-0142",
-  agentEmail:  "chris@axenrealty.com",
+  agentEmail:  "chris@dravikrealty.com",
   imageSeed:   "flyer-hero",
-  qrCodeUrl:   "axenone.co/p/ocean-villa",
+  qrCodeUrl:   "dravikrealty.com/p/ocean-villa",
 };
 
 interface FlyerDesignerProps {
@@ -266,7 +266,7 @@ export default function FlyerDesigner({ open, onClose }: FlyerDesignerProps) {
         {/* ── Left: editor ───────────────────────────────── */}
         <div className="w-[340px] flex-shrink-0 flex flex-col border-r border-line overflow-hidden">
           {/* Header */}
-          <div className="flex-shrink-0 flex items-center justify-between px-5 py-4 bg-axen-dark">
+          <div className="flex-shrink-0 flex items-center justify-between px-5 py-4 bg-dravik-dark">
             <div>
               <h2 className="text-white font-bold text-base">Flyer Designer</h2>
               <p className="text-gray-400 text-xs mt-0.5">Print &amp; digital ready</p>
@@ -298,7 +298,7 @@ export default function FlyerDesigner({ open, onClose }: FlyerDesignerProps) {
                     )}
                     style={{ borderColor: content.templateId === ft.id ? ft.accentColor : undefined }}
                   >
-                    <p className="text-xs font-bold text-axen-dark">{ft.name}</p>
+                    <p className="text-xs font-bold text-dravik-dark">{ft.name}</p>
                     <p className="text-[10px] text-gray-400 mt-0.5 leading-tight">{ft.description}</p>
                   </button>
                 ))}
@@ -324,8 +324,8 @@ export default function FlyerDesigner({ open, onClose }: FlyerDesignerProps) {
               <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Agent Info</p>
               <Field label="Agent Name"  value={content.agentName}  onChange={set("agentName")}  placeholder="Your Name" />
               <Field label="Phone"       value={content.agentPhone} onChange={set("agentPhone")} placeholder="(305) 555-0100" />
-              <Field label="Email"       value={content.agentEmail} onChange={set("agentEmail")} placeholder="agent@axenrealty.com" />
-              <Field label="QR Code URL" value={content.qrCodeUrl}  onChange={set("qrCodeUrl")}  placeholder="axenone.co/p/…" />
+              <Field label="Email"       value={content.agentEmail} onChange={set("agentEmail")} placeholder="agent@dravikrealty.com" />
+              <Field label="QR Code URL" value={content.qrCodeUrl}  onChange={set("qrCodeUrl")}  placeholder="dravikrealty.com/p/…" />
             </div>
           </div>
 
@@ -333,7 +333,7 @@ export default function FlyerDesigner({ open, onClose }: FlyerDesignerProps) {
           <div className="flex-shrink-0 border-t border-line p-4 flex gap-2">
             <button
               onClick={() => { setDownloaded(true); setTimeout(() => setDownloaded(false), 2500); }}
-              className="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-axen-dark text-white font-bold text-sm rounded-xl hover:bg-gold hover:text-axen-dark transition-all"
+              className="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-dravik-dark text-white font-bold text-sm rounded-xl hover:bg-gold hover:text-dravik-dark transition-all"
             >
               {downloaded ? <><Check size={15} /> Saved!</> : <><Download size={15} /> Download PDF</>}
             </button>

@@ -24,7 +24,7 @@ function KpiCard({ icon: Icon, label, value, accent, sub }: {
         <Icon size={18} style={{ color: accent }} />
       </div>
       <div>
-        <p className="text-xl font-bold text-axen-dark leading-none">{value}</p>
+        <p className="text-xl font-bold text-dravik-dark leading-none">{value}</p>
         <p className="text-[11px] text-gray-400 mt-0.5">{label}</p>
         {sub && <p className="text-[10px] text-gray-300 mt-0.5">{sub}</p>}
       </div>
@@ -151,7 +151,7 @@ export default function TeamDashboard() {
       lastActivity:  "2026-05-29",
       monthlyVolume: [0, 0, 0, 0, 0, 0],
       splitPercent:   data.splitPercent   ?? 65,
-      axenCutPercent: data.axenCutPercent ?? 35,
+      dravikCutPercent: data.dravikCutPercent ?? 35,
       customRules:    [],
       referralsSent: 0, referralsReceived: 0, referralRevenue: 0,
       eAndOExpiry:   data.eAndOExpiry ?? "",
@@ -186,10 +186,10 @@ export default function TeamDashboard() {
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Search agents…"
-                  className="w-full pl-8 pr-8 py-2 bg-surface-2 border border-transparent rounded-xl text-sm text-axen-dark placeholder:text-gray-400 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition"
+                  className="w-full pl-8 pr-8 py-2 bg-surface-2 border border-transparent rounded-xl text-sm text-dravik-dark placeholder:text-gray-400 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition"
                 />
                 {search && (
-                  <button onClick={() => setSearch("")} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-axen-dark">
+                  <button onClick={() => setSearch("")} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-dravik-dark">
                     <X size={13} />
                   </button>
                 )}
@@ -208,8 +208,8 @@ export default function TeamDashboard() {
                   className={cn(
                     "flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold border-b-2 whitespace-nowrap transition-colors",
                     filter === id
-                      ? "border-gold text-axen-dark"
-                      : "border-transparent text-gray-400 hover:text-axen-dark hover:border-gray-200"
+                      ? "border-gold text-dravik-dark"
+                      : "border-transparent text-gray-400 hover:text-dravik-dark hover:border-gray-200"
                   )}
                 >
                   {label}
@@ -236,7 +236,7 @@ export default function TeamDashboard() {
                       title={v === "directory" ? "Directory view" : "Hierarchy view"}
                       className={cn(
                         "flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg transition-all",
-                        view === v ? "bg-axen-dark text-white shadow-sm" : "text-gray-400 hover:text-axen-dark"
+                        view === v ? "bg-dravik-dark text-white shadow-sm" : "text-gray-400 hover:text-dravik-dark"
                       )}
                     >
                       <Icon size={12} />
@@ -259,7 +259,7 @@ export default function TeamDashboard() {
               {/* Add Agent */}
               <button
                 onClick={() => setShowOnboarding(true)}
-                className="flex items-center gap-1.5 px-4 py-1.5 text-xs font-bold rounded-xl bg-gold text-axen-dark hover:bg-gold-dark transition-colors"
+                className="flex items-center gap-1.5 px-4 py-1.5 text-xs font-bold rounded-xl bg-gold text-dravik-dark hover:bg-gold-dark transition-colors"
               >
                 <UserPlus size={12} /> Add Agent
               </button>

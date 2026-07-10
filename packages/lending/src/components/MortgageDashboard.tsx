@@ -40,7 +40,7 @@ function KpiCard({
         <Icon size={20} style={accent ? { color: accent } : { color: "#9CA3AF" }} />
       </div>
       <div className="min-w-0">
-        <p className="text-xl font-bold text-axen-dark leading-none tabular-nums">{value}</p>
+        <p className="text-xl font-bold text-dravik-dark leading-none tabular-nums">{value}</p>
         <p className="text-[11px] text-gray-400 mt-0.5 truncate">{label}</p>
         {sub && <p className="text-[10px] text-gray-300 mt-0.5">{sub}</p>}
       </div>
@@ -136,7 +136,7 @@ export default function MortgageDashboard() {
               <Landmark size={18} className="text-gold" />
             </div>
             <div>
-              <h1 className="text-lg font-bold text-axen-dark leading-tight">Mortgage Tools</h1>
+              <h1 className="text-lg font-bold text-dravik-dark leading-tight">Mortgage Tools</h1>
               <p className="text-xs text-gray-400">Pipeline · Underwriting · Calculators</p>
             </div>
           </div>
@@ -151,8 +151,8 @@ export default function MortgageDashboard() {
                   className={cn(
                     "px-3 py-1.5 text-xs font-semibold rounded-lg transition-all",
                     view === opt.id
-                      ? "bg-white text-axen-dark shadow-sm"
-                      : "text-gray-400 hover:text-axen-dark"
+                      ? "bg-white text-dravik-dark shadow-sm"
+                      : "text-gray-400 hover:text-dravik-dark"
                   )}
                 >
                   {opt.label}
@@ -225,8 +225,8 @@ export default function MortgageDashboard() {
                 className={cn(
                   "flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-lg transition-all",
                   section === s.id
-                    ? "bg-white text-axen-dark shadow-sm"
-                    : "text-gray-400 hover:text-axen-dark"
+                    ? "bg-white text-dravik-dark shadow-sm"
+                    : "text-gray-400 hover:text-dravik-dark"
                 )}
               >
                 <Icon size={13} />
@@ -245,12 +245,12 @@ export default function MortgageDashboard() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search client, address…"
-              className="w-full pl-8 pr-8 py-2 text-xs bg-white border border-line rounded-xl text-axen-dark placeholder:text-gray-300 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition"
+              className="w-full pl-8 pr-8 py-2 text-xs bg-white border border-line rounded-xl text-dravik-dark placeholder:text-gray-300 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition"
             />
             {search && (
               <button
                 onClick={() => setSearch("")}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-300 hover:text-axen-dark"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-300 hover:text-dravik-dark"
               >
                 <X size={13} />
               </button>

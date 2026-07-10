@@ -74,7 +74,7 @@ function ConvRow({
         {/* Top row: name + time */}
         <div className="flex items-center justify-between gap-2 mb-0.5">
           <div className="flex items-center gap-1.5 min-w-0">
-            <span className={cn("text-sm font-semibold truncate", c.unreadCount > 0 ? "text-axen-dark" : "text-gray-700")}>
+            <span className={cn("text-sm font-semibold truncate", c.unreadCount > 0 ? "text-dravik-dark" : "text-gray-700")}>
               {c.clientName}
             </span>
             {c.isHighIntent && (
@@ -92,7 +92,7 @@ function ConvRow({
         )}
 
         {/* Last message */}
-        <p className={cn("text-xs truncate", c.unreadCount > 0 ? "text-axen-dark font-medium" : "text-gray-400")}>
+        <p className={cn("text-xs truncate", c.unreadCount > 0 ? "text-dravik-dark font-medium" : "text-gray-400")}>
           {c.lastMessage}
         </p>
 
@@ -103,7 +103,7 @@ function ConvRow({
           </span>
           <Icon size={11} className={cn("flex-shrink-0", CHANNEL_COLOR[c.channel])} />
           {c.unreadCount > 0 && (
-            <span className="ml-auto text-[9px] font-bold w-4 h-4 rounded-full bg-gold text-axen-dark flex items-center justify-center flex-shrink-0">
+            <span className="ml-auto text-[9px] font-bold w-4 h-4 rounded-full bg-gold text-dravik-dark flex items-center justify-center flex-shrink-0">
               {c.unreadCount}
             </span>
           )}
@@ -178,10 +178,10 @@ export default function ConversationList({ conversations, folder, selectedId, on
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search conversations…"
-            className="w-full pl-8 pr-8 py-2 bg-surface-2 border border-transparent rounded-xl text-sm text-axen-dark placeholder:text-gray-400 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition"
+            className="w-full pl-8 pr-8 py-2 bg-surface-2 border border-transparent rounded-xl text-sm text-dravik-dark placeholder:text-gray-400 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition"
           />
           {search && (
-            <button onClick={() => setSearch("")} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-axen-dark">
+            <button onClick={() => setSearch("")} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-dravik-dark">
               <X size={13} />
             </button>
           )}
@@ -197,8 +197,8 @@ export default function ConversationList({ conversations, folder, selectedId, on
             className={cn(
               "px-3 py-1 text-[11px] font-semibold rounded-lg whitespace-nowrap transition-colors",
               quickFilter === id
-                ? "bg-axen-dark text-white"
-                : "text-gray-400 hover:text-axen-dark hover:bg-surface-2"
+                ? "bg-dravik-dark text-white"
+                : "text-gray-400 hover:text-dravik-dark hover:bg-surface-2"
             )}
           >
             {label}

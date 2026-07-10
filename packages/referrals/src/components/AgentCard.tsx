@@ -14,8 +14,8 @@ const CERT_CONFIG = {
     text: "text-gold-dark",
   },
   "Dual Licensed": {
-    bg: "bg-axen-dark",
-    border: "border-axen-dark",
+    bg: "bg-dravik-dark",
+    border: "border-dravik-dark",
     text: "text-white",
   },
   "RE + Mortgage": {
@@ -80,7 +80,7 @@ export default function AgentCard({ agent, onInitiate }: AgentCardProps) {
 
           <div className="min-w-0 flex-1">
             <div className="flex items-start justify-between gap-1">
-              <p className="font-bold text-axen-dark text-sm leading-tight truncate">{agent.name}</p>
+              <p className="font-bold text-dravik-dark text-sm leading-tight truncate">{agent.name}</p>
               <span className="text-[10px] font-semibold text-gray-400 whitespace-nowrap">
                 {agent.yearsExperience}y
               </span>
@@ -107,7 +107,7 @@ export default function AgentCard({ agent, onInitiate }: AgentCardProps) {
           </span>
           <div className="flex items-center gap-1.5">
             <Stars score={agent.productionScore} />
-            <span className="text-xs font-bold text-axen-dark">
+            <span className="text-xs font-bold text-dravik-dark">
               {agent.productionScore.toFixed(1)}
             </span>
             <span className="text-[10px] text-gray-400">({agent.totalReviews})</span>
@@ -129,15 +129,15 @@ export default function AgentCard({ agent, onInitiate }: AgentCardProps) {
         {/* ── Stats ── */}
         <div className="grid grid-cols-3 gap-2 bg-surface rounded-xl p-3">
           <div className="text-center">
-            <p className="text-sm font-bold text-axen-dark">{agent.closedVolumeMTD}</p>
+            <p className="text-sm font-bold text-dravik-dark">{agent.closedVolumeMTD}</p>
             <p className="text-[9px] uppercase tracking-wide text-gray-400 mt-0.5">Vol. MTD</p>
           </div>
           <div className="text-center border-x border-line">
-            <p className="text-sm font-bold text-axen-dark">{agent.closedTransactions}</p>
+            <p className="text-sm font-bold text-dravik-dark">{agent.closedTransactions}</p>
             <p className="text-[9px] uppercase tracking-wide text-gray-400 mt-0.5">Closings</p>
           </div>
           <div className="text-center">
-            <p className="text-sm font-bold text-axen-dark">{agent.avgDaysToClose}d</p>
+            <p className="text-sm font-bold text-dravik-dark">{agent.avgDaysToClose}d</p>
             <p className="text-[9px] uppercase tracking-wide text-gray-400 mt-0.5">Avg Close</p>
           </div>
         </div>
@@ -145,7 +145,7 @@ export default function AgentCard({ agent, onInitiate }: AgentCardProps) {
         {/* ── Avg property value ── */}
         <div className="flex items-center justify-between text-xs">
           <span className="text-gray-400">Avg. Market Value</span>
-          <span className="font-bold text-axen-dark">
+          <span className="font-bold text-dravik-dark">
             {formatCurrency(agent.location.avgPropertyValue)}
           </span>
         </div>
@@ -153,7 +153,7 @@ export default function AgentCard({ agent, onInitiate }: AgentCardProps) {
         {/* ── CTA ── */}
         <button
           onClick={() => onInitiate(agent)}
-          className="mt-auto w-full flex items-center justify-center gap-2 bg-axen-dark hover:bg-axen-navy text-white text-sm font-bold py-2.5 rounded-xl transition-colors shadow-sm group"
+          className="mt-auto w-full flex items-center justify-center gap-2 bg-dravik-dark hover:bg-dravik-navy text-white text-sm font-bold py-2.5 rounded-xl transition-colors shadow-sm group"
         >
           Initiate Referral
           <ArrowUpRight

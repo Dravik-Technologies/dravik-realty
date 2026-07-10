@@ -59,7 +59,7 @@ function NotifRow({ notif, onRead }: { notif: Notif; onRead: (id: string) => voi
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 mb-0.5">
-          <p className={cn("text-xs truncate leading-snug", notif.read ? "font-medium text-axen-dark" : "font-bold text-axen-dark")}>
+          <p className={cn("text-xs truncate leading-snug", notif.read ? "font-medium text-dravik-dark" : "font-bold text-dravik-dark")}>
             {notif.title}
           </p>
           {!notif.read && <span className="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0" />}
@@ -109,7 +109,7 @@ export default function NotificationCenter() {
         aria-label={`Notifications${unread ? ` — ${unread} unread` : ""}`}
         aria-expanded={open}
         onClick={() => setOpen(v => !v)}
-        className="relative p-2.5 rounded-xl text-gray-400 hover:bg-surface-2 hover:text-axen-dark transition-colors"
+        className="relative p-2.5 rounded-xl text-gray-400 hover:bg-surface-2 hover:text-dravik-dark transition-colors"
       >
         <Bell size={18} />
         {unread > 0 && (
@@ -124,7 +124,7 @@ export default function NotificationCenter() {
           <div className="flex items-center justify-between px-5 py-3.5 border-b border-line flex-shrink-0">
             <div className="flex items-center gap-2">
               <Bell size={14} className="text-gold" />
-              <h3 className="text-sm font-bold text-axen-dark">Notifications</h3>
+              <h3 className="text-sm font-bold text-dravik-dark">Notifications</h3>
               {unread > 0 && (
                 <span className="text-[10px] font-bold text-white bg-gold px-1.5 py-0.5 rounded-full leading-none">
                   {unread}
@@ -143,7 +143,7 @@ export default function NotificationCenter() {
               <button
                 onClick={handleClose}
                 aria-label="Close notifications"
-                className="p-1 rounded-lg text-gray-400 hover:text-axen-dark hover:bg-surface-2 transition-colors"
+                className="p-1 rounded-lg text-gray-400 hover:text-dravik-dark hover:bg-surface-2 transition-colors"
               >
                 <X size={14} />
               </button>

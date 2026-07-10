@@ -53,27 +53,27 @@ function PageCampaignCard({ campaign: c, onEdit }: PageCardProps) {
             Live
           </div>
         )}
-        <div className="absolute inset-0 bg-axen-dark/0 group-hover:bg-axen-dark/30 transition-colors duration-200 flex items-center justify-center gap-2">
+        <div className="absolute inset-0 bg-dravik-dark/0 group-hover:bg-dravik-dark/30 transition-colors duration-200 flex items-center justify-center gap-2">
           <button
             onClick={() => onEdit(c)}
-            className="opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1.5 px-3 py-1.5 bg-white text-axen-dark font-bold text-xs rounded-lg shadow"
+            className="opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1.5 px-3 py-1.5 bg-white text-dravik-dark font-bold text-xs rounded-lg shadow"
           >
             <Edit size={11} /> Edit
           </button>
           <button
             onClick={() => onEdit(c)}
-            className="opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1.5 px-3 py-1.5 bg-white text-axen-dark font-bold text-xs rounded-lg shadow"
+            className="opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1.5 px-3 py-1.5 bg-white text-dravik-dark font-bold text-xs rounded-lg shadow"
           >
             <Eye size={11} /> Preview
           </button>
         </div>
       </div>
       <div className="p-3">
-        <p className="text-sm font-bold text-axen-dark truncate">{c.name}</p>
+        <p className="text-sm font-bold text-dravik-dark truncate">{c.name}</p>
         <p className="text-[10px] text-gray-400 mt-0.5">{c.type}</p>
         <div className="flex items-center gap-3 text-xs text-gray-500 mt-2">
-          <span><span className="font-bold text-axen-dark">{c.views.toLocaleString()}</span> views</span>
-          <span><span className="font-bold text-axen-dark">{c.leadsGenerated}</span> leads</span>
+          <span><span className="font-bold text-dravik-dark">{c.views.toLocaleString()}</span> views</span>
+          <span><span className="font-bold text-dravik-dark">{c.leadsGenerated}</span> leads</span>
           {c.conversionRate > 0 && (
             <span className="ml-auto font-bold text-emerald-600">{c.conversionRate}%</span>
           )}
@@ -94,14 +94,14 @@ function FlyersGrid({ onDesign }: { onDesign: () => void }) {
           <Printer size={28} className="text-gold" />
         </div>
         <div>
-          <p className="text-base font-bold text-axen-dark">No flyers yet</p>
+          <p className="text-base font-bold text-dravik-dark">No flyers yet</p>
           <p className="text-sm text-gray-500 mt-1 max-w-xs">
             Design a professional property flyer in minutes with our drag-and-drop designer.
           </p>
         </div>
         <button
           onClick={onDesign}
-          className="flex items-center gap-2 px-5 py-2.5 bg-axen-dark text-white font-bold text-sm rounded-xl hover:bg-gold hover:text-axen-dark transition-all"
+          className="flex items-center gap-2 px-5 py-2.5 bg-dravik-dark text-white font-bold text-sm rounded-xl hover:bg-gold hover:text-dravik-dark transition-all"
         >
           <Plus size={14} /> Design a Flyer
         </button>
@@ -113,7 +113,7 @@ function FlyersGrid({ onDesign }: { onDesign: () => void }) {
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
       {flyerCampaigns.map((c) => (
         <div key={c.id} className="bg-white rounded-2xl border border-line p-4">
-          <p className="text-sm font-bold text-axen-dark truncate">{c.name}</p>
+          <p className="text-sm font-bold text-dravik-dark truncate">{c.name}</p>
         </div>
       ))}
     </div>
@@ -197,7 +197,7 @@ export default function MarketingPage({ properties }: { properties: Property[] }
         <div className="flex-shrink-0 bg-white border-b border-line">
           <div className="flex items-center justify-between px-6 py-4">
             <div>
-              <h1 className="text-xl font-bold text-axen-dark">Marketing</h1>
+              <h1 className="text-xl font-bold text-dravik-dark">Marketing</h1>
               <p className="text-xs text-gray-400 mt-0.5">Landing pages, flyers, and campaign management</p>
             </div>
 
@@ -205,7 +205,7 @@ export default function MarketingPage({ properties }: { properties: Property[] }
             <div ref={menuRef} className="relative">
               <button
                 onClick={() => setMenuOpen((v) => !v)}
-                className="flex items-center gap-2 px-4 py-2.5 bg-axen-dark text-white font-bold text-sm rounded-xl hover:bg-gold hover:text-axen-dark transition-all"
+                className="flex items-center gap-2 px-4 py-2.5 bg-dravik-dark text-white font-bold text-sm rounded-xl hover:bg-gold hover:text-dravik-dark transition-all"
               >
                 <Plus size={15} /> Create New
                 <ChevronDown size={13} className={cn("transition-transform", menuOpen && "rotate-180")} />
@@ -217,7 +217,7 @@ export default function MarketingPage({ properties }: { properties: Property[] }
                     <button
                       key={action}
                       onClick={() => handleCreate(action)}
-                      className="w-full flex items-center gap-3 px-4 py-3 text-sm text-axen-dark hover:bg-gold-light hover:text-gold-dark transition-colors"
+                      className="w-full flex items-center gap-3 px-4 py-3 text-sm text-dravik-dark hover:bg-gold-light hover:text-gold-dark transition-colors"
                     >
                       <Icon size={14} className="text-gold flex-shrink-0" />
                       {label}
@@ -237,8 +237,8 @@ export default function MarketingPage({ properties }: { properties: Property[] }
                 className={cn(
                   "flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold border-b-2 transition-colors",
                   tab === id
-                    ? "border-gold text-axen-dark"
-                    : "border-transparent text-gray-400 hover:text-axen-dark"
+                    ? "border-gold text-dravik-dark"
+                    : "border-transparent text-gray-400 hover:text-dravik-dark"
                 )}
               >
                 <Icon size={13} />

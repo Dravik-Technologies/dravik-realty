@@ -6,9 +6,9 @@ import type {
 // ─── Shared agent ─────────────────────────────────────────────
 const AGENT_CHRIS = {
   name: "Chris Macabugao",
-  title: "Realtor® · Axen Realty",
+  title: "Realtor® · Dravik Realty",
   phone: "(305) 555-0100",
-  email: "chris@axenrealty.com",
+  email: "chris@dravikrealty.com",
   license: "FL-BK3512490",
   initials: "CM",
 };
@@ -71,7 +71,7 @@ export const CLIENT_JOHN: ClientPortalData = {
       ],
       mortgage: {
         id: "pm1",
-        lender: "Axen Mortgage",
+        lender: "Dravik Mortgage",
         status: "Underwriting",
         approvedAmount: 1_000_000,
         rate: 6.875,
@@ -164,12 +164,12 @@ export const CLIENT_JOHN: ClientPortalData = {
   activity: [
     activity("a1",  "2026-05-01",  "System",          "system",  "Purchase agreement fully executed. Transaction opened.", "milestone"),
     activity("a2",  "2026-05-03",  "John Smith",       "client",  "Proof of funds uploaded.", "document"),
-    activity("a3",  "2026-05-08",  "John Smith",       "client",  "Loan application submitted to Axen Mortgage.", "document"),
+    activity("a3",  "2026-05-08",  "John Smith",       "client",  "Loan application submitted to Dravik Mortgage.", "document"),
     activity("a4",  "2026-05-10",  "Chris Macabugao",  "agent",   "Inspection completed. Report delivered — minor items noted.", "milestone"),
-    activity("a5",  "2026-05-15",  "Axen Mortgage",    "system",  "Loan application moved to Processing.", "status"),
-    activity("a6",  "2026-05-22",  "Axen Mortgage",    "system",  "File submitted to underwriting.", "status"),
+    activity("a5",  "2026-05-15",  "Dravik Mortgage",    "system",  "Loan application moved to Processing.", "status"),
+    activity("a6",  "2026-05-22",  "Dravik Mortgage",    "system",  "File submitted to underwriting.", "status"),
     activity("a7",  "2026-05-23",  "Chris Macabugao",  "agent",   "Appraisal ordered. Scheduled for June 2.", "milestone"),
-    activity("a8",  "2026-05-24",  "Axen Mortgage",    "system",  "Bank statements needed to complete underwriting file.", "document"),
+    activity("a8",  "2026-05-24",  "Dravik Mortgage",    "system",  "Bank statements needed to complete underwriting file.", "document"),
   ],
 };
 
@@ -294,7 +294,7 @@ export const CLIENT_DAVID: ClientPortalData = {
       ],
       mortgage: {
         id: "pm2",
-        lender: "Axen Mortgage",
+        lender: "Dravik Mortgage",
         status: "Funded",
         approvedAmount: 372_000,
         rate: 7.125,
@@ -332,7 +332,7 @@ export const CLIENT_DAVID: ClientPortalData = {
   activity: [
     activity("a15", "2026-03-10", "System",          "system",  "Contract executed at $465,000.", "milestone"),
     activity("a16", "2026-03-20", "Chris Macabugao", "agent",   "Inspection completed — no major defects found.", "milestone"),
-    activity("a17", "2026-04-01", "Axen Mortgage",   "system",  "Loan cleared to close.", "status"),
+    activity("a17", "2026-04-01", "Dravik Mortgage",   "system",  "Loan cleared to close.", "status"),
     activity("a18", "2026-04-23", "Chris Macabugao", "agent",   "Closing disclosure reviewed and approved.", "document"),
     activity("a19", "2026-04-25", "System",          "system",  "Transaction funded and closed. Keys delivered.", "milestone"),
   ],

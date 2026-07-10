@@ -12,13 +12,13 @@ function rule(id: string, name: string, condition: string, agentSplit: number, n
 export const AGENTS: Agent[] = [
   {
     id: "a1", name: "Chris Macabugao", initials: "CM", color: "#D4AF37",
-    email: "chris@axenrealty.com", phone: "(305) 555-0100", address: "1200 Brickell Ave, Miami FL 33131",
+    email: "chris@dravikrealty.com", phone: "(305) 555-0100", address: "1200 Brickell Ave, Miami FL 33131",
     licenseType: "Dual", licenseNumber: "SL3412987", licenseExpiry: "2027-06-30",
     status: "Active", role: "Broker", teamId: "direct", managerId: undefined, joinDate: "2018-03-01",
     ytdVolume: 22_400_000, ytdGci: 672_000, closedUnits: 28, activeListings: 6,
     referralScore: 92, avgDaysToClose: 38, conversionRate: 20, lastActivity: "2026-05-28",
     monthlyVolume: [3_200_000, 4_100_000, 3_900_000, 5_200_000, 6_000_000, 4_800_000],
-    splitPercent: 100, axenCutPercent: 0,
+    splitPercent: 100, dravikCutPercent: 0,
     customRules: [
       rule("r-a1-1", "Broker Override", "All transactions", 100, "Owner of brokerage; full commission retained"),
     ],
@@ -37,13 +37,13 @@ export const AGENTS: Agent[] = [
 
   {
     id: "a2", name: "Aisha Williams", initials: "AW", color: "#3B82F6",
-    email: "aisha.williams@axenrealty.com", phone: "(305) 555-0102", address: "8880 SW 40th St, Miami FL 33165",
+    email: "aisha.williams@dravikrealty.com", phone: "(305) 555-0102", address: "8880 SW 40th St, Miami FL 33165",
     licenseType: "RE", licenseNumber: "BK3198452", licenseExpiry: "2026-09-30",
     status: "Active", role: "Team Lead", teamId: "direct", managerId: "a1", joinDate: "2019-07-15",
     ytdVolume: 15_000_000, ytdGci: 450_000, closedUnits: 18, activeListings: 5,
     referralScore: 88, avgDaysToClose: 41, conversionRate: 18, lastActivity: "2026-05-27",
     monthlyVolume: [2_100_000, 2_600_000, 2_400_000, 3_800_000, 4_100_000, 3_000_000],
-    splitPercent: 80, axenCutPercent: 20,
+    splitPercent: 80, dravikCutPercent: 20,
     customRules: [
       rule("r-a2-1", "Team Lead Tier",   "As team lead — elevated base split",       80, "Applied to all personal transactions"),
       rule("r-a2-2", "Luxury Bonus",     "Transaction price ≥ $2M",                  85, "+5% for luxury sales above $2M"),
@@ -63,13 +63,13 @@ export const AGENTS: Agent[] = [
 
   {
     id: "a3", name: "Sarah Chen", initials: "SC", color: "#10B981",
-    email: "sarah.chen@axenrealty.com", phone: "(305) 555-0103", address: "1700 Ponce de Leon Blvd, Coral Gables FL 33134",
+    email: "sarah.chen@dravikrealty.com", phone: "(305) 555-0103", address: "1700 Ponce de Leon Blvd, Coral Gables FL 33134",
     licenseType: "RE", licenseNumber: "BK3205618", licenseExpiry: "2026-12-31",
     status: "Active", role: "Team Lead", teamId: "direct", managerId: "a1", joinDate: "2020-01-08",
     ytdVolume: 13_000_000, ytdGci: 390_000, closedUnits: 16, activeListings: 4,
     referralScore: 84, avgDaysToClose: 44, conversionRate: 17, lastActivity: "2026-05-26",
     monthlyVolume: [1_800_000, 2_200_000, 2_100_000, 3_100_000, 3_800_000, 2_600_000],
-    splitPercent: 78, axenCutPercent: 22,
+    splitPercent: 78, dravikCutPercent: 22,
     customRules: [
       rule("r-a3-1", "Team Lead Tier",   "As team lead",             78, "Base elevated split"),
       rule("r-a3-2", "New Agent Bonus",  "Transaction with onboarding agent", 80, "+2% when mentoring new agents on a deal"),
@@ -89,13 +89,13 @@ export const AGENTS: Agent[] = [
 
   {
     id: "a4", name: "Elena Rodriguez", initials: "ER", color: "#8B5CF6",
-    email: "elena.rodriguez@axenrealty.com", phone: "(305) 555-0104", address: "2601 S Bayshore Dr, Miami FL 33133",
+    email: "elena.rodriguez@dravikrealty.com", phone: "(305) 555-0104", address: "2601 S Bayshore Dr, Miami FL 33133",
     licenseType: "Mortgage", licenseNumber: "NMLS-1987432", licenseExpiry: "2026-12-31",
     status: "Active", role: "Team Lead", teamId: "direct", managerId: "a1", joinDate: "2020-06-01",
     ytdVolume: 8_000_000, ytdGci: 240_000, closedUnits: 12, activeListings: 3,
     referralScore: 80, avgDaysToClose: 35, conversionRate: 16, lastActivity: "2026-05-25",
     monthlyVolume: [1_100_000, 1_300_000, 1_200_000, 1_800_000, 2_100_000, 1_600_000],
-    splitPercent: 82, axenCutPercent: 18,
+    splitPercent: 82, dravikCutPercent: 18,
     customRules: [
       rule("r-a4-1", "Mortgage Lead Tier", "All mortgage loan closings", 82, "Higher split for mortgage specialists"),
       rule("r-a4-2", "Jumbo Bonus",        "Loan amount ≥ $1M",          87, "+5% split for jumbo loans"),
@@ -115,13 +115,13 @@ export const AGENTS: Agent[] = [
 
   {
     id: "a5", name: "Marcus Rivera", initials: "MR", color: "#F59E0B",
-    email: "marcus.rivera@axenrealty.com", phone: "(305) 555-0105", address: "10401 SW 8th St, Miami FL 33174",
+    email: "marcus.rivera@dravikrealty.com", phone: "(305) 555-0105", address: "10401 SW 8th St, Miami FL 33174",
     licenseType: "RE", licenseNumber: "SL3456123", licenseExpiry: "2027-03-31",
     status: "Active", role: "Agent", teamId: "williams", managerId: "a2", joinDate: "2021-03-15",
     ytdVolume: 8_500_000, ytdGci: 255_000, closedUnits: 10, activeListings: 3,
     referralScore: 76, avgDaysToClose: 45, conversionRate: 15, lastActivity: "2026-05-24",
     monthlyVolume: [1_200_000, 1_400_000, 1_300_000, 1_900_000, 2_200_000, 1_700_000],
-    splitPercent: 72, axenCutPercent: 28,
+    splitPercent: 72, dravikCutPercent: 28,
     customRules: [
       rule("r-a5-1", "Standard Split",  "All transactions",   72, "Base commission split"),
       rule("r-a5-2", "Volume Bonus",    "Annual GCI ≥ $250K", 75, "+3% once annual GCI threshold is met"),
@@ -140,13 +140,13 @@ export const AGENTS: Agent[] = [
 
   {
     id: "a6", name: "Priya Sharma", initials: "PS", color: "#EF4444",
-    email: "priya.sharma@axenrealty.com", phone: "(305) 555-0106", address: "7200 Red Rd, South Miami FL 33143",
+    email: "priya.sharma@dravikrealty.com", phone: "(305) 555-0106", address: "7200 Red Rd, South Miami FL 33143",
     licenseType: "RE", licenseNumber: "SL3489201", licenseExpiry: "2027-01-31",
     status: "Active", role: "Agent", teamId: "williams", managerId: "a2", joinDate: "2021-09-01",
     ytdVolume: 7_200_000, ytdGci: 216_000, closedUnits: 9, activeListings: 2,
     referralScore: 78, avgDaysToClose: 48, conversionRate: 14, lastActivity: "2026-05-22",
     monthlyVolume: [1_000_000, 1_200_000, 1_100_000, 1_600_000, 1_800_000, 1_400_000],
-    splitPercent: 72, axenCutPercent: 28,
+    splitPercent: 72, dravikCutPercent: 28,
     customRules: [
       rule("r-a6-1", "Standard Split", "All transactions",   72, "Base commission split"),
       rule("r-a6-2", "Luxury Bonus",   "Price ≥ $1.5M",      76, "+4% for premium listings"),
@@ -164,13 +164,13 @@ export const AGENTS: Agent[] = [
 
   {
     id: "a7", name: "Tyler Brooks", initials: "TB", color: "#6366F1",
-    email: "tyler.brooks@axenrealty.com", phone: "(305) 555-0107", address: "1540 NE 2nd Ave, Miami FL 33132",
+    email: "tyler.brooks@dravikrealty.com", phone: "(305) 555-0107", address: "1540 NE 2nd Ave, Miami FL 33132",
     licenseType: "RE", licenseNumber: "SL3521890", licenseExpiry: "2028-09-30",
     status: "Onboarding", role: "Agent", teamId: "williams", managerId: "a2", joinDate: "2025-09-15",
     ytdVolume: 1_200_000, ytdGci: 36_000, closedUnits: 2, activeListings: 1,
     referralScore: 65, avgDaysToClose: 55, conversionRate: 10, lastActivity: "2026-05-10",
     monthlyVolume: [0, 0, 200_000, 400_000, 600_000, 400_000],
-    splitPercent: 65, axenCutPercent: 35,
+    splitPercent: 65, dravikCutPercent: 35,
     customRules: [
       rule("r-a7-1", "Onboarding Split", "First 12 months",           65, "Reduced split during onboarding period"),
       rule("r-a7-2", "Graduation Tier",  "After 10 closed units",     70, "Auto-upgrade to standard split at 10 closings"),
@@ -188,13 +188,13 @@ export const AGENTS: Agent[] = [
 
   {
     id: "a8", name: "Jessica Park", initials: "JP", color: "#EC4899",
-    email: "jessica.park@axenrealty.com", phone: "(305) 555-0108", address: "4000 Ponce de Leon Blvd, Coral Gables FL 33146",
+    email: "jessica.park@dravikrealty.com", phone: "(305) 555-0108", address: "4000 Ponce de Leon Blvd, Coral Gables FL 33146",
     licenseType: "Dual", licenseNumber: "SL3412654", licenseExpiry: "2027-06-30",
     status: "Active", role: "Agent", teamId: "chen", managerId: "a3", joinDate: "2021-11-15",
     ytdVolume: 9_100_000, ytdGci: 273_000, closedUnits: 11, activeListings: 4,
     referralScore: 82, avgDaysToClose: 40, conversionRate: 17, lastActivity: "2026-05-23",
     monthlyVolume: [1_300_000, 1_600_000, 1_500_000, 2_000_000, 2_400_000, 1_900_000],
-    splitPercent: 75, axenCutPercent: 25,
+    splitPercent: 75, dravikCutPercent: 25,
     customRules: [
       rule("r-a8-1", "Dual License Tier", "RE + Mortgage dual transactions", 75, "Elevated split for dual-licensed closings"),
       rule("r-a8-2", "Cross-Sell Bonus",  "Closes both RE + mortgage",       80, "+5% on package deals"),
@@ -212,13 +212,13 @@ export const AGENTS: Agent[] = [
 
   {
     id: "a9", name: "Kevin O'Brien", initials: "KO", color: "#14B8A6",
-    email: "kevin.obrien@axenrealty.com", phone: "(305) 555-0109", address: "3560 NW 82nd Ave, Doral FL 33122",
+    email: "kevin.obrien@dravikrealty.com", phone: "(305) 555-0109", address: "3560 NW 82nd Ave, Doral FL 33122",
     licenseType: "RE", licenseNumber: "SL3445876", licenseExpiry: "2026-08-31",
     status: "Active", role: "Agent", teamId: "chen", managerId: "a3", joinDate: "2022-04-01",
     ytdVolume: 5_800_000, ytdGci: 174_000, closedUnits: 7, activeListings: 2,
     referralScore: 70, avgDaysToClose: 52, conversionRate: 13, lastActivity: "2026-05-20",
     monthlyVolume: [800_000, 1_000_000, 900_000, 1_300_000, 1_500_000, 1_100_000],
-    splitPercent: 70, axenCutPercent: 30,
+    splitPercent: 70, dravikCutPercent: 30,
     customRules: [
       rule("r-a9-1", "Standard Split", "All transactions",   70, "Base split"),
       rule("r-a9-2", "Referral Bonus", "Referred-in lead",   72, "+2% on referral-sourced deals"),
@@ -236,13 +236,13 @@ export const AGENTS: Agent[] = [
 
   {
     id: "a10", name: "Sofia Hernandez", initials: "SH", color: "#F97316",
-    email: "sofia.hernandez@axenrealty.com", phone: "(305) 555-0110", address: "245 NE 14th St, Miami FL 33132",
+    email: "sofia.hernandez@dravikrealty.com", phone: "(305) 555-0110", address: "245 NE 14th St, Miami FL 33132",
     licenseType: "RE", licenseNumber: "SL3539012", licenseExpiry: "2028-12-31",
     status: "Onboarding", role: "Agent", teamId: "chen", managerId: "a3", joinDate: "2025-12-01",
     ytdVolume: 0, ytdGci: 0, closedUnits: 0, activeListings: 0,
     referralScore: 0, avgDaysToClose: 0, conversionRate: 0, lastActivity: "2026-05-15",
     monthlyVolume: [0, 0, 0, 0, 0, 0],
-    splitPercent: 60, axenCutPercent: 40,
+    splitPercent: 60, dravikCutPercent: 40,
     customRules: [
       rule("r-a10-1", "Onboarding Split", "First 12 months",       60, "New agent onboarding rate"),
       rule("r-a10-2", "Graduation Tier",  "After 5 closed units",  65, "Moves to 65/35 at 5 closings"),
@@ -253,20 +253,20 @@ export const AGENTS: Agent[] = [
     certifications: [],
     recentActivity: [
       act("ac37", "compliance", "License activation completed",          "2026-05-15"),
-      act("ac38", "note",       "Completed AxenOne platform training",   "2026-05-08"),
+      act("ac38", "note",       "Completed Dravik Realty platform training",   "2026-05-08"),
       act("ac39", "note",       "MLS access granted",                    "2026-05-01"),
     ],
   },
 
   {
     id: "a11", name: "David Thompson", initials: "DT", color: "#6B7280",
-    email: "david.thompson@axenrealty.com", phone: "(305) 555-0111", address: "2600 W Flagler St, Miami FL 33135",
+    email: "david.thompson@dravikrealty.com", phone: "(305) 555-0111", address: "2600 W Flagler St, Miami FL 33135",
     licenseType: "RE", licenseNumber: "SL3401237", licenseExpiry: "2026-11-30",
     status: "Active", role: "Agent", teamId: "chen", managerId: "a3", joinDate: "2022-06-15",
     ytdVolume: 6_400_000, ytdGci: 192_000, closedUnits: 8, activeListings: 1,
     referralScore: 68, avgDaysToClose: 58, conversionRate: 11, lastActivity: "2026-05-18",
     monthlyVolume: [900_000, 1_100_000, 1_000_000, 1_400_000, 1_600_000, 1_200_000],
-    splitPercent: 70, axenCutPercent: 30,
+    splitPercent: 70, dravikCutPercent: 30,
     customRules: [
       rule("r-a11-1", "Standard Split", "All transactions", 70, "Base commission split"),
     ],
@@ -283,13 +283,13 @@ export const AGENTS: Agent[] = [
 
   {
     id: "a12", name: "James Wilson", initials: "JW", color: "#0EA5E9",
-    email: "james.wilson@axenrealty.com", phone: "(305) 555-0112", address: "1200 Brickell Bay Dr #2400, Miami FL 33131",
+    email: "james.wilson@dravikrealty.com", phone: "(305) 555-0112", address: "1200 Brickell Bay Dr #2400, Miami FL 33131",
     licenseType: "Mortgage", licenseNumber: "NMLS-2104387", licenseExpiry: "2026-12-31",
     status: "Active", role: "Agent", teamId: "rodriguez", managerId: "a4", joinDate: "2023-02-01",
     ytdVolume: 4_200_000, ytdGci: 126_000, closedUnits: 6, activeListings: 0,
     referralScore: 72, avgDaysToClose: 32, conversionRate: 14, lastActivity: "2026-05-21",
     monthlyVolume: [600_000, 700_000, 650_000, 900_000, 1_000_000, 800_000],
-    splitPercent: 68, axenCutPercent: 32,
+    splitPercent: 68, dravikCutPercent: 32,
     customRules: [
       rule("r-a12-1", "Mortgage Standard", "All loan closings",  68, "Mortgage specialist base split"),
       rule("r-a12-2", "Jumbo Bonus",        "Loan ≥ $1M",         72, "+4% on jumbo loan closings"),
@@ -307,13 +307,13 @@ export const AGENTS: Agent[] = [
 
   {
     id: "a13", name: "Raj Patel", initials: "RP", color: "#84CC16",
-    email: "raj.patel@axenrealty.com", phone: "(305) 555-0113", address: "701 Brickell Ave, Miami FL 33131",
+    email: "raj.patel@dravikrealty.com", phone: "(305) 555-0113", address: "701 Brickell Ave, Miami FL 33131",
     licenseType: "Mortgage", licenseNumber: "NMLS-2298014", licenseExpiry: "2026-12-31",
     status: "Active", role: "Mortgage Officer", teamId: "rodriguez", managerId: "a4", joinDate: "2025-01-15",
     ytdVolume: 3_800_000, ytdGci: 114_000, closedUnits: 5, activeListings: 0,
     referralScore: 75, avgDaysToClose: 30, conversionRate: 16, lastActivity: "2026-05-19",
     monthlyVolume: [400_000, 600_000, 600_000, 800_000, 900_000, 700_000],
-    splitPercent: 68, axenCutPercent: 32,
+    splitPercent: 68, dravikCutPercent: 32,
     customRules: [
       rule("r-a13-1", "Mortgage Standard", "All loan closings",  68, "Base mortgage split"),
       rule("r-a13-2", "Growth Bonus",       "GCI ≥ $100K annual", 71, "+3% on exceeding growth target"),
@@ -331,13 +331,13 @@ export const AGENTS: Agent[] = [
 
   {
     id: "a14", name: "Mia Tanaka", initials: "MT", color: "#A855F7",
-    email: "mia.tanaka@axenrealty.com", phone: "(305) 555-0114", address: "400 Alton Rd #1500, Miami Beach FL 33139",
+    email: "mia.tanaka@dravikrealty.com", phone: "(305) 555-0114", address: "400 Alton Rd #1500, Miami Beach FL 33139",
     licenseType: "Dual", licenseNumber: "SL3478901", licenseExpiry: "2027-09-30",
     status: "Active", role: "Agent", teamId: "direct", managerId: "a1", joinDate: "2022-09-01",
     ytdVolume: 7_600_000, ytdGci: 228_000, closedUnits: 9, activeListings: 3,
     referralScore: 79, avgDaysToClose: 43, conversionRate: 15, lastActivity: "2026-05-24",
     monthlyVolume: [1_100_000, 1_300_000, 1_200_000, 1_700_000, 1_900_000, 1_500_000],
-    splitPercent: 74, axenCutPercent: 26,
+    splitPercent: 74, dravikCutPercent: 26,
     customRules: [
       rule("r-a14-1", "Dual License Tier", "Dual-licensed transactions", 74, "RE + mortgage capacity adds split premium"),
       rule("r-a14-2", "Beach Premium",      "Miami Beach property sales", 76, "+2% for Miami Beach market expertise"),
@@ -355,13 +355,13 @@ export const AGENTS: Agent[] = [
 
   {
     id: "a15", name: "Nathan Cole", initials: "NC", color: "#9CA3AF",
-    email: "nathan.cole@axenrealty.com", phone: "(305) 555-0115", address: "600 NE 2nd Ave, Miami FL 33132",
+    email: "nathan.cole@dravikrealty.com", phone: "(305) 555-0115", address: "600 NE 2nd Ave, Miami FL 33132",
     licenseType: "RE", licenseNumber: "SL3411002", licenseExpiry: "2026-07-31",
     status: "Inactive", role: "Agent", teamId: "direct", managerId: "a1", joinDate: "2023-08-01",
     ytdVolume: 0, ytdGci: 0, closedUnits: 0, activeListings: 0,
     referralScore: 45, avgDaysToClose: 0, conversionRate: 0, lastActivity: "2026-02-14",
     monthlyVolume: [400_000, 200_000, 0, 0, 0, 0],
-    splitPercent: 70, axenCutPercent: 30,
+    splitPercent: 70, dravikCutPercent: 30,
     customRules: [
       rule("r-a15-1", "Standard Split", "All transactions", 70, "Base split — inactive agent"),
     ],

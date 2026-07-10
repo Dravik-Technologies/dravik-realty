@@ -44,7 +44,7 @@ export default function PortalManagementPage() {
 
   return (
     <div className="space-y-6">
-      <section className="bg-axen-dark rounded-2xl p-6 text-white overflow-hidden relative">
+      <section className="bg-dravik-dark rounded-2xl p-6 text-white overflow-hidden relative">
         <div className="absolute inset-y-0 right-0 w-1/3 bg-gold/10 pointer-events-none" />
         <div className="relative flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
           <div>
@@ -58,7 +58,7 @@ export default function PortalManagementPage() {
           </div>
           <a
             href={CLIENT_PORTAL_URL}
-            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-gold text-axen-dark rounded-xl text-xs font-bold hover:bg-gold/90 transition-colors"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-gold text-dravik-dark rounded-xl text-xs font-bold hover:bg-gold/90 transition-colors"
           >
             Preview Client Portal
             <ExternalLink size={13} />
@@ -83,7 +83,7 @@ export default function PortalManagementPage() {
               >
                 <Icon size={17} style={{ color: item.accent }} />
               </div>
-              <p className="text-2xl font-bold text-axen-dark leading-none">{item.value}</p>
+              <p className="text-2xl font-bold text-dravik-dark leading-none">{item.value}</p>
               <p className="text-xs text-gray-400 mt-1">{item.label}</p>
             </div>
           );
@@ -93,7 +93,7 @@ export default function PortalManagementPage() {
       <section className="bg-white border border-line rounded-2xl overflow-hidden">
         <div className="flex items-center justify-between gap-4 px-5 py-4 border-b border-line">
           <div>
-            <h2 className="text-sm font-bold text-axen-dark">Client Access</h2>
+            <h2 className="text-sm font-bold text-dravik-dark">Client Access</h2>
             <p className="text-xs text-gray-400 mt-0.5">Portal readiness by client and transaction activity.</p>
           </div>
           <button
@@ -110,13 +110,13 @@ export default function PortalManagementPage() {
           {clients.map(({ data, activeTransactions, neededDocs, pendingDocs, unreadMessages, isReady }) => (
             <div key={data.client.id} className="p-5 flex flex-col xl:flex-row xl:items-center gap-4">
               <div className="flex items-center gap-3 flex-1 min-w-0">
-                <div className="w-11 h-11 rounded-xl bg-axen-dark flex items-center justify-center flex-shrink-0">
+                <div className="w-11 h-11 rounded-xl bg-dravik-dark flex items-center justify-center flex-shrink-0">
                   <span className="text-gold text-sm font-bold">
                     {data.client.name.split(" ").map((part) => part[0]).join("")}
                   </span>
                 </div>
                 <div className="min-w-0">
-                  <p className="text-sm font-bold text-axen-dark truncate">{data.client.name}</p>
+                  <p className="text-sm font-bold text-dravik-dark truncate">{data.client.name}</p>
                   <p className="text-xs text-gray-400 truncate">{data.client.email}</p>
                   <p className="text-[10px] text-gray-300 mt-0.5">{data.client.phone}</p>
                 </div>
@@ -125,19 +125,19 @@ export default function PortalManagementPage() {
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 xl:w-[520px]">
                 <div className="bg-surface-2 rounded-xl px-3 py-2">
                   <p className="text-[10px] text-gray-400">Active</p>
-                  <p className="text-sm font-bold text-axen-dark">{activeTransactions}</p>
+                  <p className="text-sm font-bold text-dravik-dark">{activeTransactions}</p>
                 </div>
                 <div className="bg-surface-2 rounded-xl px-3 py-2">
                   <p className="text-[10px] text-gray-400">Needed</p>
-                  <p className="text-sm font-bold text-axen-dark">{neededDocs}</p>
+                  <p className="text-sm font-bold text-dravik-dark">{neededDocs}</p>
                 </div>
                 <div className="bg-surface-2 rounded-xl px-3 py-2">
                   <p className="text-[10px] text-gray-400">Pending</p>
-                  <p className="text-sm font-bold text-axen-dark">{pendingDocs}</p>
+                  <p className="text-sm font-bold text-dravik-dark">{pendingDocs}</p>
                 </div>
                 <div className="bg-surface-2 rounded-xl px-3 py-2">
                   <p className="text-[10px] text-gray-400">Unread</p>
-                  <p className="text-sm font-bold text-axen-dark">{unreadMessages}</p>
+                  <p className="text-sm font-bold text-dravik-dark">{unreadMessages}</p>
                 </div>
               </div>
 
@@ -153,7 +153,7 @@ export default function PortalManagementPage() {
                 </span>
                 <a
                   href={CLIENT_PORTAL_URL}
-                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-line text-xs font-semibold text-gray-500 hover:text-axen-dark hover:border-axen-dark transition-colors"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-line text-xs font-semibold text-gray-500 hover:text-dravik-dark hover:border-dravik-dark transition-colors"
                 >
                   Preview
                   <ExternalLink size={12} />

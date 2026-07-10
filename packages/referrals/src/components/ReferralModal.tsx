@@ -11,7 +11,7 @@ import { cn } from "@dravik/shared";
 // ──────────────────────────────────────────────
 const CERT_CONFIG = {
   "RE Broker":     { bg: "bg-gold-light",  border: "border-gold/50",  text: "text-gold-dark"  },
-  "Dual Licensed": { bg: "bg-axen-dark",   border: "border-axen-dark", text: "text-white"      },
+  "Dual Licensed": { bg: "bg-dravik-dark",   border: "border-dravik-dark", text: "text-white"      },
   "RE + Mortgage": { bg: "bg-gold",        border: "border-gold",      text: "text-white"      },
 };
 
@@ -106,7 +106,7 @@ export default function ReferralModal({ agent, open, onClose }: ReferralModalPro
 
             <div>
               <div className="flex items-center gap-2 flex-wrap">
-                <h2 id="referral-modal-title" className="text-xl font-bold text-axen-dark">{agent.name}</h2>
+                <h2 id="referral-modal-title" className="text-xl font-bold text-dravik-dark">{agent.name}</h2>
                 <span
                   className={cn(
                     "inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-0.5 rounded-full border",
@@ -138,7 +138,7 @@ export default function ReferralModal({ agent, open, onClose }: ReferralModalPro
                       }
                     />
                   ))}
-                  <span className="font-semibold text-axen-dark ml-0.5">
+                  <span className="font-semibold text-dravik-dark ml-0.5">
                     {agent.productionScore.toFixed(1)}
                   </span>
                   <span className="text-gray-400">({agent.totalReviews})</span>
@@ -152,7 +152,7 @@ export default function ReferralModal({ agent, open, onClose }: ReferralModalPro
           <button
             aria-label="Close referral calculator"
             onClick={onClose}
-            className="p-2 hover:bg-surface-2 rounded-xl transition-colors text-gray-400 hover:text-axen-dark flex-shrink-0"
+            className="p-2 hover:bg-surface-2 rounded-xl transition-colors text-gray-400 hover:text-dravik-dark flex-shrink-0"
           >
             <X size={20} />
           </button>
@@ -167,7 +167,7 @@ export default function ReferralModal({ agent, open, onClose }: ReferralModalPro
             { label: "Active Listings",   value: agent.activeListings },
           ].map(({ label, value }) => (
             <div key={label} className="px-5 py-3 text-center">
-              <p className="text-lg font-bold text-axen-dark">{value}</p>
+              <p className="text-lg font-bold text-dravik-dark">{value}</p>
               <p className="text-[11px] text-gray-400 leading-tight">{label}</p>
             </div>
           ))}
@@ -176,9 +176,9 @@ export default function ReferralModal({ agent, open, onClose }: ReferralModalPro
         {/* ── Calculator section ── */}
         <div className="flex-1 overflow-y-auto px-7 py-6">
           <div className="mb-5">
-            <h3 className="text-base font-bold text-axen-dark flex items-center gap-2">
+            <h3 className="text-base font-bold text-dravik-dark flex items-center gap-2">
               <span className="w-1 h-5 rounded-full bg-gold inline-block" />
-              Axen Cut — Split Calculator
+              Dravik Cut — Split Calculator
             </h3>
             <p className="text-sm text-gray-400 mt-1">
               Adjust the sliders to model your referral payout in real time.
@@ -191,7 +191,7 @@ export default function ReferralModal({ agent, open, onClose }: ReferralModalPro
         {/* ── Footer CTA ── */}
         <div className="px-7 py-5 border-t border-line bg-surface flex items-center justify-between flex-shrink-0">
           <p className="text-xs text-gray-400">
-            Sending referral to <span className="font-semibold text-axen-dark">{agent.name}</span> · {agent.location.city}
+            Sending referral to <span className="font-semibold text-dravik-dark">{agent.name}</span> · {agent.location.city}
           </p>
           <div className="flex gap-3">
             <button
@@ -200,7 +200,7 @@ export default function ReferralModal({ agent, open, onClose }: ReferralModalPro
             >
               Cancel
             </button>
-            <button className="px-6 py-2.5 text-sm font-bold rounded-xl bg-axen-dark text-white hover:bg-axen-navy transition-colors shadow-md">
+            <button className="px-6 py-2.5 text-sm font-bold rounded-xl bg-dravik-dark text-white hover:bg-dravik-navy transition-colors shadow-md">
               Send Referral Agreement
             </button>
           </div>

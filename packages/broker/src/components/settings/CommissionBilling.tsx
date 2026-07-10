@@ -12,7 +12,7 @@ function SplitBar({ agent, company }: { agent: number; company: number }) {
     <div className="flex items-center gap-2">
       <div className="flex-1 h-2 bg-line rounded-full overflow-hidden flex">
         <div className="h-full bg-gold rounded-l-full transition-all duration-300" style={{ width: `${agent}%` }} />
-        <div className="h-full bg-axen-dark rounded-r-full transition-all duration-300" style={{ width: `${company}%` }} />
+        <div className="h-full bg-dravik-dark rounded-r-full transition-all duration-300" style={{ width: `${company}%` }} />
       </div>
       <span className="text-[10px] text-gray-400 tabular-nums whitespace-nowrap">
         <span className="text-gold font-bold">{agent}%</span> / {company}%
@@ -46,13 +46,13 @@ export default function CommissionBilling({ onSave }: { onSave: () => void }) {
           <div className="flex items-center gap-2">
             <DollarSign size={16} className="text-gold" />
             <div>
-              <h3 className="text-sm font-bold text-axen-dark">Commission Split Rules</h3>
+              <h3 className="text-sm font-bold text-dravik-dark">Commission Split Rules</h3>
               <p className="text-xs text-gray-400 mt-0.5">Agent % · Company %</p>
             </div>
           </div>
           <button
             onClick={onSave}
-            className="px-3 py-1.5 bg-gold text-axen-dark text-xs font-bold rounded-xl hover:bg-gold-dark transition-colors"
+            className="px-3 py-1.5 bg-gold text-dravik-dark text-xs font-bold rounded-xl hover:bg-gold-dark transition-colors"
           >
             Save Rules
           </button>
@@ -73,7 +73,7 @@ export default function CommissionBilling({ onSave }: { onSave: () => void }) {
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-2">
                     <TrendingUp size={13} className="text-gray-300 flex-shrink-0" />
-                    <span className="text-xs font-semibold text-axen-dark">{tier.name}</span>
+                    <span className="text-xs font-semibold text-dravik-dark">{tier.name}</span>
                   </div>
                 </td>
                 <td className="px-4 py-4 hidden sm:table-cell">
@@ -91,7 +91,7 @@ export default function CommissionBilling({ onSave }: { onSave: () => void }) {
                       min={50} max={95} step={1}
                       value={tier.agentSplit}
                       onChange={(e) => updateSplit(tier.id, "agentSplit", Math.min(95, Math.max(50, Number(e.target.value))))}
-                      className="w-14 px-2 py-1 text-xs border border-line rounded-lg text-axen-dark bg-surface text-center focus:outline-none focus:border-gold transition tabular-nums"
+                      className="w-14 px-2 py-1 text-xs border border-line rounded-lg text-dravik-dark bg-surface text-center focus:outline-none focus:border-gold transition tabular-nums"
                     />
                     <span className="text-[10px] text-gray-400">%</span>
                   </div>
@@ -107,16 +107,16 @@ export default function CommissionBilling({ onSave }: { onSave: () => void }) {
         <div className="flex items-center gap-2 mb-5">
           <CreditCard size={16} className="text-gold" />
           <div>
-            <h3 className="text-sm font-bold text-axen-dark">Subscription & Billing</h3>
+            <h3 className="text-sm font-bold text-dravik-dark">Subscription & Billing</h3>
             <p className="text-xs text-gray-400 mt-0.5">Current plan and payment details.</p>
           </div>
         </div>
 
         {/* Plan card */}
-        <div className="bg-axen-dark rounded-2xl p-5 mb-4 flex items-start justify-between gap-4">
+        <div className="bg-dravik-dark rounded-2xl p-5 mb-4 flex items-start justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-[10px] font-bold text-gold uppercase tracking-widest">AxenONE Pro</span>
+              <span className="text-[10px] font-bold text-gold uppercase tracking-widest">Dravik Realty Pro</span>
             </div>
             <p className="text-2xl font-bold text-white">$499<span className="text-sm font-normal text-gray-400">/mo</span></p>
             <p className="text-xs text-gray-400 mt-1">Billed monthly · Renews Jun 1, 2026</p>
@@ -135,7 +135,7 @@ export default function CommissionBilling({ onSave }: { onSave: () => void }) {
           <div className="flex items-center gap-3 bg-surface-2 rounded-xl px-4 py-3">
             <CreditCard size={16} className="text-gray-400 flex-shrink-0" />
             <div>
-              <p className="text-xs font-semibold text-axen-dark">Visa ending 4242</p>
+              <p className="text-xs font-semibold text-dravik-dark">Visa ending 4242</p>
               <p className="text-[10px] text-gray-400">Expires 08/27</p>
             </div>
             <button disabled title="Payment method update coming soon" className="ml-auto text-[10px] font-semibold text-gray-300 cursor-not-allowed">Update</button>
@@ -143,8 +143,8 @@ export default function CommissionBilling({ onSave }: { onSave: () => void }) {
           <div className="flex items-center gap-3 bg-surface-2 rounded-xl px-4 py-3">
             <Users size={16} className="text-gray-400 flex-shrink-0" />
             <div>
-              <p className="text-xs font-semibold text-axen-dark">Billing Contact</p>
-              <p className="text-[10px] text-gray-400">chris@axenrealty.com</p>
+              <p className="text-xs font-semibold text-dravik-dark">Billing Contact</p>
+              <p className="text-[10px] text-gray-400">chris@dravikrealty.com</p>
             </div>
             <button disabled title="Billing contact edit coming soon" className="ml-auto text-[10px] font-semibold text-gray-300 cursor-not-allowed">Edit</button>
           </div>
@@ -164,7 +164,7 @@ export default function CommissionBilling({ onSave }: { onSave: () => void }) {
               )}>
                 <span className="text-xs text-gray-500">{inv.date}</span>
                 <div className="flex items-center gap-3">
-                  <span className="text-xs font-bold text-axen-dark tabular-nums">{inv.amount}</span>
+                  <span className="text-xs font-bold text-dravik-dark tabular-nums">{inv.amount}</span>
                   <span className="text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">{inv.status}</span>
                   <button disabled title="Invoice PDF download coming soon" className="text-[10px] font-semibold text-gray-300 cursor-not-allowed">PDF</button>
                 </div>

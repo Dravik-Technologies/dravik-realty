@@ -93,7 +93,7 @@ export function LeadCardContent({
 
       {/* Row 2: name */}
       <div>
-        <p className="text-sm font-bold text-axen-dark leading-tight">{lead.name}</p>
+        <p className="text-sm font-bold text-dravik-dark leading-tight">{lead.name}</p>
         <p className="text-[11px] text-gray-400 mt-0.5">{lead.phone}</p>
       </div>
 

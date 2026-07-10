@@ -44,7 +44,7 @@ function KanbanCol({
             className="w-2 h-2 rounded-full flex-shrink-0"
             style={{ background: column.dotColor }}
           />
-          <span className="text-sm font-bold text-axen-dark">{column.label}</span>
+          <span className="text-sm font-bold text-dravik-dark">{column.label}</span>
         </div>
         <span
           className="text-xs font-bold px-2 py-0.5 rounded-full"

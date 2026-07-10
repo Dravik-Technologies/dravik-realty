@@ -69,11 +69,11 @@ function QueueRow({
       )}
     >
       <div className="flex items-start gap-3">
-        <div className="w-9 h-9 rounded-xl bg-axen-dark text-gold flex items-center justify-center flex-shrink-0">
+        <div className="w-9 h-9 rounded-xl bg-dravik-dark text-gold flex items-center justify-center flex-shrink-0">
           <UserRound size={16} />
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-xs font-bold text-axen-dark truncate">{lead.ownerName}</p>
+          <p className="text-xs font-bold text-dravik-dark truncate">{lead.ownerName}</p>
           <p className="text-[10px] text-gray-400 truncate mt-0.5">{lead.address}</p>
           <div className="flex items-center gap-2 mt-2">
             <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-surface-2 text-gray-500">
@@ -214,7 +214,7 @@ export default function PowerDialer({ queue, onToggleQueue }: PowerDialerProps) 
     <div className="min-h-full grid grid-cols-1 xl:grid-cols-[320px_minmax(0,1fr)_320px]">
       <aside className="bg-white border-b xl:border-b-0 xl:border-r border-line flex flex-col min-h-[280px] xl:min-h-0">
         <div className="px-4 py-4 border-b border-line">
-          <p className="text-sm font-bold text-axen-dark">Call Queue</p>
+          <p className="text-sm font-bold text-dravik-dark">Call Queue</p>
           <p className="text-[11px] text-gray-400 mt-1">{queue.length} seller lead{queue.length === 1 ? "" : "s"} ready</p>
         </div>
 
@@ -225,7 +225,7 @@ export default function PowerDialer({ queue, onToggleQueue }: PowerDialerProps) 
                 <Phone size={20} className="text-gray-300" />
               </div>
               <div>
-                <p className="font-semibold text-axen-dark">No leads queued yet</p>
+                <p className="font-semibold text-dravik-dark">No leads queued yet</p>
                 <p className="text-sm text-gray-400 mt-1">Add prospects from Seller Leads or a Geo Farm list to start dialing.</p>
               </div>
               <Link href="/prospecting" className="text-sm font-semibold text-gold hover:text-gold-dark">
@@ -252,12 +252,12 @@ export default function PowerDialer({ queue, onToggleQueue }: PowerDialerProps) 
             <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Current Prospect</p>
             {selectedLead ? (
               <>
-                <p className="text-lg font-bold text-axen-dark">{selectedLead.ownerName}</p>
+                <p className="text-lg font-bold text-dravik-dark">{selectedLead.ownerName}</p>
                 <p className="text-xs text-gray-400 mt-1">{selectedLead.address} · {selectedLead.phone}</p>
               </>
             ) : (
               <>
-                <p className="text-lg font-bold text-axen-dark">Manual Dial</p>
+                <p className="text-lg font-bold text-dravik-dark">Manual Dial</p>
                 <p className="text-xs text-gray-400 mt-1">Use the dial pad to call a custom number.</p>
               </>
             )}
@@ -272,7 +272,7 @@ export default function PowerDialer({ queue, onToggleQueue }: PowerDialerProps) 
             </Link>
             <div className="px-3 py-2 rounded-xl bg-gold-light border border-gold/30">
               <p className="text-[10px] font-bold text-gold-dark uppercase tracking-widest">Status</p>
-              <p className="text-xs font-semibold text-axen-dark capitalize mt-0.5">{dialerMode}</p>
+              <p className="text-xs font-semibold text-dravik-dark capitalize mt-0.5">{dialerMode}</p>
             </div>
           </div>
         </div>
@@ -280,7 +280,7 @@ export default function PowerDialer({ queue, onToggleQueue }: PowerDialerProps) 
         <div className="bg-white rounded-[28px] border border-line shadow-sm p-5 md:p-6 flex-1 flex flex-col">
           <div className="text-center mb-6">
             <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-2">Power Dialer</p>
-            <p className="text-3xl md:text-4xl font-bold text-axen-dark tracking-[0.08em]">{digits || "Enter number"}</p>
+            <p className="text-3xl md:text-4xl font-bold text-dravik-dark tracking-[0.08em]">{digits || "Enter number"}</p>
             <p className="text-sm text-gray-400 mt-2">
               {dialerMode === "connected"
                 ? `Live call · ${formatDuration(durationSec)}`
@@ -299,7 +299,7 @@ export default function PowerDialer({ queue, onToggleQueue }: PowerDialerProps) 
                 onClick={() => appendDigit(digit)}
                 className="aspect-square rounded-2xl bg-surface border border-line hover:border-gold hover:bg-gold-light transition-all flex flex-col items-center justify-center"
               >
-                <span className="text-2xl font-bold text-axen-dark leading-none">{digit}</span>
+                <span className="text-2xl font-bold text-dravik-dark leading-none">{digit}</span>
                 <span className="text-[10px] font-semibold text-gray-400 mt-1">{letters}</span>
               </button>
             ))}
@@ -326,7 +326,7 @@ export default function PowerDialer({ queue, onToggleQueue }: PowerDialerProps) 
               className={cn(
                 "px-7 h-14 rounded-full text-base font-bold transition-colors shadow-sm",
                 dialerMode === "idle"
-                  ? "bg-gold text-axen-dark hover:bg-gold-dark"
+                  ? "bg-gold text-dravik-dark hover:bg-gold-dark"
                   : "bg-rose-500 text-white hover:bg-rose-600"
               )}
             >
@@ -352,18 +352,18 @@ export default function PowerDialer({ queue, onToggleQueue }: PowerDialerProps) 
           <div className="grid md:grid-cols-[minmax(0,1fr)_220px] gap-4 mt-6">
             <div className="rounded-2xl bg-surface p-4 border border-line">
               <div className="flex items-center justify-between gap-3 mb-3">
-                <p className="text-sm font-bold text-axen-dark">Call Notes</p>
+                <p className="text-sm font-bold text-dravik-dark">Call Notes</p>
                 <span className="text-[10px] font-semibold text-gray-400">Auto-logged to Activity + Inbox</span>
               </div>
               <textarea
                 value={notes}
                 onChange={(event) => setNotes(event.target.value)}
                 placeholder="Capture seller objections, price position, timing, or next steps..."
-                className="w-full h-28 resize-none rounded-xl border border-line bg-white px-3 py-2 text-sm text-axen-dark placeholder:text-gray-300 focus:outline-none focus:border-gold"
+                className="w-full h-28 resize-none rounded-xl border border-line bg-white px-3 py-2 text-sm text-dravik-dark placeholder:text-gray-300 focus:outline-none focus:border-gold"
               />
             </div>
 
-            <div className="rounded-2xl bg-axen-dark p-4 text-white flex flex-col gap-4">
+            <div className="rounded-2xl bg-dravik-dark p-4 text-white flex flex-col gap-4">
               <div>
                 <p className="text-[10px] font-bold text-gold uppercase tracking-widest mb-1">Session Controls</p>
                 <p className="text-sm text-gray-300">Keep the cadence moving and auto-advance to the next prospect when a call is logged.</p>
@@ -390,13 +390,13 @@ export default function PowerDialer({ queue, onToggleQueue }: PowerDialerProps) 
 
           {dialerMode === "wrapup" && (
             <div className="mt-6 rounded-2xl border border-gold/30 bg-gold-light p-4">
-              <p className="text-sm font-bold text-axen-dark mb-3">Post-call Disposition</p>
+              <p className="text-sm font-bold text-dravik-dark mb-3">Post-call Disposition</p>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2">
                 {DISPOSITIONS.map((disposition) => (
                   <button
                     key={disposition}
                     onClick={() => logDisposition(disposition)}
-                    className="px-3 py-2 rounded-xl bg-white border border-gold/20 text-sm font-semibold text-axen-dark hover:border-gold hover:text-gold transition-colors"
+                    className="px-3 py-2 rounded-xl bg-white border border-gold/20 text-sm font-semibold text-dravik-dark hover:border-gold hover:text-gold transition-colors"
                   >
                     {disposition}
                   </button>
@@ -409,7 +409,7 @@ export default function PowerDialer({ queue, onToggleQueue }: PowerDialerProps) 
 
       <aside className="bg-white border-t xl:border-t-0 xl:border-l border-line flex flex-col min-h-[280px] xl:min-h-0">
         <div className="px-4 py-4 border-b border-line">
-          <p className="text-sm font-bold text-axen-dark">Session Activity</p>
+          <p className="text-sm font-bold text-dravik-dark">Session Activity</p>
           <p className="text-[11px] text-gray-400 mt-1">Live call log synced to the workflow timeline</p>
         </div>
 
@@ -420,7 +420,7 @@ export default function PowerDialer({ queue, onToggleQueue }: PowerDialerProps) 
                 <Clock3 size={20} className="text-gray-300" />
               </div>
               <div>
-                <p className="font-semibold text-axen-dark">No calls logged yet</p>
+                <p className="font-semibold text-dravik-dark">No calls logged yet</p>
                 <p className="text-sm text-gray-400 mt-1">Dispositioned calls will appear here and can be reviewed in the Unified Inbox.</p>
               </div>
             </div>
@@ -428,7 +428,7 @@ export default function PowerDialer({ queue, onToggleQueue }: PowerDialerProps) 
             logs.map((log) => (
               <div key={log.id} className="px-4 py-3 border-b border-line">
                 <div className="flex items-center justify-between gap-3">
-                  <p className="text-xs font-bold text-axen-dark truncate">{log.leadName}</p>
+                  <p className="text-xs font-bold text-dravik-dark truncate">{log.leadName}</p>
                   <span className="text-[10px] text-gray-400">{log.callTime}</span>
                 </div>
                 <p className="text-[10px] text-gray-400 mt-1 truncate">{log.address}</p>

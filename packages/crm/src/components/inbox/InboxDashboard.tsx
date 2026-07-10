@@ -76,7 +76,7 @@ export default function InboxDashboard() {
           id:          `call-${Date.now()}`,
           role:        "system" as const,
           channel:     "call"   as const,
-          senderName:  "AxenOne",
+          senderName:  "Dravik Realty",
           content,
           timestamp:   now.toISOString(),
           displayTime,
@@ -124,7 +124,7 @@ export default function InboxDashboard() {
               onClick={() => setFolder(f)}
               className={cn(
                 "px-2.5 py-1 text-[10px] font-semibold rounded-lg capitalize whitespace-nowrap transition-colors",
-                folder === f ? "bg-axen-dark text-white" : "text-gray-400 hover:text-axen-dark"
+                folder === f ? "bg-dravik-dark text-white" : "text-gray-400 hover:text-dravik-dark"
               )}
             >
               {f}
@@ -160,7 +160,7 @@ export default function InboxDashboard() {
       <button
         disabled
         title="New message coming soon"
-        className="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-gold text-axen-dark shadow-lg flex items-center justify-center hover:bg-gold-dark transition-colors opacity-70 cursor-not-allowed z-20"
+        className="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-gold text-dravik-dark shadow-lg flex items-center justify-center hover:bg-gold-dark transition-colors opacity-70 cursor-not-allowed z-20"
         aria-label="New message"
       >
         <Pencil size={18} />

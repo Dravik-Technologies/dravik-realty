@@ -44,7 +44,7 @@ test.describe("shell chrome", () => {
     "Marketing & Landing Pages",
     "Transactions",
     "Unified Inbox",
-    "Client Portal",
+    "Client Portal Admin",
     "Reports & Analytics",
     "Team Management",
     "Mortgage Tools",

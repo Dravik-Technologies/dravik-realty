@@ -126,13 +126,13 @@ export default function CompliancePanel() {
         </div>
         <div className="flex-1">
           <p className="text-sm font-bold text-axen-dark">Compliance Documents</p>
-          <p className="text-xs text-gray-400 mt-0.5">Broker agreements, disclosure forms, and policy templates are stored in the Client Portal vault.</p>
+          <p className="text-xs text-gray-400 mt-0.5">Broker agreements, disclosure forms, and policy templates are managed in Client Portal Admin.</p>
         </div>
         <Link
-          href="/portal"
+          href="/realty/client-portal"
           className="flex-shrink-0 px-4 py-2 border border-line text-xs font-semibold text-gray-500 rounded-xl hover:text-axen-dark hover:border-axen-dark transition-colors"
         >
-          Open Vault
+          Manage Vault
         </Link>
       </div>
 

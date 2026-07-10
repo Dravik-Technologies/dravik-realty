@@ -17,6 +17,7 @@ const PAGE_TITLES: Record<string, string> = {
   "/mapping":          "Interactive Mapping & IDX",
   "/marketing":        "Marketing & Landing Pages",
   "/transactions":     "Transactions",
+  "/realty/client-portal": "Client Portal Admin",
   "/portal":           "Client Portal",
   "/reports":          "Reports & Analytics",
   "/team":             "Team Management",

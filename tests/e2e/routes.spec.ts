@@ -18,6 +18,7 @@ const ROUTES: Array<{ path: string; probe: (page: import("@playwright/test").Pag
   { path: "/marketing", probe: (p) => p.getByRole("heading", { name: "Marketing", exact: true }).first() },
   { path: "/realty/transactions", probe: (p) => p.getByRole("heading", { name: "Transactions", exact: true }).first() },
   { path: "/crm/inbox", probe: (p) => p.getByRole("navigation", { name: "Inbox folders" }) },
+  { path: "/realty/client-portal", probe: (p) => p.getByRole("heading", { name: "Client Portal Admin" }).first() },
   { path: "/portal", probe: (p) => p.getByText("Active Transactions", { exact: true }) },
   { path: "/broker/reports", probe: (p) => p.getByRole("heading", { name: "Reports & Analytics" }).first() },
   { path: "/broker/team", probe: (p) => p.getByRole("button", { name: "My Team" }) },

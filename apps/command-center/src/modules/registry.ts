@@ -59,7 +59,7 @@ export const NAV_SECTIONS: NavSection[] = [
       marketing.navEntries[0],  // Marketing & Landing Pages   → /marketing
       realty.navEntries[1],     // Transactions                → /realty/transactions
       crm.navEntries[2],        // Unified Inbox               → /crm/inbox
-      portal.navEntries[0],     // Client Portal               → /portal
+      portal.navEntries[0],     // Client Portal Admin         → /realty/client-portal
     ],
   },
   {

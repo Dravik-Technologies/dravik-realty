@@ -20,7 +20,7 @@ export const BRANCH_COLOR: Record<MilitaryBranch, string> = {
   "Coast Guard": "#B06AB3",
 };
 
-// Top 10 PCS hotspots — ordered by annual PCS move volume
+// Military landmarks used by the Partner Network map search and legend.
 export const MILITARY_BASES: MilitaryBase[] = [
   { id:"jba",  name:"Joint Base Andrews",        shortName:"Andrews AFB",   branch:"Joint",      lat:38.8108, lng:-76.8666, city:"Camp Springs",  state:"MD" },
   { id:"nsn",  name:"Naval Station Norfolk",      shortName:"NS Norfolk",    branch:"Navy",       lat:36.9453, lng:-76.2988, city:"Norfolk",       state:"VA" },

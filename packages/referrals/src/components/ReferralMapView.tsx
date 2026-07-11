@@ -9,6 +9,7 @@ import "leaflet/dist/leaflet.css";
 import { Search, X, MapPin, ChevronRight, Target, SlidersHorizontal } from "lucide-react";
 import { AGENTS } from "../data/agents";
 import { MILITARY_BASES, BRANCH_COLOR, type MilitaryBase } from "../data/militaryBases";
+import { getPartnerTier, getPartnerTierLabel, getPartnerTierStyles } from "../data/partnerTiers";
 import type { Agent, CertificationType } from "@dravik/contracts/referrals";
 import { cn } from "@dravik/shared";
 
@@ -27,7 +28,7 @@ function haversine(lat1: number, lng1: number, lat2: number, lng2: number): numb
 const MILES_TO_METERS = 1609.34;
 type RadiusMiles = 25 | 50 | 100;
 
-// ─── Selected location (base or city search result) ───────────
+// ─── Selected location (base, city, or partner search result) ─
 interface SelectedLoc {
   lat:    number;
   lng:    number;
@@ -135,6 +136,8 @@ function AgentListItem({ agent, dist, onInitiate }: {
   onInitiate: (a: Agent) => void;
 }) {
   const cfg = CERT_CFG[agent.certification];
+  const tier = getPartnerTier(agent);
+  const tierStyle = getPartnerTierStyles(tier);
   return (
     <button
       onClick={() => onInitiate(agent)}
@@ -149,6 +152,12 @@ function AgentListItem({ agent, dist, onInitiate }: {
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-1.5 flex-wrap">
           <p className="text-xs font-bold text-dravik-dark truncate">{agent.name}</p>
+          <span
+            className="text-[9px] font-bold px-1.5 py-0.5 rounded-full border flex-shrink-0"
+            style={{ background: tierStyle.bg, color: tierStyle.text, borderColor: tierStyle.border }}
+          >
+            {getPartnerTierLabel(tier, true)}
+          </span>
           <span
             className="text-[9px] font-bold px-1.5 py-0.5 rounded-full flex-shrink-0"
             style={{ background: cfg.bg, color: cfg.text }}
@@ -174,8 +183,8 @@ interface ReferralMapViewProps {
   onInitiateReferral: (agent: Agent) => void;
 }
 
-const INITIAL_CENTER: [number, number] = [39.5, -98.35];
-const INITIAL_ZOOM = 4;
+const INITIAL_CENTER: [number, number] = [20, 0];
+const INITIAL_ZOOM = 2;
 
 export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewProps) {
   const [searchQuery,      setSearchQuery]      = useState("");
@@ -213,9 +222,13 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
     return { inRadius, withDist };
   }, [geoAgents, selectedLoc, radiusMiles, certFilter]);
 
-  // Sorted sidebar list (by distance asc when base selected)
+  // Sorted sidebar list: subscribers first, then distance when a location is selected.
   const sortedList = useMemo(
-    () => [...inRadius].sort((a, b) => (a.dist ?? 0) - (b.dist ?? 0)),
+    () => [...inRadius].sort((a, b) => {
+      const tierDelta = Number(getPartnerTier(b.agent) === "App Subscriber") - Number(getPartnerTier(a.agent) === "App Subscriber");
+      if (tierDelta !== 0) return tierDelta;
+      return (a.dist ?? 0) - (b.dist ?? 0);
+    }),
     [inRadius]
   );
 
@@ -241,16 +254,34 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
     geoAgents.forEach(a => {
       const key = `${a.location.city}-${a.location.state}`;
       if (!seen.has(key) &&
-          (a.location.city.toLowerCase().includes(q) || a.location.state.toLowerCase().includes(q))) {
+          (a.location.city.toLowerCase().includes(q) ||
+           a.location.state.toLowerCase().includes(q) ||
+           a.location.region.toLowerCase().includes(q) ||
+           a.specializations.some((s) => s.toLowerCase().includes(q)))) {
         seen.add(key);
         cities.push({
-          id: `city-${key}`, label: a.location.city, sublabel: a.location.state,
+          id: `city-${key}`, label: a.location.city, sublabel: `${a.location.state} · ${a.location.region}`,
           lat: a.location.lat!, lng: a.location.lng!, isBase: false,
         });
       }
     });
 
-    return [...bases, ...cities].slice(0, 7);
+    const partners: Suggestion[] = geoAgents
+      .filter(a =>
+        a.name.toLowerCase().includes(q) ||
+        a.location.city.toLowerCase().includes(q) ||
+        a.location.state.toLowerCase().includes(q)
+      )
+      .map(a => ({
+        id: `agent-${a.id}`,
+        label: a.name,
+        sublabel: `${getPartnerTierLabel(getPartnerTier(a))} · ${a.location.city}, ${a.location.state}`,
+        lat: a.location.lat!,
+        lng: a.location.lng!,
+        isBase: false,
+      }));
+
+    return [...cities, ...partners, ...bases].slice(0, 7);
   }, [searchQuery, geoAgents]);
 
   const selectSuggestion = useCallback((s: Suggestion) => {
@@ -260,12 +291,6 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
     setShowDrop(false);
     setMapCenter([s.lat, s.lng]);
     setMapZoom(s.isBase ? 9 : 10);
-  }, []);
-
-  const selectBase = useCallback((base: MilitaryBase) => {
-    setSelectedLoc({ lat: base.lat, lng: base.lng, name: base.name, isBase: true, branch: base.branch });
-    setMapCenter([base.lat, base.lng]);
-    setMapZoom(9);
   }, []);
 
   const clearLocation = useCallback(() => {
@@ -308,7 +333,7 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
           <div className="flex items-center justify-between mb-1">
             <div className="flex items-center gap-2">
               <Target size={15} className="text-gold" />
-              <h2 className="text-sm font-bold text-dravik-dark">PCS Map Search</h2>
+              <h2 className="text-sm font-bold text-dravik-dark">Global Partner Search</h2>
             </div>
             <button
               onClick={() => setMobileSidebarOpen(false)}
@@ -319,20 +344,21 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
             </button>
           </div>
           <p className="text-[10px] text-gray-400">
-            Find agents near military bases or any city
+            Find subscribers and preferred agents by place, partner, or military base
           </p>
         </div>
 
         <div className="flex-1 overflow-y-auto">
 
           {/* Search */}
-          <div className="px-4 pt-4 pb-3">
+          <div className="relative z-30 px-4 pt-4 pb-3">
             <div className="relative">
               <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
               <input
                 ref={inputRef}
                 type="text"
                 role="combobox"
+                aria-label="Global partner search"
                 aria-haspopup="listbox"
                 aria-autocomplete="list"
                 aria-controls="map-search-listbox"
@@ -364,7 +390,7 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
                     setDropCursor(-1);
                   }
                 }}
-                placeholder="Search base or city…"
+                placeholder="Search city, state, partner, or base..."
                 className="w-full pl-9 pr-8 py-2.5 border border-line rounded-xl text-sm text-dravik-dark placeholder:text-gray-400 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition"
               />
               {searchQuery && (
@@ -383,7 +409,7 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
                   id="map-search-listbox"
                   role="listbox"
                   aria-label="Location suggestions"
-                  className="absolute left-0 right-0 top-full mt-1 bg-white border border-line rounded-xl shadow-xl z-10 overflow-hidden animate-fade-in"
+                  className="absolute left-0 right-0 top-full mt-1 z-50 overflow-hidden rounded-xl border border-line bg-white shadow-2xl animate-fade-in"
                 >
                   {suggestions.map((s, i) => (
                     <button
@@ -407,6 +433,15 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
                   ))}
                 </div>
               )}
+              {showDrop && searchQuery.trim() && suggestions.length === 0 && (
+                <div className="absolute left-0 right-0 top-full mt-1 z-50 overflow-hidden rounded-xl border border-line bg-white shadow-2xl animate-fade-in">
+                  <div className="px-3 py-3 text-center">
+                    <MapPin size={18} className="mx-auto text-gray-300 mb-1" />
+                    <p className="text-xs font-semibold text-dravik-dark">No agents within that area</p>
+                    <p className="text-[10px] text-gray-400 mt-0.5">Try another city, state, partner name, or military base.</p>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Selected location badge */}
@@ -416,7 +451,7 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
                 <div className="flex-1 min-w-0">
                   <p className="text-xs font-bold text-dravik-dark truncate">{selectedLoc.name}</p>
                   <p className="text-[10px] text-gray-500">
-                    {inRadius.length} agent{inRadius.length !== 1 ? "s" : ""} within {radiusMiles}mi
+                    {inRadius.length} partner{inRadius.length !== 1 ? "s" : ""} within {radiusMiles}mi
                   </p>
                 </div>
                 <button onClick={clearLocation} aria-label="Clear selection" className="text-gray-400 hover:text-dravik-dark">
@@ -473,41 +508,11 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
             )}
           </div>
 
-          {/* PCS Hotspots */}
-          <div className="px-4 pb-4 border-t border-line pt-4">
-            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2.5">
-              PCS Hotspots
-            </p>
-            <div className="grid grid-cols-2 gap-1.5">
-              {MILITARY_BASES.map(base => {
-                const isActive = selectedLoc?.name === base.name;
-                const color    = BRANCH_COLOR[base.branch];
-                return (
-                  <button
-                    key={base.id}
-                    onClick={() => selectBase(base)}
-                    className={cn(
-                      "flex items-center gap-1.5 px-2.5 py-2 rounded-lg border text-left transition-colors",
-                      isActive
-                        ? "border-gold bg-gold-light"
-                        : "border-line bg-surface-2 hover:border-gray-300"
-                    )}
-                  >
-                    <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: color }} />
-                    <span className="text-[10px] font-semibold text-dravik-dark leading-tight truncate">
-                      {base.shortName}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
           {/* Agents list */}
           <div className="border-t border-line">
             <div className="px-4 py-3 flex items-center justify-between">
               <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                {selectedLoc ? "Agents in Area" : "All Agents"}
+                {selectedLoc ? "Partners in Area" : "All Partners"}
               </p>
               <span className="text-[10px] font-bold text-gold bg-gold-light px-2 py-0.5 rounded-full">
                 {sortedList.length}
@@ -525,7 +530,7 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
               {sortedList.length === 0 && (
                 <div className="px-4 py-8 text-center">
                   <MapPin size={24} className="text-gray-200 mx-auto mb-2" />
-                  <p className="text-xs text-gray-400">No agents in this area</p>
+                  <p className="text-xs text-gray-400">No agents within that area</p>
                   <button
                     onClick={() => setRadiusMiles(100)}
                     className="text-[11px] text-gold mt-1 font-semibold hover:text-gold-dark"
@@ -706,11 +711,11 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
             </div>
             <div className="flex items-center gap-2">
               <div className="w-4 h-4 rounded-full bg-blue-400 border-2 border-gold" />
-              <span className="text-[10px] text-gray-600">Agent (in radius)</span>
+              <span className="text-[10px] text-gray-600">Partner (in radius)</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-4 h-4 rounded-full bg-gray-300 border-2 border-gray-200 opacity-40" />
-              <span className="text-[10px] text-gray-400">Agent (outside)</span>
+              <span className="text-[10px] text-gray-400">Partner (outside)</span>
             </div>
           </div>
         </div>
@@ -722,7 +727,7 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
             <span className="text-xs font-bold text-dravik-dark">{radiusMiles}mi radius</span>
             <span className="text-[10px] text-gray-400">·</span>
             <span className="text-[10px] font-semibold text-gold">
-              {inRadius.length} agent{inRadius.length !== 1 ? "s" : ""}
+              {inRadius.length} partner{inRadius.length !== 1 ? "s" : ""}
             </span>
           </div>
         )}

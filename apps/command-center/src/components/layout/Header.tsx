@@ -50,6 +50,7 @@ export default function Header({ session }: { session: CommandCenterSession }) {
   const { openMobileSidebar } = useShell();
   const pathname  = usePathname();
   const pageTitle = resolveTitle(pathname);
+  const hideGlobalSearch = pathname === "/referrals";
 
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [searchOpen,   setSearchOpen]   = useState(false);
@@ -58,6 +59,7 @@ export default function Header({ session }: { session: CommandCenterSession }) {
   // ⌘K / Ctrl+K global shortcut
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
+      if (hideGlobalSearch) return;
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
         setSearchOpen(true);
@@ -65,7 +67,7 @@ export default function Header({ session }: { session: CommandCenterSession }) {
     }
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
-  }, []);
+  }, [hideGlobalSearch]);
 
   useEffect(() => {
     function onOutside(e: MouseEvent) {
@@ -98,26 +100,31 @@ export default function Header({ session }: { session: CommandCenterSession }) {
         {/* Page title — desktop */}
         <h1 className="hidden lg:block text-sm font-bold text-dravik-dark flex-shrink-0">{pageTitle}</h1>
 
-        {/* Search trigger — opens GlobalSearch overlay */}
-        <button
-          aria-label="Open global search"
-          onClick={() => setSearchOpen(true)}
-          className="relative hidden sm:flex flex-1 max-w-md mx-auto items-center gap-2.5 px-4 py-2 bg-surface-2 border border-transparent rounded-xl text-gray-400 hover:border-gold/30 hover:bg-white transition-all cursor-text text-left"
-        >
-          <Search size={14} className="flex-shrink-0" />
-          <span className="flex-1 truncate text-sm">Search leads, partners, listings...</span>
-          <kbd className="hidden md:flex items-center ml-auto text-[10px] text-gray-300 font-mono bg-surface-2 border border-line rounded px-1.5 py-0.5 flex-shrink-0 leading-none">
-            ⌘K
-          </kbd>
-        </button>
+        {!hideGlobalSearch && (
+          <button
+            aria-label="Open global search"
+            onClick={() => setSearchOpen(true)}
+            className="relative hidden sm:flex flex-1 max-w-md mx-auto items-center gap-2.5 px-4 py-2 bg-surface-2 border border-transparent rounded-xl text-gray-400 hover:border-gold/30 hover:bg-white transition-all cursor-text text-left"
+          >
+            <Search size={14} className="flex-shrink-0" />
+            <span className="flex-1 truncate text-sm">Search leads, partners, listings...</span>
+            <kbd className="hidden md:flex items-center ml-auto text-[10px] text-gray-300 font-mono bg-surface-2 border border-line rounded px-1.5 py-0.5 flex-shrink-0 leading-none">
+              ⌘K
+            </kbd>
+          </button>
+        )}
 
-        <button
-          aria-label="Open global search"
-          onClick={() => setSearchOpen(true)}
-          className="sm:hidden ml-auto p-2 rounded-xl text-gray-400 hover:bg-surface hover:text-dravik-dark transition-colors"
-        >
-          <Search size={18} />
-        </button>
+        {!hideGlobalSearch && (
+          <button
+            aria-label="Open global search"
+            onClick={() => setSearchOpen(true)}
+            className="sm:hidden ml-auto p-2 rounded-xl text-gray-400 hover:bg-surface hover:text-dravik-dark transition-colors"
+          >
+            <Search size={18} />
+          </button>
+        )}
+
+        {hideGlobalSearch && <div className="flex-1" />}
 
         {/* Right actions */}
         <div className="flex items-center gap-1.5 flex-shrink-0">
@@ -170,7 +177,7 @@ export default function Header({ session }: { session: CommandCenterSession }) {
         </div>
       </header>
 
-      <GlobalSearch open={searchOpen} onClose={() => setSearchOpen(false)} />
+      <GlobalSearch open={!hideGlobalSearch && searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   );
 }

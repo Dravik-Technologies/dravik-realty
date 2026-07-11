@@ -42,7 +42,7 @@ const closingsMtd = SAMPLE_TRANSACTIONS.filter((t) => t.status === "Closed").len
 
 const KPIS = [
   { label: "Active Leads",    value: String(totalLeads),                sub: isLocalDemoEnvironment ? "+8 this week" : "No records yet", accent: "#4A90A4" },
-  { label: "Pipeline Volume", value: formatCurrency(pipelineVol),        sub: `${SAMPLE_TRANSACTIONS.length} active deals`, accent: "#D4AF37" },
+  { label: "Pipeline Volume", value: formatCurrency(pipelineVol),        sub: `${SAMPLE_TRANSACTIONS.length} active deals`, accent: "#C9C3B6" },
   { label: "Closings MTD",    value: String(closingsMtd),               sub: isLocalDemoEnvironment ? "On target for May" : "No closed deals", accent: "#4A7A4A" },
   { label: "Mortgage Apps",   value: String(activeApps),                sub: `${approvedClosing} approved/closing`, accent: "#C0786C" },
 ];
@@ -61,7 +61,7 @@ const ACTIVITY: ActivityItem[] = isLocalDemoEnvironment ? [
   { id:"a1", icon:Users,     accent:"#4A90A4", module:"Leads",        href:"/crm/leads",             text:"Sarah Johnson moved to Under Contract",              time:"2m ago"    },
   { id:"a2", icon:Receipt,   accent:"#4A7A4A", module:"Transactions", href:"/realty/transactions",   text:"Document signed: Purchase Agreement on 12 Ocean Dr", time:"14m ago"   },
   { id:"a3", icon:Landmark,  accent:"#C0786C", module:"Mortgage",     href:"/lending",               text:"Chloe Nguyen's FHA loan approved — Closing stage",   time:"1h ago"    },
-  { id:"a4", icon:Globe,     accent:"#D4AF37", module:"Referrals",    href:"/referrals",             text:"Marcus Thompson sent referral: David & Amy Park",    time:"2h ago"    },
+  { id:"a4", icon:Globe,     accent:"#C9C3B6", module:"Referrals",    href:"/referrals",             text:"Marcus Thompson sent referral: David & Amy Park",    time:"2h ago"    },
   { id:"a5", icon:Users,     accent:"#4A90A4", module:"Leads",        href:"/crm/leads",             text:"5 new leads added from Zillow Spring campaign",      time:"3h ago"    },
   { id:"a6", icon:Receipt,   accent:"#4A7A4A", module:"Transactions", href:"/realty/transactions",   text:"Inspection report delivered for 580 Sunset Isle Dr", time:"5h ago"    },
   { id:"a7", icon:Megaphone, accent:"#7C6A9E", module:"Marketing",    href:"/marketing",        text:"Spring Listings 2026 sent to 148 contacts",          time:"6h ago"    },

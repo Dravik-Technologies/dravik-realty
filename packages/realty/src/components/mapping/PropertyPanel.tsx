@@ -36,7 +36,7 @@ function SliderRow({ label, value, min, max, step, onChange, fmt }: {
         type="range" min={min} max={max} step={step} value={value}
         onChange={(e) => onChange(Number(e.target.value))}
         className="gold-slider w-full"
-        style={{ background: `linear-gradient(to right, #D4AF37 ${pct}%, #E8E8E8 ${pct}%)` }}
+        style={{ background: `linear-gradient(to right, #C9C3B6 ${pct}%, #DDE2E8 ${pct}%)` }}
       />
     </div>
   );

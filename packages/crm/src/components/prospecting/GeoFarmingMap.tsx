@@ -48,7 +48,7 @@ const TYPE_COLOR: Record<LeadType, string> = {
   "FRBO":            "#8B5CF6",
   "Pre-Foreclosure": "#BE123C",
   "Absentee":        "#3B82F6",
-  "High Equity":     "#D4AF37",
+  "High Equity":     "#C9C3B6",
 };
 
 // Score → heat colour
@@ -63,7 +63,7 @@ function heatColor(score: number): string {
 function makeLeadIcon(lead: SellerLead, heatmap: boolean, inArea: boolean): L.DivIcon {
   const color   = heatmap ? heatColor(lead.motivationScore) : TYPE_COLOR[lead.leadType];
   const opacity = inArea ? 1 : 0.35;
-  const border  = inArea ? "#D4AF37" : "#E5E7EB";
+  const border  = inArea ? "#C9C3B6" : "#E5E7EB";
   const size    = heatmap ? Math.max(22, Math.round(lead.motivationScore / 4)) : 30;
   return L.divIcon({
     className: "",
@@ -492,19 +492,19 @@ export default function GeoFarmingMap({ onFarmGenerated }: Props) {
             <Circle
               center={radiusCenter}
               radius={radiusMiles * MILES_TO_M}
-              pathOptions={{ color: "#D4AF37", weight: 2, fillColor: "#D4AF37", fillOpacity: 0.06, dashArray: "8 5" }}
+              pathOptions={{ color: "#C9C3B6", weight: 2, fillColor: "#C9C3B6", fillOpacity: 0.06, dashArray: "8 5" }}
             />
           )}
 
           {/* Polygon in-progress */}
           {polyPoints.length >= 2 && !polyClosed && (
-            <Polyline positions={polyPoints} pathOptions={{ color: "#D4AF37", weight: 2, dashArray: "6 4" }} />
+            <Polyline positions={polyPoints} pathOptions={{ color: "#C9C3B6", weight: 2, dashArray: "6 4" }} />
           )}
 
           {/* Closed polygon */}
           {polyClosed && polyPoints.length >= 3 && (
             <Polygon positions={polyPoints}
-              pathOptions={{ color: "#D4AF37", weight: 2, fillColor: "#D4AF37", fillOpacity: 0.07 }} />
+              pathOptions={{ color: "#C9C3B6", weight: 2, fillColor: "#C9C3B6", fillOpacity: 0.07 }} />
           )}
 
           {/* Lead markers */}
@@ -529,7 +529,7 @@ export default function GeoFarmingMap({ onFarmGenerated }: Props) {
                         {lead.leadType.slice(0, 2).toUpperCase()}
                       </div>
                       <div>
-                        <p style={{ fontWeight: 700, fontSize: 12, color: "#1A1A2E", marginBottom: 2 }}>
+                        <p style={{ fontWeight: 700, fontSize: 12, color: "#111418", marginBottom: 2 }}>
                           {lead.address}
                         </p>
                         <p style={{ fontSize: 10, color: "#6B7280" }}>{lead.city}, {lead.state}</p>
@@ -537,17 +537,17 @@ export default function GeoFarmingMap({ onFarmGenerated }: Props) {
                     </div>
                     <div style={{ display: "flex", gap: 12, fontSize: 11, marginBottom: 8 }}>
                       <div>
-                        <p style={{ fontWeight: 700, color: "#1A1A2E" }}>{lead.estimatedEquity}%</p>
+                        <p style={{ fontWeight: 700, color: "#111418" }}>{lead.estimatedEquity}%</p>
                         <p style={{ color: "#9CA3AF" }}>Equity</p>
                       </div>
                       <div>
-                        <p style={{ fontWeight: 700, color: lead.motivationScore >= 70 ? "#D4AF37" : "#1A1A2E" }}>
+                        <p style={{ fontWeight: 700, color: lead.motivationScore >= 70 ? "#C9C3B6" : "#111418" }}>
                           {lead.motivationScore >= 70 ? `🔥 ${lead.motivationScore}` : lead.motivationScore}
                         </p>
                         <p style={{ color: "#9CA3AF" }}>Score</p>
                       </div>
                       <div>
-                        <p style={{ fontWeight: 700, color: "#1A1A2E" }}>{lead.daysSinceEvent}d</p>
+                        <p style={{ fontWeight: 700, color: "#111418" }}>{lead.daysSinceEvent}d</p>
                         <p style={{ color: "#9CA3AF" }}>Since event</p>
                       </div>
                     </div>

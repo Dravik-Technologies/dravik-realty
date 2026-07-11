@@ -15,6 +15,6 @@ export const manifest = {
     label:  "Global Referral Network",
     desc:   "Manage and initiate agent referrals across the network.",
     href:   "/referrals",
-    accent: "#D4AF37",
+    accent: "#C9C3B6",
   },
 };

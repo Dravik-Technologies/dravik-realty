@@ -27,7 +27,7 @@ function SliderRow({ label, min, max, step, value, onChange, display }: SliderRo
         onChange={(e) => onChange(Number(e.target.value))}
         className="w-full h-1.5 rounded-full appearance-none cursor-pointer"
         style={{
-          background: `linear-gradient(to right, #D4AF37 ${pct}%, #E8E8E8 ${pct}%)`,
+          background: `linear-gradient(to right, #C9C3B6 ${pct}%, #DDE2E8 ${pct}%)`,
         }}
       />
       <div className="flex justify-between text-[9px] text-gray-400">
@@ -148,7 +148,7 @@ export default function CommissionBreakdown({ contractPrice, commission: c }: Co
           label="Gross Commission"
           sub={`${rate.toFixed(2)}% of ${formatCurrency(contractPrice)}`}
           amount={gross}
-          accent="#D4AF37"
+          accent="#C9C3B6"
         />
 
         {hasReferral && (
@@ -197,7 +197,7 @@ export default function CommissionBreakdown({ contractPrice, commission: c }: Co
           label="Agent Net Payout"
           sub="Projected deposit"
           amount={agentNet}
-          accent="#D4AF37"
+          accent="#C9C3B6"
           bold
         />
       </div>

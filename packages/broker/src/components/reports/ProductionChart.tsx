@@ -101,20 +101,20 @@ export default function ProductionChart({ timeSeries, agents, viewMode }: Props)
           <AreaChart data={timeSeries} margin={{ top: 4, right: 4, left: 0, bottom: 0 }}>
             <defs>
               <linearGradient id="volGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%"  stopColor="#D4AF37" stopOpacity={0.18} />
-                <stop offset="95%" stopColor="#D4AF37" stopOpacity={0}    />
+                <stop offset="5%"  stopColor="#C9C3B6" stopOpacity={0.18} />
+                <stop offset="95%" stopColor="#C9C3B6" stopOpacity={0}    />
               </linearGradient>
               <linearGradient id="gciGrad" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%"  stopColor="#10B981" stopOpacity={0.18} />
                 <stop offset="95%" stopColor="#10B981" stopOpacity={0}    />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#E8E8E8" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#DDE2E8" vertical={false} />
             <XAxis dataKey="label" tick={{ fontSize: 11, fill: "#9CA3AF" }} axisLine={false} tickLine={false} />
             <YAxis tickFormatter={tickFmt} tick={{ fontSize: 10, fill: "#9CA3AF" }} axisLine={false} tickLine={false} width={60} />
             <Tooltip content={<VolumeTooltip />} />
             <Legend wrapperStyle={{ fontSize: 11, paddingTop: 8 }} />
-            <Area type="monotone" dataKey="volume" name="volume" stroke="#D4AF37" strokeWidth={2.5} fill="url(#volGrad)" dot={{ fill: "#D4AF37", r: 3 }} activeDot={{ r: 5 }} />
+            <Area type="monotone" dataKey="volume" name="volume" stroke="#C9C3B6" strokeWidth={2.5} fill="url(#volGrad)" dot={{ fill: "#C9C3B6", r: 3 }} activeDot={{ r: 5 }} />
             <Area type="monotone" dataKey="gci"    name="gci"    stroke="#10B981" strokeWidth={2}   fill="url(#gciGrad)" dot={{ fill: "#10B981", r: 3 }} activeDot={{ r: 5 }} />
           </AreaChart>
         </ResponsiveContainer>
@@ -125,11 +125,11 @@ export default function ProductionChart({ timeSeries, agents, viewMode }: Props)
         <p className="text-sm font-bold text-dravik-dark mb-4">Transactions Closed</p>
         <ResponsiveContainer width="100%" height={160}>
           <BarChart data={timeSeries} margin={{ top: 4, right: 4, left: 0, bottom: 0 }} barSize={28}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#E8E8E8" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#DDE2E8" vertical={false} />
             <XAxis dataKey="label" tick={{ fontSize: 11, fill: "#9CA3AF" }} axisLine={false} tickLine={false} />
             <YAxis tick={{ fontSize: 10, fill: "#9CA3AF" }} axisLine={false} tickLine={false} width={24} />
             <Tooltip content={<TxTooltip />} />
-            <Bar dataKey="transactions" name="transactions" fill="#D4AF37" radius={[6, 6, 0, 0]} />
+            <Bar dataKey="transactions" name="transactions" fill="#C9C3B6" radius={[6, 6, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>

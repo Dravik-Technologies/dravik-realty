@@ -171,7 +171,7 @@ export default function TeamDashboard() {
         <div className="flex-shrink-0 bg-white border-b border-line">
           {/* KPI strip */}
           <div className="flex items-center divide-x divide-line overflow-x-auto">
-            <KpiCard icon={Users}     label="Total Agents"         value={String(kpis.total)}                   accent="#D4AF37" />
+            <KpiCard icon={Users}     label="Total Agents"         value={String(kpis.total)}                   accent="#C9C3B6" />
             <KpiCard icon={UserCheck} label="Active"               value={String(kpis.active)}                  accent="#10B981" sub={`${kpis.onboarding} onboarding`} />
             <KpiCard icon={Clock}     label="Pending Onboarding"   value={String(kpis.onboarding)}              accent="#3B82F6" />
             <KpiCard icon={DollarSign}label="GCI This Month"       value={formatCurrency(kpis.monthlyGci)}      accent="#8B5CF6" />

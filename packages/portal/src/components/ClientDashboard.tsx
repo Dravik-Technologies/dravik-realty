@@ -157,7 +157,7 @@ function MessageBubble({ msg }: { msg: ClientMessage }) {
 // ─── Activity item (module level) ────────────────────────
 function ActivityItem({ entry: a, isLast }: { entry: ActivityEntry; isLast: boolean }) {
   const dotColor =
-    a.actorRole === "agent"  ? "#D4AF37" :
+    a.actorRole === "agent"  ? "#C9C3B6" :
     a.actorRole === "client" ? "#3B82F6" : "#9CA3AF";
 
   return (
@@ -190,7 +190,7 @@ function DashboardTab({ data, onTabChange }: { data: ClientPortalData; onTabChan
       {/* KPIs */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         <KpiCard icon={Building2}     label="Active Transactions"  value={String(activeTx.length)}       accent="#3B82F6"  sub={activeTx.length > 0 ? "In progress" : "None active"} />
-        <KpiCard icon={Bookmark}      label="Saved Properties"     value={String(savedCount)}             accent="#D4AF37"  sub="Watchlist" />
+        <KpiCard icon={Bookmark}      label="Saved Properties"     value={String(savedCount)}             accent="#C9C3B6"  sub="Watchlist" />
         <KpiCard icon={BarChart3}     label="Mortgage Status"      value={hasMortgage ? "Active" : "N/A"} accent="#10B981"  sub={activeTx.find(t => t.mortgage)?.mortgage?.status} />
         <KpiCard icon={AlertCircle}   label="Docs Needed"          value={String(docsNeeded)}             accent={docsNeeded > 0 ? "#EF4444" : "#10B981"} sub="Upload required" />
       </div>

@@ -23,7 +23,7 @@ const LOCAL_SETTINGS_USERS: SettingsUser[] = [
   {
     id: "u1", name: "Chris Macabugao", email: "chris@dravikrealty.com",
     role: "Principal Broker", status: "active",
-    joinedDate: "Jan 15, 2022", lastLogin: "Today, 9:14 AM", avatarColor: "#D4AF37",
+    joinedDate: "Jan 15, 2022", lastLogin: "Today, 9:14 AM", avatarColor: "#C9C3B6",
   },
   {
     id: "u2", name: "Elena Rodriguez", email: "elena@dravikrealty.com",
@@ -213,7 +213,7 @@ export const NOTIF_PREFS: NotifPref[] = [
 
 // ─── Color themes ─────────────────────────────────────────────
 export const COLOR_THEMES: ColorTheme[] = [
-  { id: "gold",    label: "Gold & Midnight",  primary: "#D4AF37", dark: "#1A1A2E", preview: "#D4AF37" },
+  { id: "gold",    label: "Platinum & Graphite", primary: "#C9C3B6", dark: "#111418", preview: "#C9C3B6" },
   { id: "navy",    label: "Navy & Silver",    primary: "#4F7CAC", dark: "#1B2A4A", preview: "#4F7CAC" },
   { id: "emerald", label: "Emerald & Dark",   primary: "#10B981", dark: "#0D2B22", preview: "#10B981" },
   { id: "rose",    label: "Rose & Charcoal",  primary: "#E11D48", dark: "#1C0B0B", preview: "#E11D48" },

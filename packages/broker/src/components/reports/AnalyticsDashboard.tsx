@@ -112,7 +112,7 @@ function MarketingTab({ campaigns }: { campaigns: CampaignStat[] }) {
         <p className="text-xs text-gray-400 mb-4">Click a bar to see campaign detail</p>
         <ResponsiveContainer width="100%" height={240}>
           <BarChart data={barData} margin={{ top: 4, right: 4, left: 0, bottom: 32 }} barSize={20} style={{ cursor: "pointer" }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#E8E8E8" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#DDE2E8" vertical={false} />
             <XAxis dataKey="name" tick={{ fontSize: 10, fill: "#9CA3AF" }} axisLine={false} tickLine={false} angle={-20} textAnchor="end" interval={0} />
             <YAxis tick={{ fontSize: 10, fill: "#9CA3AF" }} axisLine={false} tickLine={false} width={24} />
             <Tooltip content={<CampaignTooltip />} />
@@ -125,7 +125,7 @@ function MarketingTab({ campaigns }: { campaigns: CampaignStat[] }) {
             <Bar dataKey="conversions" name="conversions" radius={[4, 4, 0, 0]}
               onClick={(d) => { const id = (d as unknown as { id: string }).id; setDrillId(id === drillId ? null : id); }}>
               {barData.map((d) => (
-                <Cell key={d.id} fill={drillId && drillId !== d.id ? "#F5EDD3" : d.color} />
+                <Cell key={d.id} fill={drillId && drillId !== d.id ? "#F1F0EC" : d.color} />
               ))}
             </Bar>
           </BarChart>
@@ -227,7 +227,7 @@ function MortgageTab({ months, conversionRate, avgLoanSize, avgRate, mortgageRev
     <div className="space-y-5">
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {[
-          { label: "Pre-Qual → Funded",   value: `${conversionRate}%`,             accent: "#D4AF37" },
+          { label: "Pre-Qual → Funded",   value: `${conversionRate}%`,             accent: "#C9C3B6" },
           { label: "Avg Loan Size",        value: formatCurrency(avgLoanSize),       accent: "#3B82F6" },
           { label: "Avg Interest Rate",    value: `${avgRate.toFixed(2)}%`,          accent: "#10B981" },
           { label: "Mortgage Revenue",     value: formatCurrency(mortgageRevenue),   accent: "#8B5CF6" },
@@ -244,14 +244,14 @@ function MortgageTab({ months, conversionRate, avgLoanSize, avgRate, mortgageRev
         <p className="text-xs text-gray-400 mb-4">Pre-Qual → Application → Approval → Funded</p>
         <ResponsiveContainer width="100%" height={260}>
           <BarChart data={months} margin={{ top: 4, right: 4, left: 0, bottom: 0 }} barSize={12} barCategoryGap="25%">
-            <CartesianGrid strokeDasharray="3 3" stroke="#E8E8E8" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#DDE2E8" vertical={false} />
             <XAxis dataKey="month" tick={{ fontSize: 10, fill: "#9CA3AF" }} axisLine={false} tickLine={false} />
             <YAxis tick={{ fontSize: 10, fill: "#9CA3AF" }} axisLine={false} tickLine={false} width={24} />
             <Tooltip content={<MortgageTooltip />} />
             <Bar dataKey="preQuals"     name="pre-quals"     fill="#CBD5E1" radius={[3,3,0,0]} />
             <Bar dataKey="applications" name="applications"  fill="#3B82F6" radius={[3,3,0,0]} />
             <Bar dataKey="approvals"    name="approvals"     fill="#8B5CF6" radius={[3,3,0,0]} />
-            <Bar dataKey="funded"       name="funded"        fill="#D4AF37" radius={[3,3,0,0]} />
+            <Bar dataKey="funded"       name="funded"        fill="#C9C3B6" radius={[3,3,0,0]} />
           </BarChart>
         </ResponsiveContainer>
         <div className="flex items-center justify-center gap-4 mt-2">
@@ -259,7 +259,7 @@ function MortgageTab({ months, conversionRate, avgLoanSize, avgRate, mortgageRev
             { label: "Pre-Qual",     color: "#CBD5E1" },
             { label: "Application",  color: "#3B82F6" },
             { label: "Approved",     color: "#8B5CF6" },
-            { label: "Funded",       color: "#D4AF37" },
+            { label: "Funded",       color: "#C9C3B6" },
           ].map(({ label, color }) => (
             <div key={label} className="flex items-center gap-1.5 text-[10px] text-gray-500">
               <span className="w-2 h-2 rounded-full" style={{ background: color }} />
@@ -430,7 +430,7 @@ export default function AnalyticsDashboard() {
 
         {/* KPI strip */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-          <KpiCard icon={DollarSign}  label="Closed Volume"    value={`$${(kpiVolume / 1_000_000).toFixed(1)}M`}  accent="#D4AF37" delta="+12%" />
+          <KpiCard icon={DollarSign}  label="Closed Volume"    value={`$${(kpiVolume / 1_000_000).toFixed(1)}M`}  accent="#C9C3B6" delta="+12%" />
           <KpiCard icon={TrendingUp}  label="GCI"              value={`$${(kpiGci / 1_000).toFixed(0)}K`}         accent="#10B981" delta="+8%"  />
           <KpiCard icon={Building2}   label="Mortgage Rev."    value={formatCurrency(kpiMortgageRev)}              accent="#3B82F6"               />
           <KpiCard icon={BarChart3}   label="Conversion Rate"  value={`${kpiConv}%`}                               accent="#8B5CF6" delta="+2%"  />

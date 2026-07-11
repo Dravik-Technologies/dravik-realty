@@ -96,7 +96,7 @@ function ProfileTab({ a }: { a: Agent }) {
 // ─── Performance tab ──────────────────────────────────────────
 function PerformanceTab({ a }: { a: Agent }) {
   const kpis = [
-    { label: "YTD Volume",      value: a.ytdVolume > 0 ? `$${(a.ytdVolume / 1_000_000).toFixed(1)}M` : "—",   accent: "#D4AF37" },
+    { label: "YTD Volume",      value: a.ytdVolume > 0 ? `$${(a.ytdVolume / 1_000_000).toFixed(1)}M` : "—",   accent: "#C9C3B6" },
     { label: "YTD GCI",         value: a.ytdGci    > 0 ? formatCurrency(a.ytdGci)                    : "—",   accent: "#10B981" },
     { label: "Closed Units",    value: a.closedUnits > 0 ? String(a.closedUnits)                      : "—",   accent: "#3B82F6" },
     { label: "Active Listings", value: String(a.activeListings),                                                accent: "#8B5CF6" },
@@ -153,7 +153,7 @@ function PerformanceTab({ a }: { a: Agent }) {
                   className="w-full rounded-t-sm transition-all"
                   style={{
                     height:     `${Math.max(4, (v / maxVol) * 56)}px`,
-                    background: i === a.monthlyVolume.length - 1 ? "#D4AF37" : "#E2E8F0",
+                    background: i === a.monthlyVolume.length - 1 ? "#C9C3B6" : "#E2E8F0",
                   }}
                 />
                 <span className="text-[8px] text-gray-400">{MONTHS[i]}</span>

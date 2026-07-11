@@ -14,7 +14,7 @@ const PieChartSection = dynamic(() => import("./PieChartSection"), {
 
 // ─── Brand tokens ──────────────────────────────────────────────
 const TEAL   = "#4A90A4";
-const GOLD   = "#D4AF37";
+const GOLD   = "#C9C3B6";
 const SLATE  = "#CBD5E1"; // neutral dot for "Total Commission" anchor step
 const RED_DOT = "#C0524A"; // muted deep-red — deduction indicator
 
@@ -53,7 +53,7 @@ function SliderRow({
 }: SliderRowProps) {
   const pct = ((value - min) / (max - min)) * 100;
   const trackStyle = {
-    background: `linear-gradient(to right, #D4AF37 ${pct}%, #E8E8E8 ${pct}%)`,
+    background: `linear-gradient(to right, #C9C3B6 ${pct}%, #DDE2E8 ${pct}%)`,
   };
   return (
     <div className="space-y-1.5">

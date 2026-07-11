@@ -96,7 +96,7 @@ const LOCAL_MORTGAGE_APPS: MortgageApplication[] = [
     id:              "m3",
     clientName:      "Jennifer Walsh",
     clientInitials:  "JW",
-    clientColor:     "#D4AF37",
+    clientColor:     "#C9C3B6",
     clientPhone:     "(949) 555-0271",
     clientEmail:     "jennifer.walsh@walshgroup.com",
     propertyAddress: "5 Pelican Crest Court",

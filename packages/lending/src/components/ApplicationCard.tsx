@@ -96,7 +96,7 @@ export function ApplicationCardContent({
             className="h-full rounded-full transition-all duration-300"
             style={{
               width:      `${app.progress}%`,
-              background: app.progress >= 90 ? "#D4AF37" : app.progress >= 60 ? "#10B981" : "#6366F1",
+              background: app.progress >= 90 ? "#C9C3B6" : app.progress >= 60 ? "#10B981" : "#6366F1",
             }}
           />
         </div>

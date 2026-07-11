@@ -146,7 +146,7 @@ export default function ProspectingDashboard() {
             <KpiCard icon={TrendingUp} label="Expireds Today" value={String(kpis.expiredsToday)} sub="fresh listing fallout" accent="#EF4444" />
             <KpiCard icon={Users} label="FSBOs" value={String(kpis.fsbos)} sub="owner-led listings" accent="#F97316" />
             <KpiCard icon={Building2} label="FRBOs" value={String(kpis.frbos)} sub="landlord burnout targets" accent="#8B5CF6" />
-            <KpiCard icon={Sparkles} label="High Equity Leads" value={String(kpis.highEquity)} sub="equity-rich owners" accent="#D4AF37" />
+            <KpiCard icon={Sparkles} label="High Equity Leads" value={String(kpis.highEquity)} sub="equity-rich owners" accent="#C9C3B6" />
             <KpiCard icon={PhoneCall} label="Contacted This Week" value={String(kpis.contactedThisWeek)} sub={`${dialQueue.length} in call queue`} accent="#10B981" />
           </div>
         </div>

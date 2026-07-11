@@ -127,7 +127,7 @@ export default function LeadsPage() {
               label="Total Leads"
               value={String(kpis.total)}
               sub="All pipeline stages"
-              accent="#D4AF37"
+              accent="#C9C3B6"
             />
             <KpiCard
               icon={Flame}

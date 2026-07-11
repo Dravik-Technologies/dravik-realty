@@ -143,7 +143,7 @@ function StepCommission({ data, set }: { data: FormData; set: (k: keyof FormData
           onChange={(e) => set("splitPercent", Number(e.target.value))}
           className="gold-slider w-full"
           style={{
-            background: `linear-gradient(to right, #D4AF37 ${data.splitPercent - 50}%, #F1F3F5 ${data.splitPercent - 50}%)`,
+            background: `linear-gradient(to right, #C9C3B6 ${data.splitPercent - 50}%, #F1F3F5 ${data.splitPercent - 50}%)`,
           }}
         />
         <div className="flex justify-between text-[10px] text-gray-400 mt-1">

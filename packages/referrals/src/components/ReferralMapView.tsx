@@ -58,7 +58,7 @@ const CERT_OPTIONS: Array<{ label: string; value: CertificationType | "All" }> =
 // ─── Leaflet icon factories — must stay at module level ───────
 function createAgentIcon(agent: Agent, inRadius: boolean): L.DivIcon {
   const opacity = inRadius ? "1" : "0.35";
-  const border  = inRadius ? "#D4AF37" : "#E5E7EB";
+  const border  = inRadius ? "#C9C3B6" : "#E5E7EB";
   return L.divIcon({
     className: "",
     html: `<div style="
@@ -82,7 +82,7 @@ function createBaseIcon(branch: MilitaryBase["branch"]): L.DivIcon {
     className: "",
     html: `<div style="
       width:42px;height:42px;border-radius:50%;
-      background:#1A1A2E;border:3px solid ${color};
+      background:#111418;border:3px solid ${color};
       display:flex;align-items:center;justify-content:center;
       box-shadow:0 3px 14px rgba(0,0,0,0.35);font-size:18px;
       cursor:default;
@@ -123,9 +123,9 @@ function ZoomButtons() {
 
 // ─── Compact cert badge ───────────────────────────────────────
 const CERT_CFG: Record<CertificationType, { bg: string; text: string }> = {
-  "RE Broker":     { bg: "#F5EDD3", text: "#A8892E" },
-  "Dual Licensed": { bg: "#1A1A2E", text: "#ffffff" },
-  "RE + Mortgage": { bg: "#D4AF37", text: "#1A1A2E" },
+  "RE Broker":     { bg: "#F1F0EC", text: "#767E88" },
+  "Dual Licensed": { bg: "#111418", text: "#ffffff" },
+  "RE + Mortgage": { bg: "#C9C3B6", text: "#111418" },
 };
 
 // ─── Agent sidebar card ───────────────────────────────────────
@@ -578,9 +578,9 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
               center={[selectedLoc.lat, selectedLoc.lng]}
               radius={radiusMiles * MILES_TO_METERS}
               pathOptions={{
-                color:       "#D4AF37",
+                color:       "#C9C3B6",
                 weight:      2,
-                fillColor:   "#D4AF37",
+                fillColor:   "#C9C3B6",
                 fillOpacity: 0.06,
                 dashArray:   "8 6",
               }}
@@ -596,13 +596,13 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
             >
               <Popup closeButton={false} maxWidth={220}>
                 <div style={{ fontFamily: "system-ui, sans-serif", padding: "4px 0" }}>
-                  <p style={{ fontWeight: 700, fontSize: 13, color: "#1A1A2E", marginBottom: 4 }}>
+                  <p style={{ fontWeight: 700, fontSize: 13, color: "#111418", marginBottom: 4 }}>
                     ⭐ {selectedLoc.name}
                   </p>
                   <p style={{ fontSize: 11, color: "#6B7280" }}>
                     {selectedLoc.branch} Installation
                   </p>
-                  <p style={{ fontSize: 11, color: "#D4AF37", fontWeight: 600, marginTop: 4 }}>
+                  <p style={{ fontSize: 11, color: "#C9C3B6", fontWeight: 600, marginTop: 4 }}>
                     {inRadius.length} agent{inRadius.length !== 1 ? "s" : ""} within {radiusMiles}mi
                   </p>
                 </div>
@@ -635,7 +635,7 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
                         {agent.initials}
                       </div>
                       <div style={{ minWidth: 0 }}>
-                        <p style={{ fontWeight: 700, fontSize: 13, color: "#1A1A2E", whiteSpace: "nowrap" }}>
+                        <p style={{ fontWeight: 700, fontSize: 13, color: "#111418", whiteSpace: "nowrap" }}>
                           {agent.name}
                         </p>
                         <div style={{ display: "flex", alignItems: "center", gap: 4, marginTop: 2 }}>
@@ -653,7 +653,7 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
                     <p style={{ fontSize: 11, color: "#6B7280", display: "flex", alignItems: "center", gap: 4 }}>
                       📍 {agent.location.city}, {agent.location.state}
                       {dist !== null && (
-                        <span style={{ color: "#D4AF37", fontWeight: 700 }}>
+                        <span style={{ color: "#C9C3B6", fontWeight: 700 }}>
                           · {Math.round(dist)}mi
                         </span>
                       )}
@@ -662,16 +662,16 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
                     {/* Production stats */}
                     <div style={{ display: "flex", gap: 12, margin: "8px 0", fontSize: 11 }}>
                       <div>
-                        <p style={{ fontWeight: 700, color: "#1A1A2E" }}>{agent.closedVolumeMTD}</p>
+                        <p style={{ fontWeight: 700, color: "#111418" }}>{agent.closedVolumeMTD}</p>
                         <p style={{ color: "#9CA3AF" }}>Vol MTD</p>
                       </div>
                       <div>
-                        <p style={{ fontWeight: 700, color: "#1A1A2E" }}>{agent.closedTransactions}</p>
+                        <p style={{ fontWeight: 700, color: "#111418" }}>{agent.closedTransactions}</p>
                         <p style={{ color: "#9CA3AF" }}>Txns</p>
                       </div>
                       <div>
-                        <p style={{ fontWeight: 700, color: "#1A1A2E", display: "flex", alignItems: "center", gap: 2 }}>
-                          <span style={{ color: "#D4AF37" }}>★</span> {agent.productionScore.toFixed(1)}
+                        <p style={{ fontWeight: 700, color: "#111418", display: "flex", alignItems: "center", gap: 2 }}>
+                          <span style={{ color: "#C9C3B6" }}>★</span> {agent.productionScore.toFixed(1)}
                         </p>
                         <p style={{ color: "#9CA3AF" }}>Score</p>
                       </div>
@@ -682,7 +682,7 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
                       onClick={() => onInitiateReferral(agent)}
                       style={{
                         width: "100%", padding: "8px 0",
-                        background: "#1A1A2E", color: "#D4AF37",
+                        background: "#111418", color: "#C9C3B6",
                         borderRadius: 10, fontWeight: 700, fontSize: 12,
                         border: "none", cursor: "pointer",
                       }}

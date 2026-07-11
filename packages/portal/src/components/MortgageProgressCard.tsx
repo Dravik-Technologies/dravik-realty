@@ -13,7 +13,7 @@ const STATUS_COLOR: Record<string, string> = {
   "Underwriting":          "#8B5CF6",
   "Conditional Approval":  "#EC4899",
   "Clear to Close":        "#10B981",
-  "Funded":                "#D4AF37",
+  "Funded":                "#C9C3B6",
 };
 
 interface Props {
@@ -22,7 +22,7 @@ interface Props {
 
 export default function MortgageProgressCard({ mortgage: m }: Props) {
   const currentIdx = MORTGAGE_STAGES.indexOf(m.status);
-  const color = STATUS_COLOR[m.status] ?? "#D4AF37";
+  const color = STATUS_COLOR[m.status] ?? "#C9C3B6";
 
   return (
     <div className="bg-white rounded-2xl border border-line overflow-hidden">

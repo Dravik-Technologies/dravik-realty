@@ -213,6 +213,15 @@ resource controlDatabase 'Microsoft.DBforPostgreSQL/flexibleServers/databases@20
   }
 }
 
+resource postgresAllowAzureServicesFirewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2024-08-01' = if (createPostgres) {
+  name: 'allow-azure-services'
+  parent: postgresServer
+  properties: {
+    startIpAddress: '0.0.0.0'
+    endIpAddress: '0.0.0.0'
+  }
+}
+
 output acrLoginServer string = containerRegistry.properties.loginServer
 output acrName string = containerRegistry.name
 output applicationInsightsName string = applicationInsights.name

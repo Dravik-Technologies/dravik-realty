@@ -17,6 +17,8 @@ export function BrandLogo({
   const isMark = variant === "mark";
   const edgeFade =
     "radial-gradient(ellipse 74% 70% at 50% 50%, #000 58%, rgba(0,0,0,0.9) 68%, transparent 100%)";
+  const edgeBlur =
+    "radial-gradient(ellipse 86% 82% at 50% 50%, transparent 48%, rgba(0,0,0,0.78) 68%, #000 100%)";
 
   return (
     <span
@@ -26,6 +28,22 @@ export function BrandLogo({
         className
       )}
     >
+      <Image
+        src="/dravik-realty-logo.png"
+        alt=""
+        aria-hidden
+        fill
+        sizes={isMark ? "40px" : "176px"}
+        className={cn(
+          "pointer-events-none select-none object-contain opacity-80 blur-md",
+          isMark ? "scale-[1.56]" : "scale-[1.16]"
+        )}
+        style={{
+          objectPosition: "50% 50%",
+          WebkitMaskImage: edgeBlur,
+          maskImage: edgeBlur,
+        }}
+      />
       <Image
         src="/dravik-realty-logo.png"
         alt={alt}

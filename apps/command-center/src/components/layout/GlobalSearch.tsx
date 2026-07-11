@@ -1,12 +1,14 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { Search, X, Users, Globe, Receipt, Landmark, ArrowRight, Home } from "lucide-react";
 import Link from "next/link";
+import type { CommandCenterSession } from "@dravik/contracts/identity";
 import { SAMPLE_LEADS } from "@dravik/crm";
 import { AGENTS } from "@dravik/referrals";
 import { SAMPLE_PROPERTIES, SAMPLE_TRANSACTIONS } from "@dravik/realty";
 import { MORTGAGE_APPS } from "@dravik/lending";
+import { canAccessHref } from "@/modules/registry";
 import { cn } from "@dravik/shared";
 
 type ResultCat = "Lead" | "Partner" | "Listing" | "Transaction" | "Mortgage";
@@ -66,12 +68,10 @@ const SEARCH_INDEX: SearchResult[] = [
   })),
 ];
 
-const RECENT = SEARCH_INDEX.slice(0, 6);
-
-function runSearch(q: string): SearchResult[] {
+function runSearch(q: string, index: SearchResult[]): SearchResult[] {
   if (!q.trim()) return [];
   const lower = q.toLowerCase();
-  return SEARCH_INDEX.filter(r =>
+  return index.filter(r =>
     r.title.toLowerCase().includes(lower) || r.subtitle.toLowerCase().includes(lower)
   ).slice(0, 9);
 }
@@ -113,15 +113,27 @@ function ResultRow({ result, active, onSelect, onHover }: {
 }
 
 // ─── GlobalSearch ─────────────────────────────────────────────
-export default function GlobalSearch({ open, onClose }: { open: boolean; onClose: () => void }) {
+export default function GlobalSearch({
+  session,
+  open,
+  onClose,
+}: {
+  session: CommandCenterSession;
+  open: boolean;
+  onClose: () => void;
+}) {
   const [query,  setQuery]  = useState("");
   const [cursor, setCursor] = useState(-1);
   const inputRef       = useRef<HTMLInputElement>(null);
   const panelRef       = useRef<HTMLDivElement>(null);
   const returnFocusRef = useRef<HTMLElement | null>(null);
+  const searchIndex = useMemo(
+    () => SEARCH_INDEX.filter((result) => canAccessHref(session, result.href)),
+    [session]
+  );
 
-  const results  = runSearch(query);
-  const items    = query.trim() ? results : RECENT;
+  const results  = runSearch(query, searchIndex);
+  const items    = query.trim() ? results : searchIndex.slice(0, 6);
   const isRecent = !query.trim();
 
   const handleClose = useCallback(() => { setQuery(""); onClose(); }, [onClose]);

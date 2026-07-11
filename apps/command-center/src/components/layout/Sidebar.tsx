@@ -7,9 +7,10 @@ import {
   PanelLeftClose,
   PanelLeft,
 } from "lucide-react";
+import type { CommandCenterSession } from "@dravik/contracts/identity";
 import { useShell } from "./ShellProvider";
 import { BrandLogo } from "@/components/brand/BrandLogo";
-import { NAV_SECTIONS } from "@/modules/registry";
+import { filterNavSections } from "@/modules/registry";
 import type { NavEntry } from "@/modules/registry";
 import { cn } from "@dravik/shared";
 
@@ -53,10 +54,11 @@ function NavLink({
 }
 
 // ─── Sidebar ──────────────────────────────────────────────────
-export default function Sidebar() {
+export default function Sidebar({ session }: { session: CommandCenterSession }) {
   const { mobileSidebarOpen, sidebarCollapsed, closeMobileSidebar, toggleCollapsed } =
     useShell();
   const pathname = usePathname();
+  const navSections = filterNavSections(session);
 
   return (
     <>
@@ -103,7 +105,7 @@ export default function Sidebar() {
 
         {/* ── Nav sections ────────────────────────────────── */}
         <nav className="flex-1 overflow-y-auto overflow-x-hidden py-4 px-2 space-y-5">
-          {NAV_SECTIONS.map((section) => (
+          {navSections.map((section) => (
             <div key={section.title}>
               {/* Section label — hidden when collapsed */}
               {!sidebarCollapsed && (

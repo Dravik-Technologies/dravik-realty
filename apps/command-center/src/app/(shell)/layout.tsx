@@ -11,7 +11,7 @@ export default async function ShellLayout({ children }: { children: ReactNode })
   return (
     <ShellProvider>
       <div className="flex h-screen overflow-hidden bg-surface">
-        <Sidebar />
+        <Sidebar session={session} />
         <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
           <Header session={session} />
           <main className="flex-1 overflow-y-auto">
@@ -19,7 +19,7 @@ export default async function ShellLayout({ children }: { children: ReactNode })
           </main>
         </div>
       </div>
-      <QuickActionFAB />
+      <QuickActionFAB session={session} />
     </ShellProvider>
   );
 }

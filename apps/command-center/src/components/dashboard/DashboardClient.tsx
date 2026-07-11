@@ -7,11 +7,12 @@ import {
   Inbox, DollarSign, TrendingUp, ArrowRight, Activity, Settings,
   X, HelpCircle, CheckCircle2, LayoutDashboard, Target,
 } from "lucide-react";
+import type { CommandCenterSession } from "@dravik/contracts/identity";
 import { SAMPLE_LEADS } from "@dravik/crm";
 import { SAMPLE_TRANSACTIONS } from "@dravik/realty";
 import { MORTGAGE_APPS } from "@dravik/lending";
 import { formatCurrency, cn, isLocalDemoEnvironment } from "@dravik/shared";
-import { DASHBOARD_MODULES } from "@/modules/registry";
+import { canAccessHref, filterDashboardModules } from "@/modules/registry";
 
 // ─── Module-level precomputed data ────────────────────────────
 const totalLeads  = SAMPLE_LEADS.length;
@@ -41,10 +42,10 @@ const approvedClosing = mortgageCounts[3].count + mortgageCounts[4].count;
 const closingsMtd = SAMPLE_TRANSACTIONS.filter((t) => t.status === "Closed").length;
 
 const KPIS = [
-  { label: "Active Leads",    value: String(totalLeads),                sub: isLocalDemoEnvironment ? "+8 this week" : "No records yet", accent: "#4A90A4" },
-  { label: "Pipeline Volume", value: formatCurrency(pipelineVol),        sub: `${SAMPLE_TRANSACTIONS.length} active deals`, accent: "#C9C3B6" },
-  { label: "Closings MTD",    value: String(closingsMtd),               sub: isLocalDemoEnvironment ? "On target for May" : "No closed deals", accent: "#4A7A4A" },
-  { label: "Mortgage Apps",   value: String(activeApps),                sub: `${approvedClosing} approved/closing`, accent: "#C0786C" },
+  { label: "Active Leads",    value: String(totalLeads),                sub: isLocalDemoEnvironment ? "+8 this week" : "No records yet", accent: "#4A90A4", href: "/crm/leads" },
+  { label: "Pipeline Volume", value: formatCurrency(pipelineVol),        sub: `${SAMPLE_TRANSACTIONS.length} active deals`, accent: "#C9C3B6", href: "/realty/transactions" },
+  { label: "Closings MTD",    value: String(closingsMtd),               sub: isLocalDemoEnvironment ? "On target for May" : "No closed deals", accent: "#4A7A4A", href: "/realty/transactions" },
+  { label: "Mortgage Apps",   value: String(activeApps),                sub: `${approvedClosing} approved/closing`, accent: "#C0786C", href: "/lending" },
 ];
 
 interface ActivityItem {
@@ -119,7 +120,7 @@ function StageColumn({ label, count, maxCount, accent }: {
 }
 
 // ─── HelpModal ────────────────────────────────────────────────
-function HelpModal({ onClose }: { onClose: () => void }) {
+function HelpModal({ links, onClose }: { links: typeof HELP_LINKS; onClose: () => void }) {
   const modalRef       = useRef<HTMLDivElement>(null);
   const returnFocusRef = useRef<HTMLElement | null>(null);
 
@@ -199,7 +200,7 @@ function HelpModal({ onClose }: { onClose: () => void }) {
           <div>
             <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3">Platform Modules</p>
             <div className="grid grid-cols-2 gap-2">
-              {HELP_LINKS.map(({ label, icon: Icon, href }) => (
+              {links.map(({ label, icon: Icon, href }) => (
                 <Link
                   key={href}
                   href={href}
@@ -242,11 +243,41 @@ function HelpModal({ onClose }: { onClose: () => void }) {
 }
 
 // ─── DashboardClient ──────────────────────────────────────────
-export default function DashboardClient() {
+export default function DashboardClient({ session }: { session: CommandCenterSession }) {
   const [greeting, setGreeting] = useState("Good morning");
   const [dateStr,  setDateStr]  = useState("");
   const [showHelp, setShowHelp] = useState(false);
   const closeHelp = useCallback(() => setShowHelp(false), []);
+  const dashboardModules = filterDashboardModules(session);
+  const visibleHelpLinks = HELP_LINKS.filter((link) => canAccessHref(session, link.href));
+  const visibleKpis = KPIS.filter((kpi) => canAccessHref(session, kpi.href));
+  const visibleActivity = ACTIVITY.filter((item) => canAccessHref(session, item.href));
+  const showLeadPipeline = canAccessHref(session, "/crm/leads");
+  const showMortgagePipeline = canAccessHref(session, "/lending");
+  const showProduction = canAccessHref(session, "/realty/transactions");
+  const quickStats = [
+    {
+      label: "Avg Deal Size",
+      value: formatCurrency(pipelineVol / Math.max(SAMPLE_TRANSACTIONS.length, 1)),
+      icon:  TrendingUp,
+      color: "text-gold",
+      href: "/realty/transactions",
+    },
+    {
+      label: "Approval Rate",
+      value: `${Math.round((activeApps / Math.max(MORTGAGE_APPS.length, 1)) * 100)}%`,
+      icon:  CheckCircle2,
+      color: "text-emerald-500",
+      href: "/lending",
+    },
+    {
+      label: "Active Transactions",
+      value: String(SAMPLE_TRANSACTIONS.length),
+      icon:  Receipt,
+      color: "text-blue-500",
+      href: "/realty/transactions",
+    },
+  ].filter((stat) => canAccessHref(session, stat.href));
 
   useEffect(() => {
     const id = requestAnimationFrame(() => {
@@ -268,22 +299,24 @@ export default function DashboardClient() {
       {/* ── Welcome ─────────────────────────────────────── */}
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
-          <h2 className="text-2xl font-bold text-dravik-dark">{greeting}, Chris.</h2>
+          <h2 className="text-2xl font-bold text-dravik-dark">{greeting}, {session.user.name.split(" ")[0]}.</h2>
           <p className="text-sm text-gray-400 mt-1 min-h-[1.25rem]">{dateStr}</p>
         </div>
         <div className="flex items-center gap-2 bg-gold-light border border-gold/30 rounded-xl px-4 py-2.5">
           <DollarSign size={15} className="text-gold" />
-          <span className="text-sm font-semibold text-dravik-dark">Principal Broker · Dravik Realty</span>
+          <span className="text-sm font-semibold text-dravik-dark">{session.user.title} · {session.tenant.name}</span>
         </div>
       </div>
 
       {/* ── KPI Strip ────────────────────────────────────── */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {KPIS.map(kpi => <KpiCard key={kpi.label} {...kpi} />)}
+        {visibleKpis.map(kpi => <KpiCard key={kpi.label} {...kpi} />)}
       </div>
 
       {/* ── Pipeline at a Glance ─────────────────────────── */}
+      {(showLeadPipeline || showMortgagePipeline) && (
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        {showLeadPipeline && (
         <div className="bg-white rounded-2xl border border-line p-5">
           <div className="flex items-center justify-between mb-5">
             <div className="flex items-center gap-2">
@@ -304,7 +337,9 @@ export default function DashboardClient() {
             {totalLeads} total leads across all stages
           </p>
         </div>
+        )}
 
+        {showMortgagePipeline && (
         <div className="bg-white rounded-2xl border border-line p-5">
           <div className="flex items-center justify-between mb-5">
             <div className="flex items-center gap-2">
@@ -325,7 +360,9 @@ export default function DashboardClient() {
             {activeApps} active applications in pipeline
           </p>
         </div>
+        )}
       </div>
+      )}
 
       {/* ── Activity Feed + Production ───────────────────── */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
@@ -342,12 +379,12 @@ export default function DashboardClient() {
             </span>
           </div>
           <div className="divide-y divide-line">
-            {ACTIVITY.length === 0 ? (
+            {visibleActivity.length === 0 ? (
               <div className="px-5 py-12 text-center">
                 <p className="text-sm font-semibold text-gray-400">No recent activity yet</p>
                 <p className="text-xs text-gray-300 mt-1">Activity will appear here once real leads, transactions, and messages exist.</p>
               </div>
-            ) : ACTIVITY.map(item => {
+            ) : visibleActivity.map(item => {
               const Icon = item.icon;
               return (
                 <Link
@@ -379,6 +416,7 @@ export default function DashboardClient() {
 
         {/* Production widget — 1/3 */}
         <div className="space-y-4">
+          {showProduction && (
           <div className="bg-dravik-dark rounded-2xl p-5">
             <div className="flex items-center gap-2 mb-4">
               <Target size={14} className="text-gold" />
@@ -394,29 +432,12 @@ export default function DashboardClient() {
               <span className="text-gray-400">{SAMPLE_TRANSACTIONS.length} active deals</span>
             </div>
           </div>
+          )}
 
+          {quickStats.length > 0 && (
           <div className="bg-white rounded-2xl border border-line p-5 space-y-3.5">
             <p className="text-xs font-bold text-dravik-dark">Quick Stats</p>
-            {[
-              {
-                label: "Avg Deal Size",
-                value: formatCurrency(pipelineVol / Math.max(SAMPLE_TRANSACTIONS.length, 1)),
-                icon:  TrendingUp,
-                color: "text-gold",
-              },
-              {
-                label: "Approval Rate",
-                value: `${Math.round((activeApps / Math.max(MORTGAGE_APPS.length, 1)) * 100)}%`,
-                icon:  CheckCircle2,
-                color: "text-emerald-500",
-              },
-              {
-                label: "Active Transactions",
-                value: String(SAMPLE_TRANSACTIONS.length),
-                icon:  Receipt,
-                color: "text-blue-500",
-              },
-            ].map(stat => {
+            {quickStats.map(stat => {
               const Icon = stat.icon;
               return (
                 <div key={stat.label} className="flex items-center justify-between">
@@ -429,6 +450,7 @@ export default function DashboardClient() {
               );
             })}
           </div>
+          )}
         </div>
       </div>
 
@@ -439,7 +461,7 @@ export default function DashboardClient() {
           <h3 className="text-base font-bold text-dravik-dark">Platform Modules</h3>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {DASHBOARD_MODULES.map(({ label, desc, icon: Icon, href, accent }) => (
+          {dashboardModules.map(({ label, desc, icon: Icon, href, accent }) => (
             <Link
               key={label}
               href={href}
@@ -486,7 +508,7 @@ export default function DashboardClient() {
         </button>
       </div>
 
-      {showHelp && <HelpModal onClose={closeHelp} />}
+      {showHelp && <HelpModal links={visibleHelpLinks} onClose={closeHelp} />}
     </div>
   );
 }

@@ -1,4 +1,12 @@
 import { test, expect } from "./fixtures";
+import { LOCAL_COMMAND_SESSION } from "../../apps/command-center/src/auth/local-identity";
+import {
+  DASHBOARD_MODULES,
+  NAV_SECTIONS,
+  canAccessItem,
+  filterDashboardModules,
+  filterNavSections,
+} from "../../apps/command-center/src/modules/registry";
 
 // Dashboard tiles repeat the sidebar link names, so all shell assertions
 // are scoped to the <aside> sidebar.
@@ -33,45 +41,43 @@ test.describe("shell chrome", () => {
     await expect(page).toHaveURL(/\/transactions$/);
   });
 
-  // E9.3: data-driven nav completeness -- derived from NAV_SECTIONS in modules/registry.ts.
-  // When the registry changes, update this list to keep it in sync.
-  const NAV_LABELS = [
-    "Dashboard",
-    "Lead Engine & Smart CRM",
-    "Prospecting & Seller Leads",
-    "DRAVIK Partner Network",
-    "Interactive Mapping & IDX",
-    "Listings",
-    "Marketing & Landing Pages",
-    "Transactions",
-    "Unified Inbox",
-    "Client Portal Admin",
-    "Reports & Analytics",
-    "Team Management",
-    "Mortgage Tools",
+  // E9.3: data-driven nav completeness. The shell now renders the subscribed
+  // registry subset for the active session, not every module in the product.
+  const VISIBLE_NAV_LABELS = [
+    ...filterNavSections(LOCAL_COMMAND_SESSION).flatMap((section) =>
+      section.items.map((item) => item.label)
+    ),
     "Settings",
   ];
+  const HIDDEN_NAV_LABELS = NAV_SECTIONS
+    .flatMap((section) => section.items)
+    .filter((item) => !canAccessItem(LOCAL_COMMAND_SESSION, item))
+    .map((item) => item.label);
 
-  test("sidebar renders all nav items from the module registry", async ({ page }) => {
+  test("sidebar renders subscribed nav items from the module registry", async ({ page }) => {
     const sidebar = page.locator("aside");
-    for (const label of NAV_LABELS) {
+    for (const label of VISIBLE_NAV_LABELS) {
       await expect(sidebar.getByText(label)).toBeVisible();
+    }
+
+    for (const label of HIDDEN_NAV_LABELS) {
+      await expect(sidebar.getByText(label)).toHaveCount(0);
     }
   });
 
   // Dashboard module tiles -- derived from DASHBOARD_MODULES in modules/registry.ts.
-  const DASHBOARD_MODULE_HREFS = [
-    "/referrals",
-    "/crm/leads",
-    "/broker/reports",
-    "/lending",
-    "/realty/transactions",
-    "/marketing",
-  ];
+  const DASHBOARD_MODULE_HREFS = filterDashboardModules(LOCAL_COMMAND_SESSION).map((tile) => tile.href);
+  const HIDDEN_DASHBOARD_MODULE_HREFS = DASHBOARD_MODULES
+    .filter((tile) => !canAccessItem(LOCAL_COMMAND_SESSION, tile))
+    .map((tile) => tile.href);
 
-  test("dashboard renders all module tiles from the registry", async ({ page }) => {
+  test("dashboard renders subscribed module tiles from the registry", async ({ page }) => {
     for (const href of DASHBOARD_MODULE_HREFS) {
       await expect(page.locator(`a[href="${href}"]`).first()).toBeVisible();
+    }
+
+    for (const href of HIDDEN_DASHBOARD_MODULE_HREFS) {
+      await expect(page.locator(`a[href="${href}"]`)).toHaveCount(0);
     }
   });
 });

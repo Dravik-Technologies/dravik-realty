@@ -42,6 +42,8 @@ Create the GitHub OIDC deployment identity:
 scripts/azure/bootstrap-github-oidc.sh
 ```
 
+The deployment identity gets `Contributor`, `Role Based Access Control Administrator`, and `AcrPush` on both resource groups. The RBAC role is required because the Bicep deployment creates scoped role assignments for the app's managed identity.
+
 Add the printed Azure values as GitHub secrets. Add `POSTGRES_ADMIN_PASSWORD` as an environment secret in both the `staging` and `production` GitHub environments.
 
 ## Manual Validation

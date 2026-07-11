@@ -16,6 +16,9 @@ param managedIdentityName string
 param maxReplicas int = environmentName == 'prod' ? 20 : 5
 param minReplicas int = environmentName == 'prod' ? 2 : 1
 
+@secure()
+param databaseUrl string = ''
+
 @allowed([
   '0.5'
   '1.0'
@@ -31,6 +34,18 @@ param cpuCores string = environmentName == 'prod' ? '1.0' : '0.5'
 param memory string = environmentName == 'prod' ? '2Gi' : '1Gi'
 
 var containerAppName = 'dravik-${environmentName}-${appName}'
+var databaseSecrets = empty(databaseUrl) ? [] : [
+  {
+    name: 'database-url'
+    value: databaseUrl
+  }
+]
+var databaseEnvironment = empty(databaseUrl) ? [] : [
+  {
+    name: 'DATABASE_URL'
+    secretRef: 'database-url'
+  }
+]
 
 resource containerRegistry 'Microsoft.ContainerRegistry/registries@2023-07-01' existing = {
   name: acrName
@@ -56,6 +71,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
     configuration: {
       activeRevisionsMode: 'Single'
+      secrets: databaseSecrets
       ingress: {
         allowInsecure: false
         external: true
@@ -75,7 +91,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
         {
           name: appName
           image: '${containerRegistry.properties.loginServer}/${imageName}:${imageTag}'
-          env: [
+          env: concat([
             {
               name: 'APP_ENV'
               value: environmentName
@@ -96,7 +112,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
               name: 'PORT'
               value: '3000'
             }
-          ]
+          ], databaseEnvironment)
           resources: {
             cpu: json(cpuCores)
             memory: memory

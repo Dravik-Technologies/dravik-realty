@@ -74,7 +74,7 @@ export default function ListView({
             <button
               key={col.label}
               onClick={() => onSort(col.field!)}
-              className={cn(col.width, "flex items-center select-none hover:text-axen-dark focus-visible:outline-none focus-visible:text-gold transition-colors")}
+              className={cn(col.width, "flex items-center select-none hover:text-dravik-dark focus-visible:outline-none focus-visible:text-gold transition-colors")}
               aria-label={`Sort by ${col.label}`}
             >
               {col.label}
@@ -108,7 +108,7 @@ export default function ListView({
                 <img src={p.heroImage} alt={p.address} className="w-full h-full object-cover" />
               </div>
               <div className="min-w-0">
-                <p className="text-sm font-semibold text-axen-dark truncate">{p.address}</p>
+                <p className="text-sm font-semibold text-dravik-dark truncate">{p.address}</p>
                 <p className="text-xs text-gray-400 truncate">{p.city}, {p.state} · {p.neighborhood}</p>
                 <div className="mt-0.5">
                   <StatusBadge status={p.status} />
@@ -118,7 +118,7 @@ export default function ListView({
 
             {/* Price */}
             <div className="w-36 flex flex-col">
-              <span className="text-sm font-bold text-axen-dark">{formatCurrency(p.price)}</span>
+              <span className="text-sm font-bold text-dravik-dark">{formatCurrency(p.price)}</span>
               {p.originalPrice && (
                 <span className="text-[10px] text-rose-500 line-through">{formatCurrency(p.originalPrice)}</span>
               )}
@@ -177,7 +177,7 @@ export default function ListView({
               <button
                 onClick={(e) => { e.stopPropagation(); onSelect(p); }}
                 aria-label="View property details"
-                className="p-1.5 rounded-lg hover:bg-axen-dark hover:text-white text-gray-300 transition-colors"
+                className="p-1.5 rounded-lg hover:bg-dravik-dark hover:text-white text-gray-300 transition-colors"
               >
                 <ArrowRight size={13} />
               </button>

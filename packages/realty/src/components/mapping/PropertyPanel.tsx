@@ -30,7 +30,7 @@ function SliderRow({ label, value, min, max, step, onChange, fmt }: {
     <div className="space-y-1.5">
       <div className="flex justify-between text-xs">
         <span className="text-gray-500 font-medium">{label}</span>
-        <span className="font-bold text-axen-dark">{fmt(value)}</span>
+        <span className="font-bold text-dravik-dark">{fmt(value)}</span>
       </div>
       <input
         type="range" min={min} max={max} step={step} value={value}
@@ -68,32 +68,32 @@ function MortgageTab({ property: p }: { property: Property }) {
 
       <div className="bg-gold-light border border-gold/30 rounded-xl p-4">
         <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wide">Est. Monthly Payment</p>
-        <p className="text-2xl font-bold text-axen-dark mt-1 tabular-nums">
+        <p className="text-2xl font-bold text-dravik-dark mt-1 tabular-nums">
           {formatCurrency(Math.round(withTaxHoa))}
           <span className="text-sm font-normal text-gray-400">/mo</span>
         </p>
         <div className="mt-2 space-y-1 text-xs text-gray-500">
           <div className="flex justify-between">
             <span>Principal & Interest</span>
-            <span className="font-semibold text-axen-dark">{formatCurrency(Math.round(monthly))}</span>
+            <span className="font-semibold text-dravik-dark">{formatCurrency(Math.round(monthly))}</span>
           </div>
           <div className="flex justify-between">
             <span>Property Tax</span>
-            <span className="font-semibold text-axen-dark">{formatCurrency(Math.round(p.taxesAnnual / 12))}</span>
+            <span className="font-semibold text-dravik-dark">{formatCurrency(Math.round(p.taxesAnnual / 12))}</span>
           </div>
           {(p.hoaMonthly ?? 0) > 0 && (
             <div className="flex justify-between">
               <span>HOA</span>
-              <span className="font-semibold text-axen-dark">{formatCurrency(p.hoaMonthly!)}</span>
+              <span className="font-semibold text-dravik-dark">{formatCurrency(p.hoaMonthly!)}</span>
             </div>
           )}
           <div className="flex justify-between pt-1 border-t border-gold/20">
             <span>Loan Amount</span>
-            <span className="font-semibold text-axen-dark">{formatCurrency(Math.round(loanAmt))}</span>
+            <span className="font-semibold text-dravik-dark">{formatCurrency(Math.round(loanAmt))}</span>
           </div>
         </div>
       </div>
-      <button className="w-full py-2.5 text-sm font-bold bg-axen-dark text-white rounded-xl hover:bg-gold hover:text-axen-dark transition-all">
+      <button className="w-full py-2.5 text-sm font-bold bg-dravik-dark text-white rounded-xl hover:bg-gold hover:text-dravik-dark transition-all">
         Connect with Mortgage Officer
       </button>
     </div>
@@ -116,7 +116,7 @@ function CompsTab({ property: p }: { property: Property }) {
         return (
           <div key={i} className="flex items-center justify-between py-3 px-3 bg-surface-2 rounded-xl">
             <div>
-              <p className="text-sm font-bold text-axen-dark">{formatCurrency(compPrice)}</p>
+              <p className="text-sm font-bold text-dravik-dark">{formatCurrency(compPrice)}</p>
               <p className="text-xs text-gray-400">
                 {p.beds}bd · {compSqft.toLocaleString()} sqft · {c.sold}
               </p>
@@ -132,7 +132,7 @@ function CompsTab({ property: p }: { property: Property }) {
       })}
       <div className="bg-surface-2 rounded-xl px-3 py-3 flex justify-between text-xs">
         <span className="text-gray-500">Average Comp Price</span>
-        <span className="font-bold text-axen-dark">
+        <span className="font-bold text-dravik-dark">
           {formatCurrency(Math.round(COMP_OFFSETS.reduce((s, c) => s + p.price * (1 + c.delta), 0) / 3))}
         </span>
       </div>
@@ -151,7 +151,7 @@ function OutreachTab({ property: p }: { property: Property }) {
           <div className="flex-1 h-2 bg-gold/20 rounded-full overflow-hidden">
             <div className="h-full bg-gold rounded-full" style={{ width: `${p.leadScore}%` }} />
           </div>
-          <span className="text-sm font-bold text-axen-dark tabular-nums">{p.leadScore}</span>
+          <span className="text-sm font-bold text-dravik-dark tabular-nums">{p.leadScore}</span>
         </div>
         <p className="text-[10px] text-gray-500 mt-1.5">
           {p.viewedThisWeek} views this week · {p.savedCount} saves
@@ -161,7 +161,7 @@ function OutreachTab({ property: p }: { property: Property }) {
       {!created ? (
         <button
           onClick={() => setCreated(true)}
-          className="w-full flex items-center justify-center gap-2 py-3 bg-axen-dark text-white font-bold text-sm rounded-xl hover:bg-gold hover:text-axen-dark transition-all"
+          className="w-full flex items-center justify-center gap-2 py-3 bg-dravik-dark text-white font-bold text-sm rounded-xl hover:bg-gold hover:text-dravik-dark transition-all"
         >
           <UserPlus size={16} />
           Create Lead from Property
@@ -189,7 +189,7 @@ function OutreachTab({ property: p }: { property: Property }) {
               <Icon size={15} className="text-gold" />
             </div>
             <div>
-              <p className="text-xs font-bold text-axen-dark">{label}</p>
+              <p className="text-xs font-bold text-dravik-dark">{label}</p>
               <p className="text-[10px] text-gray-400">{sub}</p>
             </div>
           </button>
@@ -354,7 +354,7 @@ export default function PropertyPanel({ property: p, open, onClose }: PropertyPa
           ].map(({ icon: Icon, value, label }) => (
             <div key={label} className="flex-1 flex flex-col items-center py-2.5 gap-0.5">
               <Icon size={13} className="text-gold" />
-              <span className="text-sm font-bold text-axen-dark">{value}</span>
+              <span className="text-sm font-bold text-dravik-dark">{value}</span>
               <span className="text-[9px] text-gray-400 uppercase tracking-wide">{label}</span>
             </div>
           ))}
@@ -369,8 +369,8 @@ export default function PropertyPanel({ property: p, open, onClose }: PropertyPa
               className={cn(
                 "flex items-center gap-1.5 px-4 py-2.5 text-xs font-semibold border-b-2 whitespace-nowrap transition-colors",
                 tab === id
-                  ? "border-gold text-axen-dark"
-                  : "border-transparent text-gray-400 hover:text-axen-dark"
+                  ? "border-gold text-dravik-dark"
+                  : "border-transparent text-gray-400 hover:text-dravik-dark"
               )}
             >
               <Icon size={13} />
@@ -385,10 +385,10 @@ export default function PropertyPanel({ property: p, open, onClose }: PropertyPa
             <div className="p-5 space-y-5">
               {/* Action buttons */}
               <div className="flex gap-2">
-                <button className="flex-1 flex items-center justify-center gap-1.5 py-2.5 text-sm font-bold bg-axen-dark text-white rounded-xl hover:bg-gold hover:text-axen-dark transition-all">
+                <button className="flex-1 flex items-center justify-center gap-1.5 py-2.5 text-sm font-bold bg-dravik-dark text-white rounded-xl hover:bg-gold hover:text-dravik-dark transition-all">
                   <Bookmark size={14} /> Save Listing
                 </button>
-                <button className="flex-1 flex items-center justify-center gap-1.5 py-2.5 text-sm font-bold border border-line text-axen-dark rounded-xl hover:bg-surface-2 transition-all">
+                <button className="flex-1 flex items-center justify-center gap-1.5 py-2.5 text-sm font-bold border border-line text-dravik-dark rounded-xl hover:bg-surface-2 transition-all">
                   <Send size={14} /> Send to Client
                 </button>
                 <button className="flex-1 flex items-center justify-center gap-1.5 py-2.5 text-sm font-bold border border-gold/40 text-gold rounded-xl hover:bg-gold-light transition-all">
@@ -399,7 +399,7 @@ export default function PropertyPanel({ property: p, open, onClose }: PropertyPa
               {/* Description */}
               <div>
                 <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">About this property</h3>
-                <p className="text-sm text-axen-dark leading-relaxed">{p.description}</p>
+                <p className="text-sm text-dravik-dark leading-relaxed">{p.description}</p>
               </div>
 
               {/* Key details grid */}
@@ -418,7 +418,7 @@ export default function PropertyPanel({ property: p, open, onClose }: PropertyPa
                   ].map(({ label, value }) => (
                     <div key={label} className="flex items-center justify-between py-2 px-3 bg-surface-2 rounded-lg">
                       <span className="text-xs text-gray-400">{label}</span>
-                      <span className="text-xs font-semibold text-axen-dark">{value}</span>
+                      <span className="text-xs font-semibold text-dravik-dark">{value}</span>
                     </div>
                   ))}
                 </div>
@@ -429,7 +429,7 @@ export default function PropertyPanel({ property: p, open, onClose }: PropertyPa
                 <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Features</h3>
                 <div className="flex flex-wrap gap-1.5">
                   {p.features.map((f) => (
-                    <span key={f} className="flex items-center gap-1 text-xs bg-surface-2 text-axen-dark px-2.5 py-1 rounded-full border border-line">
+                    <span key={f} className="flex items-center gap-1 text-xs bg-surface-2 text-dravik-dark px-2.5 py-1 rounded-full border border-line">
                       <CheckCircle size={11} className="text-gold" />
                       {f}
                     </span>
@@ -441,7 +441,7 @@ export default function PropertyPanel({ property: p, open, onClose }: PropertyPa
               <div className="flex items-center justify-between py-3 px-4 bg-surface-2 rounded-xl">
                 <div className="flex items-center gap-2">
                   <DollarSign size={14} className="text-gold" />
-                  <span className="text-sm font-semibold text-axen-dark">Lead Opportunity Score</span>
+                  <span className="text-sm font-semibold text-dravik-dark">Lead Opportunity Score</span>
                 </div>
                 <LeadScoreBadge score={p.leadScore} />
               </div>
@@ -476,7 +476,7 @@ export default function PropertyPanel({ property: p, open, onClose }: PropertyPa
         {/* ── Footer ────────────────────────────────────────── */}
         <div className="flex-shrink-0 border-t border-line px-5 py-3 flex items-center justify-between bg-surface">
           <div>
-            <p className="text-[10px] text-gray-400">Listing courtesy of Axen Realty IDX · MLS #{p.mlsNumber}</p>
+            <p className="text-[10px] text-gray-400">Listing courtesy of Dravik Realty IDX · MLS #{p.mlsNumber}</p>
             {p.status === "Price Reduced" && p.originalPrice && (
               <p className="text-[10px] text-rose-500 flex items-center gap-1 mt-0.5">
                 <TrendingDown size={9} />
@@ -486,7 +486,7 @@ export default function PropertyPanel({ property: p, open, onClose }: PropertyPa
           </div>
           <button
             onClick={onClose}
-            className="text-xs font-semibold text-gray-400 hover:text-axen-dark px-3 py-1.5 rounded-lg hover:bg-surface-2 transition-colors"
+            className="text-xs font-semibold text-gray-400 hover:text-dravik-dark px-3 py-1.5 rounded-lg hover:bg-surface-2 transition-colors"
           >
             Close
           </button>

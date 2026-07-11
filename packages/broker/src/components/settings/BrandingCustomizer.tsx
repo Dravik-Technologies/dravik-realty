@@ -25,10 +25,10 @@ function Swatch({ theme, active, onSelect }: {
         <div className="w-8 h-8 rounded-lg" style={{ background: theme.primary }} />
         <div className="w-8 h-8 rounded-lg" style={{ background: theme.dark }} />
       </div>
-      <p className="text-[10px] font-semibold text-axen-dark text-center leading-tight">{theme.label}</p>
+      <p className="text-[10px] font-semibold text-dravik-dark text-center leading-tight">{theme.label}</p>
       {active && (
         <span className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-gold flex items-center justify-center">
-          <Check size={11} className="text-axen-dark" />
+          <Check size={11} className="text-dravik-dark" />
         </span>
       )}
     </button>
@@ -46,9 +46,9 @@ function EmailPreview({ primary, dark }: { primary: string; dark: string }) {
         {/* Header band */}
         <div className="h-10 flex items-center px-4 gap-2" style={{ background: dark }}>
           <div className="w-6 h-6 rounded border flex items-center justify-center" style={{ borderColor: `${primary}40`, background: `${primary}10` }}>
-            <span className="font-bold text-xs leading-none" style={{ color: primary }}>A</span>
+            <span className="font-bold text-xs leading-none" style={{ color: primary }}>DR</span>
           </div>
-          <span className="text-xs font-bold text-white/90">AxenONE</span>
+          <span className="text-xs font-bold text-white/90">Dravik Realty</span>
         </div>
         {/* Body */}
         <div className="px-5 py-4 space-y-2">
@@ -100,7 +100,7 @@ export default function BrandingCustomizer({ onSave }: { onSave: () => void }) {
         <div className="flex items-center gap-2 mb-5">
           <Palette size={16} className="text-gold" />
           <div>
-            <h3 className="text-sm font-bold text-axen-dark">Color Theme</h3>
+            <h3 className="text-sm font-bold text-dravik-dark">Color Theme</h3>
             <p className="text-xs text-gray-400 mt-0.5">Applied to sidebar, buttons, and accents across the platform.</p>
           </div>
         </div>
@@ -124,7 +124,7 @@ export default function BrandingCustomizer({ onSave }: { onSave: () => void }) {
             style={{ background: customHex }}
           />
           <div className="flex-1">
-            <p className="text-xs font-semibold text-axen-dark mb-1">Custom Accent Color</p>
+            <p className="text-xs font-semibold text-dravik-dark mb-1">Custom Accent Color</p>
             <input
               type="color"
               value={customHex}
@@ -147,7 +147,7 @@ export default function BrandingCustomizer({ onSave }: { onSave: () => void }) {
         <div className="flex items-center gap-2 mb-5">
           <Mail size={16} className="text-gold" />
           <div>
-            <h3 className="text-sm font-bold text-axen-dark">Email Template Preview</h3>
+            <h3 className="text-sm font-bold text-dravik-dark">Email Template Preview</h3>
             <p className="text-xs text-gray-400 mt-0.5">Outbound emails use your active brand colors.</p>
           </div>
         </div>
@@ -156,17 +156,17 @@ export default function BrandingCustomizer({ onSave }: { onSave: () => void }) {
 
       {/* Typography + logo notes */}
       <div className="bg-white border border-line rounded-2xl p-6">
-        <h3 className="text-sm font-bold text-axen-dark mb-3">Typography & Assets</h3>
+        <h3 className="text-sm font-bold text-dravik-dark mb-3">Typography & Assets</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {[
             { label: "Primary Font",    value: "Geist Sans",      locked: true  },
             { label: "Monospace Font",  value: "Geist Mono",      locked: true  },
-            { label: "Logo (Light BG)", value: "axen-logo.svg",   locked: false },
-            { label: "Logo (Dark BG)",  value: "axen-logo-inv.svg",locked: false },
+            { label: "Logo (Light BG)", value: "dravik-logo.svg",   locked: false },
+            { label: "Logo (Dark BG)",  value: "dravik-logo-inv.svg",locked: false },
           ].map((item) => (
             <div key={item.label} className="flex items-center justify-between bg-surface-2 rounded-xl px-4 py-3">
               <div>
-                <p className="text-xs font-semibold text-axen-dark">{item.label}</p>
+                <p className="text-xs font-semibold text-dravik-dark">{item.label}</p>
                 <p className="text-[10px] text-gray-400">{item.value}</p>
               </div>
               {item.locked ? (
@@ -183,7 +183,7 @@ export default function BrandingCustomizer({ onSave }: { onSave: () => void }) {
       <div className="flex justify-end">
         <button
           onClick={onSave}
-          className="px-5 py-2.5 bg-gold text-axen-dark text-sm font-bold rounded-xl hover:bg-gold-dark transition-colors"
+          className="px-5 py-2.5 bg-gold text-dravik-dark text-sm font-bold rounded-xl hover:bg-gold-dark transition-colors"
         >
           Apply Theme
         </button>

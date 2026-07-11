@@ -57,7 +57,7 @@ export default function SecurityAuditLog({ onSave }: { onSave: () => void }) {
         <div className="flex items-center gap-2 mb-5">
           <Lock size={16} className="text-gold" />
           <div>
-            <h3 className="text-sm font-bold text-axen-dark">Security Settings</h3>
+            <h3 className="text-sm font-bold text-dravik-dark">Security Settings</h3>
             <p className="text-xs text-gray-400 mt-0.5">Authentication and access controls for the platform.</p>
           </div>
         </div>
@@ -68,7 +68,7 @@ export default function SecurityAuditLog({ onSave }: { onSave: () => void }) {
             <div className="flex items-start gap-3">
               <ShieldCheck size={16} className="text-gold mt-0.5 flex-shrink-0" />
               <div>
-                <p className="text-sm font-semibold text-axen-dark">Two-Factor Authentication</p>
+                <p className="text-sm font-semibold text-dravik-dark">Two-Factor Authentication</p>
                 <p className="text-xs text-gray-400 mt-0.5">Require 2FA for all admin and Principal Broker accounts.</p>
               </div>
             </div>
@@ -80,7 +80,7 @@ export default function SecurityAuditLog({ onSave }: { onSave: () => void }) {
             <div className="flex items-start gap-3">
               <Monitor size={16} className="text-gray-400 mt-0.5 flex-shrink-0" />
               <div>
-                <p className="text-sm font-semibold text-axen-dark">IP Allowlist</p>
+                <p className="text-sm font-semibold text-dravik-dark">IP Allowlist</p>
                 <p className="text-xs text-gray-400 mt-0.5">Restrict access to known office and VPN IP addresses.</p>
                 {ipLock && (
                   <p className="text-[10px] text-gold mt-1.5 font-semibold">
@@ -97,14 +97,14 @@ export default function SecurityAuditLog({ onSave }: { onSave: () => void }) {
             <div className="flex items-start gap-3">
               <Clock size={16} className="text-gray-400 mt-0.5 flex-shrink-0" />
               <div>
-                <p className="text-sm font-semibold text-axen-dark">Session Timeout</p>
+                <p className="text-sm font-semibold text-dravik-dark">Session Timeout</p>
                 <p className="text-xs text-gray-400 mt-0.5">Auto-sign out inactive users after this period.</p>
               </div>
             </div>
             <select
               value={timeout}
               onChange={(e) => setTimeout_(e.target.value)}
-              className="px-3 py-1.5 bg-surface border border-line rounded-xl text-sm text-axen-dark focus:outline-none focus:border-gold transition"
+              className="px-3 py-1.5 bg-surface border border-line rounded-xl text-sm text-dravik-dark focus:outline-none focus:border-gold transition"
             >
               {[["15","15 minutes"],["30","30 minutes"],["60","1 hour"],["240","4 hours"],["480","8 hours"]].map(([v, l]) => (
                 <option key={v} value={v}>{l}</option>
@@ -116,7 +116,7 @@ export default function SecurityAuditLog({ onSave }: { onSave: () => void }) {
         <div className="flex justify-end mt-2">
           <button
             onClick={onSave}
-            className="px-4 py-2 bg-gold text-axen-dark text-xs font-bold rounded-xl hover:bg-gold-dark transition-colors"
+            className="px-4 py-2 bg-gold text-dravik-dark text-xs font-bold rounded-xl hover:bg-gold-dark transition-colors"
           >
             Save Settings
           </button>
@@ -127,7 +127,7 @@ export default function SecurityAuditLog({ onSave }: { onSave: () => void }) {
       <div className="bg-white border border-line rounded-2xl overflow-hidden">
         <div className="flex items-center justify-between px-6 py-4 border-b border-line">
           <div>
-            <h3 className="text-sm font-bold text-axen-dark">Audit Log</h3>
+            <h3 className="text-sm font-bold text-dravik-dark">Audit Log</h3>
             <p className="text-xs text-gray-400 mt-0.5">Recent activity across all modules.</p>
           </div>
           <div className="flex items-center gap-2">
@@ -163,12 +163,12 @@ export default function SecurityAuditLog({ onSave }: { onSave: () => void }) {
                 <tr key={entry.id} className={cn("border-b border-line last:border-0", cfg.row)}>
                   <td className="px-5 py-3 font-mono text-[10px] text-gray-400 whitespace-nowrap">{entry.timestamp}</td>
                   <td className="px-4 py-3 hidden sm:table-cell">
-                    <span className="text-xs text-axen-dark font-medium">{entry.user}</span>
+                    <span className="text-xs text-dravik-dark font-medium">{entry.user}</span>
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2">
                       <Icon size={12} className={cn("flex-shrink-0", cfg.cls)} />
-                      <span className="text-xs text-axen-dark">{entry.action}</span>
+                      <span className="text-xs text-dravik-dark">{entry.action}</span>
                     </div>
                   </td>
                   <td className="px-4 py-3 hidden md:table-cell">
@@ -187,7 +187,7 @@ export default function SecurityAuditLog({ onSave }: { onSave: () => void }) {
           <div className="border-t border-line px-5 py-3 flex justify-center">
             <button
               onClick={() => setLogLimit((v) => Math.min(v + 10, AUDIT_LOG.length))}
-              className="flex items-center gap-1.5 text-xs font-semibold text-gray-500 hover:text-axen-dark transition-colors"
+              className="flex items-center gap-1.5 text-xs font-semibold text-gray-500 hover:text-dravik-dark transition-colors"
             >
               <ChevronDown size={13} /> Load more ({AUDIT_LOG.length - logLimit} remaining)
             </button>

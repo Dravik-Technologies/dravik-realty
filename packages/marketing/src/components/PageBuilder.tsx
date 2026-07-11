@@ -44,18 +44,18 @@ interface SectionPreviewProps { content: Record<string, string> }
 
 function HeroPreview({ content }: SectionPreviewProps) {
   return (
-    <div className="relative h-56 bg-axen-dark overflow-hidden">
+    <div className="relative h-56 bg-dravik-dark overflow-hidden">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src="https://picsum.photos/seed/hero-bg/800/400" alt=""
         className="absolute inset-0 w-full h-full object-cover opacity-50" />
-      <div className="absolute inset-0 bg-gradient-to-t from-axen-dark/80 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-dravik-dark/80 to-transparent" />
       <div className="absolute inset-0 flex flex-col items-center justify-center px-8 text-center">
         <p className="text-white font-bold text-xl leading-tight max-w-lg">{content.headline}</p>
         {content.subheadline && (
           <p className="text-white/70 text-sm mt-2 max-w-sm">{content.subheadline}</p>
         )}
         {content.ctaText && (
-          <div className="mt-4 px-5 py-2 bg-gold text-axen-dark font-bold text-sm rounded-xl">
+          <div className="mt-4 px-5 py-2 bg-gold text-dravik-dark font-bold text-sm rounded-xl">
             {content.ctaText}
           </div>
         )}
@@ -68,7 +68,7 @@ function GalleryPreview({ content }: SectionPreviewProps) {
   const seeds = ["gal1", "gal2", "gal3", "gal4", "gal5", "gal6"];
   return (
     <div className="px-6 py-5 bg-white">
-      {content.title && <p className="text-base font-bold text-axen-dark mb-1">{content.title}</p>}
+      {content.title && <p className="text-base font-bold text-dravik-dark mb-1">{content.title}</p>}
       {content.subtitle && <p className="text-xs text-gray-500 mb-3">{content.subtitle}</p>}
       <div className="grid grid-cols-3 gap-1.5">
         {seeds.map((s) => (
@@ -85,13 +85,13 @@ function GalleryPreview({ content }: SectionPreviewProps) {
 function MortgageCtaPreview({ content }: SectionPreviewProps) {
   return (
     <div className="px-6 py-5 bg-gold-light border-y border-gold/20">
-      <p className="text-base font-bold text-axen-dark">{content.headline}</p>
+      <p className="text-base font-bold text-dravik-dark">{content.headline}</p>
       {content.body && <p className="text-xs text-gray-500 mt-1 mb-3">{content.body}</p>}
       <div className="bg-white rounded-xl p-4 space-y-2">
         {[["Home Price", "$650,000"], ["Down Payment", "20%"], ["Loan Term", "30 years"]].map(([l, v]) => (
           <div key={l} className="flex justify-between text-xs">
             <span className="text-gray-500">{l}</span>
-            <span className="font-bold text-axen-dark">{v}</span>
+            <span className="font-bold text-dravik-dark">{v}</span>
           </div>
         ))}
         <div className="pt-2 border-t border-line flex justify-between text-sm">
@@ -100,7 +100,7 @@ function MortgageCtaPreview({ content }: SectionPreviewProps) {
         </div>
       </div>
       {content.ctaText && (
-        <div className="mt-3 text-center py-2 bg-axen-dark text-white text-xs font-bold rounded-lg">
+        <div className="mt-3 text-center py-2 bg-dravik-dark text-white text-xs font-bold rounded-lg">
           {content.ctaText}
         </div>
       )}
@@ -111,11 +111,11 @@ function MortgageCtaPreview({ content }: SectionPreviewProps) {
 function TestimonialsPreview({ content }: SectionPreviewProps) {
   const items = [
     { name: "Sarah M.", text: "Chris found us our dream home in under 3 weeks. Absolutely exceptional service." },
-    { name: "James T.", text: "The Axen Realty team made selling our home completely stress-free." },
+    { name: "James T.", text: "The Dravik Realty team made selling our home completely stress-free." },
   ];
   return (
     <div className="px-6 py-5 bg-surface">
-      {content.headline && <p className="text-base font-bold text-axen-dark mb-3">{content.headline}</p>}
+      {content.headline && <p className="text-base font-bold text-dravik-dark mb-3">{content.headline}</p>}
       <div className="space-y-3">
         {items.map((t) => (
           <div key={t.name} className="bg-white rounded-xl p-3 border border-line">
@@ -123,7 +123,7 @@ function TestimonialsPreview({ content }: SectionPreviewProps) {
               {STAR_INDICES.map((i) => <Star key={i} size={10} className="text-gold fill-gold" />)}
             </div>
             <p className="text-xs text-gray-500 leading-relaxed">{`"${t.text}"`}</p>
-            <p className="text-[11px] font-bold text-axen-dark mt-1.5">— {t.name}</p>
+            <p className="text-[11px] font-bold text-dravik-dark mt-1.5">— {t.name}</p>
           </div>
         ))}
       </div>
@@ -133,7 +133,7 @@ function TestimonialsPreview({ content }: SectionPreviewProps) {
 
 function ContactPreview({ content }: SectionPreviewProps) {
   return (
-    <div className="px-6 py-5 bg-axen-dark">
+    <div className="px-6 py-5 bg-dravik-dark">
       <p className="text-white font-bold text-base mb-0.5">{content.headline}</p>
       {content.subheadline && <p className="text-white/60 text-xs mb-4">{content.subheadline}</p>}
       <div className="space-y-2">
@@ -142,7 +142,7 @@ function ContactPreview({ content }: SectionPreviewProps) {
         ))}
         <div className="w-full h-16 bg-white/10 rounded-lg border border-white/20" />
         {content.ctaText && (
-          <div className="w-full h-9 bg-gold rounded-lg flex items-center justify-center text-axen-dark font-bold text-sm">
+          <div className="w-full h-9 bg-gold rounded-lg flex items-center justify-center text-dravik-dark font-bold text-sm">
             {content.ctaText}
           </div>
         )}
@@ -154,7 +154,7 @@ function ContactPreview({ content }: SectionPreviewProps) {
 function MapPreview({ content }: SectionPreviewProps) {
   return (
     <div className="px-6 py-5 bg-white">
-      {content.headline && <p className="text-base font-bold text-axen-dark mb-2">{content.headline}</p>}
+      {content.headline && <p className="text-base font-bold text-dravik-dark mb-2">{content.headline}</p>}
       <div className="relative rounded-xl overflow-hidden h-36 border border-line">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="https://picsum.photos/seed/map-preview/800/300" alt="Map"
@@ -180,7 +180,7 @@ function StatsPreview({ content }: SectionPreviewProps) {
   ];
   return (
     <div className="px-6 py-5 bg-white">
-      {content.headline && <p className="text-base font-bold text-axen-dark mb-3">{content.headline}</p>}
+      {content.headline && <p className="text-base font-bold text-dravik-dark mb-3">{content.headline}</p>}
       <div className="grid grid-cols-3 gap-3">
         {stats.map(({ v, l }) => (
           <div key={l} className="text-center bg-surface rounded-xl p-3">
@@ -197,13 +197,13 @@ function AgentBioPreview({ content }: SectionPreviewProps) {
   const initials = (content.agentName || "A").split(" ").map((w: string) => w[0]).join("").slice(0, 2);
   return (
     <div className="px-6 py-5 bg-surface">
-      {content.headline && <p className="text-base font-bold text-axen-dark mb-3">{content.headline}</p>}
+      {content.headline && <p className="text-base font-bold text-dravik-dark mb-3">{content.headline}</p>}
       <div className="flex items-start gap-4">
-        <div className="w-14 h-14 rounded-full bg-axen-dark flex items-center justify-center text-white text-lg font-bold flex-shrink-0">
+        <div className="w-14 h-14 rounded-full bg-dravik-dark flex items-center justify-center text-white text-lg font-bold flex-shrink-0">
           {initials}
         </div>
         <div>
-          <p className="font-bold text-axen-dark text-sm">{content.agentName}</p>
+          <p className="font-bold text-dravik-dark text-sm">{content.agentName}</p>
           <p className="text-xs text-gold mb-2">{content.agentTitle}</p>
           <p className="text-xs text-gray-500 leading-relaxed">{content.agentBio}</p>
         </div>
@@ -237,7 +237,7 @@ function LivePreview({ sections, slug }: LivePreviewProps) {
           ))}
         </div>
         <div className="flex-1 bg-white rounded-md px-3 py-1 text-[10px] text-gray-400 border border-line truncate">
-          axenone.co/p/{slug}
+          dravikrealty.com/p/{slug}
         </div>
       </div>
       {sections.map((s) => {
@@ -267,7 +267,7 @@ function AddSectionPanel({ onAdd }: AddSectionPanelProps) {
               style={{ background: `${meta.color}18` }}>
               <Icon size={12} style={{ color: meta.color }} />
             </div>
-            <span className="text-[11px] font-semibold text-axen-dark leading-tight">{meta.label}</span>
+            <span className="text-[11px] font-semibold text-dravik-dark leading-tight">{meta.label}</span>
           </button>
         );
       })}
@@ -286,7 +286,7 @@ function SectionGhost({ section }: { section: BuilderSection }) {
         style={{ background: `${meta.color}20` }}>
         <Icon size={11} style={{ color: meta.color }} />
       </div>
-      <span className="text-xs font-semibold text-axen-dark">{meta.label}</span>
+      <span className="text-xs font-semibold text-dravik-dark">{meta.label}</span>
     </div>
   );
 }
@@ -326,8 +326,8 @@ function SortableSectionRow({ section, isEditing, onToggle, onDelete, onChange }
           style={{ background: `${meta.color}20` }}>
           <Icon size={11} style={{ color: meta.color }} />
         </div>
-        <span className="text-xs font-semibold text-axen-dark flex-1 truncate">{meta.label}</span>
-        <button onClick={onToggle} className="text-gray-400 hover:text-axen-dark p-0.5 transition-colors"
+        <span className="text-xs font-semibold text-dravik-dark flex-1 truncate">{meta.label}</span>
+        <button onClick={onToggle} className="text-gray-400 hover:text-dravik-dark p-0.5 transition-colors"
           aria-label={isEditing ? "Collapse" : "Expand"}>
           {isEditing ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
         </button>
@@ -349,10 +349,10 @@ function SortableSectionRow({ section, isEditing, onToggle, onDelete, onChange }
                 </label>
                 {isLong ? (
                   <textarea rows={2} value={val} onChange={(e) => onChange(key, e.target.value)}
-                    className="w-full px-2 py-1.5 bg-white border border-line rounded-lg text-[11px] text-axen-dark resize-none focus:outline-none focus:border-gold transition" />
+                    className="w-full px-2 py-1.5 bg-white border border-line rounded-lg text-[11px] text-dravik-dark resize-none focus:outline-none focus:border-gold transition" />
                 ) : (
                   <input type="text" value={val} onChange={(e) => onChange(key, e.target.value)}
-                    className="w-full px-2 py-1.5 bg-white border border-line rounded-lg text-[11px] text-axen-dark focus:outline-none focus:border-gold transition" />
+                    className="w-full px-2 py-1.5 bg-white border border-line rounded-lg text-[11px] text-dravik-dark focus:outline-none focus:border-gold transition" />
                 )}
               </div>
             );
@@ -478,7 +478,7 @@ export default function PageBuilder({ open, onClose, initialTemplate }: PageBuil
 
   function handlePublish() {
     const slug = pageName.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-    setPubUrl(`axenone.co/p/${slug}`);
+    setPubUrl(`dravikrealty.com/p/${slug}`);
     setPublished(true);
   }
 
@@ -508,7 +508,7 @@ export default function PageBuilder({ open, onClose, initialTemplate }: PageBuil
         )}
       >
         {/* ── Top bar ─────────────────────────────────────── */}
-        <div className="flex-shrink-0 h-14 bg-axen-dark flex items-center gap-3 px-5 border-b border-white/10">
+        <div className="flex-shrink-0 h-14 bg-dravik-dark flex items-center gap-3 px-5 border-b border-white/10">
           <button ref={closeRef} onClick={onClose} aria-label="Close builder"
             className="text-gray-400 hover:text-white transition-colors p-1">
             <X size={20} />
@@ -532,7 +532,7 @@ export default function PageBuilder({ open, onClose, initialTemplate }: PageBuil
                 "flex items-center gap-1.5 px-4 py-2 rounded-xl font-bold text-sm transition-all",
                 published
                   ? "bg-emerald-500 text-white hover:bg-emerald-600"
-                  : "bg-gold text-axen-dark hover:bg-gold/90"
+                  : "bg-gold text-dravik-dark hover:bg-gold/90"
               )}
             >
               {published ? <><Check size={14} /> Update</> : <><Rocket size={14} /> Publish</>}

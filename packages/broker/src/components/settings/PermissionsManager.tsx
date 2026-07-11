@@ -72,7 +72,7 @@ function InviteModal({ onClose, onInvite }: {
   }
 
   const inputCls =
-    "w-full px-3 py-2.5 bg-surface border border-line rounded-xl text-sm text-axen-dark " +
+    "w-full px-3 py-2.5 bg-surface border border-line rounded-xl text-sm text-dravik-dark " +
     "placeholder:text-gray-300 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition";
 
   return (
@@ -88,9 +88,9 @@ function InviteModal({ onClose, onInvite }: {
         <div className="flex items-center justify-between px-6 py-4 border-b border-line">
           <div className="flex items-center gap-2.5">
             <UserPlus size={16} className="text-gold" />
-            <h2 id="invite-title" className="text-sm font-bold text-axen-dark">Invite Team Member</h2>
+            <h2 id="invite-title" className="text-sm font-bold text-dravik-dark">Invite Team Member</h2>
           </div>
-          <button onClick={handleClose} aria-label="Close" className="p-1.5 rounded-lg text-gray-400 hover:text-axen-dark hover:bg-surface-2 transition-colors">
+          <button onClick={handleClose} aria-label="Close" className="p-1.5 rounded-lg text-gray-400 hover:text-dravik-dark hover:bg-surface-2 transition-colors">
             <X size={15} />
           </button>
         </div>
@@ -102,7 +102,7 @@ function InviteModal({ onClose, onInvite }: {
           </div>
           <div>
             <label className="text-xs font-semibold text-gray-500 block mb-1.5">Email Address</label>
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="jane@axenrealty.com" className={inputCls} />
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="jane@dravikrealty.com" className={inputCls} />
           </div>
           <div>
             <label className="text-xs font-semibold text-gray-500 block mb-1.5">Role</label>
@@ -118,12 +118,12 @@ function InviteModal({ onClose, onInvite }: {
         </div>
 
         <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-line">
-          <button onClick={handleClose} className="px-4 py-2 text-xs font-semibold text-gray-500 hover:text-axen-dark transition-colors">
+          <button onClick={handleClose} className="px-4 py-2 text-xs font-semibold text-gray-500 hover:text-dravik-dark transition-colors">
             Cancel
           </button>
           <button
             onClick={handleSubmit}
-            className="flex items-center gap-1.5 px-4 py-2 bg-gold text-axen-dark text-xs font-bold rounded-xl hover:bg-gold-dark transition-colors"
+            className="flex items-center gap-1.5 px-4 py-2 bg-gold text-dravik-dark text-xs font-bold rounded-xl hover:bg-gold-dark transition-colors"
           >
             <Mail size={12} /> Send Invitation
           </button>
@@ -160,19 +160,19 @@ export default function PermissionsManager({ onSave }: { onSave: () => void }) {
       {/* Header row */}
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-sm font-bold text-axen-dark">Team Members</h3>
+          <h3 className="text-sm font-bold text-dravik-dark">Team Members</h3>
           <p className="text-xs text-gray-400 mt-0.5">{users.filter((u) => u.status === "active").length} active · {users.length} total</p>
         </div>
         <div className="flex items-center gap-2">
           <Link
             href="/team"
-            className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold border border-line rounded-xl text-gray-500 hover:text-axen-dark hover:border-axen-dark transition-colors"
+            className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold border border-line rounded-xl text-gray-500 hover:text-dravik-dark hover:border-dravik-dark transition-colors"
           >
             <ExternalLink size={12} /> Full Team View
           </Link>
           <button
             onClick={() => setShowInvite(true)}
-            className="flex items-center gap-1.5 px-3 py-2 bg-gold text-axen-dark text-xs font-bold rounded-xl hover:bg-gold-dark transition-colors"
+            className="flex items-center gap-1.5 px-3 py-2 bg-gold text-dravik-dark text-xs font-bold rounded-xl hover:bg-gold-dark transition-colors"
           >
             <UserPlus size={12} /> Invite
           </button>
@@ -216,7 +216,7 @@ export default function PermissionsManager({ onSave }: { onSave: () => void }) {
                       {user.name.split(" ").map((p) => p[0]).join("").slice(0, 2)}
                     </div>
                     <div>
-                      <p className="text-xs font-semibold text-axen-dark">{user.name}</p>
+                      <p className="text-xs font-semibold text-dravik-dark">{user.name}</p>
                       <p className="text-[10px] text-gray-400">{user.email}</p>
                     </div>
                   </div>

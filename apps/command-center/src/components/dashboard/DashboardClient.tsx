@@ -88,9 +88,9 @@ function KpiCard({ label, value, sub, accent }: { label:string; value:string; su
   return (
     <div className="bg-white rounded-2xl border border-line p-5 space-y-2">
       <div className="w-2.5 h-2.5 rounded-full" style={{ background: accent }} />
-      <p className="text-2xl font-bold text-axen-dark leading-none">{value}</p>
+      <p className="text-2xl font-bold text-dravik-dark leading-none">{value}</p>
       <div>
-        <p className="text-xs font-semibold text-axen-dark">{label}</p>
+        <p className="text-xs font-semibold text-dravik-dark">{label}</p>
         <p className="text-[11px] text-gray-400 mt-0.5">{sub}</p>
       </div>
     </div>
@@ -107,7 +107,7 @@ function StageColumn({ label, count, maxCount, accent }: {
   const pct = maxCount > 0 ? (count / maxCount) * 100 : 0;
   return (
     <div className="flex-1 min-w-0">
-      <p className="text-lg font-bold text-axen-dark leading-none mb-1.5">{count}</p>
+      <p className="text-lg font-bold text-dravik-dark leading-none mb-1.5">{count}</p>
       <div className="h-1.5 bg-line rounded-full overflow-hidden mb-1.5">
         <div className="h-full rounded-full" style={{ width: `${pct}%`, background: accent }} />
       </div>
@@ -158,7 +158,7 @@ function HelpModal({ onClose }: { onClose: () => void }) {
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center px-4 animate-fade-in">
-      <div className="absolute inset-0 bg-axen-dark/60 backdrop-blur-sm" onClick={onClose} aria-hidden />
+      <div className="absolute inset-0 bg-dravik-dark/60 backdrop-blur-sm" onClick={onClose} aria-hidden />
       <div
         ref={modalRef}
         role="dialog"
@@ -174,14 +174,14 @@ function HelpModal({ onClose }: { onClose: () => void }) {
               <HelpCircle size={16} className="text-gold" />
             </div>
             <div>
-              <h2 id="help-modal-title" className="text-sm font-bold text-axen-dark">Getting Started</h2>
-              <p className="text-[10px] text-gray-400">AxenONE v1.0 · Platform Guide</p>
+              <h2 id="help-modal-title" className="text-sm font-bold text-dravik-dark">Getting Started</h2>
+              <p className="text-[10px] text-gray-400">Dravik Realty v1.0 · Platform Guide</p>
             </div>
           </div>
           <button
             onClick={onClose}
             aria-label="Close"
-            className="p-1.5 rounded-lg text-gray-400 hover:text-axen-dark hover:bg-surface-2 transition-colors"
+            className="p-1.5 rounded-lg text-gray-400 hover:text-dravik-dark hover:bg-surface-2 transition-colors"
           >
             <X size={15} />
           </button>
@@ -190,7 +190,7 @@ function HelpModal({ onClose }: { onClose: () => void }) {
         {/* Body */}
         <div className="px-6 py-5 space-y-5 max-h-[60vh] overflow-y-auto">
           <p className="text-xs text-gray-500 leading-relaxed">
-            AxenONE is the complete real estate and mortgage CRM for Axen Realty —
+            Dravik Realty is the complete real estate and mortgage CRM for modern brokerages —
             built for agents, loan officers, and brokers in one unified platform.
           </p>
 
@@ -205,7 +205,7 @@ function HelpModal({ onClose }: { onClose: () => void }) {
                   className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-surface-2 hover:bg-gold-light border border-transparent hover:border-gold/30 transition-all"
                 >
                   <Icon size={14} className="text-gray-400 flex-shrink-0" />
-                  <span className="text-xs font-semibold text-axen-dark">{label}</span>
+                  <span className="text-xs font-semibold text-dravik-dark">{label}</span>
                 </Link>
               ))}
             </div>
@@ -227,12 +227,12 @@ function HelpModal({ onClose }: { onClose: () => void }) {
         {/* Footer */}
         <div className="px-6 py-4 border-t border-line bg-surface-2 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-md border border-gold/40 bg-axen-dark flex items-center justify-center">
-              <span className="text-gold text-[10px] font-bold leading-none">A</span>
+            <div className="w-6 h-6 rounded-md border border-gold/40 bg-dravik-dark flex items-center justify-center">
+              <span className="text-gold text-[10px] font-bold leading-none">DR</span>
             </div>
-            <span className="text-xs font-bold text-axen-dark">AxenONE <span className="text-gold">v1.0</span></span>
+            <span className="text-xs font-bold text-dravik-dark">Dravik Realty <span className="text-gold">v1.0</span></span>
           </div>
-          <p className="text-[10px] text-gray-400">© 2026 Axen Realty Group</p>
+          <p className="text-[10px] text-gray-400">© 2026 Dravik Realty</p>
         </div>
       </div>
     </div>
@@ -266,12 +266,12 @@ export default function DashboardClient() {
       {/* ── Welcome ─────────────────────────────────────── */}
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
-          <h2 className="text-2xl font-bold text-axen-dark">{greeting}, Chris.</h2>
+          <h2 className="text-2xl font-bold text-dravik-dark">{greeting}, Chris.</h2>
           <p className="text-sm text-gray-400 mt-1 min-h-[1.25rem]">{dateStr}</p>
         </div>
         <div className="flex items-center gap-2 bg-gold-light border border-gold/30 rounded-xl px-4 py-2.5">
           <DollarSign size={15} className="text-gold" />
-          <span className="text-sm font-semibold text-axen-dark">Principal Broker · Axen Realty</span>
+          <span className="text-sm font-semibold text-dravik-dark">Principal Broker · Dravik Realty</span>
         </div>
       </div>
 
@@ -286,7 +286,7 @@ export default function DashboardClient() {
           <div className="flex items-center justify-between mb-5">
             <div className="flex items-center gap-2">
               <span className="w-1 h-4 rounded-full bg-blue-400 inline-block" />
-              <p className="text-sm font-bold text-axen-dark">Lead Pipeline</p>
+              <p className="text-sm font-bold text-dravik-dark">Lead Pipeline</p>
             </div>
             <Link href="/crm/leads" className="flex items-center gap-1 text-[11px] font-semibold text-gold hover:text-gold-dark transition-colors">
               View all <ArrowRight size={11} />
@@ -307,7 +307,7 @@ export default function DashboardClient() {
           <div className="flex items-center justify-between mb-5">
             <div className="flex items-center gap-2">
               <span className="w-1 h-4 rounded-full bg-amber-400 inline-block" />
-              <p className="text-sm font-bold text-axen-dark">Mortgage Pipeline</p>
+              <p className="text-sm font-bold text-dravik-dark">Mortgage Pipeline</p>
             </div>
             <Link href="/lending" className="flex items-center gap-1 text-[11px] font-semibold text-gold hover:text-gold-dark transition-colors">
               View all <ArrowRight size={11} />
@@ -333,7 +333,7 @@ export default function DashboardClient() {
           <div className="flex items-center justify-between px-5 py-4 border-b border-line">
             <div className="flex items-center gap-2">
               <Activity size={15} className="text-gold" />
-              <p className="text-sm font-bold text-axen-dark">Recent Activity</p>
+              <p className="text-sm font-bold text-dravik-dark">Recent Activity</p>
             </div>
             <span className="text-[10px] font-semibold text-emerald-600 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
               Live
@@ -355,7 +355,7 @@ export default function DashboardClient() {
                     <Icon size={13} style={{ color: item.accent }} />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs text-axen-dark leading-relaxed">{item.text}</p>
+                    <p className="text-xs text-dravik-dark leading-relaxed">{item.text}</p>
                     <div className="flex items-center gap-2 mt-1">
                       <span className="text-[10px] font-semibold text-gray-400 bg-surface-2 border border-line px-1.5 py-0.5 rounded-full">
                         {item.module}
@@ -372,7 +372,7 @@ export default function DashboardClient() {
 
         {/* Production widget — 1/3 */}
         <div className="space-y-4">
-          <div className="bg-axen-dark rounded-2xl p-5">
+          <div className="bg-dravik-dark rounded-2xl p-5">
             <div className="flex items-center gap-2 mb-4">
               <Target size={14} className="text-gold" />
               <p className="text-xs font-bold text-white">Monthly Production</p>
@@ -389,7 +389,7 @@ export default function DashboardClient() {
           </div>
 
           <div className="bg-white rounded-2xl border border-line p-5 space-y-3.5">
-            <p className="text-xs font-bold text-axen-dark">Quick Stats</p>
+            <p className="text-xs font-bold text-dravik-dark">Quick Stats</p>
             {[
               {
                 label: "Avg Deal Size",
@@ -417,7 +417,7 @@ export default function DashboardClient() {
                     <Icon size={13} className={cn("flex-shrink-0", stat.color)} />
                     <span className="text-[11px] text-gray-500">{stat.label}</span>
                   </div>
-                  <span className="text-xs font-bold text-axen-dark">{stat.value}</span>
+                  <span className="text-xs font-bold text-dravik-dark">{stat.value}</span>
                 </div>
               );
             })}
@@ -429,7 +429,7 @@ export default function DashboardClient() {
       <div>
         <div className="flex items-center gap-3 mb-5">
           <span className="w-1 h-5 rounded-full bg-gold inline-block" />
-          <h3 className="text-base font-bold text-axen-dark">Platform Modules</h3>
+          <h3 className="text-base font-bold text-dravik-dark">Platform Modules</h3>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {DASHBOARD_MODULES.map(({ label, desc, icon: Icon, href, accent }) => (
@@ -451,7 +451,7 @@ export default function DashboardClient() {
                 />
               </div>
               <div>
-                <p className="text-sm font-bold text-axen-dark">{label}</p>
+                <p className="text-sm font-bold text-dravik-dark">{label}</p>
                 <p className="text-xs text-gray-400 mt-1 leading-relaxed">{desc}</p>
               </div>
             </Link>
@@ -463,17 +463,17 @@ export default function DashboardClient() {
       <div className="flex items-center justify-between pt-4 pb-2 border-t border-line">
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-md border border-gold/40 bg-axen-dark flex items-center justify-center">
-              <span className="text-gold text-[10px] font-bold leading-none">A</span>
+            <div className="w-6 h-6 rounded-md border border-gold/40 bg-dravik-dark flex items-center justify-center">
+              <span className="text-gold text-[10px] font-bold leading-none">DR</span>
             </div>
-            <span className="text-xs font-bold text-axen-dark">AxenONE</span>
-            <span className="text-[10px] font-bold text-axen-dark bg-gold px-1.5 py-0.5 rounded-full leading-none">v1.0</span>
+            <span className="text-xs font-bold text-dravik-dark">Dravik Realty</span>
+            <span className="text-[10px] font-bold text-dravik-dark bg-gold px-1.5 py-0.5 rounded-full leading-none">v1.0</span>
           </div>
-          <span className="text-[10px] text-gray-300 hidden sm:inline">Axen Realty Group · © 2026</span>
+          <span className="text-[10px] text-gray-300 hidden sm:inline">Dravik Realty · © 2026</span>
         </div>
         <button
           onClick={() => setShowHelp(true)}
-          className="flex items-center gap-1.5 text-[11px] font-semibold text-gray-400 hover:text-axen-dark transition-colors"
+          className="flex items-center gap-1.5 text-[11px] font-semibold text-gray-400 hover:text-dravik-dark transition-colors"
         >
           <HelpCircle size={13} /> Getting Started
         </button>

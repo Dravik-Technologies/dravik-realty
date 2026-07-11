@@ -94,7 +94,7 @@ change is swapping E2/E3; everything else holds.
 | ID | Task | Est | Notes |
 |---|---|---|---|
 | E4.1 | `packages/shared`: move `lib/utils.ts` (`cn`, `formatCurrency`, `formatCurrencyFull`, `timeAgo`). Codemod all `@/lib/utils` imports → `@dravik/shared` across ~80 files in the same PR. **No re-export shim** — shims linger and hide the dependency truth. | 3 h | Mechanical sed-able change; the codemod commit is separate from the move commit. |
-| E4.2 | `packages/ui`: move `components/ui/RelativeTime`; extract the Tailwind 4 design tokens (the `@theme` custom properties in `globals.css` — gold/axen-dark/surface palette) into `packages/ui/styles.css`, imported by the app's `globals.css`. Add `transpilePackages` to next config. | 3 h | Highest visual-risk task of the phase. |
+| E4.2 | `packages/ui`: move `components/ui/RelativeTime`; extract the Tailwind 4 design tokens (the `@theme` custom properties in `globals.css` — gold/dravik-dark/surface palette) into `packages/ui/styles.css`, imported by the app's `globals.css`. Add `transpilePackages` to next config. | 3 h | Highest visual-risk task of the phase. |
 | E4.3 | Manual visual sweep of all 14 routes side-by-side with the baseline + E2 green. | 1 h | |
 
 - **Validation:** E2 green; visual sweep finds zero styling drift; boundary truth: `ui` depends

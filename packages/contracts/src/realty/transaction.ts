@@ -69,7 +69,7 @@ export interface CommissionInfo {
   hasReferral: boolean;
   referralAgent?: string;
   referralRate: number;
-  axenSplitRate: number;
+  dravikSplitRate: number;
   transactionFee: number;
 }
 

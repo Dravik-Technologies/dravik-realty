@@ -14,9 +14,9 @@
 
 - **Branch contains substantial non-E3 work.** The `phase1/e3-monorepo-scaffold` branch includes E2 characterization commits, docs changes (model routing, branch protection), agency-agents removal, and CI work. The two E3 commits exist (`3b9678c` move, `974e26a` root conversion), but the diff/PR as presented is not isolated to "add pnpm workspace/turbo scaffolding + move the app". This violates the "one epic-task-cluster per PR" and "pure-move + mechanical config" discipline documented in the backlog. Review and history are polluted.
 
-- **Stray tracked file at root: `axen-realty-logo.webp`.** It is in the git index at the repo root. The move commit correctly renamed the one inside `public/` into `apps/command-center/public/`, but this duplicate/old root-level asset was left behind and remains tracked. It is app-specific content that has no place at the new monorepo root. This is a behavior/hygiene violation for a "wholesale move" + cleanup.
+- **Stray tracked legacy logo file at root.** It is in the git index at the repo root. The move commit correctly renamed the one inside `public/` into `apps/command-center/public/`, but this duplicate/old root-level asset was left behind and remains tracked. It is app-specific content that has no place at the new monorepo root. This is a behavior/hygiene violation for a "wholesale move" + cleanup.
 
-- **`.next/`, `tsconfig.tsbuildinfo`, `next-env.d.ts`, and `test-results/` at root on disk.** While currently untracked (good), their presence after the move + scaffold commits indicates the working tree was not clean when the move/config commits were made. Combined with the root `axen-realty-logo.webp` being tracked, this suggests incomplete "mechanical" hygiene in the E3 changes.
+- **`.next/`, `tsconfig.tsbuildinfo`, `next-env.d.ts`, and `test-results/` at root on disk.** While currently untracked (good), their presence after the move + scaffold commits indicates the working tree was not clean when the move/config commits were made. Combined with the root legacy logo file being tracked, this suggests incomplete "mechanical" hygiene in the E3 changes.
 
 ## 2. Non-blocking risks
 
@@ -51,7 +51,7 @@ However, the PR/branch fails the explicit E3 constraints:
 
 **Fixes required before merge:**
 - Rebase/squash/rewrite the branch to contain only the two E3 commits (or equivalent clean "scaffold then move+fixup" as per plan discipline).
-- `git rm axen-realty-logo.webp` (and confirm no other root-level app assets leak).
+- Remove the legacy root-level logo asset (and confirm no other root-level app assets leak).
 - Ensure a clean `git checkout` + `pnpm install --frozen-lockfile && pnpm build && pnpm test:e2e` produces no root pollution and full characterization green.
 - Either add the `test:e2e` pipeline to `turbo.json` (even as a no-op) or explicitly note the deviation in the PR description.
 
@@ -68,7 +68,7 @@ Verdict after verification: **GO** — merged as PR #4 (`ea26f6d`).
 
 - Blocker 1 (non-E3 work on branch): stacked-branch strategy, not scope pollution; the E1/E2/docs
   PRs had not yet merged, and the E3 delta was exactly the two contracted commits.
-- Blocker 2 (stray root `axen-realty-logo.webp`): real, but pre-existing since the initial
+- Blocker 2 (stray root legacy logo asset): real, but pre-existing since the initial
   commits and explicitly out of E3 scope by the handoff prompt. Removed by the
   `phase1/e3-cleanup` PR.
 - Blocker 3 (untracked root build artifacts): local working-tree leftovers, gitignored,

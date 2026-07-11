@@ -228,7 +228,7 @@ export const SAMPLE_LEADS: Lead[] = [
     assignedTo: "Chris M.",
     createdAt: T.d14,
     notes:
-      "Reached out via mortgage inquiry form. Interested in both buying and getting a mortgage through Axen. Pre-approval in progress.",
+      "Reached out via mortgage inquiry form. Interested in both buying and getting a mortgage through Dravik. Pre-approval in progress.",
     priceMin: 420000,
     priceMax: 550000,
     savedProperties: 5,
@@ -276,7 +276,7 @@ export const SAMPLE_LEADS: Lead[] = [
     assignedTo: "Chris M.",
     createdAt: T.d10,
     notes:
-      "Found Axen through Instagram Reel. First-time home buyer. Looking for townhome or condo. Parents co-signing on mortgage.",
+      "Found Dravik through Instagram Reel. First-time home buyer. Looking for townhome or condo. Parents co-signing on mortgage.",
     priceMin: 380000,
     priceMax: 470000,
     savedProperties: 8,

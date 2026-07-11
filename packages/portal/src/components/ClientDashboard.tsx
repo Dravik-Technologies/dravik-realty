@@ -37,7 +37,7 @@ function KpiCard({ icon: Icon, label, value, sub, accent }: {
         <Icon size={18} style={{ color: accent }} />
       </div>
       <div>
-        <p className="text-xl font-bold text-axen-dark leading-none">{value}</p>
+        <p className="text-xl font-bold text-dravik-dark leading-none">{value}</p>
         <p className="text-xs text-gray-400 mt-0.5">{label}</p>
         {sub && <p className="text-[10px] text-gray-300 mt-0.5">{sub}</p>}
       </div>
@@ -49,11 +49,11 @@ function KpiCard({ icon: Icon, label, value, sub, accent }: {
 function AgentCard({ agent }: { agent: ClientPortalData["agent"] }) {
   return (
     <div className="bg-white rounded-2xl border border-line p-4 flex items-center gap-4">
-      <div className="w-12 h-12 rounded-full bg-axen-dark flex items-center justify-center text-gold font-bold text-lg flex-shrink-0">
+      <div className="w-12 h-12 rounded-full bg-dravik-dark flex items-center justify-center text-gold font-bold text-lg flex-shrink-0">
         {agent.initials}
       </div>
       <div className="flex-1 min-w-0">
-        <p className="font-bold text-axen-dark text-sm">{agent.name}</p>
+        <p className="font-bold text-dravik-dark text-sm">{agent.name}</p>
         <p className="text-xs text-gray-400">{agent.title}</p>
         <p className="text-[10px] text-gray-300 mt-0.5">License #{agent.license}</p>
       </div>
@@ -89,14 +89,14 @@ function PropertyCard({ p, onRemove }: { p: SavedProperty; onRemove: (id: string
           )}>{p.status}</span>
         </div>
         <div className="absolute top-2 right-2">
-          <span className="bg-axen-dark/80 text-gold text-xs font-bold px-2 py-0.5 rounded-full backdrop-blur-sm">
+          <span className="bg-dravik-dark/80 text-gold text-xs font-bold px-2 py-0.5 rounded-full backdrop-blur-sm">
             {formatCurrency(p.price)}
           </span>
         </div>
       </div>
       <div className="p-3 space-y-2">
         <div>
-          <p className="text-xs font-bold text-axen-dark truncate">{p.address}</p>
+          <p className="text-xs font-bold text-dravik-dark truncate">{p.address}</p>
           <p className="text-[10px] text-gray-400">{p.city}, {p.state}</p>
         </div>
         <div className="flex items-center gap-3 text-[10px] text-gray-500">
@@ -133,7 +133,7 @@ function MessageBubble({ msg }: { msg: ClientMessage }) {
   return (
     <div className={cn("flex gap-2.5", isAgent ? "justify-start" : "justify-end")}>
       {isAgent && (
-        <div className="w-7 h-7 rounded-full bg-axen-dark flex items-center justify-center text-gold text-[10px] font-bold flex-shrink-0 mt-1">
+        <div className="w-7 h-7 rounded-full bg-dravik-dark flex items-center justify-center text-gold text-[10px] font-bold flex-shrink-0 mt-1">
           CM
         </div>
       )}
@@ -141,9 +141,9 @@ function MessageBubble({ msg }: { msg: ClientMessage }) {
         "max-w-[80%] rounded-2xl px-3.5 py-2.5",
         isAgent
           ? "bg-white border border-line rounded-tl-sm"
-          : "bg-axen-dark rounded-tr-sm"
+          : "bg-dravik-dark rounded-tr-sm"
       )}>
-        <p className={cn("text-xs leading-snug", isAgent ? "text-axen-dark" : "text-white")}>
+        <p className={cn("text-xs leading-snug", isAgent ? "text-dravik-dark" : "text-white")}>
           {msg.content}
         </p>
         <p className={cn("text-[9px] mt-1", isAgent ? "text-gray-400" : "text-gray-400")}>
@@ -168,7 +168,7 @@ function ActivityItem({ entry: a, isLast }: { entry: ActivityEntry; isLast: bool
       </div>
       <div className="pb-4 flex-1 min-w-0">
         <p className="text-[10px] text-gray-400 mb-0.5">{a.date} · {a.actor}</p>
-        <p className="text-xs font-semibold text-axen-dark leading-snug">{a.message}</p>
+        <p className="text-xs font-semibold text-dravik-dark leading-snug">{a.message}</p>
       </div>
     </div>
   );
@@ -212,7 +212,7 @@ function DashboardTab({ data, onTabChange }: { data: ClientPortalData; onTabChan
               <div key={t.id} className="flex items-center gap-3 p-3 bg-amber-50 rounded-xl border border-amber-100">
                 <Calendar size={14} className="text-amber-500 flex-shrink-0" />
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs font-semibold text-axen-dark truncate">{t.address}</p>
+                  <p className="text-xs font-semibold text-dravik-dark truncate">{t.address}</p>
                   <p className="text-[10px] text-amber-600">{t.closingDate} · {t.daysUntilClose} days away</p>
                 </div>
               </div>
@@ -227,7 +227,7 @@ function DashboardTab({ data, onTabChange }: { data: ClientPortalData; onTabChan
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <button
             onClick={() => onTabChange("messages")}
-            className="flex items-center gap-3 p-4 bg-axen-dark text-white rounded-2xl hover:bg-gold hover:text-axen-dark transition-all group"
+            className="flex items-center gap-3 p-4 bg-dravik-dark text-white rounded-2xl hover:bg-gold hover:text-dravik-dark transition-all group"
           >
             <MessageSquare size={18} className="flex-shrink-0" />
             <div className="text-left">
@@ -301,11 +301,11 @@ function MessagesTab({ data }: { data: ClientPortalData }) {
   return (
     <div className="flex flex-col h-full space-y-0">
       <div className="flex items-center gap-3 pb-4 border-b border-line mb-4">
-        <div className="w-9 h-9 rounded-full bg-axen-dark flex items-center justify-center text-gold font-bold text-sm flex-shrink-0">
+        <div className="w-9 h-9 rounded-full bg-dravik-dark flex items-center justify-center text-gold font-bold text-sm flex-shrink-0">
           {data.agent.initials}
         </div>
         <div>
-          <p className="text-sm font-bold text-axen-dark">{data.agent.name}</p>
+          <p className="text-sm font-bold text-dravik-dark">{data.agent.name}</p>
           <p className="text-xs text-gray-400">{data.agent.title}</p>
         </div>
       </div>
@@ -321,12 +321,12 @@ function MessagesTab({ data }: { data: ClientPortalData }) {
           onChange={(e) => setDraft(e.target.value)}
           onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); handleSend(); } }}
           placeholder="Type a message to your agent…"
-          className="flex-1 px-3 py-2 text-xs text-axen-dark bg-surface-2 border border-line rounded-xl resize-none focus:outline-none focus:border-gold transition"
+          className="flex-1 px-3 py-2 text-xs text-dravik-dark bg-surface-2 border border-line rounded-xl resize-none focus:outline-none focus:border-gold transition"
         />
         <button
           onClick={handleSend}
           disabled={!draft.trim()}
-          className="p-2.5 bg-axen-dark text-white rounded-xl hover:bg-gold hover:text-axen-dark transition-all disabled:opacity-40 disabled:cursor-not-allowed flex-shrink-0"
+          className="p-2.5 bg-dravik-dark text-white rounded-xl hover:bg-gold hover:text-dravik-dark transition-all disabled:opacity-40 disabled:cursor-not-allowed flex-shrink-0"
         >
           <Send size={15} />
         </button>
@@ -415,10 +415,10 @@ export default function ClientDashboard({ data }: Props) {
           <div className="flex items-center justify-between h-14">
             {/* Brand */}
             <div className="flex items-center gap-2.5 flex-shrink-0">
-              <div className="w-7 h-7 rounded-lg bg-axen-dark flex items-center justify-center">
-                <span className="text-gold font-bold text-[11px]">AX</span>
+              <div className="w-7 h-7 rounded-lg bg-dravik-dark flex items-center justify-center">
+                <span className="text-gold font-bold text-[11px]">DR</span>
               </div>
-              <span className="font-bold text-axen-dark text-sm hidden sm:inline">AxenOne Portal</span>
+              <span className="font-bold text-dravik-dark text-sm hidden sm:inline">Dravik Realty Portal</span>
             </div>
 
             {/* Tabs — desktop */}
@@ -429,7 +429,7 @@ export default function ClientDashboard({ data }: Props) {
                   onClick={() => setTab(id)}
                   className={cn(
                     "relative flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-lg transition-colors",
-                    tab === id ? "bg-gold-light text-gold-dark" : "text-gray-400 hover:text-axen-dark hover:bg-surface"
+                    tab === id ? "bg-gold-light text-gold-dark" : "text-gray-400 hover:text-dravik-dark hover:bg-surface"
                   )}
                 >
                   <Icon size={13} /> {label}
@@ -443,8 +443,8 @@ export default function ClientDashboard({ data }: Props) {
             </div>
 
             {/* Client pill */}
-            <div className="flex items-center gap-2 bg-axen-dark text-white px-3 py-1.5 rounded-full">
-              <div className="w-5 h-5 rounded-full bg-gold flex items-center justify-center text-axen-dark text-[9px] font-bold flex-shrink-0">
+            <div className="flex items-center gap-2 bg-dravik-dark text-white px-3 py-1.5 rounded-full">
+              <div className="w-5 h-5 rounded-full bg-gold flex items-center justify-center text-dravik-dark text-[9px] font-bold flex-shrink-0">
                 {data.client.name.split(" ").map((w) => w[0]).join("").slice(0, 2)}
               </div>
               <span className="text-xs font-semibold hidden sm:inline">{data.client.name}</span>
@@ -475,7 +475,7 @@ export default function ClientDashboard({ data }: Props) {
       </nav>
 
       {/* Welcome header */}
-      <div className="bg-axen-dark">
+      <div className="bg-dravik-dark">
         <div className="max-w-5xl mx-auto px-4 py-8">
           <p className="text-gray-400 text-sm mb-1">Welcome back,</p>
           <h1 className="text-2xl font-bold text-white">{data.client.name}</h1>
@@ -514,10 +514,10 @@ export default function ClientDashboard({ data }: Props) {
       <footer className="border-t border-line mt-12 py-6">
         <div className="max-w-5xl mx-auto px-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-5 h-5 rounded bg-axen-dark flex items-center justify-center">
-              <span className="text-gold font-bold text-[8px]">AX</span>
+            <div className="w-5 h-5 rounded bg-dravik-dark flex items-center justify-center">
+              <span className="text-gold font-bold text-[8px]">DR</span>
             </div>
-            <span className="text-xs text-gray-400">Axen Realty · Powered by AxenOne</span>
+            <span className="text-xs text-gray-400">Dravik Realty Client Portal</span>
           </div>
           <p className="text-[10px] text-gray-300">Secure Client Portal</p>
         </div>

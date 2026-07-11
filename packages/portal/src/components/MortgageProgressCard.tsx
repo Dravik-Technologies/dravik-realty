@@ -29,7 +29,7 @@ export default function MortgageProgressCard({ mortgage: m }: Props) {
       {/* Header */}
       <div className="px-5 py-4 border-b border-line flex items-center justify-between">
         <div>
-          <p className="font-bold text-axen-dark text-sm">{m.lender}</p>
+          <p className="font-bold text-dravik-dark text-sm">{m.lender}</p>
           <p className="text-xs text-gray-400">{m.loanType} · {m.term}-year fixed</p>
         </div>
         <span className="text-xs font-bold px-3 py-1 rounded-full border"
@@ -71,7 +71,7 @@ export default function MortgageProgressCard({ mortgage: m }: Props) {
                 <p className={cn(
                   "text-xs pb-3",
                   done   ? "text-emerald-600 font-semibold" :
-                  active ? "font-bold text-axen-dark" :
+                  active ? "font-bold text-dravik-dark" :
                   future ? "text-gray-300" : "text-gray-400"
                 )}>
                   {stage}
@@ -96,7 +96,7 @@ export default function MortgageProgressCard({ mortgage: m }: Props) {
         ].map(({ label, value }) => (
           <div key={label} className="bg-white px-4 py-3">
             <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wide">{label}</p>
-            <p className="text-sm font-bold text-axen-dark mt-0.5">{value}</p>
+            <p className="text-sm font-bold text-dravik-dark mt-0.5">{value}</p>
           </div>
         ))}
       </div>

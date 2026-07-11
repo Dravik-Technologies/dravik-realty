@@ -48,7 +48,7 @@ function IntegCard({ integ, onToggle }: {
             <Plug size={16} style={{ color: accent }} />
           </div>
           <div>
-            <p className="text-sm font-bold text-axen-dark">{integ.name}</p>
+            <p className="text-sm font-bold text-dravik-dark">{integ.name}</p>
             <p className="text-[10px] text-gray-400">{integ.provider} · {integ.category}</p>
           </div>
         </div>
@@ -76,7 +76,7 @@ function IntegCard({ integ, onToggle }: {
             "flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg border transition-colors",
             integ.status === "connected"
               ? "border-rose-200 text-rose-600 hover:bg-rose-50"
-              : "border-gold/40 bg-gold text-axen-dark hover:bg-gold-dark"
+              : "border-gold/40 bg-gold text-dravik-dark hover:bg-gold-dark"
           )}
         >
           {integ.status === "connected" ? "Disconnect" : "Connect"}
@@ -114,18 +114,18 @@ function ApiKeysPanel() {
     <div className="bg-white border border-line rounded-2xl p-5">
       <div className="flex items-center gap-2 mb-4">
         <Key size={15} className="text-gold" />
-        <h4 className="text-sm font-bold text-axen-dark">API Keys</h4>
+        <h4 className="text-sm font-bold text-dravik-dark">API Keys</h4>
       </div>
       <p className="text-xs text-gray-500 mb-4">
         Use your secret key to authenticate requests from external systems. Keep it private.
       </p>
       <div className="flex items-center gap-2 bg-surface-2 border border-line rounded-xl px-4 py-2.5 mb-3">
-        <code className="flex-1 text-xs text-axen-dark font-mono truncate">
+        <code className="flex-1 text-xs text-dravik-dark font-mono truncate">
           {showKey ? key : masked}
         </code>
         <button
           onClick={() => setShowKey((v) => !v)}
-          className="text-gray-400 hover:text-axen-dark transition-colors flex-shrink-0"
+          className="text-gray-400 hover:text-dravik-dark transition-colors flex-shrink-0"
           aria-label={showKey ? "Hide API key" : "Show API key"}
         >
           {showKey ? <EyeOff size={14} /> : <Eye size={14} />}
@@ -138,7 +138,7 @@ function ApiKeysPanel() {
             "px-3 py-1.5 text-xs font-semibold rounded-lg border transition-colors",
             copied
               ? "border-emerald-200 text-emerald-600 bg-emerald-50"
-              : "border-line text-gray-500 hover:text-axen-dark"
+              : "border-line text-gray-500 hover:text-dravik-dark"
           )}
         >
           {copied ? "Copied!" : "Copy Key"}
@@ -178,7 +178,7 @@ export default function IntegrationStatus() {
       {/* Summary */}
       <div className="flex items-center gap-4">
         <div className="flex-1">
-          <h3 className="text-sm font-bold text-axen-dark">Integrations</h3>
+          <h3 className="text-sm font-bold text-dravik-dark">Integrations</h3>
           <p className="text-xs text-gray-400 mt-0.5">
             {connected} of {integrations.length} connected
           </p>

@@ -42,7 +42,7 @@ export default function SettingsSidebar({ active, onSelect }: Props) {
                 "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 text-left",
                 isActive
                   ? "bg-gold/10 text-gold-dark font-semibold"
-                  : "text-gray-500 hover:bg-surface-2 hover:text-axen-dark"
+                  : "text-gray-500 hover:bg-surface-2 hover:text-dravik-dark"
               )}
             >
               <Icon

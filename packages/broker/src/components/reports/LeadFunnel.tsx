@@ -20,7 +20,7 @@ function SourceTooltip({ active, payload, label }: TooltipProps) {
   if (!active || !payload?.length) return null;
   return (
     <div className="bg-white border border-line rounded-xl shadow-lg px-3 py-2.5 space-y-1 min-w-[140px]">
-      <p className="text-[10px] font-bold text-axen-dark">{label}</p>
+      <p className="text-[10px] font-bold text-dravik-dark">{label}</p>
       {payload.map((p) => (
         <p key={p.name} className="text-xs" style={{ color: p.color }}>
           <span className="font-semibold">{p.value}</span> {p.name}
@@ -60,7 +60,7 @@ function FunnelTip({ active, payload }: FunnelTipProps) {
   const p = payload[0];
   return (
     <div className="bg-white border border-line rounded-xl shadow-lg px-3 py-2 space-y-0.5">
-      <p className="text-xs font-bold text-axen-dark">{p.name}</p>
+      <p className="text-xs font-bold text-dravik-dark">{p.name}</p>
       <p className="text-sm font-bold" style={{ color: p.payload.fill }}>{p.value.toLocaleString()}</p>
     </div>
   );
@@ -71,7 +71,7 @@ function SourceDetail({ source }: { source: LeadSourceStat }) {
   const convRate = source.leads > 0 ? Math.round((source.closed / source.leads) * 100) : 0;
   return (
     <div className="mt-4 p-4 bg-surface rounded-2xl border border-line space-y-3">
-      <p className="text-sm font-bold text-axen-dark flex items-center gap-2">
+      <p className="text-sm font-bold text-dravik-dark flex items-center gap-2">
         <span className="w-2.5 h-2.5 rounded-full" style={{ background: source.color }} />
         {source.source} — Drill Down
       </p>
@@ -83,7 +83,7 @@ function SourceDetail({ source }: { source: LeadSourceStat }) {
           { label: "Closed",         value: source.closed,        sub: `${convRate}% conversion` },
         ].map(({ label, value, sub }) => (
           <div key={label} className="bg-white rounded-xl p-3 text-center border border-line">
-            <p className="text-lg font-bold text-axen-dark">{value}</p>
+            <p className="text-lg font-bold text-dravik-dark">{value}</p>
             <p className="text-[10px] font-semibold text-gray-500">{label}</p>
             <p className="text-[9px] text-gray-300 mt-0.5">{sub}</p>
           </div>
@@ -121,13 +121,13 @@ export default function LeadFunnel({ sources, funnel }: Props) {
       <div className="bg-white rounded-2xl border border-line p-5">
         <div className="flex items-center justify-between mb-1">
           <div>
-            <p className="text-sm font-bold text-axen-dark">Lead Sources</p>
+            <p className="text-sm font-bold text-dravik-dark">Lead Sources</p>
             <p className="text-xs text-gray-400">Click a bar to drill down by source</p>
           </div>
           {drillSource && (
             <button
               onClick={() => setDrillSource(null)}
-              className="flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-semibold text-gold bg-gold-light rounded-lg hover:bg-gold hover:text-axen-dark transition-all"
+              className="flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-semibold text-gold bg-gold-light rounded-lg hover:bg-gold hover:text-dravik-dark transition-all"
             >
               <X size={11} /> Clear filter
             </button>
@@ -206,7 +206,7 @@ export default function LeadFunnel({ sources, funnel }: Props) {
         <div className="flex items-center gap-2 mb-4">
           <Filter size={15} className="text-gold" />
           <div>
-            <p className="text-sm font-bold text-axen-dark">Conversion Funnel</p>
+            <p className="text-sm font-bold text-dravik-dark">Conversion Funnel</p>
             <p className="text-xs text-gray-400">New leads → closed deals</p>
           </div>
         </div>

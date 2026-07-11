@@ -35,7 +35,7 @@ export default function CompliancePanel() {
         <div className="flex items-center gap-2 px-6 py-4 border-b border-line">
           <FileText size={16} className="text-gold" />
           <div>
-            <h3 className="text-sm font-bold text-axen-dark">License Expiration Tracker</h3>
+            <h3 className="text-sm font-bold text-dravik-dark">License Expiration Tracker</h3>
             <p className="text-xs text-gray-400 mt-0.5">DRE and NMLS licenses for all active agents.</p>
           </div>
         </div>
@@ -57,7 +57,7 @@ export default function CompliancePanel() {
                   <td className="px-5 py-3.5">
                     <div className="flex items-center gap-2">
                       <Icon size={14} className={cn("flex-shrink-0", cfg.cls)} />
-                      <span className="text-xs font-semibold text-axen-dark">{rec.agentName}</span>
+                      <span className="text-xs font-semibold text-dravik-dark">{rec.agentName}</span>
                     </div>
                   </td>
                   <td className="px-4 py-3.5 hidden sm:table-cell">
@@ -67,7 +67,7 @@ export default function CompliancePanel() {
                     </div>
                   </td>
                   <td className="px-4 py-3.5">
-                    <p className="text-xs text-axen-dark">{rec.expiryDate}</p>
+                    <p className="text-xs text-dravik-dark">{rec.expiryDate}</p>
                     <p className={cn("text-[10px] font-semibold", rec.daysRemaining <= 60 ? "text-amber-500" : "text-gray-400")}>
                       {rec.daysRemaining}d remaining
                     </p>
@@ -89,7 +89,7 @@ export default function CompliancePanel() {
         <div className="flex items-center gap-2 mb-5">
           <ShieldCheck size={16} className="text-gold" />
           <div>
-            <h3 className="text-sm font-bold text-axen-dark">E&O Insurance</h3>
+            <h3 className="text-sm font-bold text-dravik-dark">E&O Insurance</h3>
             <p className="text-xs text-gray-400 mt-0.5">Errors & Omissions coverage for the brokerage.</p>
           </div>
         </div>
@@ -104,7 +104,7 @@ export default function CompliancePanel() {
           ].map((item) => (
             <div key={item.label} className="bg-surface-2 rounded-xl px-4 py-3">
               <p className="text-[10px] text-gray-400 font-semibold uppercase tracking-wide">{item.label}</p>
-              <p className="text-sm font-bold text-axen-dark mt-0.5">{item.value}</p>
+              <p className="text-sm font-bold text-dravik-dark mt-0.5">{item.value}</p>
             </div>
           ))}
         </div>
@@ -125,14 +125,14 @@ export default function CompliancePanel() {
           <FileText size={18} className="text-gray-400" />
         </div>
         <div className="flex-1">
-          <p className="text-sm font-bold text-axen-dark">Compliance Documents</p>
-          <p className="text-xs text-gray-400 mt-0.5">Broker agreements, disclosure forms, and policy templates are stored in the Client Portal vault.</p>
+          <p className="text-sm font-bold text-dravik-dark">Compliance Documents</p>
+          <p className="text-xs text-gray-400 mt-0.5">Broker agreements, disclosure forms, and policy templates are managed in Client Portal Admin.</p>
         </div>
         <Link
-          href="/portal"
-          className="flex-shrink-0 px-4 py-2 border border-line text-xs font-semibold text-gray-500 rounded-xl hover:text-axen-dark hover:border-axen-dark transition-colors"
+          href="/realty/client-portal"
+          className="flex-shrink-0 px-4 py-2 border border-line text-xs font-semibold text-gray-500 rounded-xl hover:text-dravik-dark hover:border-dravik-dark transition-colors"
         >
-          Open Vault
+          Manage Vault
         </Link>
       </div>
 

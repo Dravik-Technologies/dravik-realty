@@ -114,10 +114,10 @@ export default function MappingPage() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search address, city, zip, neighborhood…"
-              className="w-full pl-9 pr-8 py-2 bg-surface-2 border border-transparent rounded-xl text-sm text-axen-dark placeholder:text-gray-400 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition"
+              className="w-full pl-9 pr-8 py-2 bg-surface-2 border border-transparent rounded-xl text-sm text-dravik-dark placeholder:text-gray-400 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition"
             />
             {query && (
-              <button onClick={() => setQuery("")} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-axen-dark">
+              <button onClick={() => setQuery("")} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-dravik-dark">
                 <X size={13} />
               </button>
             )}
@@ -132,8 +132,8 @@ export default function MappingPage() {
                 className={cn(
                   "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all",
                   view === v
-                    ? "bg-axen-dark text-white shadow-sm"
-                    : "text-gray-400 hover:text-axen-dark"
+                    ? "bg-dravik-dark text-white shadow-sm"
+                    : "text-gray-400 hover:text-dravik-dark"
                 )}
               >
                 {v === "map" ? <Map size={13} /> : <List size={13} />}
@@ -156,7 +156,7 @@ export default function MappingPage() {
           {/* Stats */}
           <div className="hidden lg:flex items-center gap-4 ml-auto text-xs text-gray-400">
             <span>
-              <span className="font-bold text-axen-dark">{filtered.length}</span> of {SAMPLE_PROPERTIES.length} listings
+              <span className="font-bold text-dravik-dark">{filtered.length}</span> of {SAMPLE_PROPERTIES.length} listings
             </span>
           </div>
         </div>

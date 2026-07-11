@@ -60,7 +60,7 @@ export default function TransactionCard({ transaction: t, selected, onSelect, ov
             <img src={t.heroImage} alt={t.address} className="w-full h-full object-cover" />
           </div>
           <div className="min-w-0 flex-1">
-            <p className="text-xs font-bold text-axen-dark leading-tight truncate">{t.address}</p>
+            <p className="text-xs font-bold text-dravik-dark leading-tight truncate">{t.address}</p>
             <p className="text-[10px] text-gray-400 truncate">{t.city}, {t.state}</p>
           </div>
         </div>

@@ -39,7 +39,7 @@ function KpiCard({
         <Icon size={17} style={{ color: accent }} />
       </div>
       <div>
-        <p className="text-lg font-bold text-axen-dark leading-none">{value}</p>
+        <p className="text-lg font-bold text-dravik-dark leading-none">{value}</p>
         <p className="text-[11px] text-gray-400 mt-0.5">{label}</p>
         {sub && <p className="text-[10px] text-gray-300 mt-0.5">{sub}</p>}
       </div>
@@ -163,12 +163,12 @@ export default function LeadsPage() {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Filter leads…"
-                  className="w-full pl-8 pr-8 py-2 bg-surface-2 border border-transparent rounded-xl text-sm text-axen-dark placeholder:text-gray-400 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition"
+                  className="w-full pl-8 pr-8 py-2 bg-surface-2 border border-transparent rounded-xl text-sm text-dravik-dark placeholder:text-gray-400 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition"
                 />
                 {query && (
                   <button
                     onClick={() => setQuery("")}
-                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-axen-dark"
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-dravik-dark"
                   >
                     <X size={13} />
                   </button>
@@ -193,8 +193,8 @@ export default function LeadsPage() {
                   className={cn(
                     "flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold border-b-2 transition-colors whitespace-nowrap",
                     isActive
-                      ? "border-gold text-axen-dark"
-                      : "border-transparent text-gray-400 hover:text-axen-dark hover:border-gray-200"
+                      ? "border-gold text-dravik-dark"
+                      : "border-transparent text-gray-400 hover:text-dravik-dark hover:border-gray-200"
                   )}
                 >
                   {tab}
@@ -221,7 +221,7 @@ export default function LeadsPage() {
               <div className="w-12 h-12 rounded-2xl bg-surface-2 flex items-center justify-center">
                 <Search size={20} className="text-gray-300" />
               </div>
-              <p className="font-semibold text-axen-dark">No leads match &ldquo;{query}&rdquo;</p>
+              <p className="font-semibold text-dravik-dark">No leads match &ldquo;{query}&rdquo;</p>
               <button
                 onClick={() => setQuery("")}
                 className="text-sm text-gold hover:text-gold-dark font-semibold"

@@ -14,6 +14,10 @@ import { test as base, expect } from "@playwright/test";
  */
 
 export const RELATIVE_TIME = /(\d+[wdhm] ago|just now)/;
+export const COMMAND_SESSION_COOKIE = "dravik_command_session";
+export const CLIENT_SESSION_COOKIE = "dravik_client_session";
+export const LOCAL_COMMAND_SESSION_VALUE = "local:command:chris";
+export const LOCAL_CLIENT_SESSION_VALUE = "local:client:c1";
 
 interface Guards {
   consoleErrors: string[];
@@ -26,6 +30,23 @@ export const test = base.extend<{ guards: Guards }>({
       const consoleErrors: string[] = [];
       const failedRequests: string[] = [];
       const blockedUrls = new Set<string>();
+
+      await context.addCookies([
+        {
+          name: COMMAND_SESSION_COOKIE,
+          value: LOCAL_COMMAND_SESSION_VALUE,
+          url: "http://localhost:3000",
+          httpOnly: true,
+          sameSite: "Lax",
+        },
+        {
+          name: CLIENT_SESSION_COOKIE,
+          value: LOCAL_CLIENT_SESSION_VALUE,
+          url: "http://localhost:3000",
+          httpOnly: true,
+          sameSite: "Lax",
+        },
+      ]);
 
       await context.route("**/*", (route) => {
         const url = new URL(route.request().url());
@@ -49,6 +70,12 @@ export const test = base.extend<{ guards: Guards }>({
       });
       page.on("pageerror", (err) => consoleErrors.push(String(err)));
       page.on("requestfailed", (req) => {
+        // Next may abort in-flight RSC prefetches during redirects or fast
+        // client navigation; HTTP failures are still caught by response checks.
+        if (req.failure()?.errorText === "net::ERR_ABORTED") {
+          return;
+        }
+
         if (!blockedUrls.has(req.url())) {
           failedRequests.push(`${req.url()} → ${req.failure()?.errorText}`);
         }

@@ -9,10 +9,10 @@ const geistSans = Geist({
 
 export const metadata: Metadata = {
   title: {
-    default: "AxenOne",
-    template: "%s · AxenOne",
+    default: "Dravik Realty",
+    template: "%s · Dravik Realty",
   },
-  description: "Axen Realty proprietary CRM & mortgage platform",
+  description: "Dravik Realty proprietary CRM & mortgage platform",
 };
 
 export default function RootLayout({

@@ -50,7 +50,7 @@ export interface Agent {
   monthlyVolume:  number[]; // 6-month rolling for sparkline
 
   splitPercent:   number;
-  axenCutPercent: number;
+  dravikCutPercent: number;
   customRules:    CommissionRule[];
 
   referralsSent:     number;

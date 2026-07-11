@@ -39,7 +39,7 @@ function DocRow({ doc: d }: { doc: ClientDocument }) {
         <Icon size={15} className="text-gray-400" />
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-xs font-semibold text-axen-dark truncate">{d.name}</p>
+        <p className="text-xs font-semibold text-dravik-dark truncate">{d.name}</p>
         <p className="text-[10px] text-gray-400 mt-0.5">
           {d.uploadedAt ? `Uploaded ${d.uploadedAt}` : d.dueDate ? `Due ${d.dueDate}` : ""}
         </p>
@@ -104,7 +104,7 @@ export default function DocumentVault({ transactions }: Props) {
       {/* Summary bar */}
       <div className="bg-white rounded-2xl border border-line p-4 space-y-3">
         <div className="flex items-center justify-between">
-          <p className="text-sm font-bold text-axen-dark">Document Vault</p>
+          <p className="text-sm font-bold text-dravik-dark">Document Vault</p>
           <span className="text-xs text-gray-400">{signedCount}/{allDocs.length} complete</span>
         </div>
         <div className="h-2 bg-surface-2 rounded-full overflow-hidden">
@@ -112,7 +112,7 @@ export default function DocumentVault({ transactions }: Props) {
         </div>
         <div className="flex gap-2 flex-wrap">
           {[
-            { id: "all",     label: `All (${allDocs.length})`,      cls: "bg-axen-dark text-white" },
+            { id: "all",     label: `All (${allDocs.length})`,      cls: "bg-dravik-dark text-white" },
             { id: "signed",  label: `Signed (${signedCount})`,      cls: "bg-emerald-500 text-white" },
             { id: "pending", label: `Pending (${pendingCount})`,    cls: "bg-amber-400 text-white"   },
             { id: "needed",  label: `Needed (${neededCount})`,      cls: "bg-rose-500 text-white"    },
@@ -134,7 +134,7 @@ export default function DocumentVault({ transactions }: Props) {
       {/* Upload notice */}
       <div className="flex items-center gap-3 p-3 bg-gold-light rounded-xl border border-gold/20">
         <Upload size={14} className="text-gold flex-shrink-0" />
-        <p className="text-xs text-axen-dark">
+        <p className="text-xs text-dravik-dark">
           Need to upload a document? Contact your agent or reply in the <strong>Messages</strong> tab.
         </p>
       </div>

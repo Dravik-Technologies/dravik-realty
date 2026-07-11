@@ -20,10 +20,10 @@ export default async function ModulePlaceholderPage({
       <div className="w-14 h-14 rounded-2xl bg-gold-light border border-gold/30 flex items-center justify-center mb-5">
         <Construction size={24} className="text-gold" />
       </div>
-      <h2 className="text-xl font-bold text-axen-dark">{label}</h2>
+      <h2 className="text-xl font-bold text-dravik-dark">{label}</h2>
       <p className="text-sm text-gray-400 mt-2 max-w-xs leading-relaxed">
         This module is under active development and will be available in an upcoming
-        release of AxenOne.
+        release of Dravik Realty.
       </p>
       <div className="mt-6 px-4 py-2 bg-gold-light border border-gold/30 rounded-xl">
         <span className="text-xs font-bold text-gold-dark uppercase tracking-widest">

@@ -41,7 +41,7 @@ function Bubble({ msg: m }: { msg: Message }) {
       {/* Avatar */}
       <div className={cn(
         "w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold text-white flex-shrink-0",
-        isAgent ? "bg-gold" : "bg-axen-dark"
+        isAgent ? "bg-gold" : "bg-dravik-dark"
       )}>
         {isAgent ? "C" : m.senderName.charAt(0)}
       </div>
@@ -52,8 +52,8 @@ function Bubble({ msg: m }: { msg: Message }) {
         <div className={cn(
           "px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed",
           isAgent
-            ? "bg-axen-dark text-white rounded-br-sm"
-            : "bg-white border border-line text-axen-dark rounded-bl-sm shadow-sm"
+            ? "bg-dravik-dark text-white rounded-br-sm"
+            : "bg-white border border-line text-dravik-dark rounded-bl-sm shadow-sm"
         )}>
           {m.content}
         </div>
@@ -74,7 +74,7 @@ function EmptyState() {
         <MessageSquare size={28} className="text-gold" />
       </div>
       <div>
-        <p className="text-lg font-bold text-axen-dark">Select a conversation</p>
+        <p className="text-lg font-bold text-dravik-dark">Select a conversation</p>
         <p className="text-sm text-gray-400 mt-1">Choose a message from the list to read and reply</p>
       </div>
     </div>
@@ -116,7 +116,7 @@ export default function MessageThread({ conversation: c, onBack, onSend, onCallS
           {/* Mobile back button */}
           <button
             onClick={onBack}
-            className="sm:hidden p-1.5 rounded-lg hover:bg-surface-2 text-gray-400 hover:text-axen-dark transition-colors"
+            className="sm:hidden p-1.5 rounded-lg hover:bg-surface-2 text-gray-400 hover:text-dravik-dark transition-colors"
             aria-label="Back to conversations"
           >
             <ChevronLeft size={18} />
@@ -133,7 +133,7 @@ export default function MessageThread({ conversation: c, onBack, onSend, onCallS
           {/* Client info */}
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
-              <p className="font-bold text-axen-dark text-sm">{c.clientName}</p>
+              <p className="font-bold text-dravik-dark text-sm">{c.clientName}</p>
               <ChanIcon size={13} className="text-gray-400 flex-shrink-0" />
               {c.isHighIntent && (
                 <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-rose-100 text-rose-600">HOT LEAD</span>

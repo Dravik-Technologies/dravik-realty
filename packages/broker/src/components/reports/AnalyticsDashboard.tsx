@@ -63,7 +63,7 @@ function KpiCard({ icon: Icon, label, value, sub, accent, delta }: {
           )}>{delta}</span>
         )}
       </div>
-      <p className="text-xl font-bold text-axen-dark mt-2 leading-none">{value}</p>
+      <p className="text-xl font-bold text-dravik-dark mt-2 leading-none">{value}</p>
       <p className="text-xs text-gray-400 mt-0.5">{label}</p>
       {sub && <p className="text-[10px] text-gray-300 mt-0.5">{sub}</p>}
     </div>
@@ -81,7 +81,7 @@ function CampaignTooltip({ active, payload, label }: CampTooltipProps) {
   if (!active || !payload?.length) return null;
   return (
     <div className="bg-white border border-line rounded-xl shadow-lg px-3 py-2.5 space-y-1">
-      <p className="text-[10px] font-bold text-axen-dark">{label}</p>
+      <p className="text-[10px] font-bold text-dravik-dark">{label}</p>
       {payload.map((p) => (
         <p key={p.name} className="text-xs" style={{ color: p.color }}>
           <span className="font-semibold">{p.value}</span> {p.name}
@@ -108,7 +108,7 @@ function MarketingTab({ campaigns }: { campaigns: CampaignStat[] }) {
   return (
     <div className="space-y-5">
       <div className="bg-white rounded-2xl border border-line p-5">
-        <p className="text-sm font-bold text-axen-dark mb-1">Campaign Performance</p>
+        <p className="text-sm font-bold text-dravik-dark mb-1">Campaign Performance</p>
         <p className="text-xs text-gray-400 mb-4">Click a bar to see campaign detail</p>
         <ResponsiveContainer width="100%" height={240}>
           <BarChart data={barData} margin={{ top: 4, right: 4, left: 0, bottom: 32 }} barSize={20} style={{ cursor: "pointer" }}>
@@ -155,12 +155,12 @@ function MarketingTab({ campaigns }: { campaigns: CampaignStat[] }) {
               <div className="col-span-2 flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: c.color }} />
                 <div>
-                  <p className="text-xs font-semibold text-axen-dark truncate">{c.name}</p>
+                  <p className="text-xs font-semibold text-dravik-dark truncate">{c.name}</p>
                   <p className="text-[10px] text-gray-400">{c.type}</p>
                 </div>
               </div>
-              <p className="text-xs font-semibold text-axen-dark text-right self-center">{c.leads}</p>
-              <p className="text-xs font-semibold text-axen-dark text-right self-center">${cpl}</p>
+              <p className="text-xs font-semibold text-dravik-dark text-right self-center">{c.leads}</p>
+              <p className="text-xs font-semibold text-dravik-dark text-right self-center">${cpl}</p>
               <div className="text-right self-center">
                 <p className="text-xs font-bold text-gold">{c.conversions}</p>
                 <p className="text-[9px] text-gray-400">{roi}x ROI</p>
@@ -172,7 +172,7 @@ function MarketingTab({ campaigns }: { campaigns: CampaignStat[] }) {
 
       {selected && (
         <div className="p-4 bg-surface rounded-2xl border border-line">
-          <p className="text-sm font-bold text-axen-dark mb-3 flex items-center gap-2">
+          <p className="text-sm font-bold text-dravik-dark mb-3 flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full" style={{ background: selected.color }} />
             {selected.name}
           </p>
@@ -184,7 +184,7 @@ function MarketingTab({ campaigns }: { campaigns: CampaignStat[] }) {
               { label: "Conv. Rate",    value: `${Math.round(selected.conversions / Math.max(selected.leads, 1) * 100)}%` },
             ].map(({ label, value }) => (
               <div key={label} className="bg-white rounded-xl p-3 text-center border border-line">
-                <p className="text-lg font-bold text-axen-dark">{value}</p>
+                <p className="text-lg font-bold text-dravik-dark">{value}</p>
                 <p className="text-[10px] text-gray-400">{label}</p>
               </div>
             ))}
@@ -206,7 +206,7 @@ function MortgageTooltip({ active, payload, label }: MortTooltipProps) {
   if (!active || !payload?.length) return null;
   return (
     <div className="bg-white border border-line rounded-xl shadow-lg px-3 py-2.5 space-y-0.5">
-      <p className="text-[10px] font-bold text-axen-dark">{label}</p>
+      <p className="text-[10px] font-bold text-dravik-dark">{label}</p>
       {payload.map((p) => (
         <p key={p.name} className="text-xs text-gray-600">
           <span className="font-semibold">{p.value}</span> {p.name}
@@ -240,7 +240,7 @@ function MortgageTab({ months, conversionRate, avgLoanSize, avgRate, mortgageRev
       </div>
 
       <div className="bg-white rounded-2xl border border-line p-5">
-        <p className="text-sm font-bold text-axen-dark mb-1">Loan Pipeline by Period</p>
+        <p className="text-sm font-bold text-dravik-dark mb-1">Loan Pipeline by Period</p>
         <p className="text-xs text-gray-400 mb-4">Pre-Qual → Application → Approval → Funded</p>
         <ResponsiveContainer width="100%" height={260}>
           <BarChart data={months} margin={{ top: 4, right: 4, left: 0, bottom: 0 }} barSize={12} barCategoryGap="25%">
@@ -280,10 +280,10 @@ function MortgageTab({ months, conversionRate, avgLoanSize, avgRate, mortgageRev
         </div>
         {months.map((m) => (
           <div key={m.month} className="grid grid-cols-5 gap-0 px-4 py-2.5 border-b border-line last:border-0 hover:bg-surface transition-colors">
-            <p className="text-xs font-semibold text-axen-dark">{m.month}</p>
+            <p className="text-xs font-semibold text-dravik-dark">{m.month}</p>
             <p className="text-xs text-gray-500 text-center">{m.preQuals}</p>
             <p className="text-xs font-bold text-gold text-center">{m.funded}</p>
-            <p className="text-xs text-axen-dark text-right">{formatCurrency(m.avgLoanSize)}</p>
+            <p className="text-xs text-dravik-dark text-right">{formatCurrency(m.avgLoanSize)}</p>
             <p className="text-xs text-gray-500 text-right">{m.avgRate.toFixed(2)}%</p>
           </div>
         ))}
@@ -357,7 +357,7 @@ export default function AnalyticsDashboard() {
       <div className="flex-shrink-0 bg-white border-b border-line px-6 py-4">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h1 className="text-xl font-bold text-axen-dark">Reports & Analytics</h1>
+            <h1 className="text-xl font-bold text-dravik-dark">Reports & Analytics</h1>
             <p className="text-xs text-gray-400 mt-0.5">Performance insights and business intelligence</p>
           </div>
           <div className="flex items-center gap-2 flex-wrap">
@@ -369,7 +369,7 @@ export default function AnalyticsDashboard() {
                   onClick={() => setViewMode(m)}
                   className={cn(
                     "px-3 py-1.5 text-xs font-semibold rounded-lg transition-all capitalize",
-                    viewMode === m ? "bg-axen-dark text-white shadow-sm" : "text-gray-400 hover:text-axen-dark"
+                    viewMode === m ? "bg-dravik-dark text-white shadow-sm" : "text-gray-400 hover:text-dravik-dark"
                   )}
                 >
                   {m === "broker" ? "Broker View" : "My Stats"}
@@ -381,7 +381,7 @@ export default function AnalyticsDashboard() {
             <div className="relative">
               <button
                 onClick={() => setShowDateMenu((v) => !v)}
-                className="flex items-center gap-2 px-3 py-2 bg-white border border-line rounded-xl text-xs font-semibold text-axen-dark hover:border-gold/40 transition-colors"
+                className="flex items-center gap-2 px-3 py-2 bg-white border border-line rounded-xl text-xs font-semibold text-dravik-dark hover:border-gold/40 transition-colors"
               >
                 <Calendar size={13} className="text-gold" />
                 {dateLabel}
@@ -395,7 +395,7 @@ export default function AnalyticsDashboard() {
                       onClick={() => { setDateRange(r.id); setShowDateMenu(false); }}
                       className={cn(
                         "w-full px-4 py-2 text-xs font-semibold text-left hover:bg-surface transition-colors",
-                        dateRange === r.id ? "text-gold bg-gold-light" : "text-axen-dark"
+                        dateRange === r.id ? "text-gold bg-gold-light" : "text-dravik-dark"
                       )}
                     >
                       {r.label}
@@ -412,14 +412,14 @@ export default function AnalyticsDashboard() {
                   type="date"
                   value={customStart}
                   onChange={(e) => setCustomStart(e.target.value)}
-                  className="text-xs text-axen-dark bg-transparent outline-none w-[120px]"
+                  className="text-xs text-dravik-dark bg-transparent outline-none w-[120px]"
                 />
                 <span className="text-gray-300 text-xs">–</span>
                 <input
                   type="date"
                   value={customEnd}
                   onChange={(e) => setCustomEnd(e.target.value)}
-                  className="text-xs text-axen-dark bg-transparent outline-none w-[120px]"
+                  className="text-xs text-dravik-dark bg-transparent outline-none w-[120px]"
                 />
               </div>
             )}
@@ -428,7 +428,7 @@ export default function AnalyticsDashboard() {
             <button
               disabled
               title="CSV export coming soon"
-              className="flex items-center gap-1.5 px-3 py-2 bg-gold text-axen-dark text-xs font-bold rounded-xl opacity-50 cursor-not-allowed"
+              className="flex items-center gap-1.5 px-3 py-2 bg-gold text-dravik-dark text-xs font-bold rounded-xl opacity-50 cursor-not-allowed"
             >
               <Download size={13} /> CSV
             </button>
@@ -436,7 +436,7 @@ export default function AnalyticsDashboard() {
             <button
               disabled
               title="PDF export coming soon"
-              className="flex items-center gap-1.5 px-3 py-2 bg-axen-dark text-white text-xs font-bold rounded-xl opacity-50 cursor-not-allowed"
+              className="flex items-center gap-1.5 px-3 py-2 bg-dravik-dark text-white text-xs font-bold rounded-xl opacity-50 cursor-not-allowed"
             >
               <FileText size={13} /> PDF
             </button>
@@ -462,8 +462,8 @@ export default function AnalyticsDashboard() {
               className={cn(
                 "flex items-center gap-1.5 px-4 py-2 text-sm font-semibold border-b-2 transition-colors",
                 tab === id
-                  ? "border-gold text-axen-dark"
-                  : "border-transparent text-gray-400 hover:text-axen-dark"
+                  ? "border-gold text-dravik-dark"
+                  : "border-transparent text-gray-400 hover:text-dravik-dark"
               )}
             >
               <Icon size={13} /> {label}

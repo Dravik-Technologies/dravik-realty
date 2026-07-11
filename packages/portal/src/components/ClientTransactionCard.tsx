@@ -37,7 +37,7 @@ function TxDetail({ t }: { t: ClientTransaction }) {
       <div>
         <div className="flex justify-between text-xs mb-1.5">
           <span className="font-semibold" style={{ color }}>{t.stage}</span>
-          <span className="font-bold text-axen-dark">{t.progress}%</span>
+          <span className="font-bold text-dravik-dark">{t.progress}%</span>
         </div>
         <div className="h-2 bg-surface-2 rounded-full overflow-hidden">
           <div className="h-full rounded-full transition-all" style={{ width: `${t.progress}%`, background: color }} />
@@ -49,7 +49,7 @@ function TxDetail({ t }: { t: ClientTransaction }) {
         <ArrowRight size={14} className="text-gold mt-0.5 flex-shrink-0" />
         <div>
           <p className="text-[10px] font-bold text-gold-dark uppercase tracking-wider mb-0.5">Next Step</p>
-          <p className="text-xs text-axen-dark leading-snug">{t.nextStep}</p>
+          <p className="text-xs text-dravik-dark leading-snug">{t.nextStep}</p>
         </div>
       </div>
 
@@ -59,7 +59,7 @@ function TxDetail({ t }: { t: ClientTransaction }) {
           <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wide mb-1">Contract Date</p>
           <div className="flex items-center gap-1.5">
             <Calendar size={11} className="text-gold" />
-            <span className="text-xs font-bold text-axen-dark">{t.contractDate}</span>
+            <span className="text-xs font-bold text-dravik-dark">{t.contractDate}</span>
           </div>
         </div>
         <div className="bg-surface rounded-xl p-3">
@@ -68,7 +68,7 @@ function TxDetail({ t }: { t: ClientTransaction }) {
             {t.daysUntilClose > 0
               ? <Clock size={11} className={t.daysUntilClose <= 14 ? "text-amber-500" : "text-gold"} />
               : <CheckCircle2 size={11} className="text-emerald-500" />}
-            <span className="text-xs font-bold text-axen-dark">
+            <span className="text-xs font-bold text-dravik-dark">
               {t.closingDate}
               {t.daysUntilClose > 0 && <span className="text-[10px] text-gray-400 font-normal ml-1">({t.daysUntilClose}d)</span>}
             </span>
@@ -96,7 +96,7 @@ function TxDetail({ t }: { t: ClientTransaction }) {
             return (
               <div key={d.id} className="flex items-center gap-2.5 px-3 py-2 bg-white rounded-lg border border-line">
                 <FileText size={11} className="text-gray-400 flex-shrink-0" />
-                <span className="flex-1 text-xs text-axen-dark truncate">{d.name}</span>
+                <span className="flex-1 text-xs text-dravik-dark truncate">{d.name}</span>
                 <span className={cn("text-[9px] font-bold px-1.5 py-0.5 rounded-full border", cfg.cls)}>
                   {cfg.label}
                 </span>
@@ -139,7 +139,7 @@ export default function ClientTransactionCard({ transaction: t }: Props) {
           <div className="flex-1 min-w-0">
             <div className="flex items-start justify-between gap-2">
               <div className="min-w-0">
-                <p className="text-sm font-bold text-axen-dark truncate">{t.address}</p>
+                <p className="text-sm font-bold text-dravik-dark truncate">{t.address}</p>
                 <p className="text-xs text-gray-400">{t.city}, {t.state}</p>
               </div>
               <div className="text-right flex-shrink-0">

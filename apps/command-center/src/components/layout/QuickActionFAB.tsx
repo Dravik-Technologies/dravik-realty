@@ -27,7 +27,7 @@ function ActionItem({ label, icon: Icon, href, bg, onClose }: {
       className="flex items-center gap-3"
       aria-label={label}
     >
-      <span className="text-xs font-semibold text-axen-dark bg-white border border-line rounded-xl px-3 py-1.5 shadow-sm whitespace-nowrap select-none">
+      <span className="text-xs font-semibold text-dravik-dark bg-white border border-line rounded-xl px-3 py-1.5 shadow-sm whitespace-nowrap select-none">
         {label}
       </span>
       <div className={cn("w-11 h-11 rounded-full flex items-center justify-center shadow-lg text-white transition-all duration-150 hover:scale-110 active:scale-95", bg)}>
@@ -73,8 +73,8 @@ export default function QuickActionFAB() {
         className={cn(
           "w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-200",
           open
-            ? "bg-axen-dark text-white"
-            : "bg-gold text-axen-dark hover:bg-gold-dark hover:scale-105"
+            ? "bg-dravik-dark text-white"
+            : "bg-gold text-dravik-dark hover:bg-gold-dark hover:scale-105"
         )}
       >
         <div className={cn("transition-transform duration-200", open && "rotate-45")}>

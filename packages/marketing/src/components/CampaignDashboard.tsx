@@ -49,7 +49,7 @@ function KpiCard({
         <Icon size={17} style={{ color: accent }} />
       </div>
       <div>
-        <p className="text-lg font-bold text-axen-dark leading-none">{value}</p>
+        <p className="text-lg font-bold text-dravik-dark leading-none">{value}</p>
         <p className="text-[11px] text-gray-400 mt-0.5">{label}</p>
         {sub && <p className="text-[10px] text-gray-300 mt-0.5">{sub}</p>}
       </div>
@@ -115,7 +115,7 @@ export default function CampaignDashboard({ onEdit }: CampaignDashboardProps) {
                 />
               </div>
               <div className="min-w-0">
-                <p className="text-sm font-semibold text-axen-dark truncate">{c.name}</p>
+                <p className="text-sm font-semibold text-dravik-dark truncate">{c.name}</p>
                 <p className="text-[10px] text-gray-400 mt-0.5">
                   Modified {c.lastModified}
                   {c.publishedUrl && (
@@ -125,7 +125,7 @@ export default function CampaignDashboard({ onEdit }: CampaignDashboardProps) {
                       className="ml-2 text-gold hover:underline inline-flex items-center gap-0.5"
                     >
                       <ExternalLink size={9} />
-                      {c.publishedUrl.replace("axenone.co/p/", "…/")}
+                      {c.publishedUrl.replace("dravikrealty.com/p/", "…/")}
                     </a>
                   )}
                 </p>
@@ -139,12 +139,12 @@ export default function CampaignDashboard({ onEdit }: CampaignDashboardProps) {
             </div>
 
             {/* Views */}
-            <div className="w-24 text-right text-sm font-semibold text-axen-dark">
+            <div className="w-24 text-right text-sm font-semibold text-dravik-dark">
               {c.views.toLocaleString()}
             </div>
 
             {/* Leads */}
-            <div className="w-24 text-right text-sm font-bold text-axen-dark">
+            <div className="w-24 text-right text-sm font-bold text-dravik-dark">
               {c.leadsGenerated}
             </div>
 
@@ -153,7 +153,7 @@ export default function CampaignDashboard({ onEdit }: CampaignDashboardProps) {
               <span className={cn(
                 "text-sm font-bold",
                 c.conversionRate >= 10 ? "text-emerald-600" :
-                c.conversionRate >= 5  ? "text-axen-dark"   : "text-gray-400"
+                c.conversionRate >= 5  ? "text-dravik-dark"   : "text-gray-400"
               )}>
                 {c.conversionRate > 0 ? `${c.conversionRate}%` : "—"}
               </span>

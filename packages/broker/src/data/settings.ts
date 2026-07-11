@@ -5,11 +5,11 @@ import type {
 
 // ─── Company ──────────────────────────────────────────────────
 export const COMPANY_INFO: CompanyInfo = {
-  name:    "Axen Realty Group",
+  name:    "Dravik Realty",
   tagline: "Premium Real Estate & Mortgage Solutions",
   phone:   "(714) 555-0100",
-  email:   "info@axenrealty.com",
-  website: "www.axenrealty.com",
+  email:   "info@dravikrealty.com",
+  website: "www.dravikrealty.com",
   address: "100 Enterprise Way, Suite 400",
   city:    "Irvine",
   state:   "CA",
@@ -20,57 +20,57 @@ export const COMPANY_INFO: CompanyInfo = {
 // ─── Users ────────────────────────────────────────────────────
 export const SETTINGS_USERS: SettingsUser[] = [
   {
-    id: "u1", name: "Chris Macabugao", email: "chris@axenrealty.com",
+    id: "u1", name: "Chris Macabugao", email: "chris@dravikrealty.com",
     role: "Principal Broker", status: "active",
     joinedDate: "Jan 15, 2022", lastLogin: "Today, 9:14 AM", avatarColor: "#D4AF37",
   },
   {
-    id: "u2", name: "Elena Rodriguez", email: "elena@axenrealty.com",
+    id: "u2", name: "Elena Rodriguez", email: "elena@dravikrealty.com",
     role: "Mortgage LO", status: "active",
     joinedDate: "Mar 3, 2022", lastLogin: "Today, 8:42 AM", avatarColor: "#7C3AED",
   },
   {
-    id: "u3", name: "Aisha Williams", email: "aisha@axenrealty.com",
+    id: "u3", name: "Aisha Williams", email: "aisha@dravikrealty.com",
     role: "Team Lead", status: "active",
     joinedDate: "Jun 10, 2022", lastLogin: "Yesterday, 5:30 PM", avatarColor: "#0EA5E9",
   },
   {
-    id: "u4", name: "Sarah Chen", email: "sarah@axenrealty.com",
+    id: "u4", name: "Sarah Chen", email: "sarah@dravikrealty.com",
     role: "Team Lead", status: "active",
     joinedDate: "Aug 20, 2022", lastLogin: "May 28, 2026", avatarColor: "#EC4899",
   },
   {
-    id: "u5", name: "Marcus Johnson", email: "marcus@axenrealty.com",
+    id: "u5", name: "Marcus Johnson", email: "marcus@dravikrealty.com",
     role: "Agent", status: "active",
     joinedDate: "Nov 5, 2022", lastLogin: "May 27, 2026", avatarColor: "#10B981",
   },
   {
-    id: "u6", name: "James Park", email: "james@axenrealty.com",
+    id: "u6", name: "James Park", email: "james@dravikrealty.com",
     role: "Mortgage LO", status: "active",
     joinedDate: "Feb 14, 2023", lastLogin: "May 28, 2026", avatarColor: "#F97316",
   },
   {
-    id: "u7", name: "Julia Thompson", email: "julia@axenrealty.com",
+    id: "u7", name: "Julia Thompson", email: "julia@dravikrealty.com",
     role: "Agent", status: "active",
     joinedDate: "Apr 1, 2023", lastLogin: "May 26, 2026", avatarColor: "#8B5CF6",
   },
   {
-    id: "u8", name: "David Park", email: "david@axenrealty.com",
+    id: "u8", name: "David Park", email: "david@dravikrealty.com",
     role: "Agent", status: "active",
     joinedDate: "Jul 22, 2023", lastLogin: "May 25, 2026", avatarColor: "#0D9488",
   },
   {
-    id: "u9", name: "Rachel Kim", email: "rachel@axenrealty.com",
+    id: "u9", name: "Rachel Kim", email: "rachel@dravikrealty.com",
     role: "Admin", status: "active",
     joinedDate: "Sep 15, 2023", lastLogin: "Today, 10:02 AM", avatarColor: "#BE185D",
   },
   {
-    id: "u10", name: "Nathan Brooks", email: "nathan@axenrealty.com",
+    id: "u10", name: "Nathan Brooks", email: "nathan@dravikrealty.com",
     role: "Agent", status: "inactive",
     joinedDate: "Dec 1, 2023", lastLogin: "Mar 10, 2026", avatarColor: "#6B7280",
   },
   {
-    id: "u11", name: "Priya Patel", email: "priya@axenrealty.com",
+    id: "u11", name: "Priya Patel", email: "priya@dravikrealty.com",
     role: "Agent", status: "pending",
     joinedDate: "May 28, 2026", lastLogin: "—", avatarColor: "#B45309",
   },
@@ -122,7 +122,7 @@ export const INTEGRATIONS: Integration[] = [
   {
     id: "zapier", name: "Zapier", provider: "Zapier",
     category: "Automation", status: "disconnected",
-    description: "Connect AxenOne to 5,000+ apps via no-code workflows.",
+    description: "Connect Dravik Realty to 5,000+ apps via no-code workflows.",
     docsUrl: "#",
   },
   {

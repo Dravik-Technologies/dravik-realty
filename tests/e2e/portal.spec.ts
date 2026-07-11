@@ -14,3 +14,15 @@ test.describe("client portal", () => {
     await page.getByRole("button", { name: /Transactions/ }).first().click();
   });
 });
+
+test.describe("client portal admin", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/realty/client-portal");
+  });
+
+  test("realtor management surface renders client access controls", async ({ page }) => {
+    await expect(page.getByRole("main").getByRole("heading", { name: "Client Portal Admin" })).toBeVisible();
+    await expect(page.getByText("Client Access", { exact: true })).toBeVisible();
+    await expect(page.getByRole("link", { name: /Preview Client Portal/ })).toHaveAttribute("href", "/portal");
+  });
+});

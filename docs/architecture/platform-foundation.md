@@ -302,7 +302,7 @@ while contracts stay in the monorepo is a sound middle state.
 ## 9. Migration phases
 
 **Phase 0 — Hygiene (week 1).** Carry-over from the assessment: install deps, resolve the nested
-`agency-agents` repo, settle naming (Dravik/Axen), CI with lint + typecheck + build + Playwright
+`agency-agents` repo, settle naming under Dravik, CI with lint + typecheck + build + Playwright
 smoke over all 14 routes. *Exit: green pipeline on every PR.*
 
 **Phase 1 — Identity & infra skeleton (weeks 2–4).** Provision via IaC: ACA env, Postgres, Redis,

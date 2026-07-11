@@ -53,7 +53,7 @@ function StageColumn({ stage, transactions, selectedId, onSelect }: StageColumnP
       <div className="mb-2 px-1">
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: color }} />
-          <p className="text-xs font-bold text-axen-dark leading-tight flex-1 min-w-0">
+          <p className="text-xs font-bold text-dravik-dark leading-tight flex-1 min-w-0">
             {STAGE_LABEL[stage]}
           </p>
           <span className="text-[10px] font-bold text-white px-1.5 py-0.5 rounded-full flex-shrink-0"

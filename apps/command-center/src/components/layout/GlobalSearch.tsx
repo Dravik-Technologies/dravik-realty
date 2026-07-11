@@ -91,7 +91,7 @@ function ResultRow({ result, active, onSelect, onHover }: {
         <Icon size={15} className={cfg.iconCls} />
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-semibold text-axen-dark truncate">{result.title}</p>
+        <p className="text-sm font-semibold text-dravik-dark truncate">{result.title}</p>
         <p className="text-[11px] text-gray-400 truncate">{result.subtitle}</p>
       </div>
       <div className="flex items-center gap-2 flex-shrink-0">
@@ -168,7 +168,7 @@ export default function GlobalSearch({ open, onClose }: { open: boolean; onClose
 
   return (
     <div className="fixed inset-0 z-[100] flex items-start justify-center pt-[10vh] px-4 animate-fade-in">
-      <div className="absolute inset-0 bg-axen-dark/60 backdrop-blur-sm" onClick={handleClose} aria-hidden />
+      <div className="absolute inset-0 bg-dravik-dark/60 backdrop-blur-sm" onClick={handleClose} aria-hidden />
 
       <div
         ref={panelRef}
@@ -186,7 +186,7 @@ export default function GlobalSearch({ open, onClose }: { open: boolean; onClose
             value={query}
             onChange={e => { setQuery(e.target.value); setCursor(-1); }}
             placeholder="Search leads, agents, transactions, mortgage..."
-            className="flex-1 text-sm text-axen-dark placeholder:text-gray-400 focus:outline-none bg-transparent"
+            className="flex-1 text-sm text-dravik-dark placeholder:text-gray-400 focus:outline-none bg-transparent"
           />
           <div className="flex items-center gap-2 flex-shrink-0">
             <kbd className="hidden sm:inline-flex items-center px-1.5 py-0.5 rounded border border-line text-[10px] text-gray-400 font-mono bg-surface-2">
@@ -195,7 +195,7 @@ export default function GlobalSearch({ open, onClose }: { open: boolean; onClose
             <button
               onClick={handleClose}
               aria-label="Close search"
-              className="p-1 rounded-lg text-gray-400 hover:text-axen-dark hover:bg-surface-2 transition-colors"
+              className="p-1 rounded-lg text-gray-400 hover:text-dravik-dark hover:bg-surface-2 transition-colors"
             >
               <X size={15} />
             </button>
@@ -221,7 +221,7 @@ export default function GlobalSearch({ open, onClose }: { open: boolean; onClose
           {!isRecent && results.length === 0 && (
             <div className="px-5 py-10 text-center">
               <p className="text-sm text-gray-400">
-                No results for <strong className="text-axen-dark">&ldquo;{query}&rdquo;</strong>
+                No results for <strong className="text-dravik-dark">&ldquo;{query}&rdquo;</strong>
               </p>
               <p className="text-xs text-gray-300 mt-1">Try a name, address, or phone number</p>
             </div>
@@ -239,7 +239,7 @@ export default function GlobalSearch({ open, onClose }: { open: boolean; onClose
               </div>
             );
           })}
-          <span className="ml-auto text-[10px] text-gray-300">AxenONE Search</span>
+          <span className="ml-auto text-[10px] text-gray-300">Dravik Realty Search</span>
         </div>
       </div>
     </div>

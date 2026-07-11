@@ -56,7 +56,7 @@ function KpiCard({ icon: Icon, label, value, sub, color }: {
         <Icon size={20} style={{ color }} />
       </div>
       <div>
-        <p className="text-2xl font-bold text-axen-dark leading-none">{value}</p>
+        <p className="text-2xl font-bold text-dravik-dark leading-none">{value}</p>
         <p className="text-xs text-gray-400 mt-1">{label}</p>
         {sub && <p className="text-[11px] text-gray-300 mt-0.5">{sub}</p>}
       </div>
@@ -73,7 +73,7 @@ function FilterSelect<T extends string>({ value, onChange, options, label }: {
       <select
         aria-label={label} value={value}
         onChange={e => onChange(e.target.value as T)}
-        className="appearance-none bg-white border border-line rounded-xl pl-3 pr-8 py-2.5 text-sm font-semibold text-axen-dark focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition cursor-pointer"
+        className="appearance-none bg-white border border-line rounded-xl pl-3 pr-8 py-2.5 text-sm font-semibold text-dravik-dark focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition cursor-pointer"
       >
         {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
       </select>
@@ -90,7 +90,7 @@ function ViewToggle({ view, onChange }: { view: View; onChange: (v: View) => voi
         onClick={() => onChange("directory")}
         className={cn(
           "flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-bold transition-all",
-          view === "directory" ? "bg-white text-axen-dark shadow-sm" : "text-gray-400 hover:text-axen-dark"
+          view === "directory" ? "bg-white text-dravik-dark shadow-sm" : "text-gray-400 hover:text-dravik-dark"
         )}
       >
         <List size={13} /> Directory
@@ -99,7 +99,7 @@ function ViewToggle({ view, onChange }: { view: View; onChange: (v: View) => voi
         onClick={() => onChange("map")}
         className={cn(
           "flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-bold transition-all",
-          view === "map" ? "bg-white text-axen-dark shadow-sm" : "text-gray-400 hover:text-axen-dark"
+          view === "map" ? "bg-white text-dravik-dark shadow-sm" : "text-gray-400 hover:text-dravik-dark"
         )}
       >
         <Map size={13} /> Map View
@@ -158,7 +158,7 @@ export default function ReferralNetwork() {
         <div className="flex-shrink-0 bg-white border-b border-line px-6 py-3 flex items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <Globe size={15} className="text-gold" />
-            <h1 className="text-sm font-bold text-axen-dark">Global Referral Network</h1>
+            <h1 className="text-sm font-bold text-dravik-dark">Global Referral Network</h1>
             <span className="text-[10px] font-bold text-gold bg-gold-light px-2 py-0.5 rounded-full border border-gold/30">
               PCS Map
             </span>
@@ -184,7 +184,7 @@ export default function ReferralNetwork() {
         <div className="flex items-center justify-between gap-4 flex-wrap">
           <div className="flex items-center gap-3">
             <span className="w-1 h-6 rounded-full bg-gold inline-block" />
-            <h1 className="text-xl font-bold text-axen-dark">Global Referral Network</h1>
+            <h1 className="text-xl font-bold text-dravik-dark">Global Referral Network</h1>
           </div>
           <ViewToggle view={view} onChange={setView} />
         </div>
@@ -207,10 +207,10 @@ export default function ReferralNetwork() {
                 placeholder="Search by name, city, or specialization…"
                 value={query}
                 onChange={e => setQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 border border-line rounded-xl text-sm text-axen-dark placeholder:text-gray-400 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition"
+                className="w-full pl-10 pr-4 py-2.5 border border-line rounded-xl text-sm text-dravik-dark placeholder:text-gray-400 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition"
               />
               {query && (
-                <button aria-label="Clear search" onClick={() => setQuery("")} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-axen-dark">
+                <button aria-label="Clear search" onClick={() => setQuery("")} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-dravik-dark">
                   <X size={14} />
                 </button>
               )}
@@ -219,7 +219,7 @@ export default function ReferralNetwork() {
               onClick={() => setShowFilters(v => !v)}
               className={cn(
                 "flex items-center gap-2 px-4 py-2.5 rounded-xl border text-sm font-semibold transition-colors",
-                showFilters ? "bg-axen-dark text-white border-axen-dark" : "bg-white text-gray-600 border-line hover:bg-surface"
+                showFilters ? "bg-dravik-dark text-white border-dravik-dark" : "bg-white text-gray-600 border-line hover:bg-surface"
               )}
             >
               <SlidersHorizontal size={15} /> Filters
@@ -246,7 +246,7 @@ export default function ReferralNetwork() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <span className="w-1 h-5 rounded-full bg-gold inline-block" />
-              <h2 className="text-lg font-bold text-axen-dark">Agent Directory</h2>
+              <h2 className="text-lg font-bold text-dravik-dark">Agent Directory</h2>
             </div>
             <span className="text-sm text-gray-400 font-medium">
               {filteredAgents.length} of {AGENTS.length} agents
@@ -264,7 +264,7 @@ export default function ReferralNetwork() {
               <div className="w-12 h-12 rounded-2xl bg-surface-2 flex items-center justify-center">
                 <Search size={22} className="text-gray-300" />
               </div>
-              <p className="font-semibold text-axen-dark">No agents match your filters</p>
+              <p className="font-semibold text-dravik-dark">No agents match your filters</p>
               <p className="text-sm text-gray-400 max-w-xs">Try adjusting the search or clearing the active filters.</p>
               <button onClick={clearFilters} className="mt-2 text-sm font-semibold text-gold hover:text-gold-dark transition-colors">
                 Clear all filters
@@ -277,7 +277,7 @@ export default function ReferralNetwork() {
         <section className="space-y-4 pb-10">
           <div className="flex items-center gap-3">
             <span className="w-1 h-5 rounded-full bg-gold inline-block" />
-            <h2 className="text-lg font-bold text-axen-dark">Outbound Pipeline</h2>
+            <h2 className="text-lg font-bold text-dravik-dark">Outbound Pipeline</h2>
             <span className="text-[11px] font-bold bg-gold-light text-gold-dark px-2.5 py-0.5 rounded-full">
               {PIPELINE.length} referrals
             </span>

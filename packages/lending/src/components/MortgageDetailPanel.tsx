@@ -51,7 +51,7 @@ function StatRow({ label, value, accent }: { label: string; value: string; accen
   return (
     <div className="flex items-center justify-between py-2.5 border-b border-line last:border-0">
       <span className="text-xs text-gray-500">{label}</span>
-      <span className={cn("text-xs font-bold", accent ? "text-gold" : "text-axen-dark")}>
+      <span className={cn("text-xs font-bold", accent ? "text-gold" : "text-dravik-dark")}>
         {value}
       </span>
     </div>
@@ -75,15 +75,15 @@ function OverviewTab({ app }: { app: MortgageApplication }) {
               {app.clientInitials}
             </div>
             <div>
-              <p className="font-bold text-axen-dark text-sm">{app.clientName}</p>
+              <p className="font-bold text-dravik-dark text-sm">{app.clientName}</p>
               <p className="text-xs text-gray-400">{STAGE_LABELS[app.stage]}</p>
             </div>
           </div>
           <div className="pt-1 space-y-1.5">
-            <a href={`tel:${app.clientPhone}`} className="flex items-center gap-2 text-xs text-gray-500 hover:text-axen-dark">
+            <a href={`tel:${app.clientPhone}`} className="flex items-center gap-2 text-xs text-gray-500 hover:text-dravik-dark">
               <Phone size={12} className="text-gray-300" /> {app.clientPhone}
             </a>
-            <a href={`mailto:${app.clientEmail}`} className="flex items-center gap-2 text-xs text-gray-500 hover:text-axen-dark">
+            <a href={`mailto:${app.clientEmail}`} className="flex items-center gap-2 text-xs text-gray-500 hover:text-dravik-dark">
               <Mail size={12} className="text-gray-300" /> {app.clientEmail}
             </a>
           </div>
@@ -97,7 +97,7 @@ function OverviewTab({ app }: { app: MortgageApplication }) {
           <div className="flex items-start gap-2 mb-3">
             <Home size={14} className="text-gray-400 mt-0.5 flex-shrink-0" />
             <div>
-              <p className="text-sm font-semibold text-axen-dark">{app.propertyAddress}</p>
+              <p className="text-sm font-semibold text-dravik-dark">{app.propertyAddress}</p>
               <p className="text-xs text-gray-400">{app.city}</p>
             </div>
           </div>
@@ -170,7 +170,7 @@ function DocumentsTab({ app }: { app: MortgageApplication }) {
             <div key={doc.id} className="flex items-center gap-3 bg-white border border-line rounded-xl px-4 py-3">
               <Icon size={16} className={cn("flex-shrink-0", cfg.cls)} />
               <div className="flex-1 min-w-0">
-                <p className="text-sm text-axen-dark font-medium truncate">{doc.name}</p>
+                <p className="text-sm text-dravik-dark font-medium truncate">{doc.name}</p>
                 {doc.receivedDate && (
                   <p className="text-[10px] text-gray-400">Received {doc.receivedDate}</p>
                 )}
@@ -247,7 +247,7 @@ function UnderwritingTab({ app }: { app: MortgageApplication }) {
                 <div key={item.label}>
                   <div className="flex justify-between items-center mb-1">
                     <span className="text-[11px] text-gray-500">{item.label}</span>
-                    <span className="text-[11px] font-bold text-axen-dark tabular-nums">
+                    <span className="text-[11px] font-bold text-dravik-dark tabular-nums">
                       {formatCurrency(item.amount)} <span className="text-gray-400 font-normal">({pct}%)</span>
                     </span>
                   </div>
@@ -273,7 +273,7 @@ function ConditionsTab({ app }: { app: MortgageApplication }) {
     return (
       <div className="flex flex-col items-center justify-center py-16 gap-3">
         <CheckCircle2 size={32} className="text-emerald-400" />
-        <p className="text-sm font-semibold text-axen-dark">No conditions</p>
+        <p className="text-sm font-semibold text-dravik-dark">No conditions</p>
         <p className="text-xs text-gray-400">This application has no outstanding conditions.</p>
       </div>
     );
@@ -286,7 +286,7 @@ function ConditionsTab({ app }: { app: MortgageApplication }) {
           <div key={cond.id} className="bg-white border border-line rounded-xl px-4 py-3.5 flex items-start gap-3">
             <span className={cn("w-2 h-2 rounded-full flex-shrink-0 mt-1.5", cfg.dot)} />
             <div className="flex-1 min-w-0">
-              <p className="text-sm text-axen-dark leading-snug">{cond.description}</p>
+              <p className="text-sm text-dravik-dark leading-snug">{cond.description}</p>
               <p className="text-[10px] text-gray-400 mt-1">Due {cond.dueDate}</p>
             </div>
             <span className={cn("text-[10px] font-semibold border px-2 py-0.5 rounded-full flex-shrink-0", cfg.cls)}>
@@ -307,24 +307,24 @@ function CommunicationsTab({ app }: { app: MortgageApplication }) {
         <MessageSquare size={24} className="text-gold" />
       </div>
       <div>
-        <p className="font-bold text-axen-dark text-sm">{app.clientName}</p>
+        <p className="font-bold text-dravik-dark text-sm">{app.clientName}</p>
         <p className="text-xs text-gray-400 mt-1">
           All messages with this client are managed in the Unified Inbox.
         </p>
       </div>
       <Link
         href="/inbox"
-        className="flex items-center gap-2 px-4 py-2 bg-axen-dark text-white rounded-xl text-xs font-bold hover:bg-gold hover:text-axen-dark transition-colors"
+        className="flex items-center gap-2 px-4 py-2 bg-dravik-dark text-white rounded-xl text-xs font-bold hover:bg-gold hover:text-dravik-dark transition-colors"
       >
         <ExternalLink size={12} /> Open in Inbox
       </Link>
       <div className="w-full bg-surface-2 rounded-xl p-4 text-left">
         <p className="text-[10px] text-gray-400 font-semibold uppercase tracking-wide mb-1">Contact Info</p>
         <div className="space-y-1.5">
-          <a href={`tel:${app.clientPhone}`} className="flex items-center gap-2 text-xs text-axen-dark">
+          <a href={`tel:${app.clientPhone}`} className="flex items-center gap-2 text-xs text-dravik-dark">
             <Phone size={12} className="text-gray-400" /> {app.clientPhone}
           </a>
-          <a href={`mailto:${app.clientEmail}`} className="flex items-center gap-2 text-xs text-axen-dark">
+          <a href={`mailto:${app.clientEmail}`} className="flex items-center gap-2 text-xs text-dravik-dark">
             <Mail size={12} className="text-gray-400" /> {app.clientEmail}
           </a>
         </div>
@@ -344,7 +344,7 @@ function RealEstateTab({ app }: { app: MortgageApplication }) {
               <TrendingUp size={14} className="text-blue-600" />
             </div>
             <div>
-              <p className="text-xs font-bold text-axen-dark">Linked Lead</p>
+              <p className="text-xs font-bold text-dravik-dark">Linked Lead</p>
               <p className="text-[10px] text-gray-400">{app.linkedLeadId}</p>
             </div>
           </div>
@@ -364,7 +364,7 @@ function RealEstateTab({ app }: { app: MortgageApplication }) {
               <DollarSign size={14} className="text-gold" />
             </div>
             <div>
-              <p className="text-xs font-bold text-axen-dark">Linked Transaction</p>
+              <p className="text-xs font-bold text-dravik-dark">Linked Transaction</p>
               <p className="text-[10px] text-gray-400">{app.linkedTransId}</p>
             </div>
           </div>
@@ -382,7 +382,7 @@ function RealEstateTab({ app }: { app: MortgageApplication }) {
           <div className="w-14 h-14 rounded-2xl bg-surface-2 flex items-center justify-center">
             <Building2 size={24} className="text-gray-300" />
           </div>
-          <p className="text-sm font-semibold text-axen-dark">No links yet</p>
+          <p className="text-sm font-semibold text-dravik-dark">No links yet</p>
           <p className="text-xs text-gray-400 max-w-[220px]">
             Link this application to a lead or transaction from those modules.
           </p>
@@ -487,7 +487,7 @@ export default function MortgageDetailPanel({ app, open, onClose }: Props) {
                   {app.clientInitials}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p id="detail-panel-title" className="font-bold text-axen-dark text-sm leading-tight">
+                  <p id="detail-panel-title" className="font-bold text-dravik-dark text-sm leading-tight">
                     {app.clientName}
                   </p>
                   <p className="text-xs text-gray-400 truncate mt-0.5">
@@ -497,7 +497,7 @@ export default function MortgageDetailPanel({ app, open, onClose }: Props) {
                 <button
                   onClick={handleClose}
                   aria-label="Close panel"
-                  className="p-1.5 rounded-lg text-gray-400 hover:text-axen-dark hover:bg-surface-2 transition-colors flex-shrink-0"
+                  className="p-1.5 rounded-lg text-gray-400 hover:text-dravik-dark hover:bg-surface-2 transition-colors flex-shrink-0"
                 >
                   <X size={16} />
                 </button>
@@ -514,8 +514,8 @@ export default function MortgageDetailPanel({ app, open, onClose }: Props) {
                       className={cn(
                         "flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[11px] font-semibold whitespace-nowrap transition-colors",
                         tab === t.id
-                          ? "bg-axen-dark text-white"
-                          : "text-gray-400 hover:text-axen-dark hover:bg-surface-2"
+                          ? "bg-dravik-dark text-white"
+                          : "text-gray-400 hover:text-dravik-dark hover:bg-surface-2"
                       )}
                     >
                       <Icon size={11} />
@@ -554,7 +554,7 @@ export default function MortgageDetailPanel({ app, open, onClose }: Props) {
                 <button
                   disabled
                   title="Funding confirmation coming soon"
-                  className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gold/40 text-axen-dark/40 rounded-xl text-sm font-bold cursor-not-allowed"
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gold/40 text-dravik-dark/40 rounded-xl text-sm font-bold cursor-not-allowed"
                 >
                   <CheckCircle2 size={16} /> Mark as Funded
                 </button>

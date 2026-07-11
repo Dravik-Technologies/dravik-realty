@@ -43,7 +43,7 @@ export default function InboxSidebar({ conversations, active, onSelect }: Props)
     >
       {/* Header */}
       <div className="px-4 py-4 border-b border-line flex-shrink-0">
-        <p className="text-sm font-bold text-axen-dark">Messages</p>
+        <p className="text-sm font-bold text-dravik-dark">Messages</p>
         <p className="text-[10px] text-gray-400 mt-0.5">Unified communications</p>
       </div>
 
@@ -62,7 +62,7 @@ export default function InboxSidebar({ conversations, active, onSelect }: Props)
                   "w-full flex items-center gap-2.5 px-4 py-2 text-sm font-medium transition-colors text-left",
                   isActive
                     ? "bg-gold-light text-gold"
-                    : "text-gray-500 hover:bg-surface-2 hover:text-axen-dark"
+                    : "text-gray-500 hover:bg-surface-2 hover:text-dravik-dark"
                 )}
               >
                 <Icon
@@ -74,7 +74,7 @@ export default function InboxSidebar({ conversations, active, onSelect }: Props)
                   <span className={cn(
                     "text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center flex-shrink-0",
                     id === "unread" && count > 0
-                      ? "bg-gold text-axen-dark"
+                      ? "bg-gold text-dravik-dark"
                       : isActive
                         ? "bg-gold/20 text-gold"
                         : "bg-surface-2 text-gray-400"

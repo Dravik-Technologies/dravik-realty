@@ -63,6 +63,6 @@ export interface SplitBreakdown {
   totalCommission: number;
   receivingAgentShare: number;
   referringAgentGross: number;
-  axenCut: number;
+  dravikCut: number;
   referringAgentNet: number;
 }

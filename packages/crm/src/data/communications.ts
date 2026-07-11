@@ -52,7 +52,7 @@ export const CONVERSATIONS: Conversation[] = [
       msg("m2-1", "agent",  "email", ME,               "Hi Maria, just confirming the closing is set for June 12. Title has cleared and the lender confirmed final approval.",    "2026-05-28T14:00:00", "Yesterday, 2:00 PM"),
       msg("m2-2", "client", "email", "Maria Rodriguez", "That's wonderful news! Do I need to bring anything specific to closing?",                                                  "2026-05-28T15:30:00", "Yesterday, 3:30 PM"),
       msg("m2-3", "agent",  "email", ME,               "Bring your photo ID, certified funds for the closing costs, and the homeowner's insurance binder. I'll send a full checklist.", "2026-05-28T16:00:00", "Yesterday, 4:00 PM"),
-      msg("m2-4", "system", "system", "AxenOne",        "Document added: Closing Disclosure — Maria Rodriguez — 4110 Salzedo",                                                     "2026-05-29T08:00:00", "8:00 AM"),
+      msg("m2-4", "system", "system", "Dravik Realty",        "Document added: Closing Disclosure — Maria Rodriguez — 4110 Salzedo",                                                     "2026-05-29T08:00:00", "8:00 AM"),
       msg("m2-5", "agent",  "email", ME,               "Maria, I've attached the closing disclosure for your review. There's a small addendum item we need to address.",           "2026-05-29T08:45:00", "8:45 AM"),
       msg("m2-6", "client", "email", "Maria Rodriguez", "Got it. I'll have my attorney review the addendum today.",                                                                  "2026-05-29T09:15:00", "9:15 AM", false),
     ],
@@ -107,7 +107,7 @@ export const CONVERSATIONS: Conversation[] = [
     unreadCount: 0,
     messages: [
       msg("m5-1", "agent",  "email", ME,             "Michael, we had 3 showings today on Main Hwy. Overall positive reactions. Sending you a summary.",  "2026-05-27T14:00:00", "Tue, 2:00 PM"),
-      msg("m5-2", "system", "system", "AxenOne",      "Showing logged: 3 groups — 1:00 PM, 2:30 PM, 4:00 PM",                                              "2026-05-27T14:05:00", "Tue, 2:05 PM"),
+      msg("m5-2", "system", "system", "Dravik Realty",      "Showing logged: 3 groups — 1:00 PM, 2:30 PM, 4:00 PM",                                              "2026-05-27T14:05:00", "Tue, 2:05 PM"),
       msg("m5-3", "client", "email", "Michael Torres","Any offers incoming? The 4:00 group seemed very interested.",                                        "2026-05-27T15:50:00", "Tue, 3:50 PM"),
       msg("m5-4", "agent",  "email", ME,             "Two of the three buyers asked about HOA fees. I'll follow up Monday.",                                "2026-05-27T16:20:00", "Tue, 4:20 PM"),
     ],
@@ -140,7 +140,7 @@ export const CONVERSATIONS: Conversation[] = [
     lastTimestamp: "2026-05-27T14:30:00", displayTime: "Tue, 2:30 PM",
     unreadCount: 0,
     messages: [
-      msg("m7-1", "client", "sms", "David Chen", "Hi, I was told Axen Realty also handles mortgages? I'm looking to buy a $1.2M property.",          "2026-05-26T11:00:00", "Mon, 11:00 AM"),
+      msg("m7-1", "client", "sms", "David Chen", "Hi, I was told Dravik Realty also handles mortgages? I'm looking to buy a $1.2M property.",          "2026-05-26T11:00:00", "Mon, 11:00 AM"),
       msg("m7-2", "agent",  "sms", ME,           "Hi David! Yes — we have an in-house mortgage team. Current rates start at 6.75% for your range.", "2026-05-26T11:20:00", "Mon, 11:20 AM"),
       msg("m7-3", "client", "sms", "David Chen", "That rate sounds very competitive. Can we meet Thursday?",                                        "2026-05-27T14:30:00", "Tue, 2:30 PM"),
     ],
@@ -192,8 +192,8 @@ export const CONVERSATIONS: Conversation[] = [
     lastTimestamp: "2026-05-25T09:30:00", displayTime: "May 25",
     unreadCount: 0,
     messages: [
-      msg("m10-1", "system", "system", "AxenOne",      "New Zillow lead assigned: Sarah Johnson — searching for 3BR in Kendall/Doral area, budget $600K",              "2026-05-25T08:00:00", "May 25, 8:00 AM"),
-      msg("m10-2", "agent",  "sms",   ME,              "Hi Sarah! I'm Chris from Axen Realty. I saw you were searching in Kendall — I specialize in that area! Can I help?", "2026-05-25T08:15:00", "May 25, 8:15 AM"),
+      msg("m10-1", "system", "system", "Dravik Realty",      "New Zillow lead assigned: Sarah Johnson — searching for 3BR in Kendall/Doral area, budget $600K",              "2026-05-25T08:00:00", "May 25, 8:00 AM"),
+      msg("m10-2", "agent",  "sms",   ME,              "Hi Sarah! I'm Chris from Dravik Realty. I saw you were searching in Kendall — I specialize in that area! Can I help?", "2026-05-25T08:15:00", "May 25, 8:15 AM"),
       msg("m10-3", "client", "sms",   "Sarah Johnson", "Yes please! We're first-time buyers and not sure where to start.",                                                 "2026-05-25T09:30:00", "May 25, 9:30 AM"),
     ],
   },
@@ -237,7 +237,7 @@ export const CONVERSATIONS: Conversation[] = [
   {
     id: "c13",
     clientName: "Aisha Williams", clientInitials: "AW", clientColor: "#3B82F6",
-    clientEmail: "aisha.williams@axenrealty.com",
+    clientEmail: "aisha.williams@dravikrealty.com",
     tag: "team", channel: "email",
     subject: "Team — Tyler Brooks onboarding check",
     lastMessage: "Tyler will be ready to shadow by next Monday. I'll assign him to my next listing appointment.",
@@ -250,19 +250,19 @@ export const CONVERSATIONS: Conversation[] = [
     ],
   },
 
-  // ── 14. Axen System — notifications ────────────────────────
+  // ── 14. Dravik System — notifications ────────────────────────
   {
     id: "c14",
-    clientName: "AxenOne System", clientInitials: "AX", clientColor: "#D4AF37",
+    clientName: "Dravik Realty System", clientInitials: "AX", clientColor: "#D4AF37",
     tag: "team", channel: "system",
     subject: "Automated Alerts",
     lastMessage: "Reminder: 3 listing agreements expire in the next 30 days.",
     lastTimestamp: "2026-05-29T07:00:00", displayTime: "7:00 AM",
     unreadCount: 1,
     messages: [
-      msg("m14-1", "system", "system", "AxenOne", "New lead assigned from Zillow: Patricia Nguyen — Coral Gables buyer, $2.8M budget",                    "2026-05-28T08:00:00", "Yesterday, 8:00 AM"),
-      msg("m14-2", "system", "system", "AxenOne", "Transaction milestone: Maria Rodriguez — Closing Disclosure received and sent to client",               "2026-05-29T06:00:00", "6:00 AM"),
-      msg("m14-3", "system", "system", "AxenOne", "Reminder: 3 listing agreements expire in the next 30 days.",                                           "2026-05-29T07:00:00", "7:00 AM", false),
+      msg("m14-1", "system", "system", "Dravik Realty", "New lead assigned from Zillow: Patricia Nguyen — Coral Gables buyer, $2.8M budget",                    "2026-05-28T08:00:00", "Yesterday, 8:00 AM"),
+      msg("m14-2", "system", "system", "Dravik Realty", "Transaction milestone: Maria Rodriguez — Closing Disclosure received and sent to client",               "2026-05-29T06:00:00", "6:00 AM"),
+      msg("m14-3", "system", "system", "Dravik Realty", "Reminder: 3 listing agreements expire in the next 30 days.",                                           "2026-05-29T07:00:00", "7:00 AM", false),
     ],
   },
 
@@ -270,7 +270,7 @@ export const CONVERSATIONS: Conversation[] = [
   {
     id: "c15",
     clientName: "Marcus Rivera", clientInitials: "MR2", clientColor: "#F59E0B",
-    clientEmail: "marcus.rivera@axenrealty.com",
+    clientEmail: "marcus.rivera@dravikrealty.com",
     tag: "team", channel: "email",
     subject: "Shared buyer — Westchester showing",
     lastMessage: "Got it. I'll follow up with the buyer and cc you on the email.",

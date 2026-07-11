@@ -51,7 +51,7 @@ function TemplateCard({
             <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Channels</p>
             <div className="flex items-center gap-1.5 flex-wrap">
               {template.channels.map((channel) => (
-                <span key={channel} className="text-[11px] font-semibold text-axen-dark">
+                <span key={channel} className="text-[11px] font-semibold text-dravik-dark">
                   {channel}
                 </span>
               ))}
@@ -59,7 +59,7 @@ function TemplateCard({
           </div>
           <div className="rounded-xl bg-surface p-3 border border-line">
             <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Queue Match</p>
-            <p className="text-lg font-bold text-axen-dark leading-none">{queuedCount}</p>
+            <p className="text-lg font-bold text-dravik-dark leading-none">{queuedCount}</p>
             <p className="text-[10px] text-gray-400 mt-1">queued prospect{queuedCount === 1 ? "" : "s"}</p>
           </div>
         </div>
@@ -67,7 +67,7 @@ function TemplateCard({
         <div className="flex items-center gap-2">
           <Link
             href="/marketing"
-            className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-gold text-axen-dark text-sm font-bold rounded-xl hover:bg-gold-dark transition-colors"
+            className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-gold text-dravik-dark text-sm font-bold rounded-xl hover:bg-gold-dark transition-colors"
           >
             Open in Marketing
             <ArrowRight size={14} />
@@ -98,7 +98,7 @@ export default function CampaignsTab({ queuedLeads }: CampaignsTabProps) {
         <div className="bg-white border border-line rounded-2xl p-5">
           <div className="flex items-center gap-2 mb-3">
             <Sparkles size={15} className="text-gold" />
-            <p className="text-sm font-bold text-axen-dark">Prospecting Campaign Templates</p>
+            <p className="text-sm font-bold text-dravik-dark">Prospecting Campaign Templates</p>
           </div>
           <p className="text-sm text-gray-500 leading-relaxed">
             Launch seller outreach sequences built for expireds, FSBOs, absentee owners, and high-equity homeowners.
@@ -106,7 +106,7 @@ export default function CampaignsTab({ queuedLeads }: CampaignsTabProps) {
           </p>
         </div>
 
-        <div className="bg-axen-dark rounded-2xl p-5 text-white">
+        <div className="bg-dravik-dark rounded-2xl p-5 text-white">
           <p className="text-xs font-bold text-gold uppercase tracking-widest mb-2">Campaign Stack</p>
           <div className="space-y-3">
             {[

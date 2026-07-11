@@ -26,7 +26,7 @@ function KpiCard({
         <Icon size={18} style={{ color: accent }} />
       </div>
       <div>
-        <p className="text-xl font-bold text-axen-dark leading-none">{value}</p>
+        <p className="text-xl font-bold text-dravik-dark leading-none">{value}</p>
         <p className="text-xs text-gray-400 mt-0.5">{label}</p>
         {sub && <p className="text-[10px] text-gray-300 mt-0.5">{sub}</p>}
       </div>
@@ -39,7 +39,7 @@ function TxTableRow({ transaction: t, onSelect }: { transaction: Transaction; on
   const color = STAGE_COLOR[t.stage];
   const gross = t.contractPrice * (t.commission.commissionRate / 100);
   const ref   = t.commission.hasReferral ? gross * (t.commission.referralRate / 100) : 0;
-  const net   = (gross - ref) * (1 - t.commission.axenSplitRate / 100) - t.commission.transactionFee;
+  const net   = (gross - ref) * (1 - t.commission.dravikSplitRate / 100) - t.commission.transactionFee;
 
   return (
     <div
@@ -52,7 +52,7 @@ function TxTableRow({ transaction: t, onSelect }: { transaction: Transaction; on
           <img src={t.heroImage} alt={t.address} className="w-full h-full object-cover" />
         </div>
         <div className="min-w-0">
-          <p className="text-sm font-semibold text-axen-dark truncate">{t.address}</p>
+          <p className="text-sm font-semibold text-dravik-dark truncate">{t.address}</p>
           <p className="text-[10px] text-gray-400">{t.client.name} · {t.city}</p>
         </div>
       </div>
@@ -62,7 +62,7 @@ function TxTableRow({ transaction: t, onSelect }: { transaction: Transaction; on
         <span className="text-xs text-gray-500 truncate">{t.stage}</span>
       </div>
 
-      <div className="w-28 text-right text-sm font-semibold text-axen-dark">
+      <div className="w-28 text-right text-sm font-semibold text-dravik-dark">
         {formatCurrency(t.contractPrice)}
       </div>
 
@@ -120,7 +120,7 @@ export default function TransactionsPage() {
   const commPipeline = active.reduce((s, t) => {
     const gross = t.contractPrice * (t.commission.commissionRate / 100);
     const ref   = t.commission.hasReferral ? gross * (t.commission.referralRate / 100) : 0;
-    return s + (gross - ref) * (1 - t.commission.axenSplitRate / 100) - t.commission.transactionFee;
+    return s + (gross - ref) * (1 - t.commission.dravikSplitRate / 100) - t.commission.transactionFee;
   }, 0);
 
   // Tab data
@@ -136,13 +136,13 @@ export default function TransactionsPage() {
         <div className="flex-shrink-0 bg-white border-b border-line px-6 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-xl font-bold text-axen-dark">Transactions</h1>
+              <h1 className="text-xl font-bold text-dravik-dark">Transactions</h1>
               <p className="text-xs text-gray-400 mt-0.5">Deals from under contract through closing</p>
             </div>
             <button
               disabled
               title="Transaction creation coming soon"
-              className="flex items-center gap-2 px-4 py-2.5 bg-gold text-axen-dark font-bold text-sm rounded-xl opacity-50 cursor-not-allowed"
+              className="flex items-center gap-2 px-4 py-2.5 bg-gold text-dravik-dark font-bold text-sm rounded-xl opacity-50 cursor-not-allowed"
             >
               <Plus size={15} /> New Transaction
             </button>
@@ -165,8 +165,8 @@ export default function TransactionsPage() {
                 className={cn(
                   "px-4 py-2 text-sm font-semibold border-b-2 transition-colors",
                   tab === id
-                    ? "border-gold text-axen-dark"
-                    : "border-transparent text-gray-400 hover:text-axen-dark"
+                    ? "border-gold text-dravik-dark"
+                    : "border-transparent text-gray-400 hover:text-dravik-dark"
                 )}
               >
                 {label}

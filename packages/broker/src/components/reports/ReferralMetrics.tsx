@@ -19,7 +19,7 @@ function PieTooltip({ active, payload }: TooltipProps) {
   const p = payload[0];
   return (
     <div className="bg-white border border-line rounded-xl shadow-lg px-3 py-2">
-      <p className="text-xs font-bold text-axen-dark">{p.name}</p>
+      <p className="text-xs font-bold text-dravik-dark">{p.name}</p>
       <p className="text-sm font-bold" style={{ color: p.payload.color }}>{p.value}</p>
     </div>
   );
@@ -44,11 +44,11 @@ function PartnerRow({ p, topFee }: { p: ReferralPartner; topFee: number }) {
       <div className="flex items-center gap-3">
         <TypeIcon type={p.type} />
         <div className="flex-1 min-w-0">
-          <p className="text-xs font-semibold text-axen-dark truncate">{p.name}</p>
+          <p className="text-xs font-semibold text-dravik-dark truncate">{p.name}</p>
           <p className="text-[10px] text-gray-400 capitalize">{p.type}</p>
         </div>
         <div className="text-center flex-shrink-0">
-          <p className="text-[11px] font-bold text-axen-dark">{p.sent + p.received}</p>
+          <p className="text-[11px] font-bold text-dravik-dark">{p.sent + p.received}</p>
           <p className="text-[9px] text-gray-400">total</p>
         </div>
         <div className="text-center flex-shrink-0">
@@ -107,7 +107,7 @@ export default function ReferralMetrics({
           { label: "Avg Fee",      value: formatCurrency(avgReferralFee),   accent: "#8B5CF6" },
         ].map(({ label, value, accent }) => (
           <div key={label} className="bg-white rounded-2xl border border-line px-4 py-3">
-            <p className="text-xl font-bold text-axen-dark" style={{ color: accent }}>{value}</p>
+            <p className="text-xl font-bold text-dravik-dark" style={{ color: accent }}>{value}</p>
             <p className="text-xs text-gray-400 mt-0.5">{label}</p>
           </div>
         ))}
@@ -119,7 +119,7 @@ export default function ReferralMetrics({
         <div className="bg-white rounded-2xl border border-line p-5">
           <div className="flex items-center gap-2 mb-3">
             <TrendingUp size={14} className="text-gold" />
-            <p className="text-sm font-bold text-axen-dark">Sent vs Received</p>
+            <p className="text-sm font-bold text-dravik-dark">Sent vs Received</p>
           </div>
           <ResponsiveContainer width="100%" height={200}>
             <PieChart>
@@ -144,7 +144,7 @@ export default function ReferralMetrics({
           </ResponsiveContainer>
           {/* Center label */}
           <div className="text-center -mt-2">
-            <p className="text-2xl font-bold text-axen-dark">{referralsSent + referralsReceived}</p>
+            <p className="text-2xl font-bold text-dravik-dark">{referralsSent + referralsReceived}</p>
             <p className="text-xs text-gray-400">Total referrals</p>
           </div>
           <div className="mt-3 pt-3 border-t border-line flex items-center justify-between">
@@ -155,7 +155,7 @@ export default function ReferralMetrics({
 
         {/* Partner table */}
         <div className="bg-white rounded-2xl border border-line p-5">
-          <p className="text-sm font-bold text-axen-dark mb-1">Top Partners</p>
+          <p className="text-sm font-bold text-dravik-dark mb-1">Top Partners</p>
           <p className="text-xs text-gray-400 mb-3">By referrals exchanged</p>
           <div>
             {partners

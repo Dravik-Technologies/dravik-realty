@@ -81,7 +81,7 @@ export default function ReferralModal({ agent, open, onClose }: ReferralModalPro
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fade-in"
+      className="fixed inset-0 z-[1200] flex items-center justify-center p-4 animate-fade-in"
       style={{ background: "rgba(26,26,46,0.55)", backdropFilter: "blur(4px)" }}
       onClick={(e) => { if (e.target === overlayRef.current) onClose(); }}
     >

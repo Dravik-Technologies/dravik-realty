@@ -19,30 +19,30 @@ export function BrandLogo({
   return (
     <span
       className={cn(
-        "brand-logo-field relative block overflow-visible rounded-[18px]",
-        isMark ? "h-10 w-10 rounded-2xl" : "h-14 w-36",
+        "brand-logo-field relative block overflow-visible rounded-2xl",
+        isMark ? "h-10 w-10" : "h-14 w-28",
         className
       )}
     >
       <span
         aria-hidden
         className={cn(
-          "pointer-events-none absolute rounded-[inherit] bg-black/45 blur-xl",
-          isMark ? "inset-x-0 -bottom-1 top-4" : "inset-x-2 -bottom-2 top-7"
+          "pointer-events-none absolute rounded-[inherit] bg-black/35 blur-lg",
+          isMark ? "inset-x-0 -bottom-1 top-4" : "inset-x-2 -bottom-1 top-8"
         )}
       />
-      <span className="absolute inset-0 overflow-hidden rounded-[inherit] border border-[#FDFDFD]/25 bg-[#2F2F2F]/60 shadow-[0_10px_24px_rgba(0,0,0,0.34),0_1px_0_rgba(253,253,253,0.24)_inset] backdrop-blur-md">
+      <span className="absolute inset-0 overflow-hidden rounded-[inherit] border border-[#FDFDFD]/15 bg-[#2F2F2F]/55 shadow-[0_8px_18px_rgba(0,0,0,0.28),0_1px_0_rgba(253,253,253,0.2)_inset] backdrop-blur-md">
         <Image
           src="/dravik-realty-logo.png"
           alt={alt}
           fill
-          sizes={isMark ? "40px" : "176px"}
+          sizes={isMark ? "40px" : "112px"}
           className={cn(
             "pointer-events-none select-none brightness-110 contrast-110 saturate-90",
-            isMark ? "object-cover scale-[2.05]" : "object-contain"
+            isMark ? "object-cover scale-[2.05]" : "object-cover scale-[2.25]"
           )}
           priority={priority}
-          style={{ objectPosition: isMark ? "50% 36%" : "50% 50%" }}
+          style={{ objectPosition: isMark ? "50% 36%" : "50% 43%" }}
         />
         <span
           aria-hidden

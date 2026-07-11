@@ -302,18 +302,19 @@ export default function AnalyticsDashboard() {
   const [customEnd, setCustomEnd]     = useState("");
 
   const snap: AnalyticsSnapshot = ANALYTICS_DATA[dateRange];
+  const primaryAgent = snap.agents[0];
 
-  const kpiVolume       = viewMode === "broker" ? snap.teamVolume            : snap.agents[0].closedVolume;
-  const kpiGci          = viewMode === "broker" ? snap.teamGci               : snap.agents[0].gci;
-  const kpiConv         = viewMode === "broker" ? snap.teamConversionRate    : snap.agents[0].conversionRate;
-  const kpiDays         = viewMode === "broker" ? snap.teamAvgDaysToClose    : snap.agents[0].avgDaysToClose;
+  const kpiVolume       = viewMode === "broker" ? snap.teamVolume            : (primaryAgent?.closedVolume ?? 0);
+  const kpiGci          = viewMode === "broker" ? snap.teamGci               : (primaryAgent?.gci ?? 0);
+  const kpiConv         = viewMode === "broker" ? snap.teamConversionRate    : (primaryAgent?.conversionRate ?? 0);
+  const kpiDays         = viewMode === "broker" ? snap.teamAvgDaysToClose    : (primaryAgent?.avgDaysToClose ?? 0);
   const kpiReferralRev  = viewMode === "broker" ? snap.teamReferralRevenue   : snap.agentReferralRevenue;
   const kpiMortgageRev  = viewMode === "broker" ? snap.teamMortgageRevenue   : snap.agentMortgageRevenue;
 
   // Derive agent-scaled arrays for tabs that show pipeline/campaign data.
   // Chris (agents[0]) holds ~29% of team volume — reuse that ratio to scale counts.
   const teamVol  = snap.agents.reduce((s, a) => s + a.closedVolume, 0);
-  const agentShr = teamVol > 0 ? snap.agents[0].closedVolume / teamVol : 0;
+  const agentShr = teamVol > 0 && primaryAgent ? primaryAgent.closedVolume / teamVol : 0;
   const isAgent  = viewMode === "agent";
 
   const displayLeadSources = isAgent

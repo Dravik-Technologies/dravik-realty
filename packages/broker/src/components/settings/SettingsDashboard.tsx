@@ -58,7 +58,7 @@ export default function SettingsDashboard() {
   const { title, sub } = SECTION_TITLES[section];
 
   return (
-    <div className="flex bg-surface" style={{ minHeight: "calc(100vh - 4rem)" }}>
+    <div className="flex flex-col lg:flex-row bg-surface" style={{ minHeight: "calc(100vh - 4rem)" }}>
 
       {/* Left settings nav */}
       <SettingsSidebar active={section} onSelect={setSection} />
@@ -67,7 +67,7 @@ export default function SettingsDashboard() {
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
 
         {/* Top bar */}
-        <div className="flex-shrink-0 bg-white border-b border-line px-8 py-4 flex items-center justify-between gap-4">
+        <div className="flex-shrink-0 bg-white border-b border-line px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div className="flex items-center gap-3 min-w-0">
             <div className="w-8 h-8 rounded-lg bg-gold-light flex items-center justify-center flex-shrink-0">
               <Settings size={14} className="text-gold" />
@@ -77,16 +77,16 @@ export default function SettingsDashboard() {
               <p className="text-[11px] text-gray-400 truncate">{sub}</p>
             </div>
           </div>
-          <div className="flex items-center gap-2 flex-shrink-0">
+          <div className="flex w-full sm:w-auto items-center gap-2 flex-shrink-0">
             <button
               onClick={handleDiscard}
-              className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-gray-500 border border-line rounded-xl hover:text-dravik-dark hover:border-dravik-dark transition-colors"
+              className="flex flex-1 sm:flex-none items-center justify-center gap-1.5 px-3 py-2 text-xs font-semibold text-gray-500 border border-line rounded-xl hover:text-dravik-dark hover:border-dravik-dark transition-colors"
             >
               <RotateCcw size={12} /> Discard
             </button>
             <button
               onClick={handleSave}
-              className="flex items-center gap-1.5 px-4 py-2 bg-gold text-dravik-dark text-xs font-bold rounded-xl hover:bg-gold-dark transition-colors"
+              className="flex flex-1 sm:flex-none items-center justify-center gap-1.5 px-4 py-2 bg-gold text-dravik-dark text-xs font-bold rounded-xl hover:bg-gold-dark transition-colors"
             >
               <Save size={12} /> Save Changes
             </button>
@@ -94,7 +94,7 @@ export default function SettingsDashboard() {
         </div>
 
         {/* Scrollable content — key forces remount on Discard to reset all section state */}
-        <div key={resetKey} className="flex-1 overflow-y-auto px-8 py-6">
+        <div key={resetKey} className="flex-1 overflow-y-auto px-4 sm:px-6 lg:px-8 py-5 lg:py-6">
           {/* Always-mount all sections; hide non-active with CSS */}
           <div hidden={section !== "general"}>
             <GeneralSettings onSave={handleSave} />

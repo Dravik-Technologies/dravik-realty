@@ -196,17 +196,17 @@ export default function MarketingPage({ properties }: { properties: Property[] }
 
         {/* ── Page header ──────────────────────────────────── */}
         <div className="flex-shrink-0 bg-white border-b border-line">
-          <div className="flex items-center justify-between px-6 py-4">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-4 sm:px-6 py-4">
             <div>
               <h1 className="text-xl font-bold text-dravik-dark">Marketing</h1>
               <p className="text-xs text-gray-400 mt-0.5">Landing pages, flyers, and campaign management</p>
             </div>
 
             {/* Create New */}
-            <div ref={menuRef} className="relative">
+            <div ref={menuRef} className="relative w-full sm:w-auto">
               <button
                 onClick={() => setMenuOpen((v) => !v)}
-                className="flex items-center gap-2 px-4 py-2.5 bg-dravik-dark text-white font-bold text-sm rounded-xl hover:bg-gold hover:text-dravik-dark transition-all"
+                className="flex w-full sm:w-auto items-center justify-center gap-2 px-4 py-2.5 bg-dravik-dark text-white font-bold text-sm rounded-xl hover:bg-gold hover:text-dravik-dark transition-all whitespace-nowrap"
               >
                 <Plus size={15} /> Create New
                 <ChevronDown size={13} className={cn("transition-transform", menuOpen && "rotate-180")} />
@@ -240,13 +240,13 @@ export default function MarketingPage({ properties }: { properties: Property[] }
           </div>
 
           {/* Tab strip */}
-          <div className="flex items-center gap-1 px-6 pb-0">
+          <div className="flex items-center gap-1 overflow-x-auto px-4 sm:px-6 pb-0">
             {TABS.map(({ id, label, icon: Icon }) => (
               <button
                 key={id}
                 onClick={() => setTab(id)}
                 className={cn(
-                  "flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold border-b-2 transition-colors",
+                  "flex flex-shrink-0 items-center gap-1.5 px-3 sm:px-4 py-2.5 text-sm font-semibold border-b-2 transition-colors whitespace-nowrap",
                   tab === id
                     ? "border-gold text-dravik-dark"
                     : "border-transparent text-gray-400 hover:text-dravik-dark"

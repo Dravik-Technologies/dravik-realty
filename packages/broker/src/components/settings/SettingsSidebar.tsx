@@ -26,11 +26,11 @@ interface Props {
 
 export default function SettingsSidebar({ active, onSelect }: Props) {
   return (
-    <aside className="w-56 flex-shrink-0 border-r border-line bg-white flex flex-col py-4">
-      <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest px-5 mb-3">
+    <aside className="w-full lg:w-56 flex-shrink-0 border-b lg:border-b-0 lg:border-r border-line bg-white flex flex-col lg:py-4">
+      <p className="hidden lg:block text-[10px] font-bold text-gray-400 uppercase tracking-widest px-5 mb-3">
         Settings
       </p>
-      <nav className="flex-1 px-2 space-y-0.5">
+      <nav className="flex gap-1 overflow-x-auto px-3 py-3 lg:block lg:flex-1 lg:px-2 lg:py-0 lg:space-y-0.5">
         {ITEMS.map((item) => {
           const Icon    = item.icon;
           const isActive = active === item.id;
@@ -39,7 +39,7 @@ export default function SettingsSidebar({ active, onSelect }: Props) {
               key={item.id}
               onClick={() => onSelect(item.id)}
               className={cn(
-                "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 text-left",
+                "flex flex-shrink-0 items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all duration-150 text-left lg:w-full lg:gap-3",
                 isActive
                   ? "bg-gold/10 text-gold-dark font-semibold"
                   : "text-gray-500 hover:bg-surface-2 hover:text-dravik-dark"

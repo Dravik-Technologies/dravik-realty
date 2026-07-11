@@ -239,6 +239,8 @@ export default function FlyerDesigner({ open, onClose }: FlyerDesignerProps) {
     return () => document.removeEventListener("keydown", onKey);
   }, [open, onClose]);
 
+  if (!open) return null;
+
   const selectedTemplate = FLYER_TEMPLATES.find((f) => f.id === content.templateId) ?? FLYER_TEMPLATES[0];
   const renderFlyer = FLYER_RENDERERS[selectedTemplate.layout];
 

@@ -43,13 +43,13 @@ function KpiCard({
   icon: React.ElementType; label: string; value: string; sub?: string; accent: string;
 }) {
   return (
-    <div className="flex items-center gap-3 px-5 py-3">
+    <div className="flex min-w-0 items-center gap-3 px-4 sm:px-5 py-3">
       <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
         style={{ background: `${accent}18` }}>
         <Icon size={17} style={{ color: accent }} />
       </div>
-      <div>
-        <p className="text-lg font-bold text-dravik-dark leading-none">{value}</p>
+      <div className="min-w-0">
+        <p className="text-lg font-bold text-dravik-dark leading-none truncate">{value}</p>
         <p className="text-[11px] text-gray-400 mt-0.5">{label}</p>
         {sub && <p className="text-[10px] text-gray-300 mt-0.5">{sub}</p>}
       </div>
@@ -78,7 +78,7 @@ export default function CampaignDashboard({ onEdit }: CampaignDashboardProps) {
 
       {/* ── KPI strip ──────────────────────────────────────── */}
       <div className="flex-shrink-0 bg-white border-b border-line">
-        <div className="flex items-center divide-x divide-line overflow-x-auto">
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:flex lg:items-center lg:divide-x lg:divide-line">
           <KpiCard icon={Megaphone} label="Active Campaigns" value={String(active)} sub="Currently running" accent="#D4AF37" />
           <KpiCard icon={Users}     label="Leads This Month" value={String(totalLeads)} sub="All campaigns"  accent="#10B981" />
           <KpiCard icon={TrendingUp} label="Avg Conversion"  value={`${avgConv}%`}  sub="Active pages"  accent="#4A90A4" />
@@ -89,7 +89,7 @@ export default function CampaignDashboard({ onEdit }: CampaignDashboardProps) {
       {/* ── Campaign table ─────────────────────────────────── */}
       <div className="flex-1 overflow-y-auto">
         {/* Table header */}
-        <div className="sticky top-0 z-10 flex items-center px-6 py-2 bg-surface-2 border-b border-line text-[11px] font-bold text-gray-400 uppercase tracking-wide">
+        <div className="hidden md:flex sticky top-0 z-10 items-center px-6 py-2 bg-surface-2 border-b border-line text-[11px] font-bold text-gray-400 uppercase tracking-wide">
           <div className="flex-[4]">Campaign</div>
           <div className="w-28">Type</div>
           <div className="w-24 text-right">Views</div>
@@ -100,101 +100,135 @@ export default function CampaignDashboard({ onEdit }: CampaignDashboardProps) {
         </div>
 
         {SAMPLE_CAMPAIGNS.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-20 gap-3 text-center">
+          <div className="flex flex-col items-center justify-center px-6 py-20 gap-3 text-center">
             <Megaphone size={24} className="text-gray-300" />
             <p className="text-sm font-semibold text-gray-400">No campaigns yet</p>
-            <p className="text-xs text-gray-300">Create a landing page, flyer, or property site to start tracking campaign performance.</p>
+            <p className="text-xs text-gray-300 max-w-sm">Create a landing page, flyer, or property site to start tracking campaign performance.</p>
           </div>
         ) : SAMPLE_CAMPAIGNS.map((c) => (
-          <div
-            key={c.id}
-            className="flex items-center px-6 py-3.5 border-b border-line hover:bg-surface transition-colors group"
-          >
-            {/* Name + thumbnail */}
-            <div className="flex-[4] flex items-center gap-3 min-w-0">
-              <div className="w-12 h-9 rounded-lg overflow-hidden flex-shrink-0 bg-surface-2">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={`https://picsum.photos/seed/${c.thumbnailSeed}/96/72`}
-                  alt={c.name}
-                  className="w-full h-full object-cover"
-                />
+          <div key={c.id}>
+            <div className="md:hidden m-4 bg-white border border-line rounded-2xl p-4 space-y-3">
+              <div className="flex items-start gap-3">
+                <div className="w-16 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-surface-2">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={`https://picsum.photos/seed/${c.thumbnailSeed}/128/96`}
+                    alt={c.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-semibold text-dravik-dark leading-tight">{c.name}</p>
+                  <div className="mt-1 flex items-center gap-2 text-xs text-gray-500">
+                    <TypeIcon type={c.type} />
+                    <span>{c.type}</span>
+                  </div>
+                </div>
+                <StatusBadge status={c.status} />
               </div>
-              <div className="min-w-0">
-                <p className="text-sm font-semibold text-dravik-dark truncate">{c.name}</p>
-                <p className="text-[10px] text-gray-400 mt-0.5">
-                  Modified {c.lastModified}
-                  {c.publishedUrl && (
-                    <a
-                      href="#"
-                      onClick={(e) => e.preventDefault()}
-                      className="ml-2 text-gold hover:underline inline-flex items-center gap-0.5"
-                    >
-                      <ExternalLink size={9} />
-                      {c.publishedUrl.replace("dravikrealty.com/p/", "…/")}
-                    </a>
-                  )}
-                </p>
+              <div className="grid grid-cols-3 gap-2 text-center">
+                <div className="rounded-xl bg-surface-2 px-2 py-2">
+                  <p className="text-sm font-bold text-dravik-dark">{c.views.toLocaleString()}</p>
+                  <p className="text-[10px] text-gray-400">Views</p>
+                </div>
+                <div className="rounded-xl bg-surface-2 px-2 py-2">
+                  <p className="text-sm font-bold text-dravik-dark">{c.leadsGenerated}</p>
+                  <p className="text-[10px] text-gray-400">Leads</p>
+                </div>
+                <div className="rounded-xl bg-surface-2 px-2 py-2">
+                  <p className="text-sm font-bold text-dravik-dark">{c.conversionRate > 0 ? `${c.conversionRate}%` : "—"}</p>
+                  <p className="text-[10px] text-gray-400">Conv.</p>
+                </div>
               </div>
             </div>
 
-            {/* Type */}
-            <div className="w-28 flex items-center gap-1.5 text-xs text-gray-500">
-              <TypeIcon type={c.type} />
-              <span>{c.type}</span>
-            </div>
+            <div className="hidden md:flex items-center px-6 py-3.5 border-b border-line hover:bg-surface transition-colors group">
+              {/* Name + thumbnail */}
+              <div className="flex-[4] flex items-center gap-3 min-w-0">
+                <div className="w-12 h-9 rounded-lg overflow-hidden flex-shrink-0 bg-surface-2">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={`https://picsum.photos/seed/${c.thumbnailSeed}/96/72`}
+                    alt={c.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-dravik-dark truncate">{c.name}</p>
+                  <p className="text-[10px] text-gray-400 mt-0.5">
+                    Modified {c.lastModified}
+                    {c.publishedUrl && (
+                      <a
+                        href="#"
+                        onClick={(e) => e.preventDefault()}
+                        className="ml-2 text-gold hover:underline inline-flex items-center gap-0.5"
+                      >
+                        <ExternalLink size={9} />
+                        {c.publishedUrl.replace("dravikrealty.com/p/", "…/")}
+                      </a>
+                    )}
+                  </p>
+                </div>
+              </div>
 
-            {/* Views */}
-            <div className="w-24 text-right text-sm font-semibold text-dravik-dark">
-              {c.views.toLocaleString()}
-            </div>
+              {/* Type */}
+              <div className="w-28 flex items-center gap-1.5 text-xs text-gray-500">
+                <TypeIcon type={c.type} />
+                <span>{c.type}</span>
+              </div>
 
-            {/* Leads */}
-            <div className="w-24 text-right text-sm font-bold text-dravik-dark">
-              {c.leadsGenerated}
-            </div>
+              {/* Views */}
+              <div className="w-24 text-right text-sm font-semibold text-dravik-dark">
+                {c.views.toLocaleString()}
+              </div>
 
-            {/* Conv rate */}
-            <div className="w-24 text-right">
-              <span className={cn(
-                "text-sm font-bold",
-                c.conversionRate >= 10 ? "text-emerald-600" :
-                c.conversionRate >= 5  ? "text-dravik-dark"   : "text-gray-400"
-              )}>
-                {c.conversionRate > 0 ? `${c.conversionRate}%` : "—"}
-              </span>
-            </div>
+              {/* Leads */}
+              <div className="w-24 text-right text-sm font-bold text-dravik-dark">
+                {c.leadsGenerated}
+              </div>
 
-            {/* Status */}
-            <div className="w-24 text-right">
-              <StatusBadge status={c.status} />
-            </div>
+              {/* Conv rate */}
+              <div className="w-24 text-right">
+                <span className={cn(
+                  "text-sm font-bold",
+                  c.conversionRate >= 10 ? "text-emerald-600" :
+                  c.conversionRate >= 5  ? "text-dravik-dark"   : "text-gray-400"
+                )}>
+                  {c.conversionRate > 0 ? `${c.conversionRate}%` : "—"}
+                </span>
+              </div>
 
-            {/* Actions */}
-            <div className="w-20 flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-              {c.status === "Active" && (
-                <button disabled title="Pause coming soon" className="p-1.5 rounded-lg text-gray-300 cursor-not-allowed">
-                  <Pause size={13} />
+              {/* Status */}
+              <div className="w-24 text-right">
+                <StatusBadge status={c.status} />
+              </div>
+
+              {/* Actions */}
+              <div className="w-20 flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                {c.status === "Active" && (
+                  <button disabled title="Pause coming soon" className="p-1.5 rounded-lg text-gray-300 cursor-not-allowed">
+                    <Pause size={13} />
+                  </button>
+                )}
+                {c.status === "Paused" && (
+                  <button disabled title="Resume coming soon" className="p-1.5 rounded-lg text-gray-300 cursor-not-allowed">
+                    <Play size={13} />
+                  </button>
+                )}
+                <button
+                  title="Edit"
+                  onClick={() => onEdit?.(c)}
+                  className="p-1.5 rounded-lg text-gray-400 hover:bg-gold-light hover:text-gold transition-colors"
+                >
+                  <Edit size={13} />
                 </button>
-              )}
-              {c.status === "Paused" && (
-                <button disabled title="Resume coming soon" className="p-1.5 rounded-lg text-gray-300 cursor-not-allowed">
-                  <Play size={13} />
+                <button title="Preview" onClick={() => onEdit?.(c)} className="p-1.5 rounded-lg text-gray-400 hover:bg-blue-50 hover:text-blue-500 transition-colors">
+                  <Eye size={13} />
                 </button>
-              )}
-              <button
-                title="Edit"
-                onClick={() => onEdit?.(c)}
-                className="p-1.5 rounded-lg text-gray-400 hover:bg-gold-light hover:text-gold transition-colors"
-              >
-                <Edit size={13} />
-              </button>
-              <button title="Preview" onClick={() => onEdit?.(c)} className="p-1.5 rounded-lg text-gray-400 hover:bg-blue-50 hover:text-blue-500 transition-colors">
-                <Eye size={13} />
-              </button>
-              <button disabled title="More campaign actions coming soon" className="p-1.5 rounded-lg text-gray-300 cursor-not-allowed">
-                <MoreHorizontal size={13} />
-              </button>
+                <button disabled title="More campaign actions coming soon" className="p-1.5 rounded-lg text-gray-300 cursor-not-allowed">
+                  <MoreHorizontal size={13} />
+                </button>
+              </div>
             </div>
           </div>
         ))}

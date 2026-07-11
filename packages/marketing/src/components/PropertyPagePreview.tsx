@@ -121,9 +121,10 @@ export default function PropertyPagePreview({ open, onClose, properties }: Prope
   const panelRef  = useRef<HTMLDivElement>(null);
   const closeRef  = useRef<HTMLButtonElement>(null);
   const prevRef   = useRef<HTMLElement | null>(null);
+  const firstPropertyId = properties[0]?.id ?? "";
 
   const [trackedOpen, setTrackedOpen] = useState(false);
-  const [propertyId, setPropertyId] = useState(properties[0].id);
+  const [propertyId, setPropertyId] = useState(firstPropertyId);
   const [headline, setHeadline]     = useState("Discover Exclusive Waterfront Living");
   const [agentName, setAgentName]   = useState("Chris Macabugao");
   const [agentTitle, setAgentTitle] = useState("Principal Broker · Dravik Realty");
@@ -133,7 +134,7 @@ export default function PropertyPagePreview({ open, onClose, properties }: Prope
   // Derived state: reset when panel opens
   if (open && !trackedOpen) {
     setTrackedOpen(true);
-    setPropertyId(properties[0].id);
+    setPropertyId(firstPropertyId);
     setHeadline("Discover Exclusive Waterfront Living");
     setAgentName("Chris Macabugao");
     setAgentTitle("Principal Broker · Dravik Realty");
@@ -144,7 +145,7 @@ export default function PropertyPagePreview({ open, onClose, properties }: Prope
     setTrackedOpen(false);
   }
 
-  const selectedProperty = properties.find((p) => p.id === propertyId) ?? properties[0];
+  const selectedProperty = properties.find((p) => p.id === propertyId) ?? properties[0] ?? null;
 
   useEffect(() => {
     if (open) {
@@ -175,6 +176,7 @@ export default function PropertyPagePreview({ open, onClose, properties }: Prope
   }, [open, onClose]);
 
   function handlePublish() {
+    if (!selectedProperty) return;
     const slug = selectedProperty.city.toLowerCase().replace(/\s+/g, "-") + "-" + selectedProperty.id;
     setPubUrl(`dravikrealty.com/p/${slug}`);
     setPublished(true);
@@ -225,28 +227,37 @@ export default function PropertyPagePreview({ open, onClose, properties }: Prope
                 <select
                   value={propertyId}
                   onChange={(e) => setPropertyId(e.target.value)}
+                  disabled={!selectedProperty}
                   className="w-full pl-3 pr-8 py-2.5 bg-surface-2 border border-transparent rounded-xl text-sm text-dravik-dark focus:outline-none focus:border-gold appearance-none cursor-pointer"
                 >
-                  {properties.map((p) => (
-                    <option key={p.id} value={p.id}>
-                      {p.address} — {formatCurrency(p.price)}
-                    </option>
-                  ))}
+                  {selectedProperty
+                    ? properties.map((p) => (
+                        <option key={p.id} value={p.id}>
+                          {p.address} — {formatCurrency(p.price)}
+                        </option>
+                      ))
+                    : <option value="">No listings available</option>}
                 </select>
                 <ChevronDown size={14} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
               </div>
 
               {/* Selected property summary */}
-              <div className="mt-2 p-3 bg-surface-2 rounded-xl flex items-center gap-3">
-                <div className="w-12 h-9 rounded-lg overflow-hidden flex-shrink-0">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={selectedProperty.heroImage} alt="" className="w-full h-full object-cover" />
+              {selectedProperty ? (
+                <div className="mt-2 p-3 bg-surface-2 rounded-xl flex items-center gap-3">
+                  <div className="w-12 h-9 rounded-lg overflow-hidden flex-shrink-0">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={selectedProperty.heroImage} alt="" className="w-full h-full object-cover" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-xs font-bold text-dravik-dark truncate">{selectedProperty.address}</p>
+                    <p className="text-[10px] text-gray-400">{selectedProperty.city} · {formatCurrency(selectedProperty.price)}</p>
+                  </div>
                 </div>
-                <div className="min-w-0">
-                  <p className="text-xs font-bold text-dravik-dark truncate">{selectedProperty.address}</p>
-                  <p className="text-[10px] text-gray-400">{selectedProperty.city} · {formatCurrency(selectedProperty.price)}</p>
+              ) : (
+                <div className="mt-2 p-3 bg-surface-2 rounded-xl">
+                  <p className="text-xs font-semibold text-gray-400">Add or import a listing before publishing a property site.</p>
                 </div>
-              </div>
+              )}
             </div>
 
             {/* Customization */}
@@ -305,9 +316,12 @@ export default function PropertyPagePreview({ open, onClose, properties }: Prope
           <div className="flex-shrink-0 border-t border-line p-4 flex gap-2">
             <button
               onClick={handlePublish}
+              disabled={!selectedProperty}
               className={cn(
                 "flex-1 flex items-center justify-center gap-1.5 py-2.5 font-bold text-sm rounded-xl transition-all",
-                published
+                !selectedProperty
+                  ? "bg-surface-2 text-gray-300 cursor-not-allowed"
+                  : published
                   ? "bg-emerald-500 text-white hover:bg-emerald-600"
                   : "bg-dravik-dark text-white hover:bg-gold hover:text-dravik-dark"
               )}
@@ -328,13 +342,22 @@ export default function PropertyPagePreview({ open, onClose, properties }: Prope
             )}
           </div>
           <div className="flex-1 overflow-y-auto p-6">
-            <MiniPropertyPage
-              properties={properties}
-              propertyId={propertyId}
-              headline={headline}
-              agentName={agentName}
-              agentTitle={agentTitle}
-            />
+            {selectedProperty ? (
+              <MiniPropertyPage
+                properties={properties}
+                propertyId={propertyId}
+                headline={headline}
+                agentName={agentName}
+                agentTitle={agentTitle}
+              />
+            ) : (
+              <div className="h-full min-h-[360px] bg-white rounded-2xl border border-line flex items-center justify-center text-center px-6">
+                <div>
+                  <p className="text-sm font-bold text-dravik-dark">No listing selected</p>
+                  <p className="text-xs text-gray-400 mt-1">Property site previews require a real listing record.</p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

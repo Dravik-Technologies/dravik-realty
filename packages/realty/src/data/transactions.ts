@@ -1,3 +1,4 @@
+import { localDemoData } from "@dravik/shared";
 import type {
   Transaction, TransactionDocument, TransactionTask,
   TransactionParty, ActivityEntry, MortgageInfo, CommissionInfo,
@@ -48,7 +49,7 @@ function mortgage(
 }
 
 // ─── Sample transactions (today = 2026-05-25) ─────────────────
-export const SAMPLE_TRANSACTIONS: Transaction[] = [
+const LOCAL_SAMPLE_TRANSACTIONS: Transaction[] = [
   // ── 1: Under Contract ───────────────────────────────────────
   {
     id: "tx1",
@@ -438,3 +439,5 @@ export const SAMPLE_TRANSACTIONS: Transaction[] = [
     ],
   },
 ];
+
+export const SAMPLE_TRANSACTIONS: Transaction[] = localDemoData(LOCAL_SAMPLE_TRANSACTIONS);

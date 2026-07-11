@@ -93,7 +93,11 @@ function MortgageTab({ property: p }: { property: Property }) {
           </div>
         </div>
       </div>
-      <button className="w-full py-2.5 text-sm font-bold bg-dravik-dark text-white rounded-xl hover:bg-gold hover:text-dravik-dark transition-all">
+      <button
+        disabled
+        title="Mortgage officer handoff coming soon"
+        className="w-full py-2.5 text-sm font-bold bg-surface-2 text-gray-300 rounded-xl cursor-not-allowed"
+      >
         Connect with Mortgage Officer
       </button>
     </div>
@@ -385,13 +389,25 @@ export default function PropertyPanel({ property: p, open, onClose }: PropertyPa
             <div className="p-5 space-y-5">
               {/* Action buttons */}
               <div className="flex gap-2">
-                <button className="flex-1 flex items-center justify-center gap-1.5 py-2.5 text-sm font-bold bg-dravik-dark text-white rounded-xl hover:bg-gold hover:text-dravik-dark transition-all">
+                <button
+                  disabled
+                  title="Saved listings coming soon"
+                  className="flex-1 flex items-center justify-center gap-1.5 py-2.5 text-sm font-bold bg-surface-2 text-gray-300 rounded-xl cursor-not-allowed"
+                >
                   <Bookmark size={14} /> Save Listing
                 </button>
-                <button className="flex-1 flex items-center justify-center gap-1.5 py-2.5 text-sm font-bold border border-line text-dravik-dark rounded-xl hover:bg-surface-2 transition-all">
+                <button
+                  disabled
+                  title="Client sharing coming soon"
+                  className="flex-1 flex items-center justify-center gap-1.5 py-2.5 text-sm font-bold border border-line text-gray-300 rounded-xl cursor-not-allowed"
+                >
                   <Send size={14} /> Send to Client
                 </button>
-                <button className="flex-1 flex items-center justify-center gap-1.5 py-2.5 text-sm font-bold border border-gold/40 text-gold rounded-xl hover:bg-gold-light transition-all">
+                <button
+                  disabled
+                  title="Lead creation from listings coming soon"
+                  className="flex-1 flex items-center justify-center gap-1.5 py-2.5 text-sm font-bold border border-line text-gray-300 rounded-xl cursor-not-allowed"
+                >
                   <UserPlus size={14} /> Create Lead
                 </button>
               </div>

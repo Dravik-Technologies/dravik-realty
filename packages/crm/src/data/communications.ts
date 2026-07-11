@@ -1,3 +1,4 @@
+import { localDemoData } from "@dravik/shared";
 import type { Conversation, Message } from "@dravik/contracts/crm";
 
 // ─── Helpers ──────────────────────────────────────────────────
@@ -17,7 +18,7 @@ function msg(
 const ME = "Chris Macabugao";
 
 // ─── Conversations ────────────────────────────────────────────
-export const CONVERSATIONS: Conversation[] = [
+const LOCAL_CONVERSATIONS: Conversation[] = [
   // ── 1. John Smith — high-intent buyer ──────────────────────
   {
     id: "c1",
@@ -283,6 +284,8 @@ export const CONVERSATIONS: Conversation[] = [
     ],
   },
 ];
+
+export const CONVERSATIONS: Conversation[] = localDemoData(LOCAL_CONVERSATIONS);
 
 // ─── AI suggestions by conversation tag ──────────────────────
 export const AI_SUGGESTIONS: Record<string, string[]> = {

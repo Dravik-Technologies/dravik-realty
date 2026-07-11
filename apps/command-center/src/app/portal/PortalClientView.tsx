@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { LogOut, Users } from "lucide-react";
+import { LogOut, ShieldCheck, Users } from "lucide-react";
 import type { ClientPortalSession } from "@dravik/contracts/identity";
 import { ClientDashboard, ALL_CLIENTS } from "@dravik/portal";
-import { cn } from "@dravik/shared";
+import { cn, isLocalDemoEnvironment } from "@dravik/shared";
 
 export default function PortalClientView({ session }: { session: ClientPortalSession }) {
   const initialClientIdx = Math.max(
@@ -14,6 +14,41 @@ export default function PortalClientView({ session }: { session: ClientPortalSes
   );
   const [clientIdx, setClientIdx] = useState(initialClientIdx);
   const data = ALL_CLIENTS[clientIdx];
+  const sessionDisplayName = isLocalDemoEnvironment
+    ? session.user.name
+    : "Staging Client Portal";
+
+  if (!data) {
+    return (
+      <>
+        <div className="sticky top-0 z-30 bg-dravik-dark border-b border-white/10 px-4 py-2 flex items-center justify-between">
+          <div className="flex items-center gap-2 text-xs text-gray-400">
+            <div className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+            Logged in as <span className="text-white font-semibold">{sessionDisplayName}</span>
+          </div>
+          <Link
+            href="/portal/logout"
+            className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-gray-400 hover:text-white transition-colors"
+          >
+            <LogOut size={11} />
+            Sign out
+          </Link>
+        </div>
+
+        <main className="min-h-screen bg-surface flex items-center justify-center px-4 py-12">
+          <section className="w-full max-w-lg bg-white border border-line rounded-2xl p-8 text-center">
+            <div className="mx-auto w-12 h-12 rounded-2xl bg-gold-light flex items-center justify-center">
+              <ShieldCheck size={22} className="text-gold" />
+            </div>
+            <h1 className="mt-4 text-lg font-bold text-dravik-dark">No portal data yet</h1>
+            <p className="mt-2 text-sm text-gray-400 leading-relaxed">
+              Staging starts with an empty client portal. Invitation-backed client access will create this workspace when production auth and storage are connected.
+            </p>
+          </section>
+        </main>
+      </>
+    );
+  }
 
   return (
     <>

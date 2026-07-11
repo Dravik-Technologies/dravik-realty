@@ -1,3 +1,4 @@
+import { localDemoData } from "@dravik/shared";
 import type {
   SettingsUser, CompanyInfo, Integration,
   LicenseRecord, AuditEntry, CommissionTier, NotifPref, ColorTheme,
@@ -18,7 +19,7 @@ export const COMPANY_INFO: CompanyInfo = {
 };
 
 // ─── Users ────────────────────────────────────────────────────
-export const SETTINGS_USERS: SettingsUser[] = [
+const LOCAL_SETTINGS_USERS: SettingsUser[] = [
   {
     id: "u1", name: "Chris Macabugao", email: "chris@dravikrealty.com",
     role: "Principal Broker", status: "active",
@@ -76,8 +77,10 @@ export const SETTINGS_USERS: SettingsUser[] = [
   },
 ];
 
+export const SETTINGS_USERS: SettingsUser[] = localDemoData(LOCAL_SETTINGS_USERS);
+
 // ─── Integrations ─────────────────────────────────────────────
-export const INTEGRATIONS: Integration[] = [
+const LOCAL_INTEGRATIONS: Integration[] = [
   {
     id: "mls", name: "MLS / IDX Feed", provider: "CRMLS",
     category: "Listings", status: "connected",
@@ -134,8 +137,10 @@ export const INTEGRATIONS: Integration[] = [
   },
 ];
 
+export const INTEGRATIONS: Integration[] = localDemoData(LOCAL_INTEGRATIONS);
+
 // ─── License records ──────────────────────────────────────────
-export const LICENSE_RECORDS: LicenseRecord[] = [
+const LOCAL_LICENSE_RECORDS: LicenseRecord[] = [
   { id: "l1", agentName: "Chris Macabugao", licenseType: "DRE", licenseNumber: "DRE #01845621", expiryDate: "Dec 31, 2026", daysRemaining: 216, status: "active"         },
   { id: "l2", agentName: "Aisha Williams",  licenseType: "DRE", licenseNumber: "DRE #02134789", expiryDate: "Mar 15, 2027", daysRemaining: 290, status: "active"         },
   { id: "l3", agentName: "Sarah Chen",      licenseType: "DRE", licenseNumber: "DRE #01998765", expiryDate: "Aug 30, 2026", daysRemaining: 93,  status: "expiring-soon" },
@@ -146,8 +151,10 @@ export const LICENSE_RECORDS: LicenseRecord[] = [
   { id: "l8", agentName: "James Park",      licenseType: "NMLS",licenseNumber: "NMLS #9876543", expiryDate: "Dec 31, 2026", daysRemaining: 216, status: "active"         },
 ];
 
+export const LICENSE_RECORDS: LicenseRecord[] = localDemoData(LOCAL_LICENSE_RECORDS);
+
 // ─── Audit log ────────────────────────────────────────────────
-export const AUDIT_LOG: AuditEntry[] = [
+const LOCAL_AUDIT_LOG: AuditEntry[] = [
   { id: "a1",  timestamp: "May 29, 2026  2:48 PM", user: "Chris Macabugao", action: "User login",                  module: "Dashboard",   ip: "192.168.1.42",  severity: "info"    },
   { id: "a2",  timestamp: "May 29, 2026  1:32 PM", user: "Chris Macabugao", action: "Lead assigned to Marcus J.",  module: "Leads",       ip: "192.168.1.42",  severity: "info"    },
   { id: "a3",  timestamp: "May 29, 2026 11:15 AM", user: "Sarah Chen",      action: "Document uploaded",           module: "Transactions",ip: "192.168.1.18",  severity: "info"    },
@@ -169,6 +176,8 @@ export const AUDIT_LOG: AuditEntry[] = [
   { id: "a19", timestamp: "May 25, 2026  3:30 PM", user: "Julia Thompson",  action: "User login",                  module: "Dashboard",   ip: "192.168.1.55",  severity: "info"    },
   { id: "a20", timestamp: "May 25, 2026 10:00 AM", user: "Chris Macabugao", action: "DRE license record updated",  module: "Settings",    ip: "192.168.1.42",  severity: "info"    },
 ];
+
+export const AUDIT_LOG: AuditEntry[] = localDemoData(LOCAL_AUDIT_LOG);
 
 // ─── Commission tiers ─────────────────────────────────────────
 export const COMMISSION_TIERS: CommissionTier[] = [

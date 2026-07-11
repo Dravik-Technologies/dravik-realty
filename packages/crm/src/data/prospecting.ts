@@ -1,6 +1,7 @@
+import { localDemoData } from "@dravik/shared";
 import type { SellerLead, CampaignTemplate } from "@dravik/contracts/crm";
 
-export const SELLER_LEADS: SellerLead[] = [
+const LOCAL_SELLER_LEADS: SellerLead[] = [
   // ── EXPIREDS (10) ─────────────────────────────────────────────
   {
     id: "sp1", leadType: "Expired", status: "New",
@@ -292,6 +293,8 @@ export const SELLER_LEADS: SellerLead[] = [
     lat: 25.7340, lng: -80.2380,
   },
 ];
+
+export const SELLER_LEADS: SellerLead[] = localDemoData(LOCAL_SELLER_LEADS);
 
 export const CAMPAIGN_TEMPLATES: CampaignTemplate[] = [
   {

@@ -14,12 +14,15 @@ COPY packages packages
 RUN pnpm install --frozen-lockfile
 
 FROM deps AS builder
+ARG NEXT_PUBLIC_APP_ENV=local
+ENV NEXT_PUBLIC_APP_ENV=$NEXT_PUBLIC_APP_ENV
 COPY . .
 RUN pnpm --filter @dravik/command-center build
 
 FROM node:22-bookworm-slim AS runner
 ENV HOSTNAME=0.0.0.0
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV NEXT_PUBLIC_APP_ENV=local
 ENV NODE_ENV=production
 ENV PORT=3000
 WORKDIR /app

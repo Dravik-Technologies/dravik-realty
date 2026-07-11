@@ -1,6 +1,7 @@
+import { localDemoData } from "@dravik/shared";
 import type { Campaign, PageTemplate, FlyerTemplate, BuilderSection } from "@dravik/contracts/marketing";
 
-export const SAMPLE_CAMPAIGNS: Campaign[] = [
+const LOCAL_SAMPLE_CAMPAIGNS: Campaign[] = [
   {
     id: "c1",
     name: "Luxury Waterfront — Miami Beach",
@@ -115,6 +116,8 @@ export const SAMPLE_CAMPAIGNS: Campaign[] = [
     templateId: "t5",
   },
 ];
+
+export const SAMPLE_CAMPAIGNS: Campaign[] = localDemoData(LOCAL_SAMPLE_CAMPAIGNS);
 
 export const PAGE_TEMPLATES: PageTemplate[] = [
   {

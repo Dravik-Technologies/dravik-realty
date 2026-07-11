@@ -81,6 +81,10 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
               value: environmentName
             }
             {
+              name: 'NEXT_PUBLIC_APP_ENV'
+              value: environmentName
+            }
+            {
               name: 'HOSTNAME'
               value: '0.0.0.0'
             }

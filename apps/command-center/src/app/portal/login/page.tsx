@@ -1,6 +1,11 @@
 import { redirect } from "next/navigation";
 import { KeyRound, UserRound } from "lucide-react";
-import { createClientPortalSession, getClientPortalSession } from "@/auth/server";
+import { cn, isLocalDemoEnvironment } from "@dravik/shared";
+import {
+  createClientPortalSession,
+  getClientPortalSession,
+  isLocalIdentityEnabled,
+} from "@/auth/server";
 import { LOCAL_CLIENT_SESSIONS } from "@/auth/local-identity";
 import { BrandLogo } from "@/components/brand/BrandLogo";
 
@@ -14,6 +19,11 @@ async function signInClientPortal(formData: FormData) {
 
 export default async function PortalLoginPage() {
   const session = await getClientPortalSession();
+  const localIdentityEnabled = isLocalIdentityEnabled();
+  const localClientSessions = Object.values(LOCAL_CLIENT_SESSIONS);
+  const visibleClientSessions = isLocalDemoEnvironment
+    ? localClientSessions
+    : localClientSessions.slice(0, 1);
 
   if (session) {
     redirect("/portal");
@@ -36,31 +46,53 @@ export default async function PortalLoginPage() {
           <div>
             <p className="text-sm font-bold text-dravik-dark">Client sign in</p>
             <p className="text-xs text-gray-400 mt-1 leading-relaxed">
-              Local client-access stub for transaction documents, messages, and status updates.
+              {localIdentityEnabled
+                ? "Temporary staging access for transaction documents, messages, and status updates."
+                : "Production client access will use invitation links."}
             </p>
           </div>
 
           <form action={signInClientPortal} className="space-y-2">
-            {Object.values(LOCAL_CLIENT_SESSIONS).map((clientSession) => (
-              <button
-                key={clientSession.user.clientId}
-                type="submit"
-                name="clientId"
-                value={clientSession.user.clientId}
-                className="w-full flex items-center justify-between gap-3 px-4 py-3 border border-line rounded-xl text-left hover:border-gold/50 hover:bg-gold-light transition-colors"
-              >
-                <span className="flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-lg bg-dravik-dark flex items-center justify-center text-gold">
-                    <UserRound size={15} />
+            {visibleClientSessions.map((clientSession) => {
+              const displayName = isLocalDemoEnvironment
+                ? clientSession.user.name
+                : "Staging Client Portal";
+              const displayEmail = isLocalDemoEnvironment
+                ? clientSession.user.email
+                : "empty staging workspace";
+
+              return (
+                <button
+                  key={clientSession.user.clientId}
+                  type="submit"
+                  name="clientId"
+                  value={clientSession.user.clientId}
+                  disabled={!localIdentityEnabled}
+                  className={cn(
+                    "w-full flex items-center justify-between gap-3 px-4 py-3 border border-line rounded-xl text-left transition-colors",
+                    localIdentityEnabled
+                      ? "hover:border-gold/50 hover:bg-gold-light"
+                      : "opacity-50 cursor-not-allowed"
+                  )}
+                >
+                  <span className="flex items-center gap-3">
+                    <span className="w-8 h-8 rounded-lg bg-dravik-dark flex items-center justify-center text-gold">
+                      <UserRound size={15} />
+                    </span>
+                    <span>
+                      <span className="block text-sm font-bold text-dravik-dark">{displayName}</span>
+                      <span className="block text-xs text-gray-400">{displayEmail}</span>
+                    </span>
                   </span>
-                  <span>
-                    <span className="block text-sm font-bold text-dravik-dark">{clientSession.user.name}</span>
-                    <span className="block text-xs text-gray-400">{clientSession.user.email}</span>
-                  </span>
-                </span>
-                <KeyRound size={14} className="text-gray-300" />
-              </button>
-            ))}
+                  <KeyRound size={14} className="text-gray-300" />
+                </button>
+              );
+            })}
+            {!localIdentityEnabled && (
+              <p className="text-xs text-gray-400 text-center pt-2">
+                Client invitation auth is not configured yet.
+              </p>
+            )}
           </form>
         </div>
       </section>

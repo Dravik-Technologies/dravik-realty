@@ -108,20 +108,28 @@ export default function PropertyCard({ property: p, onViewDetails, onSave }: Pro
           </button>
           <button
             onClick={() => onSave?.(p)}
+            disabled={!onSave}
             title="Save listing"
-            className="w-8 h-8 flex items-center justify-center rounded-lg bg-surface-2 hover:bg-gold-light hover:text-gold text-gray-400 transition-all"
+            className={cn(
+              "w-8 h-8 flex items-center justify-center rounded-lg bg-surface-2 text-gray-400 transition-all",
+              onSave
+                ? "hover:bg-gold-light hover:text-gold"
+                : "text-gray-300 cursor-not-allowed"
+            )}
           >
             <Bookmark size={14} />
           </button>
           <button
-            title="Send to client"
-            className="w-8 h-8 flex items-center justify-center rounded-lg bg-surface-2 hover:bg-gold-light hover:text-gold text-gray-400 transition-all"
+            disabled
+            title="Client sharing coming soon"
+            className="w-8 h-8 flex items-center justify-center rounded-lg bg-surface-2 text-gray-300 cursor-not-allowed"
           >
             <Send size={14} />
           </button>
           <button
-            title="Create lead"
-            className="w-8 h-8 flex items-center justify-center rounded-lg bg-surface-2 hover:bg-gold-light hover:text-gold text-gray-400 transition-all"
+            disabled
+            title="Lead creation from listings coming soon"
+            className="w-8 h-8 flex items-center justify-center rounded-lg bg-surface-2 text-gray-300 cursor-not-allowed"
           >
             <UserPlus size={14} />
           </button>

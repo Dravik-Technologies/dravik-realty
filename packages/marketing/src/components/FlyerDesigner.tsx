@@ -337,7 +337,11 @@ export default function FlyerDesigner({ open, onClose }: FlyerDesignerProps) {
             >
               {downloaded ? <><Check size={15} /> Saved!</> : <><Download size={15} /> Download PDF</>}
             </button>
-            <button className="flex items-center justify-center gap-1.5 px-4 py-2.5 border border-line text-gray-500 font-semibold text-sm rounded-xl hover:border-gold hover:text-gold transition-all">
+            <button
+              disabled
+              title="Sharing flyers coming soon"
+              className="flex items-center justify-center gap-1.5 px-4 py-2.5 border border-line text-gray-300 font-semibold text-sm rounded-xl cursor-not-allowed"
+            >
               <Share2 size={15} />
             </button>
           </div>

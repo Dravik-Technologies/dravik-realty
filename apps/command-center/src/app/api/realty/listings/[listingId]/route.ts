@@ -9,6 +9,7 @@ import {
   updatePersistedListing,
   type CoreTenantIdentity,
 } from "@dravik/database/core";
+import { buildInitialListings, buildNetworkExchangeListings } from "@dravik/realty/listings-data";
 import { getCommandSession } from "@/auth/server";
 
 export const runtime = "nodejs";
@@ -47,7 +48,10 @@ function tenantFromSession(session: CommandCenterSession): CoreTenantIdentity {
 
 function localListings(session: CommandCenterSession) {
   localStore.__dravikListings ??= {};
-  localStore.__dravikListings[session.tenant.id] ??= [];
+  localStore.__dravikListings[session.tenant.id] ??= [
+    ...buildInitialListings(session.tenant.name, session.tenant.id),
+    ...buildNetworkExchangeListings(),
+  ];
   return localStore.__dravikListings[session.tenant.id];
 }
 
@@ -70,6 +74,10 @@ export async function PATCH(
 
     if (index === -1) {
       return json({ error: "Not found" }, { status: 404 });
+    }
+
+    if (listings[index].isNetworkListing) {
+      return json({ error: "Network listings are read-only" }, { status: 403 });
     }
 
     listings[index] = applyPatch(listings[index], patch);
@@ -107,6 +115,10 @@ export async function DELETE(
 
     if (index === -1) {
       return json({ error: "Not found" }, { status: 404 });
+    }
+
+    if (listings[index].isNetworkListing) {
+      return json({ error: "Network listings are read-only" }, { status: 403 });
     }
 
     listings.splice(index, 1);

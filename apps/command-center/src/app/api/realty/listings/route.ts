@@ -7,10 +7,10 @@ import {
   createListingId,
   createPersistedListing,
   isDatabaseConfigured,
-  listPersistedListings,
+  listPersistedListingsWithNetwork,
   type CoreTenantIdentity,
 } from "@dravik/database/core";
-import { buildInitialListings } from "@dravik/realty/listings-data";
+import { buildInitialListings, buildNetworkExchangeListings } from "@dravik/realty/listings-data";
 import { getCommandSession } from "@/auth/server";
 
 export const runtime = "nodejs";
@@ -49,7 +49,10 @@ function tenantFromSession(session: CommandCenterSession): CoreTenantIdentity {
 
 function localListings(session: CommandCenterSession) {
   localStore.__dravikListings ??= {};
-  localStore.__dravikListings[session.tenant.id] ??= buildInitialListings();
+  localStore.__dravikListings[session.tenant.id] ??= [
+    ...buildInitialListings(session.tenant.name, session.tenant.id),
+    ...buildNetworkExchangeListings(),
+  ];
   return localStore.__dravikListings[session.tenant.id];
 }
 
@@ -67,7 +70,7 @@ export async function GET() {
     });
   }
 
-  const listings = await listPersistedListings(tenantFromSession(session));
+  const listings = await listPersistedListingsWithNetwork(tenantFromSession(session));
   return json({ listings, persistence: "database" });
 }
 
@@ -132,6 +135,9 @@ function buildListing(input: ListingCreateInput): ManagedListing {
     neighborhood: city,
     sellerName: input.sellerName.trim() || "New Seller",
     agentName: input.agentName.trim() || "Chris Macabugao",
+    ownerTenantId: undefined,
+    ownerTenantName: undefined,
+    isNetworkListing: false,
     networkVisibility: "Private",
     inquiries: 0,
     partnerInterest: 0,

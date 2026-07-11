@@ -3,6 +3,7 @@
 import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 import {
   Archive,
+  Bookmark,
   Building2,
   CheckCircle2,
   DollarSign,
@@ -28,6 +29,7 @@ import { cn, formatCurrency } from "@dravik/shared";
 
 type StatusFilter = "All" | ListingStatus;
 type VisibilityFilter = "All" | ListingVisibility;
+type ListingView = "mine" | "network";
 
 const STATUS_OPTIONS: ListingStatus[] = ["Active", "Coming Soon", "Pending", "Price Reduced"];
 
@@ -136,6 +138,8 @@ function ListingCard({
   onArchive,
   onToggleVisibility,
   onUpdateStatus,
+  saved,
+  onToggleSaved,
 }: {
   listing: ManagedListing;
   selected: boolean;
@@ -144,9 +148,13 @@ function ListingCard({
   onArchive: (id: string) => void;
   onToggleVisibility: (id: string) => void;
   onUpdateStatus: (id: string, status: ListingStatus) => void;
+  saved: boolean;
+  onToggleSaved: (id: string) => void;
 }) {
   const action = statusAction(listing.status);
   const isShared = listing.networkVisibility === "Partner Network";
+  const isExternal = listing.isNetworkListing === true;
+  const sourceName = listing.ownerTenantName ?? "Partner Brokerage";
 
   return (
     <article
@@ -163,7 +171,12 @@ function ListingCard({
             </span>
             {isShared && (
               <span className="text-[10px] font-bold px-2 py-0.5 rounded-full border border-gold/40 bg-gold-light text-gold-dark">
-                Partner Network
+                {isExternal ? "Network Listing" : "Partner Network"}
+              </span>
+            )}
+            {isExternal && (
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full border border-sky-200 bg-sky-50 text-sky-700">
+                {sourceName}
               </span>
             )}
           </div>
@@ -208,7 +221,7 @@ function ListingCard({
         </span>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 pt-1">
+      <div className={cn("grid grid-cols-2 gap-2 pt-1", isExternal ? "sm:grid-cols-2" : "sm:grid-cols-5")}>
         <button
           type="button"
           onClick={() => onSelect(listing)}
@@ -217,43 +230,61 @@ function ListingCard({
           <Eye size={13} />
           Details
         </button>
-        <button
-          type="button"
-          onClick={() => onEdit(listing)}
-          className="inline-flex items-center justify-center gap-2 rounded-xl border border-line px-3 py-2 text-xs font-bold text-gray-600 hover:bg-surface transition-colors"
-        >
-          <Edit3 size={13} />
-          Edit
-        </button>
-        <button
-          type="button"
-          onClick={() => onToggleVisibility(listing.id)}
-          className={cn(
-            "inline-flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-xs font-bold transition-colors",
-            isShared
-              ? "border border-line text-gray-600 hover:bg-surface"
-              : "bg-dravik-dark text-white hover:bg-dravik-navy"
-          )}
-        >
-          <Share2 size={13} />
-          {isShared ? "Make Private" : "Share"}
-        </button>
-        <button
-          type="button"
-          onClick={() => onUpdateStatus(listing.id, action.next)}
-          className="inline-flex items-center justify-center gap-2 rounded-xl bg-gold text-white px-3 py-2 text-xs font-bold hover:bg-gold-dark transition-colors"
-        >
-          <CheckCircle2 size={13} />
-          {action.label}
-        </button>
-        <button
-          type="button"
-          onClick={() => onArchive(listing.id)}
-          className="inline-flex items-center justify-center gap-2 rounded-xl border border-rose-100 px-3 py-2 text-xs font-bold text-rose-500 hover:bg-rose-50 transition-colors"
-        >
-          <Archive size={13} />
-          Archive
-        </button>
+        {isExternal ? (
+          <button
+            type="button"
+            onClick={() => onToggleSaved(listing.id)}
+            className={cn(
+              "inline-flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-xs font-bold transition-colors",
+              saved
+                ? "border border-gold/40 bg-gold-light text-gold-dark"
+                : "bg-dravik-dark text-white hover:bg-dravik-navy"
+            )}
+          >
+            <Bookmark size={13} />
+            {saved ? "Saved" : "Save"}
+          </button>
+        ) : (
+          <>
+            <button
+              type="button"
+              onClick={() => onEdit(listing)}
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-line px-3 py-2 text-xs font-bold text-gray-600 hover:bg-surface transition-colors"
+            >
+              <Edit3 size={13} />
+              Edit
+            </button>
+            <button
+              type="button"
+              onClick={() => onToggleVisibility(listing.id)}
+              className={cn(
+                "inline-flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-xs font-bold transition-colors",
+                isShared
+                  ? "border border-line text-gray-600 hover:bg-surface"
+                  : "bg-dravik-dark text-white hover:bg-dravik-navy"
+              )}
+            >
+              <Share2 size={13} />
+              {isShared ? "Make Private" : "Share"}
+            </button>
+            <button
+              type="button"
+              onClick={() => onUpdateStatus(listing.id, action.next)}
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-gold text-white px-3 py-2 text-xs font-bold hover:bg-gold-dark transition-colors"
+            >
+              <CheckCircle2 size={13} />
+              {action.label}
+            </button>
+            <button
+              type="button"
+              onClick={() => onArchive(listing.id)}
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-rose-100 px-3 py-2 text-xs font-bold text-rose-500 hover:bg-rose-50 transition-colors"
+            >
+              <Archive size={13} />
+              Archive
+            </button>
+          </>
+        )}
       </div>
     </article>
   );
@@ -435,9 +466,11 @@ export default function ListingsPage() {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [view, setView] = useState<ListingView>("mine");
   const [query, setQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("All");
   const [visibilityFilter, setVisibilityFilter] = useState<VisibilityFilter>("All");
+  const [savedNetworkIds, setSavedNetworkIds] = useState<Set<string>>(new Set());
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<"add" | "edit">("add");
@@ -463,31 +496,43 @@ export default function ListingsPage() {
     void loadListings();
   }, [loadListings]);
 
+  const ownListings = useMemo(() => listings.filter((listing) => listing.isNetworkListing !== true), [listings]);
+  const networkListings = useMemo(
+    () => listings.filter((listing) => listing.networkVisibility === "Partner Network"),
+    [listings]
+  );
+  const scopedListings = view === "mine" ? ownListings : networkListings;
+
   const filteredListings = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return listings.filter((listing) => {
+    return scopedListings.filter((listing) => {
       const matchesQuery =
         !q ||
         listing.address.toLowerCase().includes(q) ||
         listing.city.toLowerCase().includes(q) ||
         listing.neighborhood.toLowerCase().includes(q) ||
-        listing.sellerName.toLowerCase().includes(q);
+        listing.sellerName.toLowerCase().includes(q) ||
+        listing.agentName.toLowerCase().includes(q) ||
+        listing.ownerTenantName?.toLowerCase().includes(q);
       const matchesStatus = statusFilter === "All" || listing.status === statusFilter;
       const matchesVisibility = visibilityFilter === "All" || listing.networkVisibility === visibilityFilter;
       return matchesQuery && matchesStatus && matchesVisibility;
     });
-  }, [listings, query, statusFilter, visibilityFilter]);
+  }, [scopedListings, query, statusFilter, visibilityFilter]);
 
-  const selectedListing = listings.find((listing) => listing.id === selectedId) ?? filteredListings[0] ?? null;
-  const sharedCount = listings.filter((listing) => listing.networkVisibility === "Partner Network").length;
-  const activeCount = listings.filter((listing) => listing.status === "Active").length;
-  const totalVolume = listings.reduce((sum, listing) => sum + listing.price, 0);
+  const selectedListing = scopedListings.find((listing) => listing.id === selectedId) ?? filteredListings[0] ?? null;
+  const sharedCount = networkListings.length;
+  const externalNetworkCount = listings.filter((listing) => listing.isNetworkListing === true).length;
+  const activeCount = ownListings.filter((listing) => listing.status === "Active").length;
+  const totalVolume = scopedListings.reduce((sum, listing) => sum + listing.price, 0);
+  const partnerInterest = ownListings.reduce((sum, listing) => sum + listing.partnerInterest, 0) + savedNetworkIds.size;
 
   function updateForm(patch: Partial<ListingFormState>) {
     setForm((current) => ({ ...current, ...patch }));
   }
 
   function openAddListing() {
+    setView("mine");
     setModalMode("add");
     setEditingId(null);
     setForm(EMPTY_LISTING_FORM);
@@ -506,6 +551,18 @@ export default function ListingsPage() {
     setListings((current) =>
       current.map((listing) => listing.id === nextListing.id ? nextListing : listing)
     );
+  }
+
+  function toggleSavedNetworkListing(id: string) {
+    setSavedNetworkIds((current) => {
+      const next = new Set(current);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+      return next;
+    });
   }
 
   async function toggleVisibility(id: string) {
@@ -583,14 +640,36 @@ export default function ListingsPage() {
               <p className="text-sm text-gray-400 mt-0.5">Dravik Realty inventory and Partner Network visibility</p>
             </div>
           </div>
-          <button
-            type="button"
-            onClick={openAddListing}
-            className="inline-flex items-center gap-2 rounded-xl bg-dravik-dark px-4 py-2.5 text-sm font-bold text-white hover:bg-dravik-navy transition-colors shadow-sm"
-          >
-            <Plus size={15} />
-            Add Listing
-          </button>
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="flex items-center gap-1 rounded-xl border border-line bg-white p-1">
+              {([
+                { value: "mine", label: "My Listings" },
+                { value: "network", label: "Network Exchange" },
+              ] as const).map((option) => (
+                <button
+                  key={option.value}
+                  type="button"
+                  onClick={() => setView(option.value)}
+                  className={cn(
+                    "rounded-lg px-3.5 py-2 text-xs font-bold transition-colors",
+                    view === option.value
+                      ? "bg-dravik-dark text-white shadow-sm"
+                      : "text-gray-500 hover:bg-surface"
+                  )}
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
+            <button
+              type="button"
+              onClick={openAddListing}
+              className="inline-flex items-center gap-2 rounded-xl bg-dravik-dark px-4 py-2.5 text-sm font-bold text-white hover:bg-dravik-navy transition-colors shadow-sm"
+            >
+              <Plus size={15} />
+              Add Listing
+            </button>
+          </div>
         </div>
 
         {error && (
@@ -602,10 +681,10 @@ export default function ListingsPage() {
         )}
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <KpiCard icon={Building2} label="Listings" value={String(listings.length)} sub={`${activeCount} active`} accent="#C9C3B6" />
-          <KpiCard icon={Share2} label="Partner Network" value={String(sharedCount)} sub="Shared listings" accent="#4A90A4" />
-          <KpiCard icon={DollarSign} label="Inventory Value" value={formatCompactCurrency(totalVolume)} sub="Current list price" accent="#4A7A4A" />
-          <KpiCard icon={Users} label="Partner Interest" value={String(listings.reduce((sum, listing) => sum + listing.partnerInterest, 0))} sub="Saved by partners" accent="#C0786C" />
+          <KpiCard icon={Building2} label="My Listings" value={String(ownListings.length)} sub={`${activeCount} active`} accent="#C9C3B6" />
+          <KpiCard icon={Share2} label="Network Exchange" value={String(sharedCount)} sub={`${externalNetworkCount} partner listings`} accent="#4A90A4" />
+          <KpiCard icon={DollarSign} label="Inventory Value" value={formatCompactCurrency(totalVolume)} sub={view === "mine" ? "My current list price" : "Network list price"} accent="#4A7A4A" />
+          <KpiCard icon={Users} label="Partner Interest" value={String(partnerInterest)} sub="Saves and watchlist" accent="#C0786C" />
         </div>
 
         <div className="bg-white rounded-2xl border border-line p-4 space-y-3">
@@ -616,7 +695,7 @@ export default function ListingsPage() {
                 type="search"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search listings, sellers, or neighborhoods..."
+                placeholder={view === "mine" ? "Search listings, sellers, or neighborhoods..." : "Search network listings, agents, or brokerages..."}
                 className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-line text-sm text-dravik-dark placeholder:text-gray-400 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20"
               />
             </div>
@@ -649,31 +728,37 @@ export default function ListingsPage() {
             <Loader2 size={26} className="animate-spin text-gold" />
             <p className="text-sm font-semibold text-gray-400">Loading listings...</p>
           </section>
-        ) : listings.length === 0 ? (
+        ) : scopedListings.length === 0 ? (
           <section className="bg-white rounded-2xl border border-line py-16 px-6 flex flex-col items-center text-center gap-4">
             <div className="w-14 h-14 rounded-2xl bg-surface-2 flex items-center justify-center">
               <Home size={24} className="text-gold" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-dravik-dark">No listings yet</h2>
-              <p className="text-sm text-gray-400 mt-1 max-w-sm">Create the first listing for this workspace.</p>
+              <h2 className="text-lg font-bold text-dravik-dark">{view === "mine" ? "No listings yet" : "No network listings yet"}</h2>
+              <p className="text-sm text-gray-400 mt-1 max-w-sm">
+                {view === "mine"
+                  ? "Create the first listing for this workspace."
+                  : "Shared listings from subscribers will appear here once they publish to the network."}
+              </p>
             </div>
-            <button
-              type="button"
-              onClick={openAddListing}
-              className="inline-flex items-center gap-2 rounded-xl bg-dravik-dark px-4 py-2.5 text-sm font-bold text-white hover:bg-dravik-navy transition-colors"
-            >
-              <Plus size={15} />
-              Add Listing
-            </button>
+            {view === "mine" && (
+              <button
+                type="button"
+                onClick={openAddListing}
+                className="inline-flex items-center gap-2 rounded-xl bg-dravik-dark px-4 py-2.5 text-sm font-bold text-white hover:bg-dravik-navy transition-colors"
+              >
+                <Plus size={15} />
+                Add Listing
+              </button>
+            )}
           </section>
         ) : (
           <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_360px] gap-6 items-start">
             <section className="space-y-4">
               <div className="flex items-center justify-between gap-3">
-                <h2 className="text-lg font-bold text-dravik-dark">Listing Workspace</h2>
+                <h2 className="text-lg font-bold text-dravik-dark">{view === "mine" ? "Listing Workspace" : "Network Exchange"}</h2>
                 <span className="text-sm text-gray-400 font-medium">
-                  {filteredListings.length} of {listings.length}
+                  {filteredListings.length} of {scopedListings.length}
                 </span>
               </div>
 
@@ -689,6 +774,8 @@ export default function ListingsPage() {
                       onArchive={archiveListing}
                       onToggleVisibility={toggleVisibility}
                       onUpdateStatus={updateStatus}
+                      saved={savedNetworkIds.has(listing.id)}
+                      onToggleSaved={toggleSavedNetworkListing}
                     />
                   ))}
                 </div>
@@ -714,7 +801,9 @@ export default function ListingsPage() {
               <aside className="bg-white rounded-2xl border border-line p-5 space-y-5 xl:sticky xl:top-20">
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-wide text-gray-400">Selected Listing</p>
+                    <p className="text-xs font-bold uppercase tracking-wide text-gray-400">
+                      {selectedListing.isNetworkListing ? "Network Listing" : "Selected Listing"}
+                    </p>
                     <h2 className="mt-2 text-base font-bold text-dravik-dark leading-tight">{selectedListing.address}</h2>
                     <p className="text-sm text-gray-400 mt-1">
                       {selectedListing.city}, {selectedListing.state}
@@ -735,8 +824,14 @@ export default function ListingsPage() {
                     <p className="text-sm font-bold text-dravik-dark mt-1">{selectedListing.networkVisibility}</p>
                   </div>
                   <div className="rounded-xl bg-surface p-3">
-                    <p className="text-xs text-gray-400">Seller</p>
-                    <p className="text-sm font-bold text-dravik-dark mt-1 truncate">{selectedListing.sellerName}</p>
+                    <p className="text-xs text-gray-400">
+                      {selectedListing.isNetworkListing ? "Source" : "Seller"}
+                    </p>
+                    <p className="text-sm font-bold text-dravik-dark mt-1 truncate">
+                      {selectedListing.isNetworkListing
+                        ? selectedListing.ownerTenantName ?? "Partner Brokerage"
+                        : selectedListing.sellerName}
+                    </p>
                   </div>
                   <div className="rounded-xl bg-surface p-3">
                     <p className="text-xs text-gray-400">Agent</p>

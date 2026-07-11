@@ -10,7 +10,7 @@ import { Search, X, MapPin, ChevronRight, Target, SlidersHorizontal } from "luci
 import { AGENTS } from "../data/agents";
 import { MILITARY_BASES, BRANCH_COLOR, type MilitaryBase } from "../data/militaryBases";
 import { getPartnerTier, getPartnerTierLabel, getPartnerTierStyles } from "../data/partnerTiers";
-import type { Agent, CertificationType } from "@dravik/contracts/referrals";
+import type { Agent, CertificationType, PartnerRole } from "@dravik/contracts/referrals";
 import { cn } from "@dravik/shared";
 
 // ─── Geo helpers ──────────────────────────────────────────────
@@ -54,6 +54,14 @@ const CERT_OPTIONS: Array<{ label: string; value: CertificationType | "All" }> =
   { label: "RE Broker",    value: "RE Broker"     },
   { label: "Dual Lic.",    value: "Dual Licensed" },
   { label: "RE + Mtg",     value: "RE + Mortgage" },
+  { label: "Lender",       value: "Mortgage Lender" },
+];
+
+const ROLE_OPTIONS: Array<{ label: string; value: PartnerRole | "All" }> = [
+  { label: "All", value: "All" },
+  { label: "Realtors", value: "Real Estate Agent" },
+  { label: "Lenders", value: "Mortgage Lender" },
+  { label: "Dual", value: "Dual Service" },
 ];
 
 // ─── Leaflet icon factories — must stay at module level ───────
@@ -127,6 +135,13 @@ const CERT_CFG: Record<CertificationType, { bg: string; text: string }> = {
   "RE Broker":     { bg: "#F1F0EC", text: "#767E88" },
   "Dual Licensed": { bg: "#111418", text: "#ffffff" },
   "RE + Mortgage": { bg: "#C9C3B6", text: "#111418" },
+  "Mortgage Lender": { bg: "#E0F2FE", text: "#0369A1" },
+};
+
+const ROLE_CFG: Record<PartnerRole, { label: string; bg: string; text: string }> = {
+  "Real Estate Agent": { label: "Realtor", bg: "#FFFFFF", text: "#767E88" },
+  "Mortgage Lender": { label: "Lender", bg: "#E0F2FE", text: "#0369A1" },
+  "Dual Service": { label: "Dual", bg: "#F3E8FF", text: "#6D28D9" },
 };
 
 // ─── Agent sidebar card ───────────────────────────────────────
@@ -136,8 +151,10 @@ function AgentListItem({ agent, dist, onInitiate }: {
   onInitiate: (a: Agent) => void;
 }) {
   const cfg = CERT_CFG[agent.certification];
+  const role = ROLE_CFG[agent.partnerRole];
   const tier = getPartnerTier(agent);
   const tierStyle = getPartnerTierStyles(tier);
+  const isLender = agent.partnerRole === "Mortgage Lender";
   return (
     <button
       onClick={() => onInitiate(agent)}
@@ -152,6 +169,12 @@ function AgentListItem({ agent, dist, onInitiate }: {
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-1.5 flex-wrap">
           <p className="text-xs font-bold text-dravik-dark truncate">{agent.name}</p>
+          <span
+            className="text-[9px] font-bold px-1.5 py-0.5 rounded-full flex-shrink-0"
+            style={{ background: role.bg, color: role.text }}
+          >
+            {role.label}
+          </span>
           <span
             className="text-[9px] font-bold px-1.5 py-0.5 rounded-full border flex-shrink-0"
             style={{ background: tierStyle.bg, color: tierStyle.text, borderColor: tierStyle.border }}
@@ -170,7 +193,7 @@ function AgentListItem({ agent, dist, onInitiate }: {
           {dist !== null && <span className="text-gold ml-1 font-semibold">{Math.round(dist)}mi</span>}
         </p>
         <p className="text-[10px] text-gray-500">
-          {agent.closedVolumeMTD} · {agent.closedTransactions} txns
+          {agent.closedVolumeMTD} · {agent.closedTransactions} {isLender ? "loans" : "txns"}
         </p>
       </div>
       <ChevronRight size={12} className="text-gray-300 flex-shrink-0" />
@@ -193,6 +216,7 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
   const [mobileSidebarOpen,setMobileSidebarOpen]= useState(false);
   const [selectedLoc,      setSelectedLoc]      = useState<SelectedLoc | null>(null);
   const [radiusMiles,   setRadiusMiles]   = useState<RadiusMiles>(50);
+  const [roleFilter,    setRoleFilter]    = useState<PartnerRole | "All">("All");
   const [certFilter,    setCertFilter]    = useState<CertificationType | "All">("All");
   const [mapCenter,     setMapCenter]     = useState<[number, number]>(INITIAL_CENTER);
   const [mapZoom,       setMapZoom]       = useState(INITIAL_ZOOM);
@@ -215,12 +239,13 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
 
     const inRadius = withDist.filter(({ agent, dist }) => {
       const radOk  = dist === null || dist <= radiusMiles;
+      const roleOk = roleFilter === "All" || agent.partnerRole === roleFilter;
       const certOk = certFilter === "All" || agent.certification === certFilter;
-      return radOk && certOk;
+      return radOk && roleOk && certOk;
     });
 
     return { inRadius, withDist };
-  }, [geoAgents, selectedLoc, radiusMiles, certFilter]);
+  }, [geoAgents, selectedLoc, radiusMiles, roleFilter, certFilter]);
 
   // Sorted sidebar list: subscribers first, then distance when a location is selected.
   const sortedList = useMemo(
@@ -232,7 +257,16 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
     [inRadius]
   );
 
-  // Search suggestions: military bases + unique agent cities
+  const visibleMarkers = useMemo(
+    () => withDist.filter(({ agent }) => {
+      const roleOk = roleFilter === "All" || agent.partnerRole === roleFilter;
+      const certOk = certFilter === "All" || agent.certification === certFilter;
+      return roleOk && certOk;
+    }),
+    [withDist, roleFilter, certFilter]
+  );
+
+  // Search suggestions: military bases + unique partner cities
   const suggestions = useMemo((): Suggestion[] => {
     const q = searchQuery.trim().toLowerCase();
     if (!q) return [];
@@ -257,6 +291,8 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
           (a.location.city.toLowerCase().includes(q) ||
            a.location.state.toLowerCase().includes(q) ||
            a.location.region.toLowerCase().includes(q) ||
+           a.partnerRole.toLowerCase().includes(q) ||
+           a.certification.toLowerCase().includes(q) ||
            a.specializations.some((s) => s.toLowerCase().includes(q)))) {
         seen.add(key);
         cities.push({
@@ -269,13 +305,16 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
     const partners: Suggestion[] = geoAgents
       .filter(a =>
         a.name.toLowerCase().includes(q) ||
+        a.partnerRole.toLowerCase().includes(q) ||
+        a.certification.toLowerCase().includes(q) ||
         a.location.city.toLowerCase().includes(q) ||
-        a.location.state.toLowerCase().includes(q)
+        a.location.state.toLowerCase().includes(q) ||
+        a.specializations.some((s) => s.toLowerCase().includes(q))
       )
       .map(a => ({
         id: `agent-${a.id}`,
         label: a.name,
-        sublabel: `${getPartnerTierLabel(getPartnerTier(a))} · ${a.location.city}, ${a.location.state}`,
+        sublabel: `${ROLE_CFG[a.partnerRole].label} · ${getPartnerTierLabel(getPartnerTier(a))} · ${a.location.city}, ${a.location.state}`,
         lat: a.location.lat!,
         lng: a.location.lng!,
         isBase: false,
@@ -344,7 +383,7 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
             </button>
           </div>
           <p className="text-[10px] text-gray-400">
-            Find subscribers and preferred agents by place, partner, or military base
+            Find subscribers and network partners by place, role, or military base
           </p>
         </div>
 
@@ -437,7 +476,7 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
                 <div className="absolute left-0 right-0 top-full mt-1 z-50 overflow-hidden rounded-xl border border-line bg-white shadow-2xl animate-fade-in">
                   <div className="px-3 py-3 text-center">
                     <MapPin size={18} className="mx-auto text-gray-300 mb-1" />
-                    <p className="text-xs font-semibold text-dravik-dark">No agents within that area</p>
+                    <p className="text-xs font-semibold text-dravik-dark">No partners within that area</p>
                     <p className="text-[10px] text-gray-400 mt-0.5">Try another city, state, partner name, or military base.</p>
                   </div>
                 </div>
@@ -482,6 +521,27 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
             </div>
           </div>
 
+          {/* Role filter */}
+          <div className="px-4 pb-3">
+            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Partner Type</p>
+            <div className="flex flex-wrap gap-1.5">
+              {ROLE_OPTIONS.map(o => (
+                <button
+                  key={o.value}
+                  onClick={() => setRoleFilter(o.value)}
+                  className={cn(
+                    "px-2.5 py-1.5 rounded-lg text-[11px] font-bold border transition-colors",
+                    roleFilter === o.value
+                      ? "bg-dravik-dark text-white border-dravik-dark"
+                      : "bg-surface-2 text-gray-500 border-line hover:border-dravik-dark"
+                  )}
+                >
+                  {o.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
           {/* Cert filter */}
           <div className="px-4 pb-4">
             <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Certification</p>
@@ -508,7 +568,7 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
             )}
           </div>
 
-          {/* Agents list */}
+          {/* Partners list */}
           <div className="border-t border-line">
             <div className="px-4 py-3 flex items-center justify-between">
               <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
@@ -530,7 +590,7 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
               {sortedList.length === 0 && (
                 <div className="px-4 py-8 text-center">
                   <MapPin size={24} className="text-gray-200 mx-auto mb-2" />
-                  <p className="text-xs text-gray-400">No agents within that area</p>
+                  <p className="text-xs text-gray-400">No partners within that area</p>
                   <button
                     onClick={() => setRadiusMiles(100)}
                     className="text-[11px] text-gold mt-1 font-semibold hover:text-gold-dark"
@@ -608,18 +668,20 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
                     {selectedLoc.branch} Installation
                   </p>
                   <p style={{ fontSize: 11, color: "#C9C3B6", fontWeight: 600, marginTop: 4 }}>
-                    {inRadius.length} agent{inRadius.length !== 1 ? "s" : ""} within {radiusMiles}mi
+                    {inRadius.length} partner{inRadius.length !== 1 ? "s" : ""} within {radiusMiles}mi
                   </p>
                 </div>
               </Popup>
             </Marker>
           )}
 
-          {/* Agent markers */}
-          {withDist.map(({ agent, dist }) => {
+          {/* Partner markers */}
+          {visibleMarkers.map(({ agent, dist }) => {
             if (!agent.location.lat || !agent.location.lng) return null;
             const inRad = isInRadius(agent);
             const cfg   = CERT_CFG[agent.certification];
+            const role  = ROLE_CFG[agent.partnerRole];
+            const isLender = agent.partnerRole === "Mortgage Lender";
             return (
               <Marker
                 key={agent.id}
@@ -643,7 +705,13 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
                         <p style={{ fontWeight: 700, fontSize: 13, color: "#111418", whiteSpace: "nowrap" }}>
                           {agent.name}
                         </p>
-                        <div style={{ display: "flex", alignItems: "center", gap: 4, marginTop: 2 }}>
+                        <div style={{ display: "flex", alignItems: "center", gap: 4, marginTop: 2, flexWrap: "wrap" }}>
+                          <span style={{
+                            fontSize: 9, fontWeight: 700, padding: "2px 6px",
+                            borderRadius: 20, background: role.bg, color: role.text,
+                          }}>
+                            {role.label}
+                          </span>
                           <span style={{
                             fontSize: 9, fontWeight: 700, padding: "2px 6px",
                             borderRadius: 20, background: cfg.bg, color: cfg.text,
@@ -668,11 +736,11 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
                     <div style={{ display: "flex", gap: 12, margin: "8px 0", fontSize: 11 }}>
                       <div>
                         <p style={{ fontWeight: 700, color: "#111418" }}>{agent.closedVolumeMTD}</p>
-                        <p style={{ color: "#9CA3AF" }}>Vol MTD</p>
+                        <p style={{ color: "#9CA3AF" }}>{isLender ? "Funded" : "Vol MTD"}</p>
                       </div>
                       <div>
                         <p style={{ fontWeight: 700, color: "#111418" }}>{agent.closedTransactions}</p>
-                        <p style={{ color: "#9CA3AF" }}>Txns</p>
+                        <p style={{ color: "#9CA3AF" }}>{isLender ? "Loans" : "Txns"}</p>
                       </div>
                       <div>
                         <p style={{ fontWeight: 700, color: "#111418", display: "flex", alignItems: "center", gap: 2 }}>
@@ -692,7 +760,7 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
                         border: "none", cursor: "pointer",
                       }}
                     >
-                      Start Referral
+                      {isLender ? "Start Lender Referral" : "Start Referral"}
                     </button>
                   </div>
                 </Popup>

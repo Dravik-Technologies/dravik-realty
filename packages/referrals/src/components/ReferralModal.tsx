@@ -3,16 +3,23 @@
 import { useEffect, useRef } from "react";
 import { X, MapPin, Star, BadgeCheck } from "lucide-react";
 import SplitCalculator from "./SplitCalculator";
-import { Agent } from "@dravik/contracts/referrals";
+import type { Agent, CertificationType, PartnerRole } from "@dravik/contracts/referrals";
 import { cn } from "@dravik/shared";
 
 // ──────────────────────────────────────────────
 // Certification badge config
 // ──────────────────────────────────────────────
-const CERT_CONFIG = {
+const CERT_CONFIG: Record<CertificationType, { bg: string; border: string; text: string }> = {
   "RE Broker":     { bg: "bg-gold-light",  border: "border-gold/50",  text: "text-gold-dark"  },
   "Dual Licensed": { bg: "bg-dravik-dark",   border: "border-dravik-dark", text: "text-white"      },
   "RE + Mortgage": { bg: "bg-gold",        border: "border-gold",      text: "text-white"      },
+  "Mortgage Lender": { bg: "bg-sky-50", border: "border-sky-200", text: "text-sky-700" },
+};
+
+const ROLE_CONFIG: Record<PartnerRole, { label: string; bg: string; border: string; text: string }> = {
+  "Real Estate Agent": { label: "Realtor", bg: "bg-white", border: "border-line", text: "text-gray-500" },
+  "Mortgage Lender": { label: "Lender", bg: "bg-sky-50", border: "border-sky-200", text: "text-sky-700" },
+  "Dual Service": { label: "Dual Service", bg: "bg-violet-50", border: "border-violet-200", text: "text-violet-700" },
 };
 
 // ──────────────────────────────────────────────
@@ -75,8 +82,23 @@ export default function ReferralModal({ agent, open, onClose }: ReferralModalPro
   if (!open || !agent) return null;
 
   const cert = CERT_CONFIG[agent.certification];
+  const role = ROLE_CONFIG[agent.partnerRole];
+  const isLender = agent.partnerRole === "Mortgage Lender";
   const stars = Math.floor(agent.productionScore);
   const partial = agent.productionScore % 1;
+  const stats = isLender
+    ? [
+        { label: "Funded Vol. (MTD)", value: agent.closedVolumeMTD },
+        { label: "Funded Loans",      value: agent.closedTransactions },
+        { label: "Avg Clear to Close", value: agent.avgDaysToClose },
+        { label: "Active Loan Files", value: agent.activeListings },
+      ]
+    : [
+        { label: "Closed Vol. (MTD)", value: agent.closedVolumeMTD },
+        { label: "Transactions",      value: agent.closedTransactions },
+        { label: "Avg Days to Close", value: agent.avgDaysToClose },
+        { label: "Active Listings",   value: agent.activeListings },
+      ];
 
   return (
     <div
@@ -107,6 +129,14 @@ export default function ReferralModal({ agent, open, onClose }: ReferralModalPro
             <div>
               <div className="flex items-center gap-2 flex-wrap">
                 <h2 id="referral-modal-title" className="text-xl font-bold text-dravik-dark">{agent.name}</h2>
+                <span
+                  className={cn(
+                    "inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-0.5 rounded-full border",
+                    role.bg, role.border, role.text
+                  )}
+                >
+                  {role.label}
+                </span>
                 <span
                   className={cn(
                     "inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-0.5 rounded-full border",
@@ -160,12 +190,7 @@ export default function ReferralModal({ agent, open, onClose }: ReferralModalPro
 
         {/* ── Agent stats strip ── */}
         <div className="grid grid-cols-4 divide-x divide-line border-b border-line flex-shrink-0">
-          {[
-            { label: "Closed Vol. (MTD)", value: agent.closedVolumeMTD },
-            { label: "Transactions",      value: agent.closedTransactions },
-            { label: "Avg Days to Close", value: agent.avgDaysToClose },
-            { label: "Active Listings",   value: agent.activeListings },
-          ].map(({ label, value }) => (
+          {stats.map(({ label, value }) => (
             <div key={label} className="px-5 py-3 text-center">
               <p className="text-lg font-bold text-dravik-dark">{value}</p>
               <p className="text-[11px] text-gray-400 leading-tight">{label}</p>

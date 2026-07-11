@@ -1,14 +1,14 @@
 "use client";
 
 import { MapPin, Star, ArrowUpRight, BadgeCheck } from "lucide-react";
-import { Agent } from "@dravik/contracts/referrals";
+import type { Agent, CertificationType, PartnerRole } from "@dravik/contracts/referrals";
 import { getPartnerTier, getPartnerTierLabel, getPartnerTierStyles } from "../data/partnerTiers";
 import { cn, formatCurrency } from "@dravik/shared";
 
 // ──────────────────────────────────────────────
 // Certification badge config
 // ──────────────────────────────────────────────
-const CERT_CONFIG = {
+const CERT_CONFIG: Record<CertificationType, { bg: string; border: string; text: string }> = {
   "RE Broker": {
     bg: "bg-gold-light",
     border: "border-gold/40",
@@ -23,6 +23,32 @@ const CERT_CONFIG = {
     bg: "bg-gold",
     border: "border-gold",
     text: "text-white",
+  },
+  "Mortgage Lender": {
+    bg: "bg-sky-50",
+    border: "border-sky-200",
+    text: "text-sky-700",
+  },
+};
+
+const ROLE_CONFIG: Record<PartnerRole, { label: string; bg: string; border: string; text: string }> = {
+  "Real Estate Agent": {
+    label: "Realtor",
+    bg: "bg-white",
+    border: "border-line",
+    text: "text-gray-500",
+  },
+  "Mortgage Lender": {
+    label: "Lender",
+    bg: "bg-sky-50",
+    border: "border-sky-200",
+    text: "text-sky-700",
+  },
+  "Dual Service": {
+    label: "Dual Service",
+    bg: "bg-violet-50",
+    border: "border-violet-200",
+    text: "text-violet-700",
   },
 };
 
@@ -61,8 +87,10 @@ interface AgentCardProps {
 
 export default function AgentCard({ agent, onInitiate }: AgentCardProps) {
   const cert = CERT_CONFIG[agent.certification];
+  const role = ROLE_CONFIG[agent.partnerRole];
   const tier = getPartnerTier(agent);
   const tierStyle = getPartnerTierStyles(tier);
+  const isLender = agent.partnerRole === "Mortgage Lender";
 
   return (
     <div className="card-lift bg-white rounded-2xl border border-line flex flex-col overflow-hidden">
@@ -91,6 +119,14 @@ export default function AgentCard({ agent, onInitiate }: AgentCardProps) {
 
             {/* Cert badge */}
             <div className="mt-1 flex flex-wrap gap-1">
+              <span
+                className={cn(
+                  "inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full border",
+                  role.bg, role.border, role.text
+                )}
+              >
+                {role.label}
+              </span>
               <span
                 className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full border"
                 style={{ background: tierStyle.bg, color: tierStyle.text, borderColor: tierStyle.border }}
@@ -141,21 +177,21 @@ export default function AgentCard({ agent, onInitiate }: AgentCardProps) {
         <div className="grid grid-cols-3 gap-2 bg-surface rounded-xl p-3">
           <div className="text-center">
             <p className="text-sm font-bold text-dravik-dark">{agent.closedVolumeMTD}</p>
-            <p className="text-[9px] uppercase tracking-wide text-gray-400 mt-0.5">Vol. MTD</p>
+            <p className="text-[9px] uppercase tracking-wide text-gray-400 mt-0.5">{isLender ? "Funded MTD" : "Vol. MTD"}</p>
           </div>
           <div className="text-center border-x border-line">
             <p className="text-sm font-bold text-dravik-dark">{agent.closedTransactions}</p>
-            <p className="text-[9px] uppercase tracking-wide text-gray-400 mt-0.5">Closings</p>
+            <p className="text-[9px] uppercase tracking-wide text-gray-400 mt-0.5">{isLender ? "Loans" : "Closings"}</p>
           </div>
           <div className="text-center">
             <p className="text-sm font-bold text-dravik-dark">{agent.avgDaysToClose}d</p>
-            <p className="text-[9px] uppercase tracking-wide text-gray-400 mt-0.5">Avg Close</p>
+            <p className="text-[9px] uppercase tracking-wide text-gray-400 mt-0.5">{isLender ? "Avg CTC" : "Avg Close"}</p>
           </div>
         </div>
 
         {/* ── Avg property value ── */}
         <div className="flex items-center justify-between text-xs">
-          <span className="text-gray-400">Avg. Market Value</span>
+          <span className="text-gray-400">{isLender ? "Avg. Loan Size" : "Avg. Market Value"}</span>
           <span className="font-bold text-dravik-dark">
             {formatCurrency(agent.location.avgPropertyValue)}
           </span>

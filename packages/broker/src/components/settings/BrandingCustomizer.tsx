@@ -172,7 +172,7 @@ export default function BrandingCustomizer({ onSave }: { onSave: () => void }) {
               {item.locked ? (
                 <span className="text-[10px] text-gray-300 border border-gray-200 px-2 py-0.5 rounded">Locked</span>
               ) : (
-                <button disabled title="Logo upload coming soon" className="text-[10px] font-semibold text-gray-300 cursor-not-allowed">Replace</button>
+                <span className="text-[10px] font-semibold text-gray-400">Managed</span>
               )}
             </div>
           ))}

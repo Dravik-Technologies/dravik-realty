@@ -138,7 +138,6 @@ export default function CommissionBilling({ onSave }: { onSave: () => void }) {
               <p className="text-xs font-semibold text-dravik-dark">Visa ending 4242</p>
               <p className="text-[10px] text-gray-400">Expires 08/27</p>
             </div>
-            <button disabled title="Payment method update coming soon" className="ml-auto text-[10px] font-semibold text-gray-300 cursor-not-allowed">Update</button>
           </div>
           <div className="flex items-center gap-3 bg-surface-2 rounded-xl px-4 py-3">
             <Users size={16} className="text-gray-400 flex-shrink-0" />
@@ -146,7 +145,6 @@ export default function CommissionBilling({ onSave }: { onSave: () => void }) {
               <p className="text-xs font-semibold text-dravik-dark">Billing Contact</p>
               <p className="text-[10px] text-gray-400">chris@dravikrealty.com</p>
             </div>
-            <button disabled title="Billing contact edit coming soon" className="ml-auto text-[10px] font-semibold text-gray-300 cursor-not-allowed">Edit</button>
           </div>
         </div>
 
@@ -166,7 +164,6 @@ export default function CommissionBilling({ onSave }: { onSave: () => void }) {
                 <div className="flex items-center gap-3">
                   <span className="text-xs font-bold text-dravik-dark tabular-nums">{inv.amount}</span>
                   <span className="text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">{inv.status}</span>
-                  <button disabled title="Invoice PDF download coming soon" className="text-[10px] font-semibold text-gray-300 cursor-not-allowed">PDF</button>
                 </div>
               </div>
             ))}

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import {
-  Plus, TrendingUp, DollarSign, Clock, Award,
+  TrendingUp, DollarSign, Clock, Award,
   Calendar, Tag, ExternalLink,
 } from "lucide-react";
 import type { Transaction } from "@dravik/contracts/realty";
@@ -134,18 +134,9 @@ export default function TransactionsPage() {
 
         {/* ── Header ───────────────────────────────────────── */}
         <div className="flex-shrink-0 bg-white border-b border-line px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-xl font-bold text-dravik-dark">Transactions</h1>
-              <p className="text-xs text-gray-400 mt-0.5">Deals from under contract through closing</p>
-            </div>
-            <button
-              disabled
-              title="Transaction creation coming soon"
-              className="flex items-center gap-2 px-4 py-2.5 bg-gold text-dravik-dark font-bold text-sm rounded-xl opacity-50 cursor-not-allowed"
-            >
-              <Plus size={15} /> New Transaction
-            </button>
+          <div>
+            <h1 className="text-xl font-bold text-dravik-dark">Transactions</h1>
+            <p className="text-xs text-gray-400 mt-0.5">Deals from under contract through closing</p>
           </div>
 
           {/* KPI strip */}

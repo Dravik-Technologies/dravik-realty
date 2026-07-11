@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import {
   Users, UserCheck, Clock, TrendingUp, DollarSign,
-  Search, X, UserPlus, Download, Mail, LayoutList, Network,
+  Search, X, UserPlus, LayoutList, Network,
 } from "lucide-react";
 import type { Agent, DirectoryFilter, DirectoryView, SortField } from "@dravik/contracts/broker";
 import { AGENTS, TEAMS } from "../../data/team";
@@ -245,16 +245,6 @@ export default function TeamDashboard() {
                   );
                 })}
               </div>
-
-              {/* Bulk actions (disabled) */}
-              <button disabled title="Bulk message coming soon"
-                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-xl bg-surface-2 text-gray-400 opacity-50 cursor-not-allowed">
-                <Mail size={12} /> Message
-              </button>
-              <button disabled title="Export coming soon"
-                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-xl bg-surface-2 text-gray-400 opacity-50 cursor-not-allowed">
-                <Download size={12} /> Export
-              </button>
 
               {/* Add Agent */}
               <button

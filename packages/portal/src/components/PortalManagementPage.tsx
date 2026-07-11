@@ -3,7 +3,6 @@ import {
   CheckCircle2,
   ExternalLink,
   FileText,
-  Mail,
   MessageSquare,
   ShieldCheck,
   Users,
@@ -96,14 +95,6 @@ export default function PortalManagementPage() {
             <h2 className="text-sm font-bold text-dravik-dark">Client Access</h2>
             <p className="text-xs text-gray-400 mt-0.5">Portal readiness by client and transaction activity.</p>
           </div>
-          <button
-            disabled
-            title="Client invitations coming soon"
-            className="hidden sm:inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-surface-2 text-xs font-semibold text-gray-400 cursor-not-allowed"
-          >
-            <Mail size={13} />
-            Invite Client
-          </button>
         </div>
 
         <div className="divide-y divide-line">

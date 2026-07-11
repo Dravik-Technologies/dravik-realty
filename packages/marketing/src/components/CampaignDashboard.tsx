@@ -1,8 +1,8 @@
 "use client";
 
 import {
-  Megaphone, Users, TrendingUp, Star, MoreHorizontal,
-  Eye, Edit, ExternalLink, Pause, Play,
+  Megaphone, Users, TrendingUp, Star,
+  Eye, Edit, ExternalLink,
   Globe, FileText, Home, Printer,
 } from "lucide-react";
 import type { Campaign, CampaignType } from "@dravik/contracts/marketing";
@@ -205,16 +205,6 @@ export default function CampaignDashboard({ onEdit }: CampaignDashboardProps) {
 
               {/* Actions */}
               <div className="w-20 flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                {c.status === "Active" && (
-                  <button disabled title="Pause coming soon" className="p-1.5 rounded-lg text-gray-300 cursor-not-allowed">
-                    <Pause size={13} />
-                  </button>
-                )}
-                {c.status === "Paused" && (
-                  <button disabled title="Resume coming soon" className="p-1.5 rounded-lg text-gray-300 cursor-not-allowed">
-                    <Play size={13} />
-                  </button>
-                )}
                 <button
                   title="Edit"
                   onClick={() => onEdit?.(c)}
@@ -224,9 +214,6 @@ export default function CampaignDashboard({ onEdit }: CampaignDashboardProps) {
                 </button>
                 <button title="Preview" onClick={() => onEdit?.(c)} className="p-1.5 rounded-lg text-gray-400 hover:bg-blue-50 hover:text-blue-500 transition-colors">
                   <Eye size={13} />
-                </button>
-                <button disabled title="More campaign actions coming soon" className="p-1.5 rounded-lg text-gray-300 cursor-not-allowed">
-                  <MoreHorizontal size={13} />
                 </button>
               </div>
             </div>

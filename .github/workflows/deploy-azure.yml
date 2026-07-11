@@ -15,6 +15,7 @@ concurrency:
 
 env:
   AZURE_LOCATION: eastus
+  POSTGRES_LOCATION: eastus2
   IMAGE_NAME: command-center
 
 jobs:
@@ -42,7 +43,7 @@ jobs:
             --name "core-${APP_ENVIRONMENT}-${GITHUB_RUN_NUMBER}" \
             --resource-group "$RESOURCE_GROUP" \
             --template-file infra/azure/core.bicep \
-            --parameters environmentName="$APP_ENVIRONMENT" location="$AZURE_LOCATION" postgresAdminPassword="${{ secrets.POSTGRES_ADMIN_PASSWORD }}" \
+            --parameters environmentName="$APP_ENVIRONMENT" location="$AZURE_LOCATION" postgresLocation="$POSTGRES_LOCATION" postgresAdminPassword="${{ secrets.POSTGRES_ADMIN_PASSWORD }}" \
             --query properties.outputs \
             -o json)"
 
@@ -111,7 +112,7 @@ jobs:
             --name "core-${APP_ENVIRONMENT}-${GITHUB_RUN_NUMBER}" \
             --resource-group "$RESOURCE_GROUP" \
             --template-file infra/azure/core.bicep \
-            --parameters environmentName="$APP_ENVIRONMENT" location="$AZURE_LOCATION" postgresAdminPassword="${{ secrets.POSTGRES_ADMIN_PASSWORD }}" \
+            --parameters environmentName="$APP_ENVIRONMENT" location="$AZURE_LOCATION" postgresLocation="$POSTGRES_LOCATION" postgresAdminPassword="${{ secrets.POSTGRES_ADMIN_PASSWORD }}" \
             --query properties.outputs \
             -o json)"
 

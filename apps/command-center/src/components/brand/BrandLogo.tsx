@@ -38,11 +38,11 @@ export function BrandLogo({
           fill
           sizes={isMark ? "40px" : "176px"}
           className={cn(
-            "pointer-events-none select-none object-cover brightness-110 contrast-110 saturate-90",
-            isMark ? "scale-[1.42]" : "scale-[1.08]"
+            "pointer-events-none select-none brightness-110 contrast-110 saturate-90",
+            isMark ? "object-cover scale-[2.05]" : "object-contain"
           )}
           priority={priority}
-          style={{ objectPosition: "50% 50%" }}
+          style={{ objectPosition: isMark ? "50% 36%" : "50% 50%" }}
         />
         <span
           aria-hidden

@@ -33,14 +33,11 @@ export const LOCAL_COMMAND_SESSION: CommandCenterSession = {
     "referrals.manage",
   ],
   entitlements: [
-    "billing.enabled",
-    "broker.enabled",
     "crm.enabled",
-    "lending.enabled",
-    "marketing.enabled",
+    "listings.enabled",
     "portal.enabled",
-    "realty.enabled",
     "referrals.enabled",
+    "transactions.enabled",
   ],
 };
 

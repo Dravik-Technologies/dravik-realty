@@ -177,7 +177,11 @@ export default function Header({ session }: { session: CommandCenterSession }) {
         </div>
       </header>
 
-      <GlobalSearch open={!hideGlobalSearch && searchOpen} onClose={() => setSearchOpen(false)} />
+      <GlobalSearch
+        session={session}
+        open={!hideGlobalSearch && searchOpen}
+        onClose={() => setSearchOpen(false)}
+      />
     </>
   );
 }

@@ -1,14 +1,17 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { Plus, Users, Receipt, Globe, Megaphone } from "lucide-react";
+import { Home, Plus, Users, Receipt, Globe, Megaphone } from "lucide-react";
 import Link from "next/link";
+import type { CommandCenterSession } from "@dravik/contracts/identity";
+import { canAccessHref } from "@/modules/registry";
 import { cn } from "@dravik/shared";
 
 const ACTIONS = [
   { label: "Create Campaign",  icon: Megaphone, href: "/marketing",        bg: "bg-violet-500" },
   { label: "Partner Referral", icon: Globe,     href: "/referrals",             bg: "bg-gold"       },
   { label: "New Transaction",  icon: Receipt,   href: "/realty/transactions",   bg: "bg-emerald-500"},
+  { label: "New Listing",      icon: Home,      href: "/realty/listings",       bg: "bg-stone-500"  },
   { label: "New Lead",         icon: Users,     href: "/crm/leads",             bg: "bg-blue-500"   },
 ];
 
@@ -38,10 +41,11 @@ function ActionItem({ label, icon: Icon, href, bg, onClose }: {
 }
 
 // ─── QuickActionFAB ───────────────────────────────────────────
-export default function QuickActionFAB() {
+export default function QuickActionFAB({ session }: { session: CommandCenterSession }) {
   const [open, setOpen] = useState(false);
   const fabRef = useRef<HTMLDivElement>(null);
   const handleClose = useCallback(() => setOpen(false), []);
+  const visibleActions = ACTIONS.filter((action) => canAccessHref(session, action.href));
 
   useEffect(() => {
     if (!open) return;
@@ -57,11 +61,13 @@ export default function QuickActionFAB() {
     };
   }, [open, handleClose]);
 
+  if (visibleActions.length === 0) return null;
+
   return (
     <div ref={fabRef} className="fixed bottom-6 right-6 z-[1000] flex flex-col-reverse items-end gap-3">
       {open && (
         <div className="flex flex-col-reverse gap-3 items-end animate-slide-up">
-          {ACTIONS.map(a => (
+          {visibleActions.map(a => (
             <ActionItem key={a.label} {...a} onClose={handleClose} />
           ))}
         </div>

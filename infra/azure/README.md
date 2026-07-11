@@ -13,7 +13,7 @@ Dravik Realty runs from one shared Azure Container Apps deployment per environme
 
 The app is still using the local identity foundation. The Azure resources are ready for the next identity, tenant registry, storage, and database integration phases.
 
-The resource groups and app infrastructure use `eastus`. PostgreSQL uses `eastus2` because this subscription is currently restricted from provisioning PostgreSQL Flexible Server in `eastus`.
+The resource groups and app infrastructure use `eastus`. PostgreSQL uses `centralus` because this subscription is currently restricted from provisioning PostgreSQL Flexible Server in the East US regions.
 
 ## First-Time Setup
 
@@ -63,7 +63,7 @@ Preview staging:
 az deployment group what-if \
   --resource-group dravik-realty-staging \
   --template-file infra/azure/core.bicep \
-  --parameters environmentName=staging location=eastus postgresLocation=eastus2 postgresAdminPassword="<strong password>"
+  --parameters environmentName=staging location=eastus postgresLocation=centralus postgresAdminPassword="<strong password>"
 ```
 
 ## Deployment

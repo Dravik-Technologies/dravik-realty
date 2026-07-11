@@ -113,9 +113,6 @@ export default function CompliancePanel() {
             <CheckCircle2 size={14} className="text-emerald-500" />
             <p className="text-xs font-semibold text-emerald-700">Policy is current — 216 days remaining</p>
           </div>
-          <button disabled title="Certificate download coming soon" className="text-[10px] font-semibold text-emerald-400 cursor-not-allowed">
-            Download Certificate
-          </button>
         </div>
       </div>
 

@@ -224,7 +224,7 @@ function DashboardTab({ data, onTabChange }: { data: ClientPortalData; onTabChan
       {/* Quick actions */}
       <div>
         <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">Quick Actions</p>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:max-w-sm gap-3">
           <button
             onClick={() => onTabChange("messages")}
             className="flex items-center gap-3 p-4 bg-dravik-dark text-white rounded-2xl hover:bg-gold hover:text-dravik-dark transition-all group"
@@ -235,28 +235,6 @@ function DashboardTab({ data, onTabChange }: { data: ClientPortalData; onTabChan
               {unread > 0 && <p className="text-[10px] opacity-70">{unread} unread</p>}
             </div>
             <ArrowRight size={14} className="ml-auto opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
-          </button>
-          <button
-            disabled
-            title="Showing scheduler coming soon"
-            className="flex items-center gap-3 p-4 bg-white border border-line text-gray-400 rounded-2xl cursor-not-allowed opacity-60"
-          >
-            <Calendar size={18} className="flex-shrink-0" />
-            <div className="text-left">
-              <p className="text-sm font-semibold">Schedule Showing</p>
-              <p className="text-[10px]">Coming soon</p>
-            </div>
-          </button>
-          <button
-            disabled
-            title="Pre-qualification tool coming soon"
-            className="flex items-center gap-3 p-4 bg-white border border-line text-gray-400 rounded-2xl cursor-not-allowed opacity-60"
-          >
-            <BarChart3 size={18} className="flex-shrink-0" />
-            <div className="text-left">
-              <p className="text-sm font-semibold">Run Pre-Qual</p>
-              <p className="text-[10px]">Coming soon</p>
-            </div>
           </button>
         </div>
       </div>

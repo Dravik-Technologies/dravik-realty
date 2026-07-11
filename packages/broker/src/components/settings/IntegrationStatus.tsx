@@ -143,13 +143,6 @@ function ApiKeysPanel() {
         >
           {copied ? "Copied!" : "Copy Key"}
         </button>
-        <button
-          disabled
-          title="Key regeneration coming soon"
-          className="px-3 py-1.5 text-xs font-semibold rounded-lg border border-rose-100 text-rose-300 cursor-not-allowed"
-        >
-          Regenerate
-        </button>
       </div>
     </div>
   );

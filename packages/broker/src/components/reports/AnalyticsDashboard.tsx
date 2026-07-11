@@ -8,7 +8,7 @@ import {
 } from "recharts";
 import {
   DollarSign, TrendingUp, Clock, Users, Award, BarChart3,
-  Download, FileText, Calendar, ChevronDown, Building2,
+  Calendar, ChevronDown, Building2,
 } from "lucide-react";
 import type { DateRange, ViewMode, ReportTab, AnalyticsSnapshot, CampaignStat, MortgageMonthStat } from "@dravik/contracts/broker";
 import { ANALYTICS_DATA } from "../../data/analytics";
@@ -425,22 +425,6 @@ export default function AnalyticsDashboard() {
               </div>
             )}
 
-            {/* Export — CSV */}
-            <button
-              disabled
-              title="CSV export coming soon"
-              className="flex items-center gap-1.5 px-3 py-2 bg-gold text-dravik-dark text-xs font-bold rounded-xl opacity-50 cursor-not-allowed"
-            >
-              <Download size={13} /> CSV
-            </button>
-            {/* Export — PDF */}
-            <button
-              disabled
-              title="PDF export coming soon"
-              className="flex items-center gap-1.5 px-3 py-2 bg-dravik-dark text-white text-xs font-bold rounded-xl opacity-50 cursor-not-allowed"
-            >
-              <FileText size={13} /> PDF
-            </button>
           </div>
         </div>
 

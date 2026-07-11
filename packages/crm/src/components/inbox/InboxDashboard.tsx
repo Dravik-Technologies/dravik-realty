@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { Pencil } from "lucide-react";
 import type { Conversation, InboxFolder, Channel } from "@dravik/contracts/crm";
 import { CONVERSATIONS } from "../../data/communications";
 import InboxSidebar     from "./InboxSidebar";
@@ -156,15 +155,6 @@ export default function InboxDashboard() {
         />
       </div>
 
-      {/* ── Floating compose button ───────────────────────────── */}
-      <button
-        disabled
-        title="New message coming soon"
-        className="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-gold text-dravik-dark shadow-lg flex items-center justify-center hover:bg-gold-dark transition-colors opacity-70 cursor-not-allowed z-20"
-        aria-label="New message"
-      >
-        <Pencil size={18} />
-      </button>
     </div>
   );
 }

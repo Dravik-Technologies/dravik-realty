@@ -13,7 +13,7 @@ import ReferralModal from "../components/ReferralModal";
 // Leaflet accesses window at module load — must be client-only
 const ReferralMapView = dynamic(() => import("../components/ReferralMapView"), { ssr: false });
 import { AGENTS, PIPELINE } from "../data/agents";
-import type { Agent, CertificationType, Region, Specialization } from "@dravik/contracts/referrals";
+import type { Agent, CertificationType, PartnerRole, Region, Specialization } from "@dravik/contracts/referrals";
 import { cn } from "@dravik/shared";
 
 type View = "directory" | "map";
@@ -24,6 +24,14 @@ const CERT_OPTIONS: Array<{ label: string; value: CertificationType | "All" }> =
   { label: "RE Broker",       value: "RE Broker"     },
   { label: "Dual Licensed",   value: "Dual Licensed" },
   { label: "RE + Mortgage",   value: "RE + Mortgage" },
+  { label: "Mortgage Lender", value: "Mortgage Lender" },
+];
+
+const ROLE_OPTIONS: Array<{ label: string; value: PartnerRole | "All" }> = [
+  { label: "All Partners", value: "All" },
+  { label: "Realtors", value: "Real Estate Agent" },
+  { label: "Lenders", value: "Mortgage Lender" },
+  { label: "Dual Service", value: "Dual Service" },
 ];
 
 const REGION_OPTIONS: Array<{ label: string; value: Region | "All" }> = [
@@ -44,6 +52,10 @@ const SPEC_OPTIONS: Array<{ label: string; value: Specialization | "All" }> = [
   { label: "Investment",          value: "Investment"         },
   { label: "First-Time Buyers",   value: "First-Time Buyers"  },
   { label: "New Construction",    value: "New Construction"   },
+  { label: "VA Loans",            value: "VA Loans"           },
+  { label: "FHA Loans",           value: "FHA Loans"          },
+  { label: "Jumbo Loans",         value: "Jumbo Loans"        },
+  { label: "Conventional Loans",  value: "Conventional Loans" },
 ];
 
 // ── KPI card ──────────────────────────────────────────────────
@@ -112,6 +124,7 @@ function ViewToggle({ view, onChange }: { view: View; onChange: (v: View) => voi
 export default function ReferralNetwork() {
   const [view,         setView]         = useState<View>("directory");
   const [query,        setQuery]        = useState("");
+  const [roleFilter,   setRoleFilter]   = useState<PartnerRole | "All">("All");
   const [certFilter,   setCertFilter]   = useState<CertificationType | "All">("All");
   const [regionFilter, setRegionFilter] = useState<Region | "All">("All");
   const [specFilter,   setSpecFilter]   = useState<Specialization | "All">("All");
@@ -124,14 +137,17 @@ export default function ReferralNetwork() {
     const matchSearch =
       !q ||
       a.name.toLowerCase().includes(q) ||
+      a.partnerRole.toLowerCase().includes(q) ||
+      a.certification.toLowerCase().includes(q) ||
       a.location.city.toLowerCase().includes(q) ||
       a.location.state.toLowerCase().includes(q) ||
       a.specializations.some(s => s.toLowerCase().includes(q));
+    const matchRole   = roleFilter   === "All" || a.partnerRole             === roleFilter;
     const matchCert   = certFilter   === "All" || a.certification           === certFilter;
     const matchRegion = regionFilter === "All" || a.location.region         === regionFilter;
     const matchSpec   = specFilter   === "All" || a.specializations.includes(specFilter as Specialization);
-    return matchSearch && matchCert && matchRegion && matchSpec;
-  }), [query, certFilter, regionFilter, specFilter]);
+    return matchSearch && matchRole && matchCert && matchRegion && matchSpec;
+  }), [query, roleFilter, certFilter, regionFilter, specFilter]);
 
   const networkVolume = AGENTS.reduce((sum, a) => {
     return sum + parseFloat(a.closedVolumeMTD.replace(/[$M]/g, ""));
@@ -142,6 +158,7 @@ export default function ReferralNetwork() {
     : "0.0";
   const regionCount = new Set(AGENTS.map((agent) => agent.location.region)).size;
   const regionLabel = regionCount ? `Across ${regionCount} regions` : "No regions yet";
+  const lenderCount = AGENTS.filter((agent) => agent.partnerRole === "Mortgage Lender").length;
 
   const openModal = useCallback((agent: Agent) => {
     setActiveAgent(agent);
@@ -149,10 +166,10 @@ export default function ReferralNetwork() {
   }, []);
 
   function clearFilters() {
-    setQuery(""); setCertFilter("All"); setRegionFilter("All"); setSpecFilter("All");
+    setQuery(""); setRoleFilter("All"); setCertFilter("All"); setRegionFilter("All"); setSpecFilter("All");
   }
 
-  const hasActiveFilters = query || certFilter !== "All" || regionFilter !== "All" || specFilter !== "All";
+  const hasActiveFilters = query || roleFilter !== "All" || certFilter !== "All" || regionFilter !== "All" || specFilter !== "All";
 
   // ── Map view ──
   if (view === "map") {
@@ -195,7 +212,7 @@ export default function ReferralNetwork() {
 
         {/* KPI strip */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <KpiCard icon={Users}     label="Network Partners"     value={String(AGENTS.length)} sub={regionLabel}         color="#C9C3B6" />
+          <KpiCard icon={Users}     label="Network Partners"     value={String(AGENTS.length)} sub={`${lenderCount} lenders · ${regionLabel}`} color="#C9C3B6" />
           <KpiCard icon={TrendingUp}label="Network Volume (MTD)" value={`$${networkVolume}M`}  sub="Combined closings"  color="#4A90A4" />
           <KpiCard icon={Globe}     label="Active Referrals"     value={String(PIPELINE.filter(p => p.status !== "Closed").length)} sub="In pipeline" color="#7C6A9E" />
           <KpiCard icon={Star}      label="Avg. Production Score"value={`${avgScore}/5.0`}      sub="Network average"   color="#C0786C" />
@@ -208,7 +225,7 @@ export default function ReferralNetwork() {
               <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
               <input
                 type="text"
-                placeholder="Search by name, city, or specialization..."
+                placeholder="Search by name, city, lender, or specialization..."
                 value={query}
                 onChange={e => setQuery(e.target.value)}
                 className="w-full pl-10 pr-4 py-2.5 border border-line rounded-xl text-sm text-dravik-dark placeholder:text-gray-400 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition"
@@ -238,6 +255,7 @@ export default function ReferralNetwork() {
 
           {showFilters && (
             <div className="flex flex-wrap gap-3 pt-1 animate-fade-in">
+              <FilterSelect label="Partner type"    value={roleFilter}   onChange={setRoleFilter}   options={ROLE_OPTIONS}   />
               <FilterSelect label="License type"    value={certFilter}   onChange={setCertFilter}   options={CERT_OPTIONS}   />
               <FilterSelect label="Region"          value={regionFilter} onChange={setRegionFilter} options={REGION_OPTIONS} />
               <FilterSelect label="Specialization"  value={specFilter}   onChange={setSpecFilter}   options={SPEC_OPTIONS}   />

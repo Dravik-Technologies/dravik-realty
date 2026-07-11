@@ -18,7 +18,7 @@ const GOLD   = "#C9C3B6";
 const SLATE  = "#CBD5E1"; // neutral dot for "Total Commission" anchor step
 const RED_DOT = "#C0524A"; // muted deep-red — deduction indicator
 
-const SLICE_LABELS = ["Receiving Agent", "You (Net)", "Dravik Realty"];
+const REFERRER_SLICE_LABELS = ["You (Net)", "Dravik Realty"];
 
 // ─── InfoTooltip ───────────────────────────────────────────────
 // Hover tooltip used next to the Dravik Realty Cut label.
@@ -151,6 +151,7 @@ export default function SplitCalculator({ agent }: SplitCalculatorProps) {
   const [commissionRate, setCommissionRate] = useState(2.5);
   const [referralFee, setReferralFee]       = useState(25);
   const [companySplit, setCompanySplit]     = useState(25);
+  const receivingPartnerLabel = agent.partnerRole === "Mortgage Lender" ? "Receiving Lender" : "Receiving Agent";
 
   const breakdown = useMemo((): SplitBreakdown => {
     const totalCommission     = propertyValue * (commissionRate / 100);
@@ -164,9 +165,9 @@ export default function SplitCalculator({ agent }: SplitCalculatorProps) {
   }, [propertyValue, commissionRate, referralFee, companySplit]);
 
   const chartData = [
-    { name: SLICE_LABELS[0], value: breakdown.receivingAgentShare },
-    { name: SLICE_LABELS[1], value: breakdown.referringAgentNet   },
-    { name: SLICE_LABELS[2], value: breakdown.dravikCut             },
+    { name: receivingPartnerLabel, value: breakdown.receivingAgentShare },
+    { name: REFERRER_SLICE_LABELS[0], value: breakdown.referringAgentNet },
+    { name: REFERRER_SLICE_LABELS[1], value: breakdown.dravikCut },
   ];
 
   function handlePropertyBlur() {
@@ -290,7 +291,7 @@ export default function SplitCalculator({ agent }: SplitCalculatorProps) {
           {/* Step 2 — receiving agent's share (leaves with them) */}
           <FlowStep
             dotColor={TEAL}
-            label="Receiving Agent Share"
+            label={`${receivingPartnerLabel} Share`}
             sublabel={`${100 - referralFee}% · ${agent.name} — ${agent.location.city}`}
             amount={breakdown.receivingAgentShare}
             hasLine

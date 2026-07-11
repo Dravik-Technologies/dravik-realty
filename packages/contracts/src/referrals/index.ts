@@ -1,4 +1,5 @@
-export type CertificationType = "RE Broker" | "Dual Licensed" | "RE + Mortgage";
+export type CertificationType = "RE Broker" | "Dual Licensed" | "RE + Mortgage" | "Mortgage Lender";
+export type PartnerRole = "Real Estate Agent" | "Mortgage Lender" | "Dual Service";
 export type ReferralStatus = "Pending" | "Accepted" | "Under Contract" | "Closed";
 export type Specialization =
   | "Luxury"
@@ -6,7 +7,11 @@ export type Specialization =
   | "Residential"
   | "Investment"
   | "First-Time Buyers"
-  | "New Construction";
+  | "New Construction"
+  | "VA Loans"
+  | "FHA Loans"
+  | "Jumbo Loans"
+  | "Conventional Loans";
 export type Region =
   | "Northeast"
   | "Southeast"
@@ -29,6 +34,7 @@ export interface Agent {
   name: string;
   initials: string;
   avatarColor: string;
+  partnerRole: PartnerRole;
   certification: CertificationType;
   specializations: Specialization[];
   location: AgentLocation;

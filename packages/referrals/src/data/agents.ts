@@ -6,7 +6,7 @@ const LOCAL_AGENTS: Agent[] = [
   {
     id: "a1",
     name: "Marcus Thompson", initials: "MT", avatarColor: "#4A90A4",
-    certification: "RE Broker", specializations: ["Luxury", "Investment"],
+    partnerRole: "Real Estate Agent", certification: "RE Broker", specializations: ["Luxury", "Investment"],
     location: { city: "Dallas", state: "TX", region: "Southwest", avgPropertyValue: 620000, lat: 32.7767, lng: -96.7970 },
     productionScore: 4.9, totalReviews: 112, closedVolumeMTD: "$6.8M", closedTransactions: 28, avgDaysToClose: 31, activeListings: 9,
     email: "m.thompson@dravikrealty.com", phone: "(214) 555-0182", yearsExperience: 14,
@@ -15,7 +15,7 @@ const LOCAL_AGENTS: Agent[] = [
   {
     id: "a2",
     name: "Sarah Chen", initials: "SC", avatarColor: "#7C6A9E",
-    certification: "Dual Licensed", specializations: ["Investment", "Luxury"],
+    partnerRole: "Dual Service", certification: "Dual Licensed", specializations: ["Investment", "Luxury"],
     location: { city: "San Francisco", state: "CA", region: "West", avgPropertyValue: 1350000, lat: 37.7749, lng: -122.4194 },
     productionScore: 4.8, totalReviews: 89, closedVolumeMTD: "$11.2M", closedTransactions: 14, avgDaysToClose: 28, activeListings: 6,
     email: "s.chen@dravikrealty.com", phone: "(415) 555-0247", yearsExperience: 11,
@@ -24,7 +24,7 @@ const LOCAL_AGENTS: Agent[] = [
   {
     id: "a3",
     name: "Diana Rivera", initials: "DR", avatarColor: "#C0786C",
-    certification: "RE + Mortgage", specializations: ["Luxury", "Residential"],
+    partnerRole: "Dual Service", certification: "RE + Mortgage", specializations: ["Luxury", "Residential"],
     location: { city: "Miami", state: "FL", region: "Southeast", avgPropertyValue: 780000, lat: 25.7617, lng: -80.1918 },
     productionScore: 4.7, totalReviews: 74, closedVolumeMTD: "$8.1M", closedTransactions: 19, avgDaysToClose: 35, activeListings: 11,
     email: "d.rivera@dravikrealty.com", phone: "(305) 555-0319", yearsExperience: 9,
@@ -33,7 +33,7 @@ const LOCAL_AGENTS: Agent[] = [
   {
     id: "a4",
     name: "James Okafor", initials: "JO", avatarColor: "#4A7C59",
-    certification: "RE Broker", specializations: ["Commercial", "Luxury"],
+    partnerRole: "Real Estate Agent", certification: "RE Broker", specializations: ["Commercial", "Luxury"],
     location: { city: "New York", state: "NY", region: "Northeast", avgPropertyValue: 1850000, lat: 40.7128, lng: -74.0060 },
     productionScore: 4.9, totalReviews: 143, closedVolumeMTD: "$18.4M", closedTransactions: 11, avgDaysToClose: 42, activeListings: 5,
     email: "j.okafor@dravikrealty.com", phone: "(212) 555-0408", yearsExperience: 20,
@@ -42,7 +42,7 @@ const LOCAL_AGENTS: Agent[] = [
   {
     id: "a5",
     name: "Emily Walsh", initials: "EW", avatarColor: "#D4A96A",
-    certification: "Dual Licensed", specializations: ["Residential", "First-Time Buyers"],
+    partnerRole: "Dual Service", certification: "Dual Licensed", specializations: ["Residential", "First-Time Buyers"],
     location: { city: "Chicago", state: "IL", region: "Midwest", avgPropertyValue: 390000, lat: 41.8781, lng: -87.6298 },
     productionScore: 4.6, totalReviews: 68, closedVolumeMTD: "$3.9M", closedTransactions: 22, avgDaysToClose: 26, activeListings: 14,
     email: "e.walsh@dravikrealty.com", phone: "(312) 555-0573", yearsExperience: 7,
@@ -51,7 +51,7 @@ const LOCAL_AGENTS: Agent[] = [
   {
     id: "a6",
     name: "Robert Kim", initials: "RK", avatarColor: "#5B8FB9",
-    certification: "RE Broker", specializations: ["New Construction", "Investment"],
+    partnerRole: "Real Estate Agent", certification: "RE Broker", specializations: ["New Construction", "Investment"],
     location: { city: "Seattle", state: "WA", region: "Pacific Northwest", avgPropertyValue: 870000, lat: 47.6062, lng: -122.3321 },
     productionScore: 4.8, totalReviews: 91, closedVolumeMTD: "$9.3M", closedTransactions: 17, avgDaysToClose: 30, activeListings: 8,
     email: "r.kim@dravikrealty.com", phone: "(206) 555-0634", yearsExperience: 12,
@@ -60,7 +60,7 @@ const LOCAL_AGENTS: Agent[] = [
   {
     id: "a7",
     name: "Priya Patel", initials: "PP", avatarColor: "#B06AB3",
-    certification: "RE + Mortgage", specializations: ["Residential", "Investment"],
+    partnerRole: "Dual Service", certification: "RE + Mortgage", specializations: ["Residential", "Investment"],
     location: { city: "Phoenix", state: "AZ", region: "Southwest", avgPropertyValue: 430000, lat: 33.4484, lng: -112.0740 },
     productionScore: 4.7, totalReviews: 55, closedVolumeMTD: "$5.2M", closedTransactions: 24, avgDaysToClose: 24, activeListings: 16,
     email: "p.patel@dravikrealty.com", phone: "(602) 555-0721", yearsExperience: 8,
@@ -69,7 +69,7 @@ const LOCAL_AGENTS: Agent[] = [
   {
     id: "a8",
     name: "Carlos Mendez", initials: "CM", avatarColor: "#3D7A5C",
-    certification: "Dual Licensed", specializations: ["Commercial", "Investment"],
+    partnerRole: "Dual Service", certification: "Dual Licensed", specializations: ["Commercial", "Investment"],
     location: { city: "Houston", state: "TX", region: "Southwest", avgPropertyValue: 510000, lat: 29.7604, lng: -95.3698 },
     productionScore: 4.9, totalReviews: 107, closedVolumeMTD: "$12.7M", closedTransactions: 31, avgDaysToClose: 29, activeListings: 10,
     email: "c.mendez@dravikrealty.com", phone: "(713) 555-0865", yearsExperience: 16,
@@ -80,7 +80,7 @@ const LOCAL_AGENTS: Agent[] = [
   {
     id: "a9",
     name: "Thomas Wright", initials: "TW", avatarColor: "#4A5568",
-    certification: "Dual Licensed", specializations: ["Residential", "First-Time Buyers"],
+    partnerRole: "Dual Service", certification: "Dual Licensed", specializations: ["Residential", "First-Time Buyers", "VA Loans"],
     location: { city: "Silver Spring", state: "MD", region: "Northeast", avgPropertyValue: 580000, lat: 38.9907, lng: -77.0261 },
     productionScore: 4.8, totalReviews: 84, closedVolumeMTD: "$5.6M", closedTransactions: 18, avgDaysToClose: 27, activeListings: 9,
     email: "t.wright@dravikrealty.com", phone: "(301) 555-0912", yearsExperience: 10,
@@ -89,7 +89,7 @@ const LOCAL_AGENTS: Agent[] = [
   {
     id: "a10",
     name: "Alex Nguyen", initials: "AN", avatarColor: "#4A90A4",
-    certification: "RE + Mortgage", specializations: ["Residential", "Investment"],
+    partnerRole: "Dual Service", certification: "RE + Mortgage", specializations: ["Residential", "Investment", "VA Loans"],
     location: { city: "Virginia Beach", state: "VA", region: "Southeast", avgPropertyValue: 420000, lat: 36.8529, lng: -75.9780 },
     productionScore: 4.9, totalReviews: 96, closedVolumeMTD: "$6.2M", closedTransactions: 26, avgDaysToClose: 23, activeListings: 13,
     email: "a.nguyen@dravikrealty.com", phone: "(757) 555-1042", yearsExperience: 12,
@@ -98,7 +98,7 @@ const LOCAL_AGENTS: Agent[] = [
   {
     id: "a11",
     name: "Brandon Scott", initials: "BS", avatarColor: "#6B7280",
-    certification: "Dual Licensed", specializations: ["Residential", "First-Time Buyers"],
+    partnerRole: "Dual Service", certification: "Dual Licensed", specializations: ["Residential", "First-Time Buyers", "FHA Loans"],
     location: { city: "Fayetteville", state: "NC", region: "Southeast", avgPropertyValue: 290000, lat: 35.0527, lng: -78.8784 },
     productionScore: 4.7, totalReviews: 71, closedVolumeMTD: "$3.1M", closedTransactions: 24, avgDaysToClose: 22, activeListings: 11,
     email: "b.scott@dravikrealty.com", phone: "(910) 555-1183", yearsExperience: 8,
@@ -107,7 +107,7 @@ const LOCAL_AGENTS: Agent[] = [
   {
     id: "a12",
     name: "Rachel Torres", initials: "RT", avatarColor: "#B06AB3",
-    certification: "RE + Mortgage", specializations: ["Residential", "First-Time Buyers"],
+    partnerRole: "Dual Service", certification: "RE + Mortgage", specializations: ["Residential", "First-Time Buyers", "VA Loans"],
     location: { city: "Killeen", state: "TX", region: "Southwest", avgPropertyValue: 260000, lat: 31.1171, lng: -97.7278 },
     productionScore: 4.6, totalReviews: 58, closedVolumeMTD: "$2.8M", closedTransactions: 22, avgDaysToClose: 20, activeListings: 8,
     email: "r.torres@dravikrealty.com", phone: "(254) 555-1247", yearsExperience: 7,
@@ -116,7 +116,7 @@ const LOCAL_AGENTS: Agent[] = [
   {
     id: "a13",
     name: "Jennifer Park", initials: "JP", avatarColor: "#C0786C",
-    certification: "Dual Licensed", specializations: ["Luxury", "Residential"],
+    partnerRole: "Dual Service", certification: "Dual Licensed", specializations: ["Luxury", "Residential", "Jumbo Loans"],
     location: { city: "San Diego", state: "CA", region: "West", avgPropertyValue: 890000, lat: 32.7157, lng: -117.1611 },
     productionScore: 4.8, totalReviews: 103, closedVolumeMTD: "$9.8M", closedTransactions: 16, avgDaysToClose: 31, activeListings: 7,
     email: "j.park@dravikrealty.com", phone: "(619) 555-1368", yearsExperience: 13,
@@ -125,7 +125,7 @@ const LOCAL_AGENTS: Agent[] = [
   {
     id: "a14",
     name: "Michael Chen", initials: "MC", avatarColor: "#3D7A5C",
-    certification: "RE Broker", specializations: ["Residential", "Investment"],
+    partnerRole: "Real Estate Agent", certification: "RE Broker", specializations: ["Residential", "Investment"],
     location: { city: "Tampa", state: "FL", region: "Southeast", avgPropertyValue: 480000, lat: 27.9506, lng: -82.4572 },
     productionScore: 4.7, totalReviews: 79, closedVolumeMTD: "$5.9M", closedTransactions: 21, avgDaysToClose: 28, activeListings: 10,
     email: "m.chen@dravikrealty.com", phone: "(813) 555-1429", yearsExperience: 9,
@@ -134,7 +134,7 @@ const LOCAL_AGENTS: Agent[] = [
   {
     id: "a15",
     name: "David Martinez", initials: "DM", avatarColor: "#D4A96A",
-    certification: "RE + Mortgage", specializations: ["Residential", "First-Time Buyers"],
+    partnerRole: "Dual Service", certification: "RE + Mortgage", specializations: ["Residential", "First-Time Buyers", "VA Loans"],
     location: { city: "El Paso", state: "TX", region: "Southwest", avgPropertyValue: 240000, lat: 31.7619, lng: -106.4850 },
     productionScore: 4.5, totalReviews: 62, closedVolumeMTD: "$2.4M", closedTransactions: 20, avgDaysToClose: 21, activeListings: 7,
     email: "d.martinez@dravikrealty.com", phone: "(915) 555-1537", yearsExperience: 9,
@@ -143,7 +143,7 @@ const LOCAL_AGENTS: Agent[] = [
   {
     id: "a16",
     name: "Lisa Kim", initials: "LK", avatarColor: "#5B8FB9",
-    certification: "Dual Licensed", specializations: ["Residential", "New Construction"],
+    partnerRole: "Dual Service", certification: "Dual Licensed", specializations: ["Residential", "New Construction", "Conventional Loans"],
     location: { city: "Tacoma", state: "WA", region: "Pacific Northwest", avgPropertyValue: 540000, lat: 47.2529, lng: -122.4443 },
     productionScore: 4.8, totalReviews: 88, closedVolumeMTD: "$6.7M", closedTransactions: 19, avgDaysToClose: 26, activeListings: 12,
     email: "l.kim@dravikrealty.com", phone: "(253) 555-1651", yearsExperience: 11,
@@ -152,7 +152,7 @@ const LOCAL_AGENTS: Agent[] = [
   {
     id: "a17",
     name: "Sarah Wilson", initials: "SW", avatarColor: "#7C6A9E",
-    certification: "RE + Mortgage", specializations: ["Residential", "First-Time Buyers"],
+    partnerRole: "Dual Service", certification: "RE + Mortgage", specializations: ["Residential", "First-Time Buyers", "VA Loans"],
     location: { city: "Jacksonville", state: "NC", region: "Southeast", avgPropertyValue: 270000, lat: 34.7541, lng: -77.4302 },
     productionScore: 4.6, totalReviews: 53, closedVolumeMTD: "$2.6M", closedTransactions: 21, avgDaysToClose: 19, activeListings: 9,
     email: "s.wilson@dravikrealty.com", phone: "(910) 555-1784", yearsExperience: 7,
@@ -161,11 +161,49 @@ const LOCAL_AGENTS: Agent[] = [
   {
     id: "a18",
     name: "Ashley Johnson", initials: "AJ", avatarColor: "#4A7C59",
-    certification: "Dual Licensed", specializations: ["Residential", "Investment"],
+    partnerRole: "Dual Service", certification: "Dual Licensed", specializations: ["Residential", "Investment", "VA Loans"],
     location: { city: "Columbus", state: "GA", region: "Southeast", avgPropertyValue: 280000, lat: 32.4610, lng: -84.9877 },
     productionScore: 4.7, totalReviews: 66, closedVolumeMTD: "$3.3M", closedTransactions: 23, avgDaysToClose: 22, activeListings: 8,
     email: "a.johnson@dravikrealty.com", phone: "(706) 555-1895", yearsExperience: 10,
     bio: "Fort Moore (formerly Fort Benning) area specialist with 10 years serving Army families. Dual-licensed with expertise in VA loans and rental investment for deployed service members.",
+  },
+
+  // ── Mortgage lending partners ───────────────────────────────
+  {
+    id: "a19",
+    name: "Nina Brooks", initials: "NB", avatarColor: "#8B7E74",
+    partnerRole: "Mortgage Lender", certification: "Mortgage Lender", specializations: ["VA Loans", "FHA Loans", "First-Time Buyers"],
+    location: { city: "Dallas", state: "TX", region: "Southwest", avgPropertyValue: 610000, lat: 32.8065, lng: -96.8204 },
+    productionScore: 4.8, totalReviews: 77, closedVolumeMTD: "$4.4M", closedTransactions: 21, avgDaysToClose: 24, activeListings: 18,
+    email: "n.brooks@dravikrealty.com", phone: "(214) 555-2019", yearsExperience: 10,
+    bio: "Purchase-focused mortgage lender helping Texas buyers compare VA, FHA, and conventional programs before they start touring.",
+  },
+  {
+    id: "a20",
+    name: "Leah Grant", initials: "LG", avatarColor: "#5E7188",
+    partnerRole: "Mortgage Lender", certification: "Mortgage Lender", specializations: ["Jumbo Loans", "Conventional Loans", "Luxury"],
+    location: { city: "San Diego", state: "CA", region: "West", avgPropertyValue: 910000, lat: 32.7441, lng: -117.1644 },
+    productionScore: 4.9, totalReviews: 93, closedVolumeMTD: "$7.6M", closedTransactions: 16, avgDaysToClose: 27, activeListings: 12,
+    email: "l.grant@dravikrealty.com", phone: "(619) 555-2064", yearsExperience: 13,
+    bio: "Coastal California lender specializing in jumbo pre-approvals and tight appraisal timelines for competitive purchase offers.",
+  },
+  {
+    id: "a21",
+    name: "Omar Haddad", initials: "OH", avatarColor: "#A06F5F",
+    partnerRole: "Mortgage Lender", certification: "Mortgage Lender", specializations: ["VA Loans", "Conventional Loans", "Investment"],
+    location: { city: "Tampa", state: "FL", region: "Southeast", avgPropertyValue: 470000, lat: 27.9659, lng: -82.4829 },
+    productionScore: 4.7, totalReviews: 64, closedVolumeMTD: "$3.8M", closedTransactions: 19, avgDaysToClose: 22, activeListings: 15,
+    email: "o.haddad@dravikrealty.com", phone: "(813) 555-2118", yearsExperience: 8,
+    bio: "Florida purchase lender supporting VA, investor, and primary-home buyers throughout Tampa Bay and the Gulf Coast.",
+  },
+  {
+    id: "a22",
+    name: "Kara Jensen", initials: "KJ", avatarColor: "#6B8A74",
+    partnerRole: "Mortgage Lender", certification: "Mortgage Lender", specializations: ["New Construction", "Conventional Loans", "FHA Loans"],
+    location: { city: "Seattle", state: "WA", region: "Pacific Northwest", avgPropertyValue: 850000, lat: 47.6205, lng: -122.3493 },
+    productionScore: 4.8, totalReviews: 70, closedVolumeMTD: "$5.1M", closedTransactions: 17, avgDaysToClose: 25, activeListings: 14,
+    email: "k.jensen@dravikrealty.com", phone: "(206) 555-2192", yearsExperience: 9,
+    bio: "Pacific Northwest lender focused on builder contracts, rate-lock strategy, and clean financing conditions for relocating buyers.",
   },
 ];
 

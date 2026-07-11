@@ -18,6 +18,16 @@ test.describe("DRAVIK Partner Network", () => {
     await expect(page.getByText(/Split/).first()).toBeVisible();
   });
 
+  test("partner directory includes mortgage lenders", async ({ page }) => {
+    await page.getByRole("button", { name: "Filters" }).click();
+    await page.getByLabel("Partner type").selectOption("Mortgage Lender");
+
+    await expect(page.getByText("4 of 22 partners")).toBeVisible();
+    await expect(page.getByText("Nina Brooks")).toBeVisible();
+    await expect(page.locator("span").filter({ hasText: /^Lender$/ }).first()).toBeVisible();
+    await expect(page.locator("span").filter({ hasText: "Mortgage Lender" }).first()).toBeVisible();
+  });
+
   test("map view uses global partner search without PCS hotspots", async ({ page }) => {
     await page.getByRole("button", { name: "Map View" }).click();
     await expect(page.getByRole("heading", { name: "Global Partner Search" })).toBeVisible();
@@ -26,9 +36,12 @@ test.describe("DRAVIK Partner Network", () => {
 
     const mapSearch = page.getByRole("combobox", { name: /search/i });
     await mapSearch.fill("zzzz-not-a-place");
-    await expect(page.getByText("No agents within that area")).toBeVisible();
+    await expect(page.getByText("No partners within that area")).toBeVisible();
 
     await mapSearch.fill("Miami");
     await expect(page.getByRole("option", { name: /Miami/ }).first()).toBeVisible();
+
+    await page.getByRole("button", { name: "Lenders" }).click();
+    await expect(page.getByText("Nina Brooks")).toBeVisible();
   });
 });

@@ -1,6 +1,7 @@
+import { localDemoData } from "@dravik/shared";
 import type { Property } from "@dravik/contracts/realty";
 
-export const SAMPLE_PROPERTIES: Property[] = [
+const LOCAL_SAMPLE_PROPERTIES: Property[] = [
   {
     id: "p1",
     address: "1450 Ocean Dr, Unit 2201",
@@ -799,3 +800,5 @@ export const SAMPLE_PROPERTIES: Property[] = [
     neighborhood: "North Bay Village",
   },
 ];
+
+export const SAMPLE_PROPERTIES: Property[] = localDemoData(LOCAL_SAMPLE_PROPERTIES);

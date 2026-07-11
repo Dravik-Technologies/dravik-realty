@@ -200,7 +200,11 @@ export default function ReferralModal({ agent, open, onClose }: ReferralModalPro
             >
               Cancel
             </button>
-            <button className="px-6 py-2.5 text-sm font-bold rounded-xl bg-dravik-dark text-white hover:bg-dravik-navy transition-colors shadow-md">
+            <button
+              disabled
+              title="Referral agreement sending coming soon"
+              className="px-6 py-2.5 text-sm font-bold rounded-xl bg-surface-2 text-gray-300 cursor-not-allowed"
+            >
               Send Referral Agreement
             </button>
           </div>

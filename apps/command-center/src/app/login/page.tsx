@@ -1,6 +1,11 @@
 import { redirect } from "next/navigation";
 import { Building2, ShieldCheck } from "lucide-react";
-import { createCommandSession, getCommandSession } from "@/auth/server";
+import { cn } from "@dravik/shared";
+import {
+  createCommandSession,
+  getCommandSession,
+  isLocalIdentityEnabled,
+} from "@/auth/server";
 import { BrandLogo } from "@/components/brand/BrandLogo";
 
 async function signInCommandCenter() {
@@ -12,6 +17,7 @@ async function signInCommandCenter() {
 
 export default async function LoginPage() {
   const session = await getCommandSession();
+  const localIdentityEnabled = isLocalIdentityEnabled();
 
   if (session) {
     redirect("/dashboard");
@@ -34,7 +40,9 @@ export default async function LoginPage() {
           <div>
             <p className="text-sm font-bold text-dravik-dark">Internal sign in</p>
             <p className="text-xs text-gray-400 mt-1 leading-relaxed">
-              Local identity stub for the realtor, broker, and admin workspace.
+              {localIdentityEnabled
+                ? "Temporary staging access for the realtor, broker, and admin workspace."
+                : "Production sign-in will use Microsoft Entra authentication."}
             </p>
           </div>
 
@@ -43,7 +51,9 @@ export default async function LoginPage() {
             <div>
               <p className="text-xs font-bold text-dravik-dark">Azure-ready boundary</p>
               <p className="text-xs text-gray-400 mt-1 leading-relaxed">
-                This local session shape is the seam that Microsoft Entra will replace in production.
+                {localIdentityEnabled
+                  ? "This session shape is the seam that Microsoft Entra will replace in production."
+                  : "Temporary local sessions are disabled in production."}
               </p>
             </div>
           </div>
@@ -51,10 +61,16 @@ export default async function LoginPage() {
           <form action={signInCommandCenter}>
             <button
               type="submit"
-              className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gold text-dravik-dark rounded-xl text-sm font-bold hover:bg-gold/90 transition-colors"
+              disabled={!localIdentityEnabled}
+              className={cn(
+                "w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-bold transition-colors",
+                localIdentityEnabled
+                  ? "bg-gold text-dravik-dark hover:bg-gold/90"
+                  : "bg-surface-2 text-gray-400 cursor-not-allowed"
+              )}
             >
               <Building2 size={16} />
-              Continue as Chris Macabugao
+              {localIdentityEnabled ? "Continue as Chris Macabugao" : "Production auth pending"}
             </button>
           </form>
         </div>

@@ -1,4 +1,5 @@
-import type { AnalyticsData, AgentStat, ReferralPartner, CampaignStat } from "@dravik/contracts/broker";
+import { localDemoValue } from "@dravik/shared";
+import type { AnalyticsData, AnalyticsSnapshot, AgentStat, ReferralPartner, CampaignStat } from "@dravik/contracts/broker";
 
 // ─── Shared reference data (same across periods) ──────────────
 const AGENTS: AgentStat[] = [
@@ -231,9 +232,54 @@ const MONTH_DATA: AnalyticsData["30d"] = {
   agentAvgRate:             6.86,
 };
 
-export const ANALYTICS_DATA: AnalyticsData = {
+const LOCAL_ANALYTICS_DATA: AnalyticsData = {
   year:    YEAR_DATA,
   quarter: QUARTER_DATA,
   "30d":   MONTH_DATA,
   custom:  YEAR_DATA,
 };
+
+const EMPTY_ANALYTICS_SNAPSHOT: AnalyticsSnapshot = {
+  teamVolume: 0,
+  teamGci: 0,
+  teamTransactions: 0,
+  teamConversionRate: 0,
+  teamAvgDaysToClose: 0,
+  teamReferralRevenue: 0,
+  teamMortgageRevenue: 0,
+  agentReferralRevenue: 0,
+  agentMortgageRevenue: 0,
+  timeSeries: [],
+  leadSources: [],
+  funnel: [],
+  agents: [],
+  referralPartners: [],
+  referralsSent: 0,
+  referralsReceived: 0,
+  referralSuccessRate: 0,
+  avgReferralFee: 0,
+  agentReferralsSent: 0,
+  agentReferralsReceived: 0,
+  agentReferralSuccessRate: 0,
+  agentAvgReferralFee: 0,
+  campaigns: [],
+  mortgageMonths: [],
+  mortgageConversionRate: 0,
+  avgLoanSize: 0,
+  avgRate: 0,
+  agentMortgageConversionRate: 0,
+  agentAvgLoanSize: 0,
+  agentAvgRate: 0,
+};
+
+const EMPTY_ANALYTICS_DATA: AnalyticsData = {
+  year: EMPTY_ANALYTICS_SNAPSHOT,
+  quarter: EMPTY_ANALYTICS_SNAPSHOT,
+  "30d": EMPTY_ANALYTICS_SNAPSHOT,
+  custom: EMPTY_ANALYTICS_SNAPSHOT,
+};
+
+export const ANALYTICS_DATA: AnalyticsData = localDemoValue(
+  LOCAL_ANALYTICS_DATA,
+  EMPTY_ANALYTICS_DATA
+);

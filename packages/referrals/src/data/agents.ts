@@ -1,6 +1,7 @@
+import { localDemoData } from "@dravik/shared";
 import { Agent, ReferralPipeline } from "@dravik/contracts/referrals";
 
-export const AGENTS: Agent[] = [
+const LOCAL_AGENTS: Agent[] = [
   // ── Original network agents ──────────────────────────────────
   {
     id: "a1",
@@ -168,7 +169,9 @@ export const AGENTS: Agent[] = [
   },
 ];
 
-export const PIPELINE: ReferralPipeline[] = [
+export const AGENTS: Agent[] = localDemoData(LOCAL_AGENTS);
+
+const LOCAL_PIPELINE: ReferralPipeline[] = [
   {
     id: "p1", clientName: "Jennifer Adams", agentId: "a1", agentName: "Marcus Thompson", agentCity: "Dallas, TX",
     status: "Under Contract", propertyValue: 850000, referralFee: 25, estimatedEarning: 5313,
@@ -195,3 +198,5 @@ export const PIPELINE: ReferralPipeline[] = [
     dateInitiated: "2025-05-12", lastUpdate: "2025-05-15", propertyType: "Mixed-Use Commercial",
   },
 ];
+
+export const PIPELINE: ReferralPipeline[] = localDemoData(LOCAL_PIPELINE);

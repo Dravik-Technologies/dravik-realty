@@ -1,3 +1,4 @@
+import { localDemoData } from "@dravik/shared";
 import type {
   ClientPortalData, ClientTransaction,
   ClientMessage, ActivityEntry,
@@ -32,7 +33,7 @@ function activity(id: string, date: string, actor: string, actorRole: ActivityEn
 }
 
 // ─── Client 1: John Smith — buying, active ────────────────────
-export const CLIENT_JOHN: ClientPortalData = {
+const CLIENT_JOHN: ClientPortalData = {
   client: {
     id: "c1",
     name: "John Smith",
@@ -174,7 +175,7 @@ export const CLIENT_JOHN: ClientPortalData = {
 };
 
 // ─── Client 2: Maria Rodriguez — selling, under contract ──────
-export const CLIENT_MARIA: ClientPortalData = {
+const CLIENT_MARIA: ClientPortalData = {
   client: {
     id: "c2",
     name: "Maria Rodriguez",
@@ -257,7 +258,7 @@ export const CLIENT_MARIA: ClientPortalData = {
 };
 
 // ─── Client 3: David Chen — closed, with history ─────────────
-export const CLIENT_DAVID: ClientPortalData = {
+const CLIENT_DAVID: ClientPortalData = {
   client: {
     id: "c3",
     name: "David Chen",
@@ -338,4 +339,6 @@ export const CLIENT_DAVID: ClientPortalData = {
   ],
 };
 
-export const ALL_CLIENTS = [CLIENT_JOHN, CLIENT_MARIA, CLIENT_DAVID];
+const LOCAL_CLIENTS = [CLIENT_JOHN, CLIENT_MARIA, CLIENT_DAVID];
+
+export const ALL_CLIENTS: ClientPortalData[] = localDemoData(LOCAL_CLIENTS);

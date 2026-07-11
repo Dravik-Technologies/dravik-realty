@@ -65,13 +65,13 @@ interface CampaignDashboardProps {
 export default function CampaignDashboard({ onEdit }: CampaignDashboardProps) {
   const active      = SAMPLE_CAMPAIGNS.filter((c) => c.status === "Active").length;
   const totalLeads  = SAMPLE_CAMPAIGNS.reduce((s, c) => s + c.leadsGenerated, 0);
-  const avgConv     = (
-    SAMPLE_CAMPAIGNS.filter((c) => c.conversionRate > 0).reduce((s, c) => s + c.conversionRate, 0) /
-    SAMPLE_CAMPAIGNS.filter((c) => c.conversionRate > 0).length
-  ).toFixed(1);
+  const convertingCampaigns = SAMPLE_CAMPAIGNS.filter((c) => c.conversionRate > 0);
+  const avgConv = convertingCampaigns.length > 0
+    ? (convertingCampaigns.reduce((s, c) => s + c.conversionRate, 0) / convertingCampaigns.length).toFixed(1)
+    : "0.0";
   const topPage = SAMPLE_CAMPAIGNS.reduce((best, c) =>
     c.views > (best?.views ?? 0) ? c : best
-  , SAMPLE_CAMPAIGNS[0]);
+  , SAMPLE_CAMPAIGNS[0] ?? null);
 
   return (
     <div className="h-full flex flex-col overflow-hidden">
@@ -82,7 +82,7 @@ export default function CampaignDashboard({ onEdit }: CampaignDashboardProps) {
           <KpiCard icon={Megaphone} label="Active Campaigns" value={String(active)} sub="Currently running" accent="#D4AF37" />
           <KpiCard icon={Users}     label="Leads This Month" value={String(totalLeads)} sub="All campaigns"  accent="#10B981" />
           <KpiCard icon={TrendingUp} label="Avg Conversion"  value={`${avgConv}%`}  sub="Active pages"  accent="#4A90A4" />
-          <KpiCard icon={Star}      label="Top Performing"  value={topPage.name.split("—")[0].trim()} sub={`${topPage.views.toLocaleString()} views`} accent="#EF4444" />
+          <KpiCard icon={Star}      label="Top Performing"  value={topPage ? topPage.name.split("—")[0].trim() : "—"} sub={topPage ? `${topPage.views.toLocaleString()} views` : "No campaigns"} accent="#EF4444" />
         </div>
       </div>
 
@@ -99,7 +99,13 @@ export default function CampaignDashboard({ onEdit }: CampaignDashboardProps) {
           <div className="w-20" />
         </div>
 
-        {SAMPLE_CAMPAIGNS.map((c) => (
+        {SAMPLE_CAMPAIGNS.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-20 gap-3 text-center">
+            <Megaphone size={24} className="text-gray-300" />
+            <p className="text-sm font-semibold text-gray-400">No campaigns yet</p>
+            <p className="text-xs text-gray-300">Create a landing page, flyer, or property site to start tracking campaign performance.</p>
+          </div>
+        ) : SAMPLE_CAMPAIGNS.map((c) => (
           <div
             key={c.id}
             className="flex items-center px-6 py-3.5 border-b border-line hover:bg-surface transition-colors group"
@@ -167,12 +173,12 @@ export default function CampaignDashboard({ onEdit }: CampaignDashboardProps) {
             {/* Actions */}
             <div className="w-20 flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
               {c.status === "Active" && (
-                <button title="Pause" className="p-1.5 rounded-lg text-gray-400 hover:bg-amber-50 hover:text-amber-600 transition-colors">
+                <button disabled title="Pause coming soon" className="p-1.5 rounded-lg text-gray-300 cursor-not-allowed">
                   <Pause size={13} />
                 </button>
               )}
               {c.status === "Paused" && (
-                <button title="Resume" className="p-1.5 rounded-lg text-gray-400 hover:bg-emerald-50 hover:text-emerald-600 transition-colors">
+                <button disabled title="Resume coming soon" className="p-1.5 rounded-lg text-gray-300 cursor-not-allowed">
                   <Play size={13} />
                 </button>
               )}
@@ -186,7 +192,7 @@ export default function CampaignDashboard({ onEdit }: CampaignDashboardProps) {
               <button title="Preview" onClick={() => onEdit?.(c)} className="p-1.5 rounded-lg text-gray-400 hover:bg-blue-50 hover:text-blue-500 transition-colors">
                 <Eye size={13} />
               </button>
-              <button title="More" className="p-1.5 rounded-lg text-gray-400 hover:bg-surface-2 transition-colors">
+              <button disabled title="More campaign actions coming soon" className="p-1.5 rounded-lg text-gray-300 cursor-not-allowed">
                 <MoreHorizontal size={13} />
               </button>
             </div>

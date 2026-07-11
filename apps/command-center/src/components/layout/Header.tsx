@@ -132,7 +132,11 @@ export default function Header({ session }: { session: CommandCenterSession }) {
                   <p className="text-xs text-gray-400 mt-0.5">{session.user.title} · {session.tenant.name}</p>
                 </div>
                 <div className="py-1">
-                  <button className="flex items-center gap-3 w-full px-4 py-2.5 text-sm text-gray-600 hover:bg-surface hover:text-dravik-dark transition-colors">
+                  <button
+                    disabled
+                    title="Profile management coming soon"
+                    className="flex items-center gap-3 w-full px-4 py-2.5 text-sm text-gray-300 cursor-not-allowed"
+                  >
                     <User size={14} className="text-gray-400" /> My Profile
                   </button>
                 </div>

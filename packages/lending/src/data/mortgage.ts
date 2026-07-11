@@ -1,3 +1,4 @@
+import { localDemoData } from "@dravik/shared";
 import type { MortgageApplication } from "@dravik/contracts/lending";
 
 // ─── Helpers ──────────────────────────────────────────────────
@@ -26,7 +27,7 @@ function docs(stage: string) {
 }
 
 // ─── Applications ─────────────────────────────────────────────
-export const MORTGAGE_APPS: MortgageApplication[] = [
+const LOCAL_MORTGAGE_APPS: MortgageApplication[] = [
   // ── Pre-Qual ────────────────────────────────────────────────
   {
     id:              "m1",
@@ -437,5 +438,7 @@ export const MORTGAGE_APPS: MortgageApplication[] = [
     notes:           "Declined: DTI 48% exceeds conventional limit. Credit score 591 below minimum 620. Recommend credit remediation plan — reassess in 6–12 months.",
   },
 ];
+
+export const MORTGAGE_APPS: MortgageApplication[] = localDemoData(LOCAL_MORTGAGE_APPS);
 
 export const OFFICERS = ["Chris Macabugao", "Elena Rodriguez", "James Park"] as const;

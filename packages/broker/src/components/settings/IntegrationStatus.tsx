@@ -100,8 +100,8 @@ function IntegCard({ integ, onToggle }: {
 function ApiKeysPanel() {
   const [showKey, setShowKey] = useState(false);
   const [copied,  setCopied]  = useState(false);
-  const key = "axn_live_sk_7f3k2m9p4q8r1t5w6y0z";
-  const masked = "axn_live_sk_" + "•".repeat(20);
+  const key = "drv_sk_placeholder_not_configured";
+  const masked = "drv_sk_" + "•".repeat(20);
 
   function handleCopy() {
     void navigator.clipboard.writeText(key).then(() => {

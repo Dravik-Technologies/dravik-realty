@@ -59,7 +59,7 @@ jobs:
           image_ref="${{ steps.core.outputs.acr_login_server }}/${IMAGE_NAME}:${image_tag}"
 
           az acr login --name "${{ steps.core.outputs.acr_name }}"
-          docker build --pull --tag "$image_ref" .
+          docker build --pull --build-arg NEXT_PUBLIC_APP_ENV="$APP_ENVIRONMENT" --tag "$image_ref" .
           docker push "$image_ref"
 
           echo "image_tag=$image_tag" >> "$GITHUB_OUTPUT"
@@ -128,7 +128,7 @@ jobs:
           image_ref="${{ steps.core.outputs.acr_login_server }}/${IMAGE_NAME}:${image_tag}"
 
           az acr login --name "${{ steps.core.outputs.acr_name }}"
-          docker build --pull --tag "$image_ref" .
+          docker build --pull --build-arg NEXT_PUBLIC_APP_ENV="$APP_ENVIRONMENT" --tag "$image_ref" .
           docker push "$image_ref"
 
           echo "image_tag=$image_tag" >> "$GITHUB_OUTPUT"

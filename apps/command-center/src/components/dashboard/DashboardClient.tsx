@@ -10,7 +10,7 @@ import {
 import { SAMPLE_LEADS } from "@dravik/crm";
 import { SAMPLE_TRANSACTIONS } from "@dravik/realty";
 import { MORTGAGE_APPS } from "@dravik/lending";
-import { formatCurrency, cn } from "@dravik/shared";
+import { formatCurrency, cn, isLocalDemoEnvironment } from "@dravik/shared";
 import { DASHBOARD_MODULES } from "@/modules/registry";
 
 // ─── Module-level precomputed data ────────────────────────────
@@ -38,11 +38,12 @@ const leadCounts    = LEAD_STAGES.map(s => ({ ...s, count: SAMPLE_LEADS.filter(l
 const mortgageCounts = MORT_STAGES.map(s => ({ ...s, count: MORTGAGE_APPS.filter(a => a.stage === s.key).length }));
 
 const approvedClosing = mortgageCounts[3].count + mortgageCounts[4].count;
+const closingsMtd = SAMPLE_TRANSACTIONS.filter((t) => t.status === "Closed").length;
 
 const KPIS = [
-  { label: "Active Leads",    value: String(totalLeads),                sub: "+8 this week",                      accent: "#4A90A4" },
+  { label: "Active Leads",    value: String(totalLeads),                sub: isLocalDemoEnvironment ? "+8 this week" : "No records yet", accent: "#4A90A4" },
   { label: "Pipeline Volume", value: formatCurrency(pipelineVol),        sub: `${SAMPLE_TRANSACTIONS.length} active deals`, accent: "#D4AF37" },
-  { label: "Closings MTD",    value: "7",                               sub: "On target for May",                 accent: "#4A7A4A" },
+  { label: "Closings MTD",    value: String(closingsMtd),               sub: isLocalDemoEnvironment ? "On target for May" : "No closed deals", accent: "#4A7A4A" },
   { label: "Mortgage Apps",   value: String(activeApps),                sub: `${approvedClosing} approved/closing`, accent: "#C0786C" },
 ];
 
@@ -56,7 +57,7 @@ interface ActivityItem {
   time:   string;
 }
 
-const ACTIVITY: ActivityItem[] = [
+const ACTIVITY: ActivityItem[] = isLocalDemoEnvironment ? [
   { id:"a1", icon:Users,     accent:"#4A90A4", module:"Leads",        href:"/crm/leads",             text:"Sarah Johnson moved to Under Contract",              time:"2m ago"    },
   { id:"a2", icon:Receipt,   accent:"#4A7A4A", module:"Transactions", href:"/realty/transactions",   text:"Document signed: Purchase Agreement on 12 Ocean Dr", time:"14m ago"   },
   { id:"a3", icon:Landmark,  accent:"#C0786C", module:"Mortgage",     href:"/lending",               text:"Chloe Nguyen's FHA loan approved — Closing stage",   time:"1h ago"    },
@@ -65,7 +66,7 @@ const ACTIVITY: ActivityItem[] = [
   { id:"a6", icon:Receipt,   accent:"#4A7A4A", module:"Transactions", href:"/realty/transactions",   text:"Inspection report delivered for 580 Sunset Isle Dr", time:"5h ago"    },
   { id:"a7", icon:Megaphone, accent:"#7C6A9E", module:"Marketing",    href:"/marketing",        text:"Spring Listings 2026 sent to 148 contacts",          time:"6h ago"    },
   { id:"a8", icon:Landmark,  accent:"#C0786C", module:"Mortgage",     href:"/lending",               text:"New pre-qual application: Evan & Rachel Torres",     time:"Yesterday" },
-];
+] : [];
 
 const HELP_LINKS = [
   { label:"Dashboard",        icon:LayoutDashboard, href:"/dashboard"        },
@@ -340,7 +341,12 @@ export default function DashboardClient() {
             </span>
           </div>
           <div className="divide-y divide-line">
-            {ACTIVITY.map(item => {
+            {ACTIVITY.length === 0 ? (
+              <div className="px-5 py-12 text-center">
+                <p className="text-sm font-semibold text-gray-400">No recent activity yet</p>
+                <p className="text-xs text-gray-300 mt-1">Activity will appear here once real leads, transactions, and messages exist.</p>
+              </div>
+            ) : ACTIVITY.map(item => {
               const Icon = item.icon;
               return (
                 <Link

@@ -1,3 +1,4 @@
+import { localDemoData } from "@dravik/shared";
 import type { Lead } from "@dravik/contracts/crm";
 
 // All timestamps are relative to 2026-05-25 (project demo date)
@@ -16,7 +17,7 @@ const T = {
   d30:  "2026-04-25T11:00:00.000Z",
 };
 
-export const SAMPLE_LEADS: Lead[] = [
+const LOCAL_SAMPLE_LEADS: Lead[] = [
   // ── Under Contract ────────────────────────────────────────────
   {
     id: "lead-1",
@@ -520,3 +521,5 @@ export const SAMPLE_LEADS: Lead[] = [
     ],
   },
 ];
+
+export const SAMPLE_LEADS: Lead[] = localDemoData(LOCAL_SAMPLE_LEADS);

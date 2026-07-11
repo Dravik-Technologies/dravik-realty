@@ -164,6 +164,7 @@ export default function MarketingPage({ properties }: { properties: Property[] }
   function handleCreate(action: CreateAction) {
     setMenuOpen(false);
     if (action === "flyer")         { setFlyerOpen(true);    return; }
+    if (action === "property-site" && properties.length === 0) return;
     if (action === "property-site") { setPropPageOpen(true); return; }
     setActiveTpl(null);
     setBuilderOpen(true);
@@ -213,16 +214,26 @@ export default function MarketingPage({ properties }: { properties: Property[] }
 
               {menuOpen && (
                 <div className="absolute right-0 top-full mt-2 w-52 bg-white rounded-2xl border border-line shadow-xl z-30 overflow-hidden">
-                  {CREATE_OPTIONS.map(({ label, icon: Icon, action }) => (
+                  {CREATE_OPTIONS.map(({ label, icon: Icon, action }) => {
+                    const disabled = action === "property-site" && properties.length === 0;
+                    return (
                     <button
                       key={action}
                       onClick={() => handleCreate(action)}
-                      className="w-full flex items-center gap-3 px-4 py-3 text-sm text-dravik-dark hover:bg-gold-light hover:text-gold-dark transition-colors"
+                      disabled={disabled}
+                      title={disabled ? "Property sites require a listing first" : undefined}
+                      className={cn(
+                        "w-full flex items-center gap-3 px-4 py-3 text-sm transition-colors",
+                        disabled
+                          ? "text-gray-300 cursor-not-allowed"
+                          : "text-dravik-dark hover:bg-gold-light hover:text-gold-dark"
+                      )}
                     >
-                      <Icon size={14} className="text-gold flex-shrink-0" />
+                      <Icon size={14} className={cn("flex-shrink-0", disabled ? "text-gray-300" : "text-gold")} />
                       {label}
                     </button>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
             </div>

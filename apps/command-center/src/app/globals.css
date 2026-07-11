@@ -5,6 +5,10 @@
 :root {
   --background: #F6F7F8;
   --foreground: #111418;
+  --dravik-platinum: #E5E4E2;
+  --dravik-platinum-highlight: #FDFDFD;
+  --dravik-platinum-mid: #D1CFCF;
+  --dravik-charcoal: #2F2F2F;
 }
 
 @theme inline {
@@ -20,6 +24,23 @@ body {
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: geometricPrecision;
+}
+
+.brand-metal-surface {
+  background:
+    radial-gradient(circle at 14% -24%, rgba(253, 253, 253, 0.2), transparent 34%),
+    radial-gradient(circle at 82% 0%, rgba(209, 207, 207, 0.14), transparent 28%),
+    linear-gradient(
+      135deg,
+      var(--dravik-charcoal) 0%,
+      #111418 46%,
+      var(--dravik-charcoal) 78%,
+      var(--dravik-platinum-mid) 150%
+    );
+}
+
+.brand-logo-field {
+  isolation: isolate;
 }
 
 ::selection {

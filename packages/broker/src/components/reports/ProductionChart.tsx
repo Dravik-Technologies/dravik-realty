@@ -81,6 +81,7 @@ interface Props {
 }
 
 export default function ProductionChart({ timeSeries, agents, viewMode }: Props) {
+  const primaryAgent = agents[0];
   const tickFmt = (v: number) =>
     v >= 1_000_000 ? `$${(v / 1_000_000).toFixed(1)}M` :
     v >= 1_000     ? `$${(v / 1_000).toFixed(0)}K` : `$${v}`;
@@ -142,16 +143,20 @@ export default function ProductionChart({ timeSeries, agents, viewMode }: Props)
           </p>
         </div>
         {viewMode === "broker" ? (
-          <div>
-            {agents.map((a, i) => <AgentRow key={a.id} agent={a} rank={i + 1} />)}
-          </div>
-        ) : (
+          agents.length > 0 ? (
+            <div>
+              {agents.map((a, i) => <AgentRow key={a.id} agent={a} rank={i + 1} />)}
+            </div>
+          ) : (
+            <p className="text-sm text-gray-400">No agent production data yet.</p>
+          )
+        ) : primaryAgent ? (
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {[
-              { label: "Closed Volume",  value: formatCurrency(agents[0].closedVolume)       },
-              { label: "GCI Earned",     value: formatCurrency(agents[0].gci)                },
-              { label: "Transactions",   value: String(agents[0].transactions)               },
-              { label: "Avg Days/Close", value: `${agents[0].avgDaysToClose}d`               },
+              { label: "Closed Volume",  value: formatCurrency(primaryAgent.closedVolume)       },
+              { label: "GCI Earned",     value: formatCurrency(primaryAgent.gci)                },
+              { label: "Transactions",   value: String(primaryAgent.transactions)               },
+              { label: "Avg Days/Close", value: `${primaryAgent.avgDaysToClose}d`               },
             ].map(({ label, value }) => (
               <div key={label} className="bg-surface rounded-xl p-3 text-center">
                 <p className="text-base font-bold text-dravik-dark">{value}</p>
@@ -159,6 +164,8 @@ export default function ProductionChart({ timeSeries, agents, viewMode }: Props)
               </div>
             ))}
           </div>
+        ) : (
+          <p className="text-sm text-gray-400">No personal production data yet.</p>
         )}
       </div>
     </div>

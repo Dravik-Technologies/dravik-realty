@@ -2,6 +2,7 @@
 
 import { MapPin, Star, ArrowUpRight, BadgeCheck } from "lucide-react";
 import { Agent } from "@dravik/contracts/referrals";
+import { getPartnerTier, getPartnerTierLabel, getPartnerTierStyles } from "../data/partnerTiers";
 import { cn, formatCurrency } from "@dravik/shared";
 
 // ──────────────────────────────────────────────
@@ -60,6 +61,8 @@ interface AgentCardProps {
 
 export default function AgentCard({ agent, onInitiate }: AgentCardProps) {
   const cert = CERT_CONFIG[agent.certification];
+  const tier = getPartnerTier(agent);
+  const tierStyle = getPartnerTierStyles(tier);
 
   return (
     <div className="card-lift bg-white rounded-2xl border border-line flex flex-col overflow-hidden">
@@ -87,15 +90,23 @@ export default function AgentCard({ agent, onInitiate }: AgentCardProps) {
             </div>
 
             {/* Cert badge */}
-            <span
-              className={cn(
-                "inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full border mt-1",
-                cert.bg, cert.border, cert.text
-              )}
-            >
-              <BadgeCheck size={9} />
-              {agent.certification}
-            </span>
+            <div className="mt-1 flex flex-wrap gap-1">
+              <span
+                className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full border"
+                style={{ background: tierStyle.bg, color: tierStyle.text, borderColor: tierStyle.border }}
+              >
+                {getPartnerTierLabel(tier)}
+              </span>
+              <span
+                className={cn(
+                  "inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full border",
+                  cert.bg, cert.border, cert.text
+                )}
+              >
+                <BadgeCheck size={9} />
+                {agent.certification}
+              </span>
+            </div>
           </div>
         </div>
 

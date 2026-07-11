@@ -58,7 +58,7 @@ export default function QuickActionFAB() {
   }, [open, handleClose]);
 
   return (
-    <div ref={fabRef} className="fixed bottom-6 right-6 z-40 flex flex-col-reverse items-end gap-3">
+    <div ref={fabRef} className="fixed bottom-6 right-6 z-[1000] flex flex-col-reverse items-end gap-3">
       {open && (
         <div className="flex flex-col-reverse gap-3 items-end animate-slide-up">
           {ACTIONS.map(a => (

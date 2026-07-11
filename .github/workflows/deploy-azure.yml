@@ -1,0 +1,156 @@
+name: deploy azure
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: deploy-azure-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  AZURE_LOCATION: eastus
+  IMAGE_NAME: command-center
+
+jobs:
+  deploy-staging:
+    name: deploy staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment: staging
+    env:
+      APP_ENVIRONMENT: staging
+      RESOURCE_GROUP: dravik-realty-staging
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Deploy core Azure resources
+        id: core
+        run: |
+          outputs="$(az deployment group create \
+            --name "core-${APP_ENVIRONMENT}-${GITHUB_RUN_NUMBER}" \
+            --resource-group "$RESOURCE_GROUP" \
+            --template-file infra/azure/core.bicep \
+            --parameters environmentName="$APP_ENVIRONMENT" location="$AZURE_LOCATION" postgresAdminPassword="${{ secrets.POSTGRES_ADMIN_PASSWORD }}" \
+            --query properties.outputs \
+            -o json)"
+
+          echo "acr_login_server=$(echo "$outputs" | jq -r '.acrLoginServer.value')" >> "$GITHUB_OUTPUT"
+          echo "acr_name=$(echo "$outputs" | jq -r '.acrName.value')" >> "$GITHUB_OUTPUT"
+          echo "container_apps_environment_name=$(echo "$outputs" | jq -r '.containerAppsEnvironmentName.value')" >> "$GITHUB_OUTPUT"
+          echo "managed_identity_name=$(echo "$outputs" | jq -r '.managedIdentityName.value')" >> "$GITHUB_OUTPUT"
+
+      - name: Build and push image
+        id: image
+        run: |
+          image_tag="${GITHUB_SHA}"
+          image_ref="${{ steps.core.outputs.acr_login_server }}/${IMAGE_NAME}:${image_tag}"
+
+          az acr login --name "${{ steps.core.outputs.acr_name }}"
+          docker build --pull --tag "$image_ref" .
+          docker push "$image_ref"
+
+          echo "image_tag=$image_tag" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy container app
+        id: app
+        run: |
+          outputs="$(az deployment group create \
+            --name "app-${APP_ENVIRONMENT}-${GITHUB_RUN_NUMBER}" \
+            --resource-group "$RESOURCE_GROUP" \
+            --template-file infra/azure/app.bicep \
+            --parameters \
+              environmentName="$APP_ENVIRONMENT" \
+              location="$AZURE_LOCATION" \
+              acrName="${{ steps.core.outputs.acr_name }}" \
+              containerAppsEnvironmentName="${{ steps.core.outputs.container_apps_environment_name }}" \
+              managedIdentityName="${{ steps.core.outputs.managed_identity_name }}" \
+              imageName="$IMAGE_NAME" \
+              imageTag="${{ steps.image.outputs.image_tag }}" \
+            --query properties.outputs \
+            -o json)"
+
+          echo "fqdn=$(echo "$outputs" | jq -r '.containerAppFqdn.value')" >> "$GITHUB_OUTPUT"
+
+      - name: Smoke test
+        run: curl --fail --retry 6 --retry-delay 10 "https://${{ steps.app.outputs.fqdn }}/login"
+
+  deploy-production:
+    name: deploy production
+    runs-on: ubuntu-latest
+    needs: deploy-staging
+    timeout-minutes: 45
+    environment: production
+    env:
+      APP_ENVIRONMENT: prod
+      RESOURCE_GROUP: dravik-realty
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Deploy core Azure resources
+        id: core
+        run: |
+          outputs="$(az deployment group create \
+            --name "core-${APP_ENVIRONMENT}-${GITHUB_RUN_NUMBER}" \
+            --resource-group "$RESOURCE_GROUP" \
+            --template-file infra/azure/core.bicep \
+            --parameters environmentName="$APP_ENVIRONMENT" location="$AZURE_LOCATION" postgresAdminPassword="${{ secrets.POSTGRES_ADMIN_PASSWORD }}" \
+            --query properties.outputs \
+            -o json)"
+
+          echo "acr_login_server=$(echo "$outputs" | jq -r '.acrLoginServer.value')" >> "$GITHUB_OUTPUT"
+          echo "acr_name=$(echo "$outputs" | jq -r '.acrName.value')" >> "$GITHUB_OUTPUT"
+          echo "container_apps_environment_name=$(echo "$outputs" | jq -r '.containerAppsEnvironmentName.value')" >> "$GITHUB_OUTPUT"
+          echo "managed_identity_name=$(echo "$outputs" | jq -r '.managedIdentityName.value')" >> "$GITHUB_OUTPUT"
+
+      - name: Build and push image
+        id: image
+        run: |
+          image_tag="${GITHUB_SHA}"
+          image_ref="${{ steps.core.outputs.acr_login_server }}/${IMAGE_NAME}:${image_tag}"
+
+          az acr login --name "${{ steps.core.outputs.acr_name }}"
+          docker build --pull --tag "$image_ref" .
+          docker push "$image_ref"
+
+          echo "image_tag=$image_tag" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy container app
+        id: app
+        run: |
+          outputs="$(az deployment group create \
+            --name "app-${APP_ENVIRONMENT}-${GITHUB_RUN_NUMBER}" \
+            --resource-group "$RESOURCE_GROUP" \
+            --template-file infra/azure/app.bicep \
+            --parameters \
+              environmentName="$APP_ENVIRONMENT" \
+              location="$AZURE_LOCATION" \
+              acrName="${{ steps.core.outputs.acr_name }}" \
+              containerAppsEnvironmentName="${{ steps.core.outputs.container_apps_environment_name }}" \
+              managedIdentityName="${{ steps.core.outputs.managed_identity_name }}" \
+              imageName="$IMAGE_NAME" \
+              imageTag="${{ steps.image.outputs.image_tag }}" \
+            --query properties.outputs \
+            -o json)"
+
+          echo "fqdn=$(echo "$outputs" | jq -r '.containerAppFqdn.value')" >> "$GITHUB_OUTPUT"
+
+      - name: Smoke test
+        run: curl --fail --retry 6 --retry-delay 10 "https://${{ steps.app.outputs.fqdn }}/login"

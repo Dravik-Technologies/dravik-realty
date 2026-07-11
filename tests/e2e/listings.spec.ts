@@ -5,6 +5,23 @@ test.describe.serial("listings workspace", () => {
     await page.goto("/realty/listings");
   });
 
+  test("network exchange shows partner listings as read-only inventory", async ({ page }) => {
+    await page.getByRole("button", { name: "Network Exchange" }).click();
+    await expect(page.getByRole("heading", { name: "Network Exchange" })).toBeVisible();
+
+    const networkCard = page.locator("article").filter({ hasText: "Coastal Key Realty" }).first();
+    await expect(networkCard).toBeVisible();
+    await expect(networkCard.getByRole("button", { name: "Edit" })).toHaveCount(0);
+    await expect(networkCard.getByRole("button", { name: "Archive" })).toHaveCount(0);
+
+    await networkCard.getByRole("button", { name: "Save" }).click();
+    await expect(networkCard.getByRole("button", { name: "Saved" })).toBeVisible();
+
+    await networkCard.getByRole("button", { name: "Details" }).click();
+    await expect(page.getByText("Network Listing").first()).toBeVisible();
+    await expect(page.getByText("Source").first()).toBeVisible();
+  });
+
   test("adds, edits, persists, and archives a listing", async ({ page }) => {
     await expect(page.getByRole("heading", { name: "Listings" }).first()).toBeVisible();
 

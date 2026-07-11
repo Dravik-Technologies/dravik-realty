@@ -42,6 +42,11 @@ export const CORE_MIGRATIONS = [
     schema: CORE_SCHEMA,
     path: "db/migrations/core/0002_listing_foundation.sql",
   },
+  {
+    id: "0003_listing_network_exchange",
+    schema: CORE_SCHEMA,
+    path: "db/migrations/core/0003_listing_network_exchange.sql",
+  },
 ] as const;
 
 export type CoreMigrationId = (typeof CORE_MIGRATIONS)[number]["id"];

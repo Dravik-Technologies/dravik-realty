@@ -5,6 +5,9 @@ export type ListingVisibility = "Private" | "Partner Network";
 export interface ManagedListing extends Property {
   sellerName: string;
   agentName: string;
+  ownerTenantId?: string;
+  ownerTenantName?: string;
+  isNetworkListing?: boolean;
   networkVisibility: ListingVisibility;
   inquiries: number;
   partnerInterest: number;

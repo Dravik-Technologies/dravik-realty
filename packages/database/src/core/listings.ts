@@ -16,6 +16,7 @@ export interface CoreTenantIdentity {
 
 interface ListingRow {
   id: string;
+  tenant_id?: string;
   property: ManagedListing;
 }
 
@@ -122,6 +123,20 @@ function withTimestamp(listing: ManagedListing, updatedAt: string): ManagedListi
   };
 }
 
+function withOwnerMetadata(
+  listing: ManagedListing,
+  tenantId: string,
+  tenantName: string,
+  isNetworkListing: boolean
+): ManagedListing {
+  return {
+    ...listing,
+    ownerTenantId: listing.ownerTenantId ?? tenantId,
+    ownerTenantName: listing.ownerTenantName ?? tenantName,
+    isNetworkListing,
+  };
+}
+
 export async function listPersistedListings(tenant: CoreTenantIdentity) {
   return withTenant(tenant, async (client, tenantId) => {
     const result = await client.query<ListingRow>(
@@ -135,7 +150,40 @@ export async function listPersistedListings(tenant: CoreTenantIdentity) {
       [tenantId]
     );
 
-    return result.rows.map((row) => row.property);
+    return result.rows.map((row) =>
+      withOwnerMetadata(row.property, tenantId, tenant.name, false)
+    );
+  });
+}
+
+export async function listPersistedListingsWithNetwork(tenant: CoreTenantIdentity) {
+  return withTenant(tenant, async (client, tenantId) => {
+    const result = await client.query<ListingRow>(
+      `
+        select id, tenant_id::text as tenant_id, property
+        from core.listing
+        where record_status = 'active'
+          and (
+            tenant_id = $1
+            or network_visibility = 'Partner Network'
+          )
+        order by
+          case when tenant_id = $1 then 0 else 1 end,
+          updated_at desc,
+          created_at desc
+      `,
+      [tenantId]
+    );
+
+    return result.rows.map((row) => {
+      const ownerTenantId = row.tenant_id ?? tenantId;
+      return withOwnerMetadata(
+        row.property,
+        ownerTenantId,
+        ownerTenantId === tenantId ? tenant.name : row.property.ownerTenantName ?? "Partner Brokerage",
+        ownerTenantId !== tenantId
+      );
+    });
   });
 }
 
@@ -144,7 +192,7 @@ export async function createPersistedListing(
   listing: ManagedListing
 ) {
   return withTenant(tenant, async (client, tenantId) => {
-    const persisted = withTimestamp(listing, "just now");
+    const persisted = withOwnerMetadata(withTimestamp(listing, "just now"), tenantId, tenant.name, false);
 
     await client.query(
       `

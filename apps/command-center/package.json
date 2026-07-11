@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --webpack",
     "build": "next build",
-    "start": "next start",
+    "start": "mkdir -p .next/standalone/apps/command-center/.next && cp -R public .next/standalone/apps/command-center/ && cp -R .next/static .next/standalone/apps/command-center/.next/ && node .next/standalone/apps/command-center/server.js",
     "lint": "eslint",
     "typecheck": "tsc --noEmit"
   },

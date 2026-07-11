@@ -56,8 +56,9 @@ Common navigation items include:
 - Dashboard
 - Lead Engine & Smart CRM
 - Prospecting & Seller Leads
-- Global Referral Network
+- DRAVIK Partner Network
 - Interactive Mapping & IDX
+- Listings
 - Marketing & Landing Pages
 - Transactions
 - Unified Inbox
@@ -168,25 +169,46 @@ Recommended workflow:
 3. Check Leads and Referrals next.
 4. Review Team and Mortgage communication last.
 
-## Chapter 8: Global Referral Network
+## Chapter 8: DRAVIK Partner Network
 
-The Referral Network helps brokerages and agents manage referrals.
+The DRAVIK Partner Network helps brokerages, agents, and lending partners collaborate across markets.
 
 Use it to:
 
-- Review agent directory information
+- Review partner directory information
 - Filter available referral partners
-- View referral pipeline status
-- Initiate referral workflows where available
+- View global referral pipeline status
+- Start referral workflows where available
+- Support listing collaboration where available
 
 Common workflow:
 
-1. Open **Global Referral Network**.
+1. Open **DRAVIK Partner Network**.
 2. Review directory and pipeline sections.
 3. Use filters to find a target market or partner profile.
 4. Open referral details before starting a referral.
 
-## Chapter 9: Interactive Mapping & IDX
+## Chapter 9: Listings
+
+Listings is where agents manage property inventory before sharing it through internal workflows or the Partner Network.
+
+Use Listings to:
+
+- Add brokerage or agent listings
+- Review status, price, and seller context
+- Keep listings private while preparing them
+- Share selected listings to the Partner Network
+- Track partner interest signals
+
+Common workflow:
+
+1. Open **Listings**.
+2. Add or review the listing record.
+3. Confirm the listing status is accurate.
+4. Keep the listing private until it is ready.
+5. Share it to the Partner Network when collaboration is appropriate.
+
+## Chapter 10: Interactive Mapping & IDX
 
 Mapping provides a geographic property and territory view.
 
@@ -205,7 +227,7 @@ Common workflow:
 3. Switch to list view when you need a scannable set of results.
 4. Use map view when location and neighborhood matter most.
 
-## Chapter 10: Transactions
+## Chapter 11: Transactions
 
 Transactions track deals from contract through closing.
 
@@ -229,7 +251,7 @@ Good practice:
 - Make sure client-facing updates are accurate before directing clients to the portal.
 - Archive completed deal materials according to your brokerage policy.
 
-## Chapter 11: Client Portal Admin
+## Chapter 12: Client Portal Admin
 
 Client Portal Admin is the internal realtor-facing management surface.
 
@@ -249,7 +271,7 @@ Common workflow:
 3. Check document and message readiness.
 4. Use **Preview Client Portal** to view the client-facing experience.
 
-## Chapter 12: Client Portal
+## Chapter 13: Client Portal
 
 The Client Portal is the separate client-facing area.
 
@@ -277,7 +299,7 @@ Recommended client workflow:
 4. Client reads or sends messages.
 5. Client returns to the portal for updates instead of searching email threads.
 
-## Chapter 13: Mortgage Tools
+## Chapter 14: Mortgage Tools
 
 Mortgage Tools support lending and loan pipeline visibility.
 
@@ -295,7 +317,7 @@ Common workflow:
 3. Use Calculators for quick scenario checks.
 4. Coordinate updates with the client portal and transaction workflow.
 
-## Chapter 14: Marketing & Landing Pages
+## Chapter 15: Marketing & Landing Pages
 
 Marketing centralizes campaign and landing page work.
 
@@ -320,7 +342,7 @@ Good practice:
 - Match landing pages and flyers to the correct listing or lead source.
 - Review client-facing copy before publishing.
 
-## Chapter 15: Reports & Analytics
+## Chapter 16: Reports & Analytics
 
 Reports help owners and teams understand business performance.
 
@@ -349,7 +371,7 @@ Common workflow:
 3. Select the report category.
 4. Review KPIs and trend sections.
 
-## Chapter 16: Team Management
+## Chapter 17: Team Management
 
 Team Management is used by brokers and admins to manage agent/team operations.
 
@@ -367,7 +389,7 @@ Common workflow:
 3. Use filters for dual-licensed or new agents.
 4. Use **Add Agent** when onboarding a new team member.
 
-## Chapter 17: Settings
+## Chapter 18: Settings
 
 Settings controls brokerage configuration.
 
@@ -398,7 +420,7 @@ Good practice:
 - Review user permissions regularly.
 - Keep brokerage identity and contact information accurate.
 
-## Chapter 18: Billing & Subscriptions
+## Chapter 19: Billing & Subscriptions
 
 Billing shows subscription and plan information for the brokerage workspace.
 
@@ -414,17 +436,17 @@ Example package combinations:
 
 - CRM only
 - CRM plus client portal
-- CRM plus client portal and referrals
-- Full brokerage workspace with CRM, portal, referrals, marketing, lending, realty, broker tools, and reporting
+- CRM plus client portal and Partner Network
+- Full brokerage workspace with CRM, portal, Partner Network, listings, marketing, lending, realty, broker tools, and reporting
 
-## Chapter 19: Recommended Daily Workflow
+## Chapter 20: Recommended Daily Workflow
 
 For agents:
 
 1. Start on Dashboard.
 2. Check Unified Inbox.
 3. Review Lead Engine & Smart CRM.
-4. Work Prospecting or Mapping as needed.
+4. Work Prospecting, Listings, or Mapping as needed.
 5. Update Transactions.
 6. Confirm client portal readiness for active clients.
 
@@ -433,7 +455,7 @@ For brokers:
 1. Start on Dashboard.
 2. Review Reports & Analytics.
 3. Check Team Management.
-4. Review high-priority client, transaction, and referral activity.
+4. Review high-priority client, transaction, listing, and referral activity.
 5. Open Settings only when administrative changes are needed.
 
 For lenders:
@@ -451,7 +473,7 @@ For clients:
 4. Review needed documents.
 5. Return to the portal for updates.
 
-## Chapter 20: Beta/Staging Notes
+## Chapter 21: Beta/Staging Notes
 
 Staging is used for review before production release.
 
@@ -470,7 +492,7 @@ When testing staging:
 4. Confirm the branding is correct.
 5. Report any confusing copy, broken layout, or button that appears usable but does nothing.
 
-## Chapter 21: Support Checklist
+## Chapter 22: Support Checklist
 
 Before contacting support, note:
 
@@ -487,7 +509,7 @@ Helpful screenshots:
 - Close-up of the area with the issue
 - Browser address bar showing the page route
 
-## Chapter 22: Glossary
+## Chapter 23: Glossary
 
 **Command Center**  
 The internal workspace for your brokerage team.

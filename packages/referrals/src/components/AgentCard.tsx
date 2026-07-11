@@ -155,7 +155,7 @@ export default function AgentCard({ agent, onInitiate }: AgentCardProps) {
           onClick={() => onInitiate(agent)}
           className="mt-auto w-full flex items-center justify-center gap-2 bg-dravik-dark hover:bg-dravik-navy text-white text-sm font-bold py-2.5 rounded-xl transition-colors shadow-sm group"
         >
-          Initiate Referral
+          Start Referral
           <ArrowUpRight
             size={15}
             className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"

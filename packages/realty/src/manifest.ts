@@ -1,4 +1,4 @@
-import { Map, Receipt } from "lucide-react";
+import { Home, Map, Receipt } from "lucide-react";
 
 export const manifest = {
   id:                  "realty",
@@ -10,6 +10,7 @@ export const manifest = {
   navGroup:            "Core Platform" as const,
   navEntries: [
     { label: "Interactive Mapping & IDX", icon: Map,     href: "/realty/mapping"      },
+    { label: "Listings",                  icon: Home,    href: "/realty/listings"     },
     { label: "Transactions",              icon: Receipt, href: "/realty/transactions" },
   ],
   dashboardTile: {

@@ -71,7 +71,8 @@ const ACTIVITY: ActivityItem[] = isLocalDemoEnvironment ? [
 const HELP_LINKS = [
   { label:"Dashboard",        icon:LayoutDashboard, href:"/dashboard"        },
   { label:"Lead Engine",      icon:Users,           href:"/crm/leads"        },
-  { label:"Referral Network", icon:Globe,           href:"/referrals"        },
+  { label:"Partner Network",  icon:Globe,           href:"/referrals"        },
+  { label:"Listings",         icon:Map,             href:"/realty/listings"  },
   { label:"Mapping & IDX",    icon:Map,             href:"/realty/mapping"   },
   { label:"Marketing",        icon:Megaphone,       href:"/marketing"        },
   { label:"Transactions",     icon:Receipt,         href:"/realty/transactions" },

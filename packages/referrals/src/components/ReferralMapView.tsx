@@ -687,7 +687,7 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
                         border: "none", cursor: "pointer",
                       }}
                     >
-                      Initiate Referral →
+                      Start Referral
                     </button>
                   </div>
                 </Popup>

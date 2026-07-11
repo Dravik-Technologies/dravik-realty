@@ -92,10 +92,10 @@ export default function Sidebar() {
           )}
         >
           <BrandLogo
-            variant={sidebarCollapsed ? "mark" : "wordmark"}
+            variant="mark"
             className={cn(
               "transition-all duration-300",
-              sidebarCollapsed ? "lg:h-10 lg:w-10" : "h-14 w-40"
+              sidebarCollapsed ? "lg:h-10 lg:w-10" : "h-14 w-14"
             )}
             priority
           />

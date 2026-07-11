@@ -94,7 +94,7 @@ export default function Header({ session }: { session: CommandCenterSession }) {
 
         {/* Mobile logo mark */}
         <div className="lg:hidden flex items-center flex-shrink-0">
-          <BrandLogo className="h-10 w-24 rounded-lg" priority />
+          <BrandLogo variant="mark" className="h-10 w-10 rounded-lg" priority />
         </div>
 
         {/* Page title — desktop */}

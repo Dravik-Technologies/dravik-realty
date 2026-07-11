@@ -4,7 +4,7 @@ import path from "path";
 const nextConfig: NextConfig = {
   output: "standalone",
   outputFileTracingRoot: path.resolve(__dirname, "../.."),
-  transpilePackages: ["@dravik/shared", "@dravik/ui", "@dravik/contracts", "@dravik/crm", "@dravik/realty", "@dravik/lending", "@dravik/marketing", "@dravik/referrals", "@dravik/broker", "@dravik/portal", "@dravik/billing"],
+  transpilePackages: ["@dravik/shared", "@dravik/ui", "@dravik/contracts", "@dravik/database", "@dravik/crm", "@dravik/realty", "@dravik/lending", "@dravik/marketing", "@dravik/referrals", "@dravik/broker", "@dravik/portal", "@dravik/billing"],
   async redirects() {
     return [
       { source: "/leads", destination: "/crm/leads", permanent: true },

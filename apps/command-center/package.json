@@ -17,6 +17,7 @@
     "@dravik/broker": "workspace:*",
     "@dravik/contracts": "workspace:*",
     "@dravik/crm": "workspace:*",
+    "@dravik/database": "workspace:*",
     "@dravik/lending": "workspace:*",
     "@dravik/marketing": "workspace:*",
     "@dravik/portal": "workspace:*",

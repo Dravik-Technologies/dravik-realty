@@ -47,6 +47,32 @@ test.describe("leads pipeline", () => {
     await expect(page.getByText("Sarah Johnson").first()).toBeVisible();
   });
 
+  test("CSV import previews clean rows and skips duplicates", async ({ page }) => {
+    await page.getByRole("button", { name: "Import Leads" }).click();
+
+    const csv = [
+      "Full Name,Email,Phone,Source,Status,Type,Owner,Notes,Max Budget",
+      "Sarah Johnson,sarah.johnson@email.com,(555) 234-5678,Zillow,New Lead,Buyer,Chris M.,Duplicate test,650000",
+      "Alicia Rivera,alicia.rivera@example.com,(786) 555-0101,Command,New Lead,Seller,Chris M.,Imported seller lead,725000",
+      "Brian Walker,brian.walker@example.com,(786) 555-0102,Axen,Contacted,Buyer,Chris M.,Imported buyer lead,540000",
+    ].join("\n");
+
+    await page.locator('input[type="file"]').setInputFiles({
+      name: "crm-export.csv",
+      mimeType: "text/csv",
+      buffer: Buffer.from(csv),
+    });
+
+    const dialog = page.getByRole("dialog", { name: "Import Leads" });
+    await expect(dialog.getByText("2 ready · 1 duplicate")).toBeVisible();
+    await expect(dialog.getByText("Email already exists")).toBeVisible();
+    await dialog.getByRole("button", { name: "Import 2 Leads" }).click();
+
+    await page.getByPlaceholder("Filter leads…").fill("Alicia");
+    await expect(page.getByText("Alicia Rivera")).toBeVisible();
+    await expect(page.getByText("Sarah Johnson")).toHaveCount(0);
+  });
+
   test("clicking a lead card opens and closes the detail panel", async ({ page }) => {
     await page.getByText("Sarah Johnson").first().click();
     // Panel header shows the lead name (a second occurrence on the page).

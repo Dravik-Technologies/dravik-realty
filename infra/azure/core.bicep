@@ -52,7 +52,7 @@ resource appIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-3
 }
 
 resource acrPullAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(containerRegistry.id, appIdentity.properties.principalId, acrPullRoleDefinitionId)
+  name: guid(containerRegistry.id, appIdentity.id, acrPullRoleDefinitionId)
   scope: containerRegistry
   properties: {
     principalId: appIdentity.properties.principalId
@@ -143,7 +143,7 @@ resource dealArchivesContainer 'Microsoft.Storage/storageAccounts/blobServices/c
 }
 
 resource storageBlobContributorAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(storageAccount.id, appIdentity.properties.principalId, storageBlobDataContributorRoleDefinitionId)
+  name: guid(storageAccount.id, appIdentity.id, storageBlobDataContributorRoleDefinitionId)
   scope: storageAccount
   properties: {
     principalId: appIdentity.properties.principalId
@@ -169,7 +169,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' = {
 }
 
 resource keyVaultSecretsUserAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(keyVault.id, appIdentity.properties.principalId, keyVaultSecretsUserRoleDefinitionId)
+  name: guid(keyVault.id, appIdentity.id, keyVaultSecretsUserRoleDefinitionId)
   scope: keyVault
   properties: {
     principalId: appIdentity.properties.principalId

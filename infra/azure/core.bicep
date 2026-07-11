@@ -220,4 +220,5 @@ output containerAppsEnvironmentName string = containerAppsEnvironment.name
 output keyVaultName string = keyVault.name
 output managedIdentityName string = appIdentity.name
 output postgresHost string = createPostgres ? '${postgresServerName}.postgres.database.azure.com' : ''
+output postgresServerName string = createPostgres ? postgresServerName : ''
 output storageAccountName string = storageAccount.name

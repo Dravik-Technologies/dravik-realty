@@ -54,10 +54,11 @@ export const NAV_SECTIONS: NavSection[] = [
       { label: "Dashboard", icon: LayoutDashboard, href: "/dashboard" },
       crm.navEntries[0],        // Lead Engine & Smart CRM     → /crm/leads
       crm.navEntries[1],        // Prospecting & Seller Leads  → /crm/prospecting
-      referrals.navEntries[0],  // Global Referral Network     → /referrals
+      referrals.navEntries[0],  // DRAVIK Partner Network      → /referrals
       realty.navEntries[0],     // Interactive Mapping & IDX   → /realty/mapping
+      realty.navEntries[1],     // Listings                    → /realty/listings
       marketing.navEntries[0],  // Marketing & Landing Pages   → /marketing
-      realty.navEntries[1],     // Transactions                → /realty/transactions
+      realty.navEntries[2],     // Transactions                → /realty/transactions
       crm.navEntries[2],        // Unified Inbox               → /crm/inbox
       portal.navEntries[0],     // Client Portal Admin         → /realty/client-portal
     ],

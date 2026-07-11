@@ -13,9 +13,20 @@ import { cn } from "@dravik/shared";
 
 const PAGE_TITLES: Record<string, string> = {
   "/dashboard":        "Dashboard",
+  "/crm/leads":        "Lead Engine & Smart CRM",
+  "/crm/prospecting":  "Prospecting & Seller Leads Center",
+  "/crm/inbox":        "Unified Inbox",
+  "/referrals":        "DRAVIK Partner Network",
+  "/realty/mapping":   "Interactive Mapping & IDX",
+  "/realty/listings":  "Listings",
+  "/realty/transactions": "Transactions",
+  "/broker/reports":   "Reports & Analytics",
+  "/broker/team":      "Team Management",
+  "/lending":          "Mortgage Tools",
+  "/broker/settings":  "Settings",
   "/leads":            "Lead Engine & Smart CRM",
   "/prospecting":      "Prospecting & Seller Leads Center",
-  "/referral-network": "Global Referral Network",
+  "/referral-network": "DRAVIK Partner Network",
   "/mapping":          "Interactive Mapping & IDX",
   "/marketing":        "Marketing & Landing Pages",
   "/transactions":     "Transactions",
@@ -94,7 +105,7 @@ export default function Header({ session }: { session: CommandCenterSession }) {
           className="relative hidden sm:flex flex-1 max-w-md mx-auto items-center gap-2.5 px-4 py-2 bg-surface-2 border border-transparent rounded-xl text-gray-400 hover:border-gold/30 hover:bg-white transition-all cursor-text text-left"
         >
           <Search size={14} className="flex-shrink-0" />
-          <span className="flex-1 truncate text-sm">Search leads, agents, properties...</span>
+          <span className="flex-1 truncate text-sm">Search leads, partners, listings...</span>
           <kbd className="hidden md:flex items-center ml-auto text-[10px] text-gray-300 font-mono bg-surface-2 border border-line rounded px-1.5 py-0.5 flex-shrink-0 leading-none">
             ⌘K
           </kbd>

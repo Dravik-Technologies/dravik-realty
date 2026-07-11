@@ -1,15 +1,15 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { Search, X, Users, Globe, Receipt, Landmark, ArrowRight } from "lucide-react";
+import { Search, X, Users, Globe, Receipt, Landmark, ArrowRight, Home } from "lucide-react";
 import Link from "next/link";
 import { SAMPLE_LEADS } from "@dravik/crm";
 import { AGENTS } from "@dravik/referrals";
-import { SAMPLE_TRANSACTIONS } from "@dravik/realty";
+import { SAMPLE_PROPERTIES, SAMPLE_TRANSACTIONS } from "@dravik/realty";
 import { MORTGAGE_APPS } from "@dravik/lending";
 import { cn } from "@dravik/shared";
 
-type ResultCat = "Lead" | "Agent" | "Transaction" | "Mortgage";
+type ResultCat = "Lead" | "Partner" | "Listing" | "Transaction" | "Mortgage";
 
 interface SearchResult {
   id:       string;
@@ -21,7 +21,8 @@ interface SearchResult {
 
 const CAT_CFG: Record<ResultCat, { icon: React.ElementType; iconCls: string; bgCls: string }> = {
   Lead:        { icon: Users,    iconCls: "text-blue-600",    bgCls: "bg-blue-50"    },
-  Agent:       { icon: Globe,    iconCls: "text-gold-dark",   bgCls: "bg-gold-light" },
+  Partner:     { icon: Globe,    iconCls: "text-gold-dark",   bgCls: "bg-gold-light" },
+  Listing:     { icon: Home,     iconCls: "text-violet-600",  bgCls: "bg-violet-50"  },
   Transaction: { icon: Receipt,  iconCls: "text-emerald-600", bgCls: "bg-emerald-50" },
   Mortgage:    { icon: Landmark, iconCls: "text-amber-600",   bgCls: "bg-amber-50"   },
 };
@@ -40,7 +41,14 @@ const SEARCH_INDEX: SearchResult[] = [
     title:    a.name,
     subtitle: `${a.certification} · ${a.location.city}, ${a.location.state}`,
     href:     "/referrals",
-    cat:      "Agent" as ResultCat,
+    cat:      "Partner" as ResultCat,
+  })),
+  ...SAMPLE_PROPERTIES.map(p => ({
+    id:       `p-${p.id}`,
+    title:    p.address,
+    subtitle: `${p.status} · ${p.city}, ${p.state} · ${p.neighborhood}`,
+    href:     "/realty/listings",
+    cat:      "Listing" as ResultCat,
   })),
   ...SAMPLE_TRANSACTIONS.map(t => ({
     id:       `t-${t.id}`,
@@ -185,7 +193,7 @@ export default function GlobalSearch({ open, onClose }: { open: boolean; onClose
             type="text"
             value={query}
             onChange={e => { setQuery(e.target.value); setCursor(-1); }}
-            placeholder="Search leads, agents, transactions, mortgage..."
+            placeholder="Search leads, partners, listings, transactions..."
             className="flex-1 text-sm text-dravik-dark placeholder:text-gray-400 focus:outline-none bg-transparent"
           />
           <div className="flex items-center gap-2 flex-shrink-0">

@@ -162,9 +162,9 @@ export default function ReferralNetwork() {
         <div className="flex-shrink-0 bg-white border-b border-line px-6 py-3 flex items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <Globe size={15} className="text-gold" />
-            <h1 className="text-sm font-bold text-dravik-dark">Global Referral Network</h1>
+            <h1 className="text-sm font-bold text-dravik-dark">DRAVIK Partner Network</h1>
             <span className="text-[10px] font-bold text-gold bg-gold-light px-2 py-0.5 rounded-full border border-gold/30">
-              PCS Map
+              Partner Map
             </span>
           </div>
           <ViewToggle view={view} onChange={setView} />
@@ -188,14 +188,14 @@ export default function ReferralNetwork() {
         <div className="flex items-center justify-between gap-4 flex-wrap">
           <div className="flex items-center gap-3">
             <span className="w-1 h-6 rounded-full bg-gold inline-block" />
-            <h1 className="text-xl font-bold text-dravik-dark">Global Referral Network</h1>
+            <h1 className="text-xl font-bold text-dravik-dark">DRAVIK Partner Network</h1>
           </div>
           <ViewToggle view={view} onChange={setView} />
         </div>
 
         {/* KPI strip */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <KpiCard icon={Users}     label="Network Agents"       value={String(AGENTS.length)} sub={regionLabel}         color="#C9C3B6" />
+          <KpiCard icon={Users}     label="Network Partners"     value={String(AGENTS.length)} sub={regionLabel}         color="#C9C3B6" />
           <KpiCard icon={TrendingUp}label="Network Volume (MTD)" value={`$${networkVolume}M`}  sub="Combined closings"  color="#4A90A4" />
           <KpiCard icon={Globe}     label="Active Referrals"     value={String(PIPELINE.filter(p => p.status !== "Closed").length)} sub="In pipeline" color="#7C6A9E" />
           <KpiCard icon={Star}      label="Avg. Production Score"value={`${avgScore}/5.0`}      sub="Network average"   color="#C0786C" />
@@ -208,7 +208,7 @@ export default function ReferralNetwork() {
               <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
               <input
                 type="text"
-                placeholder="Search by name, city, or specialization…"
+                placeholder="Search by name, city, or specialization..."
                 value={query}
                 onChange={e => setQuery(e.target.value)}
                 className="w-full pl-10 pr-4 py-2.5 border border-line rounded-xl text-sm text-dravik-dark placeholder:text-gray-400 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition"
@@ -250,10 +250,10 @@ export default function ReferralNetwork() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <span className="w-1 h-5 rounded-full bg-gold inline-block" />
-              <h2 className="text-lg font-bold text-dravik-dark">Agent Directory</h2>
+              <h2 className="text-lg font-bold text-dravik-dark">Partner Directory</h2>
             </div>
             <span className="text-sm text-gray-400 font-medium">
-              {filteredAgents.length} of {AGENTS.length} agents
+              {filteredAgents.length} of {AGENTS.length} partners
             </span>
           </div>
 
@@ -268,7 +268,7 @@ export default function ReferralNetwork() {
               <div className="w-12 h-12 rounded-2xl bg-surface-2 flex items-center justify-center">
                 <Search size={22} className="text-gray-300" />
               </div>
-              <p className="font-semibold text-dravik-dark">No agents match your filters</p>
+              <p className="font-semibold text-dravik-dark">No partners match your filters</p>
               <p className="text-sm text-gray-400 max-w-xs">Try adjusting the search or clearing the active filters.</p>
               <button onClick={clearFilters} className="mt-2 text-sm font-semibold text-gold hover:text-gold-dark transition-colors">
                 Clear all filters
@@ -277,11 +277,11 @@ export default function ReferralNetwork() {
           )}
         </section>
 
-        {/* Outbound pipeline */}
+        {/* Referral pipeline */}
         <section className="space-y-4 pb-10">
           <div className="flex items-center gap-3">
             <span className="w-1 h-5 rounded-full bg-gold inline-block" />
-            <h2 className="text-lg font-bold text-dravik-dark">Outbound Pipeline</h2>
+            <h2 className="text-lg font-bold text-dravik-dark">Global Referral Pipeline</h2>
             <span className="text-[11px] font-bold bg-gold-light text-gold-dark px-2.5 py-0.5 rounded-full">
               {PIPELINE.length} referrals
             </span>

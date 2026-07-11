@@ -8,7 +8,7 @@ test.describe("shell chrome", () => {
   });
 
   test("global search opens and returns cross-module results", async ({ page }) => {
-    await page.getByText("Search leads, agents, properties...").click();
+    await page.getByText("Search leads, partners, listings...").click();
     const input = page.getByRole("textbox").first();
     await expect(input).toBeVisible();
     await input.fill("Sarah");
@@ -39,8 +39,9 @@ test.describe("shell chrome", () => {
     "Dashboard",
     "Lead Engine & Smart CRM",
     "Prospecting & Seller Leads",
-    "Global Referral Network",
+    "DRAVIK Partner Network",
     "Interactive Mapping & IDX",
+    "Listings",
     "Marketing & Landing Pages",
     "Transactions",
     "Unified Inbox",

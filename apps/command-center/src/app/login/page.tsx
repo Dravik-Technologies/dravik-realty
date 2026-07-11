@@ -24,7 +24,7 @@ export default async function LoginPage() {
           <div className="flex items-center gap-3">
             <div className="w-11 h-11 rounded-xl bg-white flex items-center justify-center p-1">
               <Image
-                src="/dravik-realty-logo.webp"
+                src="/dravik-realty-logo.png"
                 alt="Dravik Realty"
                 width={36}
                 height={36}

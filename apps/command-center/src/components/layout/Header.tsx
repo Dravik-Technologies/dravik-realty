@@ -82,7 +82,7 @@ export default function Header({ session }: { session: CommandCenterSession }) {
         {/* Mobile logo mark */}
         <div className="lg:hidden flex items-center flex-shrink-0">
           <Image
-            src="/dravik-realty-logo.webp"
+            src="/dravik-realty-logo.png"
             alt="Dravik Realty"
             height={36}
             width={80}

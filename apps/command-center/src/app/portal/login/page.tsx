@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { KeyRound, UserRound } from "lucide-react";
-import { cn, isLocalDemoEnvironment } from "@dravik/shared";
+import { cn, isDemoDataEnvironment } from "@dravik/shared";
 import {
   createClientPortalSession,
   getClientPortalSession,
@@ -21,7 +21,7 @@ export default async function PortalLoginPage() {
   const session = await getClientPortalSession();
   const localIdentityEnabled = isLocalIdentityEnabled();
   const localClientSessions = Object.values(LOCAL_CLIENT_SESSIONS);
-  const visibleClientSessions = isLocalDemoEnvironment
+  const visibleClientSessions = isDemoDataEnvironment
     ? localClientSessions
     : localClientSessions.slice(0, 1);
 
@@ -54,10 +54,10 @@ export default async function PortalLoginPage() {
 
           <form action={signInClientPortal} className="space-y-2">
             {visibleClientSessions.map((clientSession) => {
-              const displayName = isLocalDemoEnvironment
+              const displayName = isDemoDataEnvironment
                 ? clientSession.user.name
                 : "Staging Client Portal";
-              const displayEmail = isLocalDemoEnvironment
+              const displayEmail = isDemoDataEnvironment
                 ? clientSession.user.email
                 : "empty staging workspace";
 

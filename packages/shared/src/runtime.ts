@@ -19,11 +19,12 @@ export const appEnvironment = normalizeAppEnvironment(
 );
 
 export const isLocalDemoEnvironment = appEnvironment === "local";
+export const isDemoDataEnvironment = appEnvironment !== "prod";
 
 export function localDemoData<T>(items: T[]): T[] {
-  return isLocalDemoEnvironment ? items : [];
+  return isDemoDataEnvironment ? items : [];
 }
 
 export function localDemoValue<T>(value: T, emptyValue: T): T {
-  return isLocalDemoEnvironment ? value : emptyValue;
+  return isDemoDataEnvironment ? value : emptyValue;
 }

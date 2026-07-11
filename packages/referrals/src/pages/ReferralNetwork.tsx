@@ -137,7 +137,11 @@ export default function ReferralNetwork() {
     return sum + parseFloat(a.closedVolumeMTD.replace(/[$M]/g, ""));
   }, 0).toFixed(1);
 
-  const avgScore = (AGENTS.reduce((s, a) => s + a.productionScore, 0) / AGENTS.length).toFixed(1);
+  const avgScore = AGENTS.length
+    ? (AGENTS.reduce((s, a) => s + a.productionScore, 0) / AGENTS.length).toFixed(1)
+    : "0.0";
+  const regionCount = new Set(AGENTS.map((agent) => agent.location.region)).size;
+  const regionLabel = regionCount ? `Across ${regionCount} regions` : "No regions yet";
 
   const openModal = useCallback((agent: Agent) => {
     setActiveAgent(agent);
@@ -191,7 +195,7 @@ export default function ReferralNetwork() {
 
         {/* KPI strip */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <KpiCard icon={Users}     label="Network Agents"       value={String(AGENTS.length)} sub="Across 6 regions"    color="#D4AF37" />
+          <KpiCard icon={Users}     label="Network Agents"       value={String(AGENTS.length)} sub={regionLabel}         color="#D4AF37" />
           <KpiCard icon={TrendingUp}label="Network Volume (MTD)" value={`$${networkVolume}M`}  sub="Combined closings"  color="#4A90A4" />
           <KpiCard icon={Globe}     label="Active Referrals"     value={String(PIPELINE.filter(p => p.status !== "Closed").length)} sub="In pipeline" color="#7C6A9E" />
           <KpiCard icon={Star}      label="Avg. Production Score"value={`${avgScore}/5.0`}      sub="Network average"   color="#C0786C" />

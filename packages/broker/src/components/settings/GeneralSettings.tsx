@@ -41,7 +41,7 @@ export default function GeneralSettings({ onSave }: { onSave: () => void }) {
         <SectionHead title="Company Identity" sub="Logo, name, and branding details." />
 
         {/* Logo upload zone */}
-        <div className="flex items-center gap-5 mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-5 mb-6">
           <div className="w-20 h-20 rounded-2xl border-2 border-dashed border-gold/40 bg-gold-light flex flex-col items-center justify-center flex-shrink-0">
             <div className="w-10 h-10 rounded-xl border border-gold/40 bg-gold/10 flex items-center justify-center">
               <span className="text-gold font-bold text-xl leading-none">DR</span>
@@ -165,7 +165,7 @@ export default function GeneralSettings({ onSave }: { onSave: () => void }) {
       </div>
 
       {/* Company preview card */}
-      <div className="bg-dravik-dark rounded-2xl p-6 flex items-center gap-4">
+      <div className="bg-dravik-dark rounded-2xl p-6 flex flex-col sm:flex-row sm:items-center gap-4">
         <div className="w-12 h-12 rounded-xl border border-gold/40 bg-gold/10 flex items-center justify-center flex-shrink-0">
           <Building2 size={20} className="text-gold" />
         </div>
@@ -176,7 +176,7 @@ export default function GeneralSettings({ onSave }: { onSave: () => void }) {
         </div>
         <button
           onClick={onSave}
-          className="ml-auto flex-shrink-0 px-4 py-2 bg-gold text-dravik-dark text-xs font-bold rounded-xl hover:bg-gold-dark transition-colors"
+          className="w-full sm:w-auto sm:ml-auto flex-shrink-0 px-4 py-2 bg-gold text-dravik-dark text-xs font-bold rounded-xl hover:bg-gold-dark transition-colors"
         >
           Save Changes
         </button>

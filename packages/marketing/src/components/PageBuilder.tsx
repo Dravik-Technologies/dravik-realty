@@ -485,6 +485,8 @@ export default function PageBuilder({ open, onClose, initialTemplate }: PageBuil
   const previewSlug = pageName.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
   const activeSection = sections.find((s) => s.id === activeId);
 
+  if (!open) return null;
+
   return (
     <>
       <div

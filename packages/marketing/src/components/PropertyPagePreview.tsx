@@ -182,6 +182,8 @@ export default function PropertyPagePreview({ open, onClose, properties }: Prope
     setPublished(true);
   }
 
+  if (!open) return null;
+
   return (
     <>
       <div

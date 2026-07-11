@@ -364,7 +364,7 @@ function PaymentBreakdown() {
   const totalInterest = monthlyPI > 0 ? monthlyPI * term * 12 - loan : 0;
 
   const items = [
-    { label: "Principal + Interest", amount: monthlyPI,  color: "#D4AF37", pct: totalPITI > 0 ? Math.round(monthlyPI / totalPITI * 100) : 0 },
+    { label: "Principal + Interest", amount: monthlyPI,  color: "#C9C3B6", pct: totalPITI > 0 ? Math.round(monthlyPI / totalPITI * 100) : 0 },
     { label: "Property Tax",         amount: monthlyTax, color: "#6366F1", pct: totalPITI > 0 ? Math.round(monthlyTax / totalPITI * 100) : 0 },
     { label: "Homeowner's Ins.",      amount: monthlyIns, color: "#10B981", pct: totalPITI > 0 ? Math.round(monthlyIns / totalPITI * 100) : 0 },
   ];

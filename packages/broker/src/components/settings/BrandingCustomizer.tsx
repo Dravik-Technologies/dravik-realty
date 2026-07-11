@@ -75,7 +75,7 @@ function EmailPreview({ primary, dark }: { primary: string; dark: string }) {
 // ─── BrandingCustomizer ───────────────────────────────────────
 export default function BrandingCustomizer({ onSave }: { onSave: () => void }) {
   const [activeTheme, setActiveTheme] = useState("gold");
-  const [customHex,   setCustomHex]   = useState("#D4AF37");
+  const [customHex,   setCustomHex]   = useState("#C9C3B6");
   const [useCustom,   setUseCustom]   = useState(false);
 
   const selectedTheme = COLOR_THEMES.find((t) => t.id === activeTheme) ?? COLOR_THEMES[0];

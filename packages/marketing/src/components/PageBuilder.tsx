@@ -22,7 +22,7 @@ import { cn } from "@dravik/shared";
 
 // ─── Section type metadata ────────────────────────────────────
 const SECTION_META: Record<SectionType, { label: string; icon: React.ElementType; color: string }> = {
-  hero:         { label: "Hero",          icon: Type,       color: "#D4AF37" },
+  hero:         { label: "Hero",          icon: Type,       color: "#C9C3B6" },
   gallery:      { label: "Gallery",       icon: Image,      color: "#4A90A4" },
   mortgage_cta: { label: "Mortgage CTA",  icon: CreditCard, color: "#10B981" },
   testimonials: { label: "Testimonials",  icon: Star,       color: "#8B5CF6" },

@@ -90,7 +90,7 @@ export default function ReferralMetrics({
   referralSuccessRate, avgReferralFee, referralRevenue,
 }: Props) {
   const pieData = [
-    { name: "Sent",     value: referralsSent,     color: "#D4AF37" },
+    { name: "Sent",     value: referralsSent,     color: "#C9C3B6" },
     { name: "Received", value: referralsReceived,  color: "#3B82F6" },
   ];
 
@@ -101,7 +101,7 @@ export default function ReferralMetrics({
       {/* KPI row */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {[
-          { label: "Sent",         value: referralsSent,                    accent: "#D4AF37" },
+          { label: "Sent",         value: referralsSent,                    accent: "#C9C3B6" },
           { label: "Received",     value: referralsReceived,                accent: "#3B82F6" },
           { label: "Success Rate", value: `${referralSuccessRate}%`,        accent: "#10B981" },
           { label: "Avg Fee",      value: formatCurrency(avgReferralFee),   accent: "#8B5CF6" },

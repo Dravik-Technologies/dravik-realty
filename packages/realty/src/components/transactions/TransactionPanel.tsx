@@ -220,7 +220,7 @@ const TASK_CATEGORY_COLOR: Record<TransactionTask["category"], string> = {
   inspection: "#F59E0B",
   finance:    "#3B82F6",
   title:      "#8B5CF6",
-  closing:    "#D4AF37",
+  closing:    "#C9C3B6",
   general:    "#9CA3AF",
 };
 
@@ -377,7 +377,7 @@ function MortgageTab({ mortgage, contractPrice }: { mortgage: MortgageInfo | und
     "Submitted":            "#3B82F6",
     "Conditionally Approved":"#8B5CF6",
     "Clear to Close":       "#10B981",
-    "Cash":                 "#D4AF37",
+    "Cash":                 "#C9C3B6",
   }[mortgage.status];
 
   return (

@@ -24,14 +24,14 @@ function pointInPolygon(lat: number, lng: number, poly: [number, number][]): boo
 
 // ─── Marker color by status / price ──────────────────────────
 function markerColors(p: Property, selected: boolean) {
-  if (selected) return { bg: "#1A1A2E", text: "#D4AF37", border: "#D4AF37" };
+  if (selected) return { bg: "#111418", text: "#C9C3B6", border: "#C9C3B6" };
   switch (p.status) {
     case "Price Reduced": return { bg: "#EF4444", text: "#fff",     border: "#DC2626" };
     case "Pending":       return { bg: "#F59E0B", text: "#fff",     border: "#D97706" };
     case "Coming Soon":   return { bg: "#8B5CF6", text: "#fff",     border: "#7C3AED" };
     default:
-      if (p.price >= 1_000_000) return { bg: "#D4AF37", text: "#1A1A2E", border: "#B8962E" };
-      return { bg: "#fff", text: "#1A1A2E", border: "#D4AF37" };
+      if (p.price >= 1_000_000) return { bg: "#C9C3B6", text: "#111418", border: "#8D877D" };
+      return { bg: "#fff", text: "#111418", border: "#C9C3B6" };
   }
 }
 
@@ -211,7 +211,7 @@ export default function PropertyMap({ properties, selectedId, onSelect }: Proper
         {polyPoints.length >= 2 && !closedPoly && (
           <Polyline
             positions={polyPoints}
-            pathOptions={{ color: "#D4AF37", weight: 2, dashArray: "6 4" }}
+            pathOptions={{ color: "#C9C3B6", weight: 2, dashArray: "6 4" }}
           />
         )}
 
@@ -219,7 +219,7 @@ export default function PropertyMap({ properties, selectedId, onSelect }: Proper
         {closedPoly && polyPoints.length >= 3 && (
           <Polygon
             positions={polyPoints}
-            pathOptions={{ color: "#D4AF37", weight: 2, fillColor: "#D4AF37", fillOpacity: 0.08 }}
+            pathOptions={{ color: "#C9C3B6", weight: 2, fillColor: "#C9C3B6", fillOpacity: 0.08 }}
           />
         )}
       </MapContainer>

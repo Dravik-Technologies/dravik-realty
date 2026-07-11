@@ -79,7 +79,7 @@ export default function CampaignDashboard({ onEdit }: CampaignDashboardProps) {
       {/* ── KPI strip ──────────────────────────────────────── */}
       <div className="flex-shrink-0 bg-white border-b border-line">
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:flex lg:items-center lg:divide-x lg:divide-line">
-          <KpiCard icon={Megaphone} label="Active Campaigns" value={String(active)} sub="Currently running" accent="#D4AF37" />
+          <KpiCard icon={Megaphone} label="Active Campaigns" value={String(active)} sub="Currently running" accent="#C9C3B6" />
           <KpiCard icon={Users}     label="Leads This Month" value={String(totalLeads)} sub="All campaigns"  accent="#10B981" />
           <KpiCard icon={TrendingUp} label="Avg Conversion"  value={`${avgConv}%`}  sub="Active pages"  accent="#4A90A4" />
           <KpiCard icon={Star}      label="Top Performing"  value={topPage ? topPage.name.split("—")[0].trim() : "—"} sub={topPage ? `${topPage.views.toLocaleString()} views` : "No campaigns"} accent="#EF4444" />

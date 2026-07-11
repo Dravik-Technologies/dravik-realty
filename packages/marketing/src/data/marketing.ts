@@ -211,8 +211,8 @@ export const PAGE_TEMPLATES: PageTemplate[] = [
 ];
 
 export const FLYER_TEMPLATES: FlyerTemplate[] = [
-  { id: "f1", name: "Luxury",  layout: "luxury",  description: "Dark background, gold accents, premium feel",     accentColor: "#D4AF37" },
-  { id: "f2", name: "Modern",  layout: "modern",  description: "Clean white, bold sans-serif typography",          accentColor: "#1A1A2E" },
+  { id: "f1", name: "Luxury",  layout: "luxury",  description: "Dark background, platinum accents, premium feel", accentColor: "#C9C3B6" },
+  { id: "f2", name: "Modern",  layout: "modern",  description: "Clean white, bold sans-serif typography",          accentColor: "#111418" },
   { id: "f3", name: "Classic", layout: "classic", description: "Traditional real estate with photo-forward layout", accentColor: "#4A90A4" },
   { id: "f4", name: "Minimal", layout: "minimal", description: "Ultra-minimal with a single strong image",          accentColor: "#10B981" },
 ];

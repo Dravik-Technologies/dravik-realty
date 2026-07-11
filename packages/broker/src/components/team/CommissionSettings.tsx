@@ -16,7 +16,7 @@ function SplitRing({ agent }: { agent: number }) {
         <circle cx="48" cy="48" r={radius} fill="none" stroke="#F1F3F5" strokeWidth="10" />
         <circle
           cx="48" cy="48" r={radius} fill="none"
-          stroke="#D4AF37" strokeWidth="10"
+          stroke="#C9C3B6" strokeWidth="10"
           strokeDasharray={`${agentArc} ${circ}`}
           strokeLinecap="round"
         />

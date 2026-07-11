@@ -1,12 +1,12 @@
 @theme inline {
-  /* Dravik Realty Brand Palette */
-  --color-gold:        #D4AF37;
-  --color-gold-muted:  #C5A059;
-  --color-gold-light:  #F5EDD3;
-  --color-gold-dark:   #A8892E;
-  --color-surface:     #F8F9FA;
-  --color-surface-2:   #F1F3F5;
-  --color-dravik-dark:   #1A1A2E;
-  --color-dravik-navy:   #16213E;
-  --color-line:        #E8E8E8;
+  /* Dravik Realty platinum / titanium brand palette */
+  --color-gold:        #C9C3B6;
+  --color-gold-muted:  #AEB6BF;
+  --color-gold-light:  #F1F0EC;
+  --color-gold-dark:   #767E88;
+  --color-surface:     #F6F7F8;
+  --color-surface-2:   #ECEFF2;
+  --color-dravik-dark: #111418;
+  --color-dravik-navy: #20252B;
+  --color-line:        #DDE2E8;
 }

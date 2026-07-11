@@ -36,7 +36,7 @@ const STAGES: StageConfig[] = [
   { id: "application",  label: "Application Complete",  color: "#3B82F6", dot: "bg-blue-400"    },
   { id: "underwriting", label: "Underwriting",          color: "#F59E0B", dot: "bg-amber-400"   },
   { id: "approved",     label: "Approved / Conditional",color: "#10B981", dot: "bg-emerald-400" },
-  { id: "closing",      label: "Closing / Funded",      color: "#D4AF37", dot: "bg-gold"        },
+  { id: "closing",      label: "Closing / Funded",      color: "#C9C3B6", dot: "bg-gold"        },
 ];
 const STAGE_IDS = new Set(STAGES.map((s) => s.id));
 

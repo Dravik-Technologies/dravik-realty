@@ -136,11 +136,11 @@ export default function LeadFunnel({ sources, funnel }: Props) {
 
         <ResponsiveContainer width="100%" height={260}>
           <BarChart data={barData} margin={{ top: 8, right: 4, left: 0, bottom: 0 }} barSize={32} style={{ cursor: "pointer" }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#E8E8E8" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#DDE2E8" vertical={false} />
             <XAxis dataKey="source" tick={{ fontSize: 11, fill: "#9CA3AF" }} axisLine={false} tickLine={false} />
             <YAxis tick={{ fontSize: 10, fill: "#9CA3AF" }} axisLine={false} tickLine={false} width={24} />
             <Tooltip content={<SourceTooltip />} />
-            <Bar dataKey="leads" name="leads" radius={[0, 0, 0, 0]} stackId="a" fill="#E8E8E8"
+            <Bar dataKey="leads" name="leads" radius={[0, 0, 0, 0]} stackId="a" fill="#DDE2E8"
               onClick={(d) => { const s = (d as unknown as { source: string }).source; setDrillSource(s === drillSource ? null : s); }}>
               {barData.map((d) => (
                 <Cell key={d.source} fill={drillSource && drillSource !== d.source ? "#F1F3F5" : "#E2E8F0"} />
@@ -152,10 +152,10 @@ export default function LeadFunnel({ sources, funnel }: Props) {
                 <Cell key={d.source} fill={drillSource && drillSource !== d.source ? "#BFDBFE" : "#3B82F6"} />
               ))}
             </Bar>
-            <Bar dataKey="closed" name="closed" stackId="c" fill="#D4AF37" radius={[4, 4, 0, 0]}
+            <Bar dataKey="closed" name="closed" stackId="c" fill="#C9C3B6" radius={[4, 4, 0, 0]}
               onClick={(d) => { const s = (d as unknown as { source: string }).source; setDrillSource(s === drillSource ? null : s); }}>
               {barData.map((d) => (
-                <Cell key={d.source} fill={drillSource && drillSource !== d.source ? "#F5EDD3" : d.color} />
+                <Cell key={d.source} fill={drillSource && drillSource !== d.source ? "#F1F0EC" : d.color} />
               ))}
             </Bar>
           </BarChart>
@@ -166,7 +166,7 @@ export default function LeadFunnel({ sources, funnel }: Props) {
           {[
             { label: "Leads",      color: "#E2E8F0" },
             { label: "Contacted",  color: "#3B82F6" },
-            { label: "Closed",     color: "#D4AF37" },
+            { label: "Closed",     color: "#C9C3B6" },
           ].map(({ label, color }) => (
             <div key={label} className="flex items-center gap-1.5 text-[11px] text-gray-500">
               <span className="w-2.5 h-2.5 rounded-full" style={{ background: color }} />

@@ -3,7 +3,7 @@ import type { AnalyticsData, AnalyticsSnapshot, AgentStat, ReferralPartner, Camp
 
 // ─── Shared reference data (same across periods) ──────────────
 const AGENTS: AgentStat[] = [
-  { id: "a1", name: "Chris Macabugao", initials: "CM", color: "#D4AF37", closedVolume: 22_400_000, transactions: 28, gci: 672_000, avgDaysToClose: 38, conversionRate: 20 },
+  { id: "a1", name: "Chris Macabugao", initials: "CM", color: "#C9C3B6", closedVolume: 22_400_000, transactions: 28, gci: 672_000, avgDaysToClose: 38, conversionRate: 20 },
   { id: "a2", name: "Sarah Chen",       initials: "SC", color: "#3B82F6", closedVolume: 18_200_000, transactions: 22, gci: 546_000, avgDaysToClose: 42, conversionRate: 18 },
   { id: "a3", name: "Marcus Rivera",    initials: "MR", color: "#10B981", closedVolume: 15_600_000, transactions: 19, gci: 468_000, avgDaysToClose: 45, conversionRate: 15 },
   { id: "a4", name: "Jessica Park",     initials: "JP", color: "#8B5CF6", closedVolume: 11_800_000, transactions: 15, gci: 354_000, avgDaysToClose: 52, conversionRate: 13 },
@@ -19,7 +19,7 @@ const REFERRAL_PARTNERS: ReferralPartner[] = [
 ];
 
 const CAMPAIGNS: CampaignStat[] = [
-  { id: "c1", name: "Coral Gables Luxury",  type: "Landing Page",   color: "#D4AF37", leads: 42, cost: 2_400, conversions: 4 },
+  { id: "c1", name: "Coral Gables Luxury",  type: "Landing Page",   color: "#C9C3B6", leads: 42, cost: 2_400, conversions: 4 },
   { id: "c2", name: "Miami Beach Buyers",   type: "Email Campaign", color: "#3B82F6", leads: 38, cost:   600, conversions: 3 },
   { id: "c3", name: "Brickell Investment",  type: "Social Media",   color: "#8B5CF6", leads: 65, cost: 3_800, conversions: 5 },
   { id: "c4", name: "First-Time Buyers",    type: "Webinar",        color: "#10B981", leads: 28, cost: 1_100, conversions: 5 },
@@ -54,7 +54,7 @@ const YEAR_DATA: AnalyticsData["year"] = {
   ],
 
   leadSources: [
-    { source: "Referral",      color: "#D4AF37", leads: 38,  contacted: 30, underContract: 16, closed: 12 },
+    { source: "Referral",      color: "#C9C3B6", leads: 38,  contacted: 30, underContract: 16, closed: 12 },
     { source: "Zillow",        color: "#FF6200", leads: 65,  contacted: 42, underContract: 10, closed:  6 },
     { source: "Website",       color: "#3B82F6", leads: 28,  contacted: 18, underContract:  7, closed:  4 },
     { source: "Social Media",  color: "#8B5CF6", leads: 48,  contacted: 22, underContract:  6, closed:  3 },
@@ -66,7 +66,7 @@ const YEAR_DATA: AnalyticsData["year"] = {
     { stage: "New Leads",       count: 226, color: "#3B82F6" },
     { stage: "Contacted",       count: 137, color: "#6366F1" },
     { stage: "Qualified",       count:  68, color: "#8B5CF6" },
-    { stage: "Under Contract",  count:  44, color: "#D4AF37" },
+    { stage: "Under Contract",  count:  44, color: "#C9C3B6" },
     { stage: "Closed",          count:  28, color: "#10B981" },
   ],
 
@@ -125,7 +125,7 @@ const QUARTER_DATA: AnalyticsData["quarter"] = {
   ],
 
   leadSources: [
-    { source: "Referral",      color: "#D4AF37", leads: 12, contacted:  9, underContract: 5, closed: 4 },
+    { source: "Referral",      color: "#C9C3B6", leads: 12, contacted:  9, underContract: 5, closed: 4 },
     { source: "Zillow",        color: "#FF6200", leads: 18, contacted: 12, underContract: 3, closed: 2 },
     { source: "Website",       color: "#3B82F6", leads:  8, contacted:  5, underContract: 2, closed: 1 },
     { source: "Social Media",  color: "#8B5CF6", leads: 14, contacted:  6, underContract: 2, closed: 1 },
@@ -137,7 +137,7 @@ const QUARTER_DATA: AnalyticsData["quarter"] = {
     { stage: "New Leads",      count: 65, color: "#3B82F6" },
     { stage: "Contacted",      count: 39, color: "#6366F1" },
     { stage: "Qualified",      count: 20, color: "#8B5CF6" },
-    { stage: "Under Contract", count: 15, color: "#D4AF37" },
+    { stage: "Under Contract", count: 15, color: "#C9C3B6" },
     { stage: "Closed",         count: 10, color: "#10B981" },
   ],
 
@@ -188,7 +188,7 @@ const MONTH_DATA: AnalyticsData["30d"] = {
   ],
 
   leadSources: [
-    { source: "Referral",      color: "#D4AF37", leads:  4, contacted: 3, underContract: 2, closed: 2 },
+    { source: "Referral",      color: "#C9C3B6", leads:  4, contacted: 3, underContract: 2, closed: 2 },
     { source: "Zillow",        color: "#FF6200", leads:  6, contacted: 4, underContract: 1, closed: 1 },
     { source: "Website",       color: "#3B82F6", leads:  3, contacted: 2, underContract: 1, closed: 0 },
     { source: "Social Media",  color: "#8B5CF6", leads:  5, contacted: 2, underContract: 1, closed: 0 },
@@ -200,7 +200,7 @@ const MONTH_DATA: AnalyticsData["30d"] = {
     { stage: "New Leads",      count: 22, color: "#3B82F6" },
     { stage: "Contacted",      count: 13, color: "#6366F1" },
     { stage: "Qualified",      count:  7, color: "#8B5CF6" },
-    { stage: "Under Contract", count:  6, color: "#D4AF37" },
+    { stage: "Under Contract", count:  6, color: "#C9C3B6" },
     { stage: "Closed",         count:  4, color: "#10B981" },
   ],
 

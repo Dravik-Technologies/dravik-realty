@@ -16,7 +16,7 @@ export const BRANCH_COLOR: Record<MilitaryBranch, string> = {
   Navy:          "#4A90A4",
   "Air Force":   "#5B8FB9",
   Marines:       "#C0786C",
-  Joint:         "#D4AF37",
+  Joint:         "#C9C3B6",
   "Coast Guard": "#B06AB3",
 };
 

@@ -22,7 +22,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   Listings:       "#3B82F6",
   Communications: "#10B981",
   Documents:      "#8B5CF6",
-  Mortgage:       "#D4AF37",
+  Mortgage:       "#C9C3B6",
   Productivity:   "#F97316",
   Automation:     "#6366F1",
   Billing:        "#EC4899",

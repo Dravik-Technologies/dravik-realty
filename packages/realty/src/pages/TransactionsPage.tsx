@@ -141,7 +141,7 @@ export default function TransactionsPage() {
 
           {/* KPI strip */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-4">
-            <KpiCard icon={Calendar}  label="Pending Closings This Month" value={String(closingMonth)}           accent="#D4AF37" sub="Active deals" />
+            <KpiCard icon={Calendar}  label="Pending Closings This Month" value={String(closingMonth)}           accent="#C9C3B6" sub="Active deals" />
             <KpiCard icon={DollarSign} label="Total Volume"              value={`$${(totalVolume / 1_000_000).toFixed(1)}M`} accent="#10B981" sub="Active pipeline" />
             <KpiCard icon={Clock}     label="Avg Days to Close"          value={`${avgDays}d`}                  accent="#3B82F6" sub="Active deals" />
             <KpiCard icon={Award}     label="Commission Pipeline"        value={`$${(commPipeline / 1_000).toFixed(0)}K`}    accent="#EF4444" sub="Agent net (est.)" />

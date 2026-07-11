@@ -195,7 +195,7 @@ export default function ReferralNetwork() {
 
         {/* KPI strip */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <KpiCard icon={Users}     label="Network Agents"       value={String(AGENTS.length)} sub={regionLabel}         color="#D4AF37" />
+          <KpiCard icon={Users}     label="Network Agents"       value={String(AGENTS.length)} sub={regionLabel}         color="#C9C3B6" />
           <KpiCard icon={TrendingUp}label="Network Volume (MTD)" value={`$${networkVolume}M`}  sub="Combined closings"  color="#4A90A4" />
           <KpiCard icon={Globe}     label="Active Referrals"     value={String(PIPELINE.filter(p => p.status !== "Closed").length)} sub="In pipeline" color="#7C6A9E" />
           <KpiCard icon={Star}      label="Avg. Production Score"value={`${avgScore}/5.0`}      sub="Network average"   color="#C0786C" />

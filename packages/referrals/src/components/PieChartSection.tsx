@@ -10,9 +10,9 @@ import {
 } from "recharts";
 import { formatCurrencyFull } from "@dravik/shared";
 
-const GOLD  = "#D4AF37";
+const GOLD  = "#C9C3B6";
 const TEAL  = "#4A90A4";
-const NAVY  = "#1A1A2E";
+const NAVY  = "#111418";
 const COLORS = [TEAL, GOLD, NAVY];
 
 interface ChartSlice { name: string; value: number; }
@@ -73,7 +73,7 @@ export default function PieChartSection({ data }: { data: ChartSlice[] }) {
           iconType="circle"
           iconSize={10}
           formatter={(value) => (
-            <span style={{ fontSize: 12, fontWeight: 500, color: "#1A1A2E" }}>{value}</span>
+            <span style={{ fontSize: 12, fontWeight: 500, color: "#111418" }}>{value}</span>
           )}
         />
       </PieChart>

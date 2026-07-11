@@ -185,7 +185,7 @@ export default function MortgageDashboard() {
             label="Funded / Closing"
             value={String(kpis.closing)}
             sub="This period"
-            accent="#D4AF37"
+            accent="#C9C3B6"
             warn={kpis.urgentClosing > 0}
           />
           <KpiCard
@@ -207,7 +207,7 @@ export default function MortgageDashboard() {
             label="Mortgage Revenue"
             value={kpis.revenue > 0 ? formatCurrency(kpis.revenue) : "—"}
             sub="Origination fees est."
-            accent="#D4AF37"
+            accent="#C9C3B6"
           />
         </div>
       </div>

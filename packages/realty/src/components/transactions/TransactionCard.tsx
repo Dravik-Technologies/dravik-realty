@@ -13,7 +13,7 @@ export const STAGE_COLOR: Record<PipelineStage, string> = {
   "Inspections":       "#F59E0B",
   "Financing Approved":"#10B981",
   "Appraisal / Title": "#8B5CF6",
-  "Closing / Funded":  "#D4AF37",
+  "Closing / Funded":  "#C9C3B6",
 };
 
 // ─── Urgency from precomputed daysUntilClose ──────────────────

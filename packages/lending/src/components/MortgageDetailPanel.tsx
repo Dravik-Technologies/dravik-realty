@@ -238,7 +238,7 @@ function UnderwritingTab({ app }: { app: MortgageApplication }) {
           <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Monthly Payment Breakdown</p>
           <div className="bg-surface-2 rounded-xl p-4 space-y-3">
             {[
-              { label: "Principal + Interest", amount: app.monthlyPayment, color: "#D4AF37" },
+              { label: "Principal + Interest", amount: app.monthlyPayment, color: "#C9C3B6" },
               { label: "Taxes",                amount: Math.round(monthlyTax * 0.7),    color: "#6366F1" },
               { label: "Insurance",            amount: Math.round(monthlyTax * 0.3),    color: "#10B981" },
             ].map((item) => {

@@ -254,7 +254,7 @@ const LOCAL_CONVERSATIONS: Conversation[] = [
   // ── 14. Dravik System — notifications ────────────────────────
   {
     id: "c14",
-    clientName: "Dravik Realty System", clientInitials: "AX", clientColor: "#D4AF37",
+    clientName: "Dravik Realty System", clientInitials: "AX", clientColor: "#C9C3B6",
     tag: "team", channel: "system",
     subject: "Automated Alerts",
     lastMessage: "Reminder: 3 listing agreements expire in the next 30 days.",

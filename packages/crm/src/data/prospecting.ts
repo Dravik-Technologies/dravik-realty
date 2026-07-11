@@ -327,8 +327,8 @@ export const CAMPAIGN_TEMPLATES: CampaignTemplate[] = [
     touchpoints: 4,
     duration: "21 days",
     description: "Equity analysis report offer + market update for long-term owners sitting on significant appreciation.",
-    colorA: "#D4AF37",
-    colorB: "#C5A059",
+    colorA: "#C9C3B6",
+    colorB: "#AEB6BF",
   },
   {
     id: "ct4",

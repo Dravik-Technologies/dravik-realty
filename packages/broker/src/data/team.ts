@@ -12,7 +12,7 @@ function rule(id: string, name: string, condition: string, agentSplit: number, n
 // ─── Agents ───────────────────────────────────────────────────
 const LOCAL_AGENTS: Agent[] = [
   {
-    id: "a1", name: "Chris Macabugao", initials: "CM", color: "#D4AF37",
+    id: "a1", name: "Chris Macabugao", initials: "CM", color: "#C9C3B6",
     email: "chris@dravikrealty.com", phone: "(305) 555-0100", address: "1200 Brickell Ave, Miami FL 33131",
     licenseType: "Dual", licenseNumber: "SL3412987", licenseExpiry: "2027-06-30",
     status: "Active", role: "Broker", teamId: "direct", managerId: undefined, joinDate: "2018-03-01",
@@ -384,7 +384,7 @@ const LOCAL_TEAMS: TeamGroup[] = [
   { id: "williams",  name: "Williams Team",       leadId: "a2",  memberIds: ["a5", "a6", "a7"],          color: "#3B82F6" },
   { id: "chen",      name: "Chen Team",            leadId: "a3",  memberIds: ["a8", "a9", "a10", "a11"],  color: "#10B981" },
   { id: "rodriguez", name: "Rodriguez Mortgage",   leadId: "a4",  memberIds: ["a12", "a13"],              color: "#8B5CF6" },
-  { id: "direct",    name: "Direct — Chris",       leadId: "a1",  memberIds: ["a2", "a3", "a4", "a14", "a15"], color: "#D4AF37" },
+  { id: "direct",    name: "Direct — Chris",       leadId: "a1",  memberIds: ["a2", "a3", "a4", "a14", "a15"], color: "#C9C3B6" },
 ];
 
 export const TEAMS: TeamGroup[] = localDemoData(LOCAL_TEAMS);

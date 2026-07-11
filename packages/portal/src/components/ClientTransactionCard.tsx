@@ -14,7 +14,7 @@ const STAGE_COLOR: Record<string, string> = {
   "Inspections":       "#F59E0B",
   "Financing Approved":"#10B981",
   "Appraisal / Title": "#8B5CF6",
-  "Closing / Funded":  "#D4AF37",
+  "Closing / Funded":  "#C9C3B6",
   "Closed":            "#6B7280",
 };
 

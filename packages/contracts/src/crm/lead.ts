@@ -110,8 +110,8 @@ export const KANBAN_COLUMNS: KanbanColumn[] = [
   {
     id: "Active / Showing",
     label: "Active / Showing",
-    accentColor: "#D4AF37",
-    dotColor:    "#D4AF37",
+    accentColor: "#C9C3B6",
+    dotColor:    "#C9C3B6",
   },
   {
     id: "Under Contract",

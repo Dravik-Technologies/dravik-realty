@@ -5,7 +5,7 @@ import { useState } from "react";
 import { LogOut, ShieldCheck, Users } from "lucide-react";
 import type { ClientPortalSession } from "@dravik/contracts/identity";
 import { ClientDashboard, ALL_CLIENTS } from "@dravik/portal";
-import { cn, isLocalDemoEnvironment } from "@dravik/shared";
+import { cn, isDemoDataEnvironment } from "@dravik/shared";
 
 export default function PortalClientView({ session }: { session: ClientPortalSession }) {
   const initialClientIdx = Math.max(
@@ -14,7 +14,7 @@ export default function PortalClientView({ session }: { session: ClientPortalSes
   );
   const [clientIdx, setClientIdx] = useState(initialClientIdx);
   const data = ALL_CLIENTS[clientIdx];
-  const sessionDisplayName = isLocalDemoEnvironment
+  const sessionDisplayName = isDemoDataEnvironment
     ? session.user.name
     : "Staging Client Portal";
 
@@ -60,7 +60,7 @@ export default function PortalClientView({ session }: { session: ClientPortalSes
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1.5">
             <Users size={11} className="text-[#D1CFCF]/70" />
-            <span className="text-[10px] text-[#D1CFCF]/70 mr-1 hidden sm:inline">Switch client (local demo):</span>
+            <span className="text-[10px] text-[#D1CFCF]/70 mr-1 hidden sm:inline">Switch client:</span>
             <div className="flex gap-1">
               {ALL_CLIENTS.map((c, i) => (
                 <button

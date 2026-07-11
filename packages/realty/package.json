@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./listings-data": "./src/data/listings.ts"
   },
   "types": "./src/index.ts",
   "scripts": {

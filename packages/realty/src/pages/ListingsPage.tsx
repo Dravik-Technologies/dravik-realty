@@ -1,10 +1,12 @@
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 import {
+  Archive,
   Building2,
   CheckCircle2,
   DollarSign,
+  Edit3,
   Eye,
   Home,
   Plus,
@@ -12,34 +14,20 @@ import {
   Share2,
   Users,
   X,
+  Loader2,
 } from "lucide-react";
-import type { ListingStatus, Property } from "@dravik/contracts/realty";
-import { SAMPLE_PROPERTIES } from "../data/properties";
+import type {
+  ListingFormState,
+  ListingStatus,
+  ListingUpdateInput,
+  ListingVisibility,
+  ManagedListing,
+} from "@dravik/contracts/realty";
+import { EMPTY_LISTING_FORM, listingToForm } from "../data/listings";
 import { cn, formatCurrency } from "@dravik/shared";
 
-type ListingVisibility = "Private" | "Partner Network";
 type StatusFilter = "All" | ListingStatus;
 type VisibilityFilter = "All" | ListingVisibility;
-
-interface ManagedListing extends Property {
-  sellerName: string;
-  agentName: string;
-  networkVisibility: ListingVisibility;
-  inquiries: number;
-  partnerInterest: number;
-  updatedAt: string;
-}
-
-interface ListingFormState {
-  address: string;
-  city: string;
-  state: string;
-  price: string;
-  beds: string;
-  baths: string;
-  sqft: string;
-  status: ListingStatus;
-}
 
 const STATUS_OPTIONS: ListingStatus[] = ["Active", "Coming Soon", "Pending", "Price Reduced"];
 
@@ -50,38 +38,58 @@ const STATUS_STYLES: Record<ListingStatus, string> = {
   "Price Reduced": "bg-amber-50 text-amber-700 border-amber-200",
 };
 
-const EMPTY_FORM: ListingFormState = {
-  address: "",
-  city: "",
-  state: "FL",
-  price: "",
-  beds: "",
-  baths: "",
-  sqft: "",
-  status: "Coming Soon",
-};
-
-function buildInitialListings(): ManagedListing[] {
-  return SAMPLE_PROPERTIES.slice(0, 8).map((property, index) => ({
-    ...property,
-    sellerName: ["Avery Morgan", "Patricia Chen", "Michael Rivera", "Dana Patel"][index % 4],
-    agentName: ["Chris Macabugao", "Maya Thompson", "Jordan Lee"][index % 3],
-    networkVisibility: index % 3 === 0 ? "Partner Network" : "Private",
-    inquiries: property.viewedThisWeek + index,
-    partnerInterest: property.savedCount,
-    updatedAt: `${Math.max(1, property.daysOnMarket || index + 1)}d ago`,
-  }));
-}
-
-function parseNumber(value: string, fallback: number): number {
-  const numeric = Number(value.replace(/,/g, ""));
-  return Number.isFinite(numeric) && numeric > 0 ? numeric : fallback;
-}
-
 function formatCompactCurrency(amount: number): string {
   if (amount >= 1_000_000) return `$${(amount / 1_000_000).toFixed(1)}M`;
   if (amount >= 1_000) return `$${Math.round(amount / 1_000)}K`;
   return formatCurrency(amount);
+}
+
+async function parseApiResponse<T>(response: Response): Promise<T> {
+  if (!response.ok) {
+    const payload = await response.json().catch(() => null);
+    throw new Error(payload?.error ?? "Listing request failed");
+  }
+
+  return response.json() as Promise<T>;
+}
+
+async function fetchListings() {
+  return parseApiResponse<{
+    listings: ManagedListing[];
+    persistence: string;
+  }>(await fetch("/api/realty/listings", { cache: "no-store" }));
+}
+
+async function createListing(input: ListingFormState) {
+  return parseApiResponse<{
+    listing: ManagedListing;
+    persistence: string;
+  }>(
+    await fetch("/api/realty/listings", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(input),
+    })
+  );
+}
+
+async function updateListing(id: string, patch: ListingUpdateInput) {
+  return parseApiResponse<{
+    listing: ManagedListing;
+    persistence: string;
+  }>(
+    await fetch(`/api/realty/listings/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(patch),
+    })
+  );
+}
+
+async function archiveListingRequest(id: string) {
+  return parseApiResponse<{ ok: boolean; persistence: string }>(
+    await fetch(`/api/realty/listings/${id}`, { method: "DELETE" })
+  );
 }
 
 function statusAction(status: ListingStatus): { label: string; next: ListingStatus } {
@@ -124,12 +132,16 @@ function ListingCard({
   listing,
   selected,
   onSelect,
+  onEdit,
+  onArchive,
   onToggleVisibility,
   onUpdateStatus,
 }: {
   listing: ManagedListing;
   selected: boolean;
   onSelect: (listing: ManagedListing) => void;
+  onEdit: (listing: ManagedListing) => void;
+  onArchive: (id: string) => void;
   onToggleVisibility: (id: string) => void;
   onUpdateStatus: (id: string, status: ListingStatus) => void;
 }) {
@@ -196,7 +208,7 @@ function ListingCard({
         </span>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1">
+      <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 pt-1">
         <button
           type="button"
           onClick={() => onSelect(listing)}
@@ -204,6 +216,14 @@ function ListingCard({
         >
           <Eye size={13} />
           Details
+        </button>
+        <button
+          type="button"
+          onClick={() => onEdit(listing)}
+          className="inline-flex items-center justify-center gap-2 rounded-xl border border-line px-3 py-2 text-xs font-bold text-gray-600 hover:bg-surface transition-colors"
+        >
+          <Edit3 size={13} />
+          Edit
         </button>
         <button
           type="button"
@@ -226,6 +246,14 @@ function ListingCard({
           <CheckCircle2 size={13} />
           {action.label}
         </button>
+        <button
+          type="button"
+          onClick={() => onArchive(listing.id)}
+          className="inline-flex items-center justify-center gap-2 rounded-xl border border-rose-100 px-3 py-2 text-xs font-bold text-rose-500 hover:bg-rose-50 transition-colors"
+        >
+          <Archive size={13} />
+          Archive
+        </button>
       </div>
     </article>
   );
@@ -233,13 +261,17 @@ function ListingCard({
 
 function AddListingModal({
   open,
+  mode,
   form,
+  submitting,
   onChange,
   onClose,
   onSubmit,
 }: {
   open: boolean;
+  mode: "add" | "edit";
   form: ListingFormState;
+  submitting: boolean;
   onChange: (patch: Partial<ListingFormState>) => void;
   onClose: () => void;
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
@@ -251,12 +283,12 @@ function AddListingModal({
       <div className="absolute inset-0 bg-dravik-dark/60 backdrop-blur-sm" onClick={onClose} aria-hidden />
       <form
         onSubmit={onSubmit}
-        className="relative w-full max-w-2xl bg-white rounded-2xl border border-line shadow-2xl overflow-hidden animate-slide-up"
+        className="relative flex max-h-[calc(100vh-2rem)] w-full max-w-2xl flex-col bg-white rounded-2xl border border-line shadow-2xl overflow-hidden animate-slide-up"
       >
         <div className="flex items-center justify-between gap-4 px-6 py-5 border-b border-line">
           <div>
-            <h2 className="text-lg font-bold text-dravik-dark">Add Listing</h2>
-            <p className="text-sm text-gray-400 mt-0.5">Private by default</p>
+            <h2 className="text-lg font-bold text-dravik-dark">{mode === "add" ? "Add Listing" : "Edit Listing"}</h2>
+            <p className="text-sm text-gray-400 mt-0.5">{mode === "add" ? "Private by default" : "Update listing details"}</p>
           </div>
           <button
             type="button"
@@ -268,7 +300,7 @@ function AddListingModal({
           </button>
         </div>
 
-        <div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="min-h-0 overflow-y-auto p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
           <label className="sm:col-span-2">
             <span className="text-xs font-bold text-gray-500">Address</span>
             <input
@@ -349,9 +381,34 @@ function AddListingModal({
               className="mt-1 w-full rounded-xl border border-line px-3 py-2.5 text-sm text-dravik-dark focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20"
             />
           </label>
+          <label>
+            <span className="text-xs font-bold text-gray-500">Seller</span>
+            <input
+              value={form.sellerName}
+              onChange={(event) => onChange({ sellerName: event.target.value })}
+              className="mt-1 w-full rounded-xl border border-line px-3 py-2.5 text-sm text-dravik-dark focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20"
+            />
+          </label>
+          <label>
+            <span className="text-xs font-bold text-gray-500">Agent</span>
+            <input
+              value={form.agentName}
+              onChange={(event) => onChange({ agentName: event.target.value })}
+              className="mt-1 w-full rounded-xl border border-line px-3 py-2.5 text-sm text-dravik-dark focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20"
+            />
+          </label>
+          <label className="sm:col-span-2">
+            <span className="text-xs font-bold text-gray-500">Description</span>
+            <textarea
+              rows={3}
+              value={form.description}
+              onChange={(event) => onChange({ description: event.target.value })}
+              className="mt-1 w-full resize-none rounded-xl border border-line px-3 py-2.5 text-sm text-dravik-dark focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20"
+            />
+          </label>
         </div>
 
-        <div className="flex items-center justify-end gap-3 px-6 py-5 border-t border-line bg-surface">
+        <div className="flex flex-shrink-0 items-center justify-end gap-3 px-6 py-5 border-t border-line bg-surface">
           <button
             type="button"
             onClick={onClose}
@@ -361,10 +418,11 @@ function AddListingModal({
           </button>
           <button
             type="submit"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-dravik-dark text-white text-sm font-bold hover:bg-dravik-navy transition-colors"
+            disabled={submitting}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-dravik-dark text-white text-sm font-bold hover:bg-dravik-navy transition-colors disabled:opacity-60 disabled:cursor-wait"
           >
-            <Plus size={15} />
-            Save Listing
+            {submitting ? <Loader2 size={15} className="animate-spin" /> : <Plus size={15} />}
+            {submitting ? "Saving..." : "Save Listing"}
           </button>
         </div>
       </form>
@@ -373,13 +431,37 @@ function AddListingModal({
 }
 
 export default function ListingsPage() {
-  const [listings, setListings] = useState<ManagedListing[]>(buildInitialListings);
+  const [listings, setListings] = useState<ManagedListing[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [query, setQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("All");
   const [visibilityFilter, setVisibilityFilter] = useState<VisibilityFilter>("All");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
-  const [form, setForm] = useState<ListingFormState>(EMPTY_FORM);
+  const [modalMode, setModalMode] = useState<"add" | "edit">("add");
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [form, setForm] = useState<ListingFormState>(EMPTY_LISTING_FORM);
+
+  const loadListings = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const payload = await fetchListings();
+      setListings(payload.listings);
+      setSelectedId((current) => current ?? payload.listings[0]?.id ?? null);
+    } catch (loadError) {
+      setError(loadError instanceof Error ? loadError.message : "Unable to load listings.");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    void loadListings();
+  }, [loadListings]);
 
   const filteredListings = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -405,76 +487,89 @@ export default function ListingsPage() {
     setForm((current) => ({ ...current, ...patch }));
   }
 
-  function toggleVisibility(id: string) {
+  function openAddListing() {
+    setModalMode("add");
+    setEditingId(null);
+    setForm(EMPTY_LISTING_FORM);
+    setModalOpen(true);
+  }
+
+  function openEditListing(listing: ManagedListing) {
+    setSelectedId(listing.id);
+    setModalMode("edit");
+    setEditingId(listing.id);
+    setForm(listingToForm(listing));
+    setModalOpen(true);
+  }
+
+  function replaceListing(nextListing: ManagedListing) {
     setListings((current) =>
-      current.map((listing) =>
-        listing.id === id
-          ? {
-              ...listing,
-              networkVisibility: listing.networkVisibility === "Partner Network" ? "Private" : "Partner Network",
-              updatedAt: "just now",
-            }
-          : listing
-      )
+      current.map((listing) => listing.id === nextListing.id ? nextListing : listing)
     );
   }
 
-  function updateStatus(id: string, status: ListingStatus) {
-    setListings((current) =>
-      current.map((listing) => listing.id === id ? { ...listing, status, updatedAt: "just now" } : listing)
-    );
+  async function toggleVisibility(id: string) {
+    const listing = listings.find((item) => item.id === id);
+
+    if (!listing) {
+      return;
+    }
+
+    setError(null);
+    try {
+      const nextVisibility = listing.networkVisibility === "Partner Network" ? "Private" : "Partner Network";
+      const payload = await updateListing(id, { networkVisibility: nextVisibility });
+      replaceListing(payload.listing);
+    } catch (actionError) {
+      setError(actionError instanceof Error ? actionError.message : "Unable to update listing visibility.");
+    }
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function updateStatus(id: string, status: ListingStatus) {
+    setError(null);
+    try {
+      const payload = await updateListing(id, { status });
+      replaceListing(payload.listing);
+    } catch (actionError) {
+      setError(actionError instanceof Error ? actionError.message : "Unable to update listing status.");
+    }
+  }
+
+  async function archiveListing(id: string) {
+    setError(null);
+    try {
+      await archiveListingRequest(id);
+      setListings((current) => current.filter((listing) => listing.id !== id));
+      setSelectedId((current) => current === id ? null : current);
+    } catch (actionError) {
+      setError(actionError instanceof Error ? actionError.message : "Unable to archive listing.");
+    }
+  }
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const price = parseNumber(form.price, 500_000);
-    const sqft = parseNumber(form.sqft, 1_500);
-    const beds = parseNumber(form.beds, 3);
-    const baths = parseNumber(form.baths, 2);
-    const id = `listing-${Date.now()}`;
+    setSubmitting(true);
+    setError(null);
 
-    const listing: ManagedListing = {
-      id,
-      address: form.address.trim(),
-      city: form.city.trim(),
-      state: form.state.trim() || "FL",
-      zip: "",
-      price,
-      pricePerSqft: Math.round(price / sqft),
-      beds,
-      baths,
-      sqft,
-      lotSqft: 0,
-      yearBuilt: new Date().getFullYear(),
-      type: "Single Family",
-      status: form.status,
-      daysOnMarket: 0,
-      coordinates: { lat: 25.7617, lng: -80.1918 },
-      heroImage: "https://picsum.photos/seed/dravik-listing/900/600",
-      images: [],
-      description: "New Dravik Realty listing.",
-      features: ["Dravik Realty"],
-      mlsNumber: `DRV-${Date.now().toString().slice(-6)}`,
-      leadScore: 50,
-      newConstruction: false,
-      pool: false,
-      garage: 0,
-      taxesAnnual: 0,
-      savedCount: 0,
-      viewedThisWeek: 0,
-      neighborhood: form.city.trim(),
-      sellerName: "New Seller",
-      agentName: "Chris Macabugao",
-      networkVisibility: "Private",
-      inquiries: 0,
-      partnerInterest: 0,
-      updatedAt: "just now",
-    };
+    try {
+      if (modalMode === "edit" && editingId) {
+        const payload = await updateListing(editingId, form);
+        replaceListing(payload.listing);
+        setSelectedId(payload.listing.id);
+      } else {
+        const payload = await createListing(form);
+        setListings((current) => [payload.listing, ...current]);
+        setSelectedId(payload.listing.id);
+      }
 
-    setListings((current) => [listing, ...current]);
-    setSelectedId(id);
-    setForm(EMPTY_FORM);
-    setModalOpen(false);
+      setForm(EMPTY_LISTING_FORM);
+      setEditingId(null);
+      setModalOpen(false);
+    } catch (submitError) {
+      setError(submitError instanceof Error ? submitError.message : "Unable to save listing.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -490,13 +585,21 @@ export default function ListingsPage() {
           </div>
           <button
             type="button"
-            onClick={() => setModalOpen(true)}
+            onClick={openAddListing}
             className="inline-flex items-center gap-2 rounded-xl bg-dravik-dark px-4 py-2.5 text-sm font-bold text-white hover:bg-dravik-navy transition-colors shadow-sm"
           >
             <Plus size={15} />
             Add Listing
           </button>
         </div>
+
+        {error && (
+          <div
+            className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-semibold text-rose-600"
+          >
+            {error}
+          </div>
+        )}
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           <KpiCard icon={Building2} label="Listings" value={String(listings.length)} sub={`${activeCount} active`} accent="#C9C3B6" />
@@ -541,7 +644,12 @@ export default function ListingsPage() {
           </div>
         </div>
 
-        {listings.length === 0 ? (
+        {loading ? (
+          <section className="bg-white rounded-2xl border border-line py-16 px-6 flex flex-col items-center text-center gap-4">
+            <Loader2 size={26} className="animate-spin text-gold" />
+            <p className="text-sm font-semibold text-gray-400">Loading listings...</p>
+          </section>
+        ) : listings.length === 0 ? (
           <section className="bg-white rounded-2xl border border-line py-16 px-6 flex flex-col items-center text-center gap-4">
             <div className="w-14 h-14 rounded-2xl bg-surface-2 flex items-center justify-center">
               <Home size={24} className="text-gold" />
@@ -552,7 +660,7 @@ export default function ListingsPage() {
             </div>
             <button
               type="button"
-              onClick={() => setModalOpen(true)}
+              onClick={openAddListing}
               className="inline-flex items-center gap-2 rounded-xl bg-dravik-dark px-4 py-2.5 text-sm font-bold text-white hover:bg-dravik-navy transition-colors"
             >
               <Plus size={15} />
@@ -577,6 +685,8 @@ export default function ListingsPage() {
                       listing={listing}
                       selected={selectedListing?.id === listing.id}
                       onSelect={(item) => setSelectedId(item.id)}
+                      onEdit={openEditListing}
+                      onArchive={archiveListing}
                       onToggleVisibility={toggleVisibility}
                       onUpdateStatus={updateStatus}
                     />
@@ -654,7 +764,9 @@ export default function ListingsPage() {
 
       <AddListingModal
         open={modalOpen}
+        mode={modalMode}
         form={form}
+        submitting={submitting}
         onChange={updateForm}
         onClose={() => setModalOpen(false)}
         onSubmit={handleSubmit}

@@ -41,6 +41,9 @@ importers:
       '@dravik/crm':
         specifier: workspace:*
         version: link:../../packages/crm
+      '@dravik/database':
+        specifier: workspace:*
+        version: link:../../packages/database
       '@dravik/lending':
         specifier: workspace:*
         version: link:../../packages/lending
@@ -240,10 +243,19 @@ importers:
 
   packages/database:
     dependencies:
+      '@dravik/contracts':
+        specifier: workspace:*
+        version: link:../contracts
       pg:
         specifier: ^8.16.3
         version: 8.22.0
     devDependencies:
+      '@types/node':
+        specifier: ^20
+        version: 20.19.42
+      '@types/pg':
+        specifier: ^8
+        version: 8.20.0
       typescript:
         specifier: ^5
         version: 5.9.3
@@ -1412,6 +1424,9 @@ packages:
 
   '@types/node@20.19.42':
     resolution: {integrity: sha512-5L7SUaFC1RyDraj2yRhyBzHTobyXHmohD100CChNtyPyleoq37Mqab5Gn8XEKI04dfN/oqPdpHk38MgcQWHbZg==}
+
+  '@types/pg@8.20.0':
+    resolution: {integrity: sha512-bEPFOaMAHTEP1EzpvHTbmwR8UsFyHSKsRisLIHVMXnpNefSbGA1bD6CVy+qKjGSqmZqNqBDV2azOBo8TgkcVow==}
 
   '@types/react-dom@19.2.3':
     resolution: {integrity: sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ==}
@@ -4060,6 +4075,12 @@ snapshots:
   '@types/node@20.19.42':
     dependencies:
       undici-types: 6.21.0
+
+  '@types/pg@8.20.0':
+    dependencies:
+      '@types/node': 20.19.42
+      pg-protocol: 1.15.0
+      pg-types: 2.2.0
 
   '@types/react-dom@19.2.3(@types/react@19.2.17)':
     dependencies:

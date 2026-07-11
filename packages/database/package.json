@@ -13,9 +13,12 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@dravik/contracts": "workspace:*",
     "pg": "^8.16.3"
   },
   "devDependencies": {
+    "@types/node": "^20",
+    "@types/pg": "^8",
     "typescript": "^5"
   }
 }

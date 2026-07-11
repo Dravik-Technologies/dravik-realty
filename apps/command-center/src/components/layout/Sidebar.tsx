@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -9,6 +8,7 @@ import {
   PanelLeft,
 } from "lucide-react";
 import { useShell } from "./ShellProvider";
+import { BrandLogo } from "@/components/brand/BrandLogo";
 import { NAV_SECTIONS } from "@/modules/registry";
 import type { NavEntry } from "@/modules/registry";
 import { cn } from "@dravik/shared";
@@ -88,35 +88,17 @@ export default function Sidebar() {
         <div
           className={cn(
             "flex items-center h-16 border-b border-white/10 flex-shrink-0 overflow-hidden",
-            sidebarCollapsed ? "lg:justify-center lg:px-0" : "px-4 gap-3"
+            sidebarCollapsed ? "lg:justify-center lg:px-0" : "px-4"
           )}
         >
-          {/* Logo glyph */}
-          <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center flex-shrink-0 overflow-hidden p-0.5">
-            <Image
-              src="/dravik-realty-logo.png"
-              alt="Dravik Realty"
-              width={28}
-              height={28}
-              className="object-contain"
-              priority
-            />
-          </div>
-
-          {/* Wordmark — hidden when collapsed */}
-          <div
+          <BrandLogo
+            variant={sidebarCollapsed ? "mark" : "wordmark"}
             className={cn(
-              "overflow-hidden transition-all duration-300",
-              sidebarCollapsed ? "lg:w-0 lg:opacity-0" : "w-auto opacity-100"
+              "transition-all duration-300",
+              sidebarCollapsed ? "lg:h-10 lg:w-10" : "h-14 w-40"
             )}
-          >
-            <p className="text-white font-bold text-sm leading-none whitespace-nowrap">
-              Dravik <span className="text-gold">Realty</span>
-            </p>
-            <p className="text-[9px] text-gray-500 uppercase tracking-[0.2em] mt-1 whitespace-nowrap">
-              The Platform
-            </p>
-          </div>
+            priority
+          />
         </div>
 
         {/* ── Nav sections ────────────────────────────────── */}

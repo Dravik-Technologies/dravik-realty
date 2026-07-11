@@ -1,8 +1,8 @@
-import Image from "next/image";
 import { redirect } from "next/navigation";
 import { KeyRound, UserRound } from "lucide-react";
 import { createClientPortalSession, getClientPortalSession } from "@/auth/server";
 import { LOCAL_CLIENT_SESSIONS } from "@/auth/local-identity";
+import { BrandLogo } from "@/components/brand/BrandLogo";
 
 async function signInClientPortal(formData: FormData) {
   "use server";
@@ -24,16 +24,7 @@ export default async function PortalLoginPage() {
       <section className="w-full max-w-md bg-white border border-line rounded-2xl shadow-sm overflow-hidden">
         <div className="bg-dravik-dark px-6 py-7 text-white">
           <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-xl bg-white flex items-center justify-center p-1">
-              <Image
-                src="/dravik-realty-logo.png"
-                alt="Dravik Realty"
-                width={36}
-                height={36}
-                className="object-contain"
-                priority
-              />
-            </div>
+            <BrandLogo className="h-16 w-36 flex-shrink-0" priority />
             <div>
               <h1 className="text-lg font-bold leading-none">Client Portal</h1>
               <p className="text-xs text-gray-400 mt-1">Dravik Realty</p>

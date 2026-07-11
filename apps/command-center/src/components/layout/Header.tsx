@@ -1,12 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, Search, ChevronDown, User, LogOut } from "lucide-react";
 import type { CommandCenterSession } from "@dravik/contracts/identity";
 import { useShell } from "./ShellProvider";
+import { BrandLogo } from "@/components/brand/BrandLogo";
 import GlobalSearch       from "./GlobalSearch";
 import NotificationCenter from "./NotificationCenter";
 import { cn } from "@dravik/shared";
@@ -81,14 +81,7 @@ export default function Header({ session }: { session: CommandCenterSession }) {
 
         {/* Mobile logo mark */}
         <div className="lg:hidden flex items-center flex-shrink-0">
-          <Image
-            src="/dravik-realty-logo.png"
-            alt="Dravik Realty"
-            height={36}
-            width={80}
-            className="object-contain"
-            priority
-          />
+          <BrandLogo className="h-10 w-24 rounded-lg" priority />
         </div>
 
         {/* Page title — desktop */}

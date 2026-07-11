@@ -32,12 +32,12 @@ export default async function PortalLoginPage() {
   return (
     <main className="min-h-screen bg-surface flex items-center justify-center px-4 py-10">
       <section className="w-full max-w-md bg-white border border-line rounded-2xl shadow-sm overflow-hidden">
-        <div className="bg-dravik-dark px-6 py-7 text-white">
+        <div className="brand-metal-surface px-6 py-7 text-[#FDFDFD] shadow-[0_1px_0_rgba(255,255,255,0.08)_inset]">
           <div className="flex items-center gap-3">
             <BrandLogo className="h-16 w-36 flex-shrink-0" priority />
             <div>
               <h1 className="text-lg font-bold leading-none">Client Portal</h1>
-              <p className="text-xs text-gray-400 mt-1">Dravik Realty</p>
+              <p className="text-xs text-[#D1CFCF] mt-1">Dravik Realty</p>
             </div>
           </div>
         </div>

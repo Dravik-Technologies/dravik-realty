@@ -81,13 +81,13 @@ export default function Header({ session }: { session: CommandCenterSession }) {
 
   return (
     <>
-      <header className="h-16 bg-white border-b border-line flex items-center gap-3 px-4 lg:px-5 flex-shrink-0 z-30">
+      <header className="brand-metal-surface h-16 border-b border-[#FDFDFD]/10 shadow-[0_1px_0_rgba(255,255,255,0.08)_inset] flex items-center gap-3 px-4 lg:px-5 flex-shrink-0 z-30">
 
         {/* Mobile hamburger */}
         <button
           aria-label="Open navigation"
           onClick={openMobileSidebar}
-          className="lg:hidden p-2 rounded-xl text-gray-400 hover:bg-surface hover:text-dravik-dark transition-colors flex-shrink-0"
+          className="lg:hidden p-2 rounded-xl text-[#D1CFCF] hover:bg-[#FDFDFD]/10 hover:text-[#FDFDFD] transition-colors flex-shrink-0"
         >
           <Menu size={20} />
         </button>
@@ -98,17 +98,17 @@ export default function Header({ session }: { session: CommandCenterSession }) {
         </div>
 
         {/* Page title — desktop */}
-        <h1 className="hidden lg:block text-sm font-bold text-dravik-dark flex-shrink-0">{pageTitle}</h1>
+        <h1 className="hidden lg:block text-sm font-bold text-[#FDFDFD] flex-shrink-0">{pageTitle}</h1>
 
         {!hideGlobalSearch && (
           <button
             aria-label="Open global search"
             onClick={() => setSearchOpen(true)}
-            className="relative hidden sm:flex flex-1 max-w-md mx-auto items-center gap-2.5 px-4 py-2 bg-surface-2 border border-transparent rounded-xl text-gray-400 hover:border-gold/30 hover:bg-white transition-all cursor-text text-left"
+            className="relative hidden sm:flex flex-1 max-w-md mx-auto items-center gap-2.5 px-4 py-2 bg-[#FDFDFD]/10 border border-[#D1CFCF]/15 rounded-xl text-[#D1CFCF] hover:border-[#FDFDFD]/35 hover:bg-[#FDFDFD]/15 transition-all cursor-text text-left"
           >
             <Search size={14} className="flex-shrink-0" />
             <span className="flex-1 truncate text-sm">Search leads, partners, listings...</span>
-            <kbd className="hidden md:flex items-center ml-auto text-[10px] text-gray-300 font-mono bg-surface-2 border border-line rounded px-1.5 py-0.5 flex-shrink-0 leading-none">
+            <kbd className="hidden md:flex items-center ml-auto text-[10px] text-[#D1CFCF] font-mono bg-[#2F2F2F]/50 border border-[#FDFDFD]/10 rounded px-1.5 py-0.5 flex-shrink-0 leading-none">
               ⌘K
             </kbd>
           </button>
@@ -118,7 +118,7 @@ export default function Header({ session }: { session: CommandCenterSession }) {
           <button
             aria-label="Open global search"
             onClick={() => setSearchOpen(true)}
-            className="sm:hidden ml-auto p-2 rounded-xl text-gray-400 hover:bg-surface hover:text-dravik-dark transition-colors"
+            className="sm:hidden ml-auto p-2 rounded-xl text-[#D1CFCF] hover:bg-[#FDFDFD]/10 hover:text-[#FDFDFD] transition-colors"
           >
             <Search size={18} />
           </button>
@@ -136,18 +136,18 @@ export default function Header({ session }: { session: CommandCenterSession }) {
               aria-label="User menu"
               aria-expanded={userMenuOpen}
               onClick={() => setUserMenuOpen(v => !v)}
-              className="flex items-center gap-2 pl-1.5 pr-2.5 py-1.5 rounded-xl hover:bg-surface-2 transition-colors"
+              className="flex items-center gap-2 pl-1.5 pr-2.5 py-1.5 rounded-xl hover:bg-[#FDFDFD]/10 transition-colors"
             >
-              <div className="w-8 h-8 rounded-lg bg-dravik-dark flex items-center justify-center flex-shrink-0">
-                <span className="text-gold text-xs font-bold leading-none">{session.user.initials}</span>
+              <div className="w-8 h-8 rounded-lg bg-[#2F2F2F] border border-[#FDFDFD]/15 flex items-center justify-center flex-shrink-0 shadow-[0_1px_0_rgba(255,255,255,0.12)_inset]">
+                <span className="text-[#E5E4E2] text-xs font-bold leading-none">{session.user.initials}</span>
               </div>
               <div className="hidden sm:block text-left">
-                <p className="text-xs font-semibold text-dravik-dark leading-tight">{session.user.name}</p>
-                <p className="text-[10px] text-gray-400 leading-tight">{session.tenant.name}</p>
+                <p className="text-xs font-semibold text-[#FDFDFD] leading-tight">{session.user.name}</p>
+                <p className="text-[10px] text-[#D1CFCF]/80 leading-tight">{session.tenant.name}</p>
               </div>
               <ChevronDown
                 size={13}
-                className={cn("hidden sm:block text-gray-400 transition-transform duration-150", userMenuOpen && "rotate-180")}
+                className={cn("hidden sm:block text-[#D1CFCF] transition-transform duration-150", userMenuOpen && "rotate-180")}
               />
             </button>
 

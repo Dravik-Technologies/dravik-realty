@@ -87,7 +87,7 @@ export default function Sidebar() {
         {/* ── Logo ───────────────────────────────────────── */}
         <div
           className={cn(
-            "flex items-center h-16 border-b border-white/10 flex-shrink-0 overflow-hidden",
+            "brand-metal-surface flex items-center h-16 border-b border-[#FDFDFD]/10 flex-shrink-0 overflow-hidden shadow-[0_1px_0_rgba(255,255,255,0.08)_inset]",
             sidebarCollapsed ? "lg:justify-center lg:px-0" : "px-4"
           )}
         >

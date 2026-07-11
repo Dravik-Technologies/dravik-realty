@@ -15,11 +15,13 @@ export function BrandLogo({
   variant = "wordmark",
 }: BrandLogoProps) {
   const isMark = variant === "mark";
+  const edgeFade =
+    "radial-gradient(ellipse 74% 70% at 50% 50%, #000 58%, rgba(0,0,0,0.9) 68%, transparent 100%)";
 
   return (
     <span
       className={cn(
-        "relative block overflow-hidden rounded-xl border border-white/10 bg-dravik-dark shadow-sm",
+        "relative block overflow-visible",
         isMark ? "h-10 w-10" : "h-14 w-36",
         className
       )}
@@ -30,12 +32,17 @@ export function BrandLogo({
         fill
         sizes={isMark ? "40px" : "176px"}
         className={cn(
+          "drop-shadow-[0_10px_24px_rgba(0,0,0,0.28)]",
           isMark
-            ? "object-cover scale-[1.6]"
-            : "object-contain scale-[1.55]"
+            ? "object-contain scale-[1.45]"
+            : "object-contain scale-[1.08]"
         )}
         priority={priority}
-        style={{ objectPosition: isMark ? "50% 35%" : "50% 45%" }}
+        style={{
+          objectPosition: "50% 50%",
+          WebkitMaskImage: edgeFade,
+          maskImage: edgeFade,
+        }}
       />
     </span>
   );

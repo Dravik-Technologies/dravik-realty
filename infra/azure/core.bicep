@@ -7,6 +7,7 @@ targetScope = 'resourceGroup'
 param environmentName string
 
 param location string = resourceGroup().location
+param postgresLocation string = location
 param projectName string = 'dravik-realty'
 param createPostgres bool = true
 param postgresAdminLogin string = 'dravikadmin'
@@ -14,20 +15,21 @@ param postgresAdminLogin string = 'dravikadmin'
 @secure()
 param postgresAdminPassword string = ''
 
-param postgresSkuName string = 'Standard_B1ms'
-param postgresSkuTier string = 'Burstable'
+param postgresSkuName string = environmentName == 'prod' ? 'Standard_D2ds_v5' : 'Standard_B1ms'
+param postgresSkuTier string = environmentName == 'prod' ? 'GeneralPurpose' : 'Burstable'
 param postgresStorageGb int = 32
 param postgresBackupRetentionDays int = 7
 
 var shortEnvironmentName = environmentName == 'prod' ? 'prd' : 'stg'
 var suffix = uniqueString(subscription().id, resourceGroup().id, projectName, environmentName)
+var postgresSuffix = uniqueString(subscription().id, resourceGroup().id, projectName, environmentName, postgresLocation)
 var acrName = take('drv${shortEnvironmentName}${suffix}', 50)
 var applicationInsightsName = 'drv-${shortEnvironmentName}-appi-${suffix}'
 var containerAppsEnvironmentName = 'drv-${shortEnvironmentName}-cae-${suffix}'
 var keyVaultName = take('drv-${shortEnvironmentName}-kv-${suffix}', 24)
 var logAnalyticsName = 'drv-${shortEnvironmentName}-logs-${suffix}'
 var managedIdentityName = 'drv-${shortEnvironmentName}-aca-${suffix}'
-var postgresServerName = 'drv-${shortEnvironmentName}-pg-${suffix}'
+var postgresServerName = 'drv-${shortEnvironmentName}-pg-${postgresSuffix}'
 var storageAccountName = take('drv${shortEnvironmentName}${suffix}', 24)
 
 var acrPullRoleDefinitionId = '7f951dda-4ed3-4680-a7ca-43fe172d538d'
@@ -180,7 +182,7 @@ resource keyVaultSecretsUserAssignment 'Microsoft.Authorization/roleAssignments@
 
 resource postgresServer 'Microsoft.DBforPostgreSQL/flexibleServers@2024-08-01' = if (createPostgres) {
   name: postgresServerName
-  location: location
+  location: postgresLocation
   sku: {
     name: postgresSkuName
     tier: postgresSkuTier

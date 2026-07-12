@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
+import { TenantBrandingProvider } from "@/components/brand/TenantBrandingProvider";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -21,7 +22,9 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${manrope.variable} h-full antialiased`}>
-      <body className="min-h-full bg-surface">{children}</body>
+      <body className="min-h-full bg-surface">
+        <TenantBrandingProvider>{children}</TenantBrandingProvider>
+      </body>
     </html>
   );
 }

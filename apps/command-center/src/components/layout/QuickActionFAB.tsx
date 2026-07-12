@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Home, Plus, Users, Receipt, Globe, Megaphone } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import type { CommandCenterSession } from "@dravik/contracts/identity";
 import { canAccessHref } from "@/modules/registry";
 import { cn } from "@dravik/shared";
@@ -42,6 +43,7 @@ function ActionItem({ label, icon: Icon, href, bg, onClose }: {
 
 // ─── QuickActionFAB ───────────────────────────────────────────
 export default function QuickActionFAB({ session }: { session: CommandCenterSession }) {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const fabRef = useRef<HTMLDivElement>(null);
   const handleClose = useCallback(() => setOpen(false), []);
@@ -61,7 +63,7 @@ export default function QuickActionFAB({ session }: { session: CommandCenterSess
     };
   }, [open, handleClose]);
 
-  if (visibleActions.length === 0) return null;
+  if (visibleActions.length === 0 || pathname.startsWith("/broker/settings")) return null;
 
   return (
     <div ref={fabRef} className="fixed bottom-6 right-6 z-[1000] flex flex-col-reverse items-end gap-3">

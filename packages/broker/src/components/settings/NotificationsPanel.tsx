@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { Bell, Mail, MessageSquare, Smartphone } from "lucide-react";
 import { NOTIF_PREFS } from "../../data/settings";
 import type { NotifPref } from "@dravik/contracts/broker";
@@ -103,8 +103,8 @@ export default function NotificationsPanel({ onSave }: { onSave: () => void }) {
           </thead>
           <tbody>
             {categories.map((cat) => (
-              <>
-                <CategoryHeader key={`cat-${cat}`} label={cat} />
+              <Fragment key={cat}>
+                <CategoryHeader label={cat} />
                 {prefs.filter((p) => p.category === cat).map((pref) => (
                   <tr key={pref.id} className="border-b border-line last:border-0 hover:bg-surface/30 transition-colors">
                     <td className="px-5 py-3.5">
@@ -127,7 +127,7 @@ export default function NotificationsPanel({ onSave }: { onSave: () => void }) {
                     </td>
                   </tr>
                 ))}
-              </>
+              </Fragment>
             ))}
           </tbody>
         </table>

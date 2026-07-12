@@ -21,7 +21,7 @@ const SECTION_TITLES: Record<SettingsSection, { title: string; sub: string }> = 
   commission:    { title: "Commission & Billing", sub: "Split rules, subscription, and invoice history."},
   integrations:  { title: "Integrations",         sub: "Connected services and API access."             },
   compliance:    { title: "Compliance & Docs",    sub: "License tracking, E&O insurance, and documents."},
-  appearance:    { title: "Appearance",           sub: "Theme, colors, and email template preview."     },
+  appearance:    { title: "Appearance",           sub: "Theme, fonts, logo, and email template preview."},
   notifications: { title: "Notifications",        sub: "Email, SMS, and push alert preferences."        },
   security:      { title: "Security & Audit",     sub: "Authentication controls and activity log."      },
 };

@@ -1,33 +1,68 @@
 "use client";
 
-import { useState } from "react";
-import { Check, Mail, Palette } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { Check, ImagePlus, Mail, Palette, RotateCcw, Type, Upload, X } from "lucide-react";
 import { COLOR_THEMES } from "../../data/settings";
 import type { ColorTheme } from "@dravik/contracts/broker";
-import { cn } from "@dravik/shared";
+import {
+  BRAND_FONT_OPTIONS,
+  DEFAULT_TENANT_BRANDING,
+  normalizeTenantBranding,
+  publishTenantBrandingChange,
+  readTenantBrandingFromStorage,
+  writeTenantBrandingToStorage,
+  cn,
+  type BrandFontId,
+  type TenantBranding,
+} from "@dravik/shared";
 
-// ─── Color swatch ─────────────────────────────────────────────
-function Swatch({ theme, active, onSelect }: {
-  theme:    ColorTheme;
-  active:   boolean;
+const MAX_LOGO_BYTES = 900_000;
+
+function findTheme(branding: TenantBranding) {
+  return COLOR_THEMES.find(
+    (theme) =>
+      theme.primary.toLowerCase() === branding.accentColor.toLowerCase() &&
+      theme.dark.toLowerCase() === branding.sidebarColor.toLowerCase()
+  );
+}
+
+function buildThemeBranding(theme: ColorTheme, current: TenantBranding): TenantBranding {
+  return normalizeTenantBranding({
+    ...current,
+    accentColor: theme.primary,
+    sidebarColor: theme.dark,
+  });
+}
+
+// Color swatch
+function Swatch({
+  theme,
+  active,
+  onSelect,
+}: {
+  theme: ColorTheme;
+  active: boolean;
   onSelect: (id: string) => void;
 }) {
   return (
     <button
+      type="button"
       onClick={() => onSelect(theme.id)}
       className={cn(
-        "relative flex flex-col items-center gap-2 p-3 rounded-xl border-2 transition-all",
+        "relative flex flex-col items-center gap-2 rounded-xl border-2 p-3 transition-all",
         active ? "border-gold shadow-md scale-105" : "border-line hover:border-gray-300"
       )}
     >
-      {/* Color preview */}
       <div className="flex gap-1">
-        <div className="w-8 h-8 rounded-lg" style={{ background: theme.primary }} />
-        <div className="w-8 h-8 rounded-lg" style={{ background: theme.dark }} />
+        <span className="h-8 w-8 rounded-lg" style={{ background: theme.primary }} />
+        <span className="h-8 w-8 rounded-lg" style={{ background: theme.dark }} />
       </div>
-      <p className="text-[10px] font-semibold text-dravik-dark text-center leading-tight">{theme.label}</p>
+      <span className="text-center text-[10px] font-semibold leading-tight text-dravik-dark">
+        {theme.label}
+      </span>
       {active && (
-        <span className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-gold flex items-center justify-center">
+        <span className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-gold">
           <Check size={11} className="text-dravik-dark" />
         </span>
       )}
@@ -35,157 +70,380 @@ function Swatch({ theme, active, onSelect }: {
   );
 }
 
-// ─── Email template preview ───────────────────────────────────
-function EmailPreview({ primary, dark }: { primary: string; dark: string }) {
+function PreviewLogo({ branding, small = false }: { branding: TenantBranding; small?: boolean }) {
   return (
-    <div className="bg-surface-2 rounded-2xl p-4 max-w-sm mx-auto">
-      <p className="text-[10px] text-gray-400 uppercase tracking-widest font-semibold mb-3 text-center">
-        Email Template Preview
-      </p>
-      <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-line">
-        {/* Header band */}
-        <div className="h-10 flex items-center px-4 gap-2" style={{ background: dark }}>
-          <div className="w-6 h-6 rounded border flex items-center justify-center" style={{ borderColor: `${primary}40`, background: `${primary}10` }}>
-            <span className="font-bold text-xs leading-none" style={{ color: primary }}>DR</span>
-          </div>
-          <span className="text-xs font-bold text-white/90">Dravik Realty</span>
+    <span
+      className={cn(
+        "relative flex shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-[linear-gradient(135deg,#FDFDFD_0%,#E5E4E2_38%,#D1CFCF_66%,#AEB6BF_100%)] shadow-[0_8px_18px_rgba(17,20,24,0.14),0_1px_0_rgba(253,253,253,0.8)_inset]",
+        small ? "h-8 w-8" : "h-12 w-12"
+      )}
+    >
+      {branding.logoDataUrl ? (
+        <Image
+          src={branding.logoDataUrl}
+          alt={branding.companyName}
+          width={80}
+          height={80}
+          unoptimized
+          className="h-[82%] w-[82%] object-contain drop-shadow-[0_3px_6px_rgba(17,20,24,0.18)]"
+          draggable={false}
+        />
+      ) : (
+        <span
+          aria-hidden
+          className={cn(
+            "font-black leading-none text-[#2F2F2F]",
+            small ? "text-sm" : "text-[1.35rem]"
+          )}
+        >
+          {branding.companyInitials}
+        </span>
+      )}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-0 rounded-[inherit] bg-[linear-gradient(135deg,rgba(253,253,253,0.54),rgba(253,253,253,0.08)_38%,rgba(47,47,47,0.1)_100%)]"
+      />
+    </span>
+  );
+}
+
+function ShellPreview({ branding }: { branding: TenantBranding }) {
+  return (
+    <div className="overflow-hidden rounded-2xl border border-line bg-white shadow-sm">
+      <div
+        className="flex items-center gap-3 border-b border-[#D1CFCF]/80 px-4 py-3"
+        style={{ background: branding.headerColor, color: branding.headerTextColor }}
+      >
+        <PreviewLogo branding={branding} />
+        <div className="min-w-0">
+          <p className="truncate text-[10px] font-bold uppercase tracking-[0.18em] text-gray-500">
+            {branding.companyName}
+          </p>
+          <p className="truncate text-sm font-black">Dashboard</p>
         </div>
-        {/* Body */}
-        <div className="px-5 py-4 space-y-2">
-          <div className="h-3.5 rounded" style={{ background: `${primary}22`, width: "60%" }} />
-          <div className="h-2 bg-gray-100 rounded w-full" />
-          <div className="h-2 bg-gray-100 rounded w-4/5" />
-          <div className="h-2 bg-gray-100 rounded w-3/5" />
-          {/* CTA button */}
-          <div className="pt-2">
-            <div className="inline-flex items-center px-4 py-1.5 rounded-lg text-xs font-bold text-white" style={{ background: primary }}>
-              View Details
-            </div>
+        <div className="ml-auto hidden h-8 w-36 rounded-xl border border-black/10 bg-white/65 sm:block" />
+      </div>
+      <div className="flex min-h-36">
+        <div className="w-24 p-3" style={{ background: branding.sidebarColor }}>
+          <div className="mb-3 h-2 w-12 rounded-full bg-white/25" />
+          <div className="space-y-2">
+            <div className="h-7 rounded-lg" style={{ background: `${branding.accentColor}26` }} />
+            <div className="h-7 rounded-lg bg-white/5" />
+            <div className="h-7 rounded-lg bg-white/5" />
           </div>
         </div>
-        {/* Footer */}
-        <div className="px-5 py-3 border-t border-line">
-          <div className="h-2 bg-gray-100 rounded w-1/2 mx-auto" />
+        <div className="flex-1 space-y-3 bg-surface p-4">
+          <div className="h-4 w-36 rounded-full" style={{ background: `${branding.accentColor}44` }} />
+          <div className="grid grid-cols-2 gap-3">
+            <div className="h-16 rounded-xl border border-line bg-white" />
+            <div className="h-16 rounded-xl border border-line bg-white" />
+          </div>
+          <button
+            type="button"
+            className="rounded-xl px-4 py-2 text-xs font-bold text-dravik-dark"
+            style={{ background: branding.accentColor }}
+          >
+            Primary Action
+          </button>
         </div>
       </div>
     </div>
   );
 }
 
-// ─── BrandingCustomizer ───────────────────────────────────────
+function EmailPreview({ branding }: { branding: TenantBranding }) {
+  return (
+    <div className="mx-auto max-w-sm rounded-2xl bg-surface-2 p-4">
+      <p className="mb-3 text-center text-[10px] font-semibold uppercase tracking-widest text-gray-400">
+        Email Template Preview
+      </p>
+      <div className="overflow-hidden rounded-xl border border-line bg-white shadow-sm">
+        <div className="flex h-10 items-center gap-2 px-4" style={{ background: branding.sidebarColor }}>
+          <PreviewLogo branding={branding} small />
+          <span className="text-xs font-bold text-white/90">{branding.companyName}</span>
+        </div>
+        <div className="space-y-2 px-5 py-4">
+          <div className="h-3.5 rounded" style={{ background: `${branding.accentColor}33`, width: "60%" }} />
+          <div className="h-2 w-full rounded bg-gray-100" />
+          <div className="h-2 w-4/5 rounded bg-gray-100" />
+          <div className="h-2 w-3/5 rounded bg-gray-100" />
+          <div className="pt-2">
+            <div className="inline-flex items-center rounded-lg px-4 py-1.5 text-xs font-bold text-dravik-dark" style={{ background: branding.accentColor }}>
+              View Details
+            </div>
+          </div>
+        </div>
+        <div className="border-t border-line px-5 py-3">
+          <div className="mx-auto h-2 w-1/2 rounded bg-gray-100" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function BrandingCustomizer({ onSave }: { onSave: () => void }) {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [draft, setDraft] = useState<TenantBranding>(DEFAULT_TENANT_BRANDING);
   const [activeTheme, setActiveTheme] = useState("gold");
-  const [customHex,   setCustomHex]   = useState("#C9C3B6");
-  const [useCustom,   setUseCustom]   = useState(false);
+  const [useCustom, setUseCustom] = useState(false);
+  const [logoError, setLogoError] = useState("");
 
-  const selectedTheme = COLOR_THEMES.find((t) => t.id === activeTheme) ?? COLOR_THEMES[0];
-  const displayPrimary = useCustom ? customHex : selectedTheme.primary;
-  const displayDark    = selectedTheme.dark;
+  useEffect(() => {
+    const stored = readTenantBrandingFromStorage();
+    const matched = findTheme(stored);
+    setDraft(stored);
+    setActiveTheme(matched?.id ?? "gold");
+    setUseCustom(!matched);
+  }, []);
 
-  function handleThemeSelect(id: string) {
-    setActiveTheme(id);
-    setUseCustom(false);
+  function updateDraft(update: Partial<TenantBranding>) {
+    setDraft((current) => normalizeTenantBranding({ ...current, ...update }));
   }
 
-  function handleCustomHex(v: string) {
-    setCustomHex(v);
+  function handleThemeSelect(id: string) {
+    const theme = COLOR_THEMES.find((item) => item.id === id) ?? COLOR_THEMES[0];
+    setActiveTheme(theme.id);
+    setUseCustom(false);
+    setDraft((current) => buildThemeBranding(theme, current));
+  }
+
+  function handleCustomAccent(value: string) {
+    setActiveTheme("custom");
     setUseCustom(true);
+    updateDraft({ accentColor: value });
+  }
+
+  function handleLogoFile(file: File | undefined) {
+    if (!file) return;
+    if (!file.type.startsWith("image/")) {
+      setLogoError("Choose a PNG, JPG, WEBP, or SVG file.");
+      return;
+    }
+    if (file.size > MAX_LOGO_BYTES) {
+      setLogoError("Choose an image under 900KB.");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      setLogoError("");
+      updateDraft({ logoDataUrl: typeof reader.result === "string" ? reader.result : null });
+    };
+    reader.onerror = () => setLogoError("Logo upload failed.");
+    reader.readAsDataURL(file);
+  }
+
+  function handleApply() {
+    const normalized = normalizeTenantBranding(draft);
+    setDraft(normalized);
+    writeTenantBrandingToStorage(normalized);
+    publishTenantBrandingChange(normalized);
+    onSave();
+  }
+
+  function handleReset() {
+    setDraft(DEFAULT_TENANT_BRANDING);
+    setActiveTheme("gold");
+    setUseCustom(false);
+    setLogoError("");
+    writeTenantBrandingToStorage(DEFAULT_TENANT_BRANDING);
+    publishTenantBrandingChange(DEFAULT_TENANT_BRANDING);
+    onSave();
   }
 
   return (
     <div className="space-y-6">
-
-      {/* Theme picker */}
-      <div className="bg-white border border-line rounded-2xl p-6">
-        <div className="flex items-center gap-2 mb-5">
-          <Palette size={16} className="text-gold" />
-          <div>
-            <h3 className="text-sm font-bold text-dravik-dark">Color Theme</h3>
-            <p className="text-xs text-gray-400 mt-0.5">Applied to sidebar, buttons, and accents across the platform.</p>
-          </div>
-        </div>
-
-        {/* Preset swatches */}
-        <div className="flex flex-wrap gap-3 mb-5">
-          {COLOR_THEMES.map((theme) => (
-            <Swatch
-              key={theme.id}
-              theme={theme}
-              active={activeTheme === theme.id && !useCustom}
-              onSelect={handleThemeSelect}
-            />
-          ))}
-        </div>
-
-        {/* Custom hex */}
-        <div className="flex items-center gap-3 p-4 bg-surface-2 rounded-xl">
-          <div
-            className="w-8 h-8 rounded-lg border border-line flex-shrink-0"
-            style={{ background: customHex }}
-          />
-          <div className="flex-1">
-            <p className="text-xs font-semibold text-dravik-dark mb-1">Custom Accent Color</p>
-            <input
-              type="color"
-              value={customHex}
-              onChange={(e) => handleCustomHex(e.target.value)}
-              className="h-7 w-20 rounded cursor-pointer border border-line bg-white"
-              title="Pick a custom brand color"
-            />
-          </div>
-          <span className="text-xs text-gray-400 font-mono">{customHex.toUpperCase()}</span>
-          {useCustom && (
-            <span className="text-[10px] font-semibold text-gold border border-gold/30 bg-gold-light px-2 py-0.5 rounded-full">
-              Active
-            </span>
-          )}
-        </div>
-      </div>
-
-      {/* Email preview */}
-      <div className="bg-white border border-line rounded-2xl p-6">
-        <div className="flex items-center gap-2 mb-5">
-          <Mail size={16} className="text-gold" />
-          <div>
-            <h3 className="text-sm font-bold text-dravik-dark">Email Template Preview</h3>
-            <p className="text-xs text-gray-400 mt-0.5">Outbound emails use your active brand colors.</p>
-          </div>
-        </div>
-        <EmailPreview primary={displayPrimary} dark={displayDark} />
-      </div>
-
-      {/* Typography + logo notes */}
-      <div className="bg-white border border-line rounded-2xl p-6">
-        <h3 className="text-sm font-bold text-dravik-dark mb-3">Typography & Assets</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {[
-            { label: "Primary Font",    value: "Geist Sans",      locked: true  },
-            { label: "Monospace Font",  value: "Geist Mono",      locked: true  },
-            { label: "Logo (Light BG)", value: "dravik-logo.svg",   locked: false },
-            { label: "Logo (Dark BG)",  value: "dravik-logo-inv.svg",locked: false },
-          ].map((item) => (
-            <div key={item.label} className="flex items-center justify-between bg-surface-2 rounded-xl px-4 py-3">
+      <div className="grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_24rem]">
+        <div className="space-y-6">
+          <section className="rounded-2xl border border-line bg-white p-6">
+            <div className="mb-5 flex items-center gap-2">
+              <Palette size={16} className="text-gold" />
               <div>
-                <p className="text-xs font-semibold text-dravik-dark">{item.label}</p>
-                <p className="text-[10px] text-gray-400">{item.value}</p>
+                <h3 className="text-sm font-bold text-dravik-dark">Color Theme</h3>
+                <p className="mt-0.5 text-xs text-gray-400">Applied to the header, sidebar, buttons, and accents.</p>
               </div>
-              {item.locked ? (
-                <span className="text-[10px] text-gray-300 border border-gray-200 px-2 py-0.5 rounded">Locked</span>
-              ) : (
-                <span className="text-[10px] font-semibold text-gray-400">Managed</span>
-              )}
             </div>
-          ))}
+
+            <div className="mb-5 flex flex-wrap gap-3">
+              {COLOR_THEMES.map((theme) => (
+                <Swatch
+                  key={theme.id}
+                  theme={theme}
+                  active={activeTheme === theme.id && !useCustom}
+                  onSelect={handleThemeSelect}
+                />
+              ))}
+            </div>
+
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+              <label className="rounded-xl bg-surface-2 p-4">
+                <span className="mb-2 block text-xs font-semibold text-dravik-dark">Accent</span>
+                <div className="flex items-center gap-3">
+                  <input
+                    aria-label="Custom accent color"
+                    type="color"
+                    value={draft.accentColor}
+                    onChange={(event) => handleCustomAccent(event.target.value)}
+                    className="h-8 w-12 cursor-pointer rounded border border-line bg-white"
+                  />
+                  <span className="font-mono text-xs text-gray-500">{draft.accentColor.toUpperCase()}</span>
+                </div>
+              </label>
+              <label className="rounded-xl bg-surface-2 p-4">
+                <span className="mb-2 block text-xs font-semibold text-dravik-dark">Header</span>
+                <div className="flex items-center gap-3">
+                  <input
+                    aria-label="Header color"
+                    type="color"
+                    value={draft.headerColor}
+                    onChange={(event) => updateDraft({ headerColor: event.target.value })}
+                    className="h-8 w-12 cursor-pointer rounded border border-line bg-white"
+                  />
+                  <span className="font-mono text-xs text-gray-500">{draft.headerColor.toUpperCase()}</span>
+                </div>
+              </label>
+              <label className="rounded-xl bg-surface-2 p-4">
+                <span className="mb-2 block text-xs font-semibold text-dravik-dark">Sidebar</span>
+                <div className="flex items-center gap-3">
+                  <input
+                    aria-label="Sidebar color"
+                    type="color"
+                    value={draft.sidebarColor}
+                    onChange={(event) => updateDraft({ sidebarColor: event.target.value })}
+                    className="h-8 w-12 cursor-pointer rounded border border-line bg-white"
+                  />
+                  <span className="font-mono text-xs text-gray-500">{draft.sidebarColor.toUpperCase()}</span>
+                </div>
+              </label>
+            </div>
+          </section>
+
+          <section className="rounded-2xl border border-line bg-white p-6">
+            <div className="mb-5 flex items-center gap-2">
+              <Type size={16} className="text-gold" />
+              <div>
+                <h3 className="text-sm font-bold text-dravik-dark">Typography</h3>
+                <p className="mt-0.5 text-xs text-gray-400">Controls the app shell and feature surfaces.</p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {BRAND_FONT_OPTIONS.map((font) => (
+                <button
+                  key={font.id}
+                  type="button"
+                  onClick={() => updateDraft({ fontId: font.id as BrandFontId })}
+                  className={cn(
+                    "flex items-center justify-between rounded-xl border px-4 py-3 text-left transition-all",
+                    draft.fontId === font.id
+                      ? "border-gold bg-gold-light text-dravik-dark"
+                      : "border-line bg-white text-gray-500 hover:border-gray-300"
+                  )}
+                  style={{ fontFamily: font.cssFamily }}
+                >
+                  <span className="text-sm font-bold">{font.label}</span>
+                  {draft.fontId === font.id && <Check size={15} className="text-gold-dark" />}
+                </button>
+              ))}
+            </div>
+          </section>
+
+          <section className="rounded-2xl border border-line bg-white p-6">
+            <div className="mb-5 flex items-center gap-2">
+              <ImagePlus size={16} className="text-gold" />
+              <div>
+                <h3 className="text-sm font-bold text-dravik-dark">Logo & Identity</h3>
+                <p className="mt-0.5 text-xs text-gray-400">The initials appear when no company logo is uploaded.</p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-[12rem_minmax(0,1fr)]">
+              <div className="flex min-h-36 items-center justify-center rounded-2xl border border-line bg-surface-2">
+                <PreviewLogo branding={draft} />
+              </div>
+              <div className="space-y-4">
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-[minmax(0,1fr)_8rem]">
+                  <label>
+                    <span className="mb-1.5 block text-xs font-semibold text-dravik-dark">Company Name</span>
+                    <input
+                      value={draft.companyName}
+                      onChange={(event) => updateDraft({ companyName: event.target.value })}
+                      className="w-full rounded-xl border border-line bg-white px-3 py-2 text-sm font-medium text-dravik-dark outline-none transition-colors focus:border-gold"
+                    />
+                  </label>
+                  <label>
+                    <span className="mb-1.5 block text-xs font-semibold text-dravik-dark">Initials</span>
+                    <input
+                      value={draft.companyInitials}
+                      onChange={(event) => updateDraft({ companyInitials: event.target.value })}
+                      maxLength={4}
+                      className="w-full rounded-xl border border-line bg-white px-3 py-2 text-sm font-bold uppercase tracking-[0.08em] text-dravik-dark outline-none transition-colors focus:border-gold"
+                    />
+                  </label>
+                </div>
+
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  aria-label="Tenant logo upload"
+                  accept="image/png,image/jpeg,image/webp,image/svg+xml"
+                  className="sr-only"
+                  onChange={(event) => handleLogoFile(event.target.files?.[0])}
+                />
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    className="inline-flex items-center gap-2 rounded-xl bg-gold px-4 py-2 text-xs font-bold text-dravik-dark transition-colors hover:bg-gold-dark"
+                  >
+                    <Upload size={14} /> Upload Logo
+                  </button>
+                  {draft.logoDataUrl && (
+                    <button
+                      type="button"
+                      onClick={() => updateDraft({ logoDataUrl: null })}
+                      className="inline-flex items-center gap-2 rounded-xl border border-line px-4 py-2 text-xs font-semibold text-gray-500 transition-colors hover:border-dravik-dark hover:text-dravik-dark"
+                    >
+                      <X size={14} /> Remove Logo
+                    </button>
+                  )}
+                </div>
+                {logoError && <p className="text-xs font-semibold text-rose-500">{logoError}</p>}
+              </div>
+            </div>
+          </section>
         </div>
+
+        <aside className="space-y-6">
+          <section className="rounded-2xl border border-line bg-white p-6">
+            <h3 className="mb-4 text-sm font-bold text-dravik-dark">Shell Preview</h3>
+            <ShellPreview branding={draft} />
+          </section>
+
+          <section className="rounded-2xl border border-line bg-white p-6">
+            <div className="mb-5 flex items-center gap-2">
+              <Mail size={16} className="text-gold" />
+              <h3 className="text-sm font-bold text-dravik-dark">Email Preview</h3>
+            </div>
+            <EmailPreview branding={draft} />
+          </section>
+        </aside>
       </div>
 
-      {/* Save */}
-      <div className="flex justify-end">
+      <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
         <button
-          onClick={onSave}
-          className="px-5 py-2.5 bg-gold text-dravik-dark text-sm font-bold rounded-xl hover:bg-gold-dark transition-colors"
+          type="button"
+          onClick={handleReset}
+          className="inline-flex items-center justify-center gap-2 rounded-xl border border-line px-4 py-2.5 text-sm font-semibold text-gray-500 transition-colors hover:border-dravik-dark hover:text-dravik-dark"
         >
-          Apply Theme
+          <RotateCcw size={14} /> Reset Dravik Default
+        </button>
+        <button
+          type="button"
+          onClick={handleApply}
+          className="inline-flex items-center justify-center gap-2 rounded-xl bg-gold px-5 py-2.5 text-sm font-bold text-dravik-dark transition-colors hover:bg-gold-dark"
+        >
+          <Check size={15} /> Apply Theme
         </button>
       </div>
     </div>

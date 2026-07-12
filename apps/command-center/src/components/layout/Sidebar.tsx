@@ -89,15 +89,15 @@ export default function Sidebar({ session }: { session: CommandCenterSession }) 
         {/* ── Logo ───────────────────────────────────────── */}
         <div
           className={cn(
-            "brand-metal-surface flex items-center h-16 border-b border-[#FDFDFD]/10 flex-shrink-0 overflow-hidden shadow-[0_1px_0_rgba(255,255,255,0.08)_inset]",
+            "brand-metal-surface flex items-center h-16 border-b border-[#D1CFCF]/80 flex-shrink-0 overflow-hidden shadow-[0_1px_0_rgba(253,253,253,0.8)_inset]",
             sidebarCollapsed ? "lg:justify-center lg:px-0" : "px-4"
           )}
         >
           <BrandLogo
-            variant="mark"
+            variant={sidebarCollapsed ? "mark" : "wordmark"}
             className={cn(
               "transition-all duration-300",
-              sidebarCollapsed ? "lg:h-10 lg:w-10" : "h-14 w-14"
+              sidebarCollapsed ? "lg:h-11 lg:w-11" : "h-12 w-44"
             )}
             priority
           />

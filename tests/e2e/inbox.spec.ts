@@ -24,4 +24,20 @@ test.describe("unified inbox", () => {
     await composer.fill("Characterization probe — not sent");
     await expect(composer).toHaveValue("Characterization probe — not sent");
   });
+
+  test("thread quick actions and attachments provide beta feedback", async ({ page }) => {
+    await page.getByText("John Smith").first().click();
+
+    await page.getByRole("button", { name: "Task" }).click();
+    await expect(page.getByText("Task queued for John Smith")).toBeVisible();
+
+    await page.getByRole("button", { name: "Log" }).click();
+    await expect(page.getByText("Activity logged for John Smith")).toBeVisible();
+
+    await page.getByRole("button", { name: "Link" }).click();
+    await expect(page.getByText("Conversation linked to transaction workspace")).toBeVisible();
+
+    await page.getByRole("button", { name: "Attach" }).click();
+    await expect(page.getByText("Attachment request added to this message.")).toBeVisible();
+  });
 });

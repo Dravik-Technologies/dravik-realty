@@ -41,6 +41,12 @@ test.describe("shell chrome", () => {
     await expect(page).toHaveURL(/\/transactions$/);
   });
 
+  test("user menu links to profile settings", async ({ page }) => {
+    await page.getByRole("button", { name: "User menu" }).click();
+    await page.getByRole("link", { name: "My Profile" }).click();
+    await expect(page).toHaveURL(/\/broker\/settings$/);
+  });
+
   // E9.3: data-driven nav completeness. The shell now renders the subscribed
   // registry subset for the active session, not every module in the product.
   const VISIBLE_NAV_LABELS = [

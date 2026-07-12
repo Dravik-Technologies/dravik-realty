@@ -158,13 +158,13 @@ export default function Header({ session }: { session: CommandCenterSession }) {
                   <p className="text-xs text-gray-400 mt-0.5">{session.user.title} · {session.tenant.name}</p>
                 </div>
                 <div className="py-1">
-                  <button
-                    disabled
-                    title="Profile management coming soon"
-                    className="flex items-center gap-3 w-full px-4 py-2.5 text-sm text-gray-300 cursor-not-allowed"
+                  <Link
+                    href="/broker/settings"
+                    onClick={() => setUserMenuOpen(false)}
+                    className="flex items-center gap-3 w-full px-4 py-2.5 text-sm text-gray-600 hover:bg-surface transition-colors"
                   >
                     <User size={14} className="text-gray-400" /> My Profile
-                  </button>
+                  </Link>
                 </div>
                 <div className="border-t border-line py-1">
                   <Link href="/logout" className="flex items-center gap-3 w-full px-4 py-2.5 text-sm text-rose-500 hover:bg-rose-50 transition-colors">

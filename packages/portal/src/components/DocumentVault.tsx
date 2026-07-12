@@ -4,7 +4,7 @@ import { useState } from "react";
 import {
   FileText, FileCheck, AlertCircle, Building2, DollarSign,
   User, Landmark, CheckCircle2, Clock, AlertTriangle,
-  Upload, Eye,
+  Upload, Eye, X,
 } from "lucide-react";
 import type { ClientDocument, ClientTransaction } from "@dravik/contracts/portal";
 import { cn } from "@dravik/shared";
@@ -27,8 +27,18 @@ const STATUS_CONFIG = {
   needed:  { icon: AlertTriangle,label: "Needed",  cls: "text-rose-600   bg-rose-50   border-rose-200"     },
 };
 
+type VaultDocument = ClientDocument & { txAddress: string };
+
 // ─── Document row (module level) ─────────────────────────────
-function DocRow({ doc: d }: { doc: ClientDocument }) {
+function DocRow({
+  doc: d,
+  onPreview,
+  onUpload,
+}: {
+  doc: VaultDocument;
+  onPreview: (doc: VaultDocument) => void;
+  onUpload: (doc: VaultDocument) => void;
+}) {
   const Icon   = DOC_ICON[d.type];
   const status = STATUS_CONFIG[d.status];
   const StatusIcon = status.icon;
@@ -53,18 +63,20 @@ function DocRow({ doc: d }: { doc: ClientDocument }) {
         </span>
         {d.status === "signed" && (
           <button
-            disabled
-            title="Document preview coming soon"
-            className="opacity-0 group-hover:opacity-100 p-1.5 rounded-lg bg-surface-2 text-gray-300 cursor-not-allowed transition-all"
+            onClick={() => onPreview(d)}
+            aria-label={`Preview ${d.name}`}
+            title={`Preview ${d.name}`}
+            className="opacity-0 group-hover:opacity-100 p-1.5 rounded-lg bg-surface-2 text-gray-400 hover:text-gold transition-all"
           >
             <Eye size={12} />
           </button>
         )}
         {d.status === "needed" && (
           <button
-            disabled
-            title="Upload coming soon — contact your agent"
-            className="flex items-center gap-1 px-2 py-1 bg-gold-light text-gold-dark text-[10px] font-bold rounded-lg cursor-not-allowed opacity-60"
+            onClick={() => onUpload(d)}
+            aria-label={`Upload ${d.name}`}
+            title={`Upload ${d.name}`}
+            className="flex items-center gap-1 px-2 py-1 bg-gold-light text-gold-dark text-[10px] font-bold rounded-lg hover:bg-gold hover:text-dravik-dark transition-colors"
           >
             <Upload size={10} /> Upload
           </button>
@@ -81,23 +93,39 @@ interface Props {
 
 export default function DocumentVault({ transactions }: Props) {
   const [filterStatus, setFilterStatus] = useState<ClientDocument["status"] | "all">("all");
+  const [uploadedIds, setUploadedIds] = useState<Set<string>>(new Set());
+  const [previewDoc, setPreviewDoc] = useState<VaultDocument | null>(null);
 
-  const allDocs = transactions.flatMap((t) =>
+  const allDocs: VaultDocument[] = transactions.flatMap((t) =>
     t.documents.map((d) => ({ ...d, txAddress: t.address }))
   );
+  const effectiveDocs: VaultDocument[] = allDocs.map((d) =>
+    uploadedIds.has(d.id)
+      ? { ...d, status: "pending" as const, uploadedAt: "just now", dueDate: undefined }
+      : d
+  );
 
-  const signedCount  = allDocs.filter((d) => d.status === "signed").length;
-  const pendingCount = allDocs.filter((d) => d.status === "pending").length;
-  const neededCount  = allDocs.filter((d) => d.status === "needed").length;
-  const pct          = allDocs.length > 0 ? Math.round((signedCount / allDocs.length) * 100) : 0;
+  const signedCount  = effectiveDocs.filter((d) => d.status === "signed").length;
+  const pendingCount = effectiveDocs.filter((d) => d.status === "pending").length;
+  const neededCount  = effectiveDocs.filter((d) => d.status === "needed").length;
+  const pct          = effectiveDocs.length > 0 ? Math.round((signedCount / effectiveDocs.length) * 100) : 0;
 
-  const filtered = filterStatus === "all" ? allDocs : allDocs.filter((d) => d.status === filterStatus);
+  const filtered = filterStatus === "all" ? effectiveDocs : effectiveDocs.filter((d) => d.status === filterStatus);
 
   // Group by transaction
   const byTx = transactions.map((t) => ({
     tx: t,
     docs: filtered.filter((d) => d.transactionId === t.id),
   })).filter(({ docs }) => docs.length > 0);
+
+  function handleUpload(doc: VaultDocument) {
+    setUploadedIds((prev) => {
+      const next = new Set(prev);
+      next.add(doc.id);
+      return next;
+    });
+    setPreviewDoc({ ...doc, status: "pending", uploadedAt: "just now", dueDate: undefined });
+  }
 
   return (
     <div className="space-y-5">
@@ -135,9 +163,32 @@ export default function DocumentVault({ transactions }: Props) {
       <div className="flex items-center gap-3 p-3 bg-gold-light rounded-xl border border-gold/20">
         <Upload size={14} className="text-gold flex-shrink-0" />
         <p className="text-xs text-dravik-dark">
-          Need to upload a document? Contact your agent or reply in the <strong>Messages</strong> tab.
+          Use <strong>Upload</strong> on needed documents to stage them for agent review.
         </p>
       </div>
+
+      {previewDoc && (
+        <div aria-label="Client document preview" className="bg-white rounded-2xl border border-line p-4 shadow-sm">
+          <div className="flex items-start gap-3">
+            <div className="w-9 h-9 rounded-xl bg-surface-2 flex items-center justify-center flex-shrink-0">
+              <Eye size={15} className="text-gold" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-xs font-bold text-dravik-dark">Previewing {previewDoc.name}</p>
+              <p className="text-[10px] text-gray-400 mt-0.5">
+                {previewDoc.txAddress} · {previewDoc.uploadedAt ? `Uploaded ${previewDoc.uploadedAt}` : `Due ${previewDoc.dueDate}`}
+              </p>
+            </div>
+            <button
+              onClick={() => setPreviewDoc(null)}
+              aria-label="Close document preview"
+              className="p-1.5 rounded-lg text-gray-400 hover:bg-surface-2 hover:text-dravik-dark transition-colors"
+            >
+              <X size={14} />
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Document groups */}
       {byTx.length === 0 ? (
@@ -149,7 +200,9 @@ export default function DocumentVault({ transactions }: Props) {
               {tx.address} — {tx.city}, {tx.state}
             </p>
             <div className="space-y-2">
-              {docs.map((d) => <DocRow key={d.id} doc={d} />)}
+              {docs.map((d) => (
+                <DocRow key={d.id} doc={d} onPreview={setPreviewDoc} onUpload={handleUpload} />
+              ))}
             </div>
           </div>
         ))

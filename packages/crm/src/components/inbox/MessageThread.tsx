@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   MessageSquare, Mail, Phone, Zap, Settings2,
   Plus, Activity, Link2, PhoneCall, ChevronLeft,
@@ -92,6 +92,7 @@ interface Props {
 export default function MessageThread({ conversation: c, onBack, onSend, onCallStart }: Props) {
   const bottomRef = useRef<HTMLDivElement>(null);
   const ChanIcon  = c ? CHANNEL_ICON[c.channel] : MessageSquare;
+  const [actionNotice, setActionNotice] = useState<string | null>(null);
 
   // Scroll to bottom when messages change
   useEffect(() => {
@@ -99,6 +100,10 @@ export default function MessageThread({ conversation: c, onBack, onSend, onCallS
       bottomRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [c, c?.messages.length]);
+
+  useEffect(() => {
+    setActionNotice(null);
+  }, [c?.id]);
 
   if (!c) {
     return (
@@ -154,28 +159,33 @@ export default function MessageThread({ conversation: c, onBack, onSend, onCallS
               <PhoneCall size={12} /> Call
             </button>
             <button
-              disabled
-              title="Create task coming soon"
-              className="flex items-center gap-1 px-2.5 py-1.5 text-[11px] font-semibold rounded-lg bg-surface-2 text-gray-400 cursor-not-allowed opacity-50"
+              onClick={() => setActionNotice(`Task queued for ${c.clientName}`)}
+              title="Create follow-up task"
+              className="flex items-center gap-1 px-2.5 py-1.5 text-[11px] font-semibold rounded-lg bg-surface-2 text-gray-500 hover:bg-gold-light hover:text-gold transition-colors"
             >
               <Plus size={12} /> Task
             </button>
             <button
-              disabled
-              title="Log activity coming soon"
-              className="hidden sm:flex items-center gap-1 px-2.5 py-1.5 text-[11px] font-semibold rounded-lg bg-surface-2 text-gray-400 cursor-not-allowed opacity-50"
+              onClick={() => setActionNotice(`Activity logged for ${c.clientName}`)}
+              title="Log activity"
+              className="hidden sm:flex items-center gap-1 px-2.5 py-1.5 text-[11px] font-semibold rounded-lg bg-surface-2 text-gray-500 hover:bg-gold-light hover:text-gold transition-colors"
             >
               <Activity size={12} /> Log
             </button>
             <button
-              disabled
-              title="Link to transaction coming soon"
-              className="hidden sm:flex items-center gap-1 px-2.5 py-1.5 text-[11px] font-semibold rounded-lg bg-surface-2 text-gray-400 cursor-not-allowed opacity-50"
+              onClick={() => setActionNotice(`Conversation linked to transaction workspace`)}
+              title="Link to transaction"
+              className="hidden sm:flex items-center gap-1 px-2.5 py-1.5 text-[11px] font-semibold rounded-lg bg-surface-2 text-gray-500 hover:bg-gold-light hover:text-gold transition-colors"
             >
               <Link2 size={12} /> Link
             </button>
           </div>
         </div>
+        {actionNotice && (
+          <div role="status" className="mt-3 rounded-xl border border-gold/25 bg-gold-light px-3 py-2 text-xs font-semibold text-dravik-dark">
+            {actionNotice}
+          </div>
+        )}
       </div>
 
       {/* Messages */}

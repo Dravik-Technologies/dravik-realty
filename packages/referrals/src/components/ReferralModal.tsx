@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { X, MapPin, Star, BadgeCheck } from "lucide-react";
 import SplitCalculator from "./SplitCalculator";
 import type { Agent, CertificationType, PartnerRole } from "@dravik/contracts/referrals";
@@ -35,6 +35,11 @@ export default function ReferralModal({ agent, open, onClose }: ReferralModalPro
   const overlayRef    = useRef<HTMLDivElement>(null);
   const modalRef      = useRef<HTMLDivElement>(null);
   const returnFocusRef = useRef<HTMLElement | null>(null);
+  const [agreementQueued, setAgreementQueued] = useState(false);
+
+  useEffect(() => {
+    setAgreementQueued(false);
+  }, [agent?.id, open]);
 
   // Save return focus, set initial focus inside modal, restore on close
   useEffect(() => {
@@ -216,7 +221,15 @@ export default function ReferralModal({ agent, open, onClose }: ReferralModalPro
         {/* ── Footer CTA ── */}
         <div className="px-7 py-5 border-t border-line bg-surface flex items-center justify-between flex-shrink-0">
           <p className="text-xs text-gray-400">
-            Sending referral to <span className="font-semibold text-dravik-dark">{agent.name}</span> · {agent.location.city}
+            {agreementQueued ? (
+              <>
+                Agreement queued for <span className="font-semibold text-dravik-dark">{agent.email}</span>
+              </>
+            ) : (
+              <>
+                Sending referral to <span className="font-semibold text-dravik-dark">{agent.name}</span> · {agent.location.city}
+              </>
+            )}
           </p>
           <div className="flex gap-3">
             <button
@@ -226,11 +239,15 @@ export default function ReferralModal({ agent, open, onClose }: ReferralModalPro
               Cancel
             </button>
             <button
-              disabled
-              title="Referral agreement sending coming soon"
-              className="px-6 py-2.5 text-sm font-bold rounded-xl bg-surface-2 text-gray-300 cursor-not-allowed"
+              onClick={() => setAgreementQueued(true)}
+              className={cn(
+                "px-6 py-2.5 text-sm font-bold rounded-xl transition-all",
+                agreementQueued
+                  ? "bg-emerald-500 text-white"
+                  : "bg-dravik-dark text-white hover:bg-gold hover:text-dravik-dark"
+              )}
             >
-              Send Referral Agreement
+              {agreementQueued ? "Agreement Queued" : "Send Referral Agreement"}
             </button>
           </div>
         </div>

@@ -126,9 +126,38 @@ function OverviewTab({ t }: { t: Transaction }) {
 
 // ─── Documents tab (module level) ────────────────────────────
 function DocumentsTab({ docs }: { docs: TransactionDocument[] }) {
-  const signed   = docs.filter((d) => d.signed).length;
-  const pending  = docs.filter((d) => !d.signed && d.signaturesRequired > 0).length;
-  const pct      = docs.length > 0 ? Math.round((signed / docs.length) * 100) : 0;
+  const [localDocs, setLocalDocs] = useState<TransactionDocument[]>(docs);
+  const [previewDoc, setPreviewDoc] = useState<TransactionDocument | null>(null);
+  const [statusText, setStatusText] = useState<string | null>(null);
+
+  useEffect(() => {
+    setLocalDocs(docs);
+    setPreviewDoc(null);
+    setStatusText(null);
+  }, [docs]);
+
+  const signed   = localDocs.filter((d) => d.signed).length;
+  const pending  = localDocs.filter((d) => !d.signed && d.signaturesRequired > 0).length;
+  const pct      = localDocs.length > 0 ? Math.round((signed / localDocs.length) * 100) : 0;
+
+  function handleUpload() {
+    const staged: TransactionDocument = {
+      id: "uploaded-beta-document",
+      name: "Client Upload Packet",
+      type: "disclosure",
+      uploadedAt: "just now",
+      signed: false,
+      signaturesRequired: 0,
+      signaturesComplete: 0,
+    };
+    setLocalDocs((prev) => prev.some((d) => d.id === staged.id) ? prev : [staged, ...prev]);
+    setPreviewDoc(staged);
+    setStatusText("Client Upload Packet staged for this transaction.");
+  }
+
+  function handleSignaturePacket() {
+    setStatusText(`Signature packet queued for ${pending} pending document${pending === 1 ? "" : "s"}.`);
+  }
 
   return (
     <div className="space-y-4">
@@ -136,7 +165,7 @@ function DocumentsTab({ docs }: { docs: TransactionDocument[] }) {
       <div className="flex items-center gap-3">
         <div className="flex-1">
           <div className="flex justify-between text-xs mb-1">
-            <span className="text-gray-400">{signed}/{docs.length} documents complete</span>
+            <span className="text-gray-400">{signed}/{localDocs.length} documents complete</span>
             <span className="font-bold text-dravik-dark">{pct}%</span>
           </div>
           <div className="h-1.5 bg-surface-2 rounded-full overflow-hidden">
@@ -145,17 +174,17 @@ function DocumentsTab({ docs }: { docs: TransactionDocument[] }) {
         </div>
         <div className="flex gap-2 flex-shrink-0">
           <button
-            disabled
-            title="Document upload coming soon"
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-surface-2 text-xs font-semibold text-gray-400 rounded-lg opacity-50 cursor-not-allowed"
+            onClick={handleUpload}
+            title="Stage a transaction document"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-surface-2 text-xs font-semibold text-gray-500 rounded-lg hover:bg-gold-light hover:text-gold transition-colors"
           >
             <Upload size={12} /> Upload
           </button>
           {pending > 0 && (
             <button
-              disabled
-              title="E-signature integration coming soon"
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-dravik-dark text-white text-xs font-bold rounded-lg opacity-50 cursor-not-allowed"
+              onClick={handleSignaturePacket}
+              title="Queue an e-signature packet"
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-dravik-dark text-white text-xs font-bold rounded-lg hover:bg-gold hover:text-dravik-dark transition-colors"
             >
               <Send size={12} /> Send for Signature
             </button>
@@ -163,9 +192,37 @@ function DocumentsTab({ docs }: { docs: TransactionDocument[] }) {
         </div>
       </div>
 
+      {statusText && (
+        <div role="status" className="rounded-xl border border-gold/25 bg-gold-light px-3 py-2 text-xs font-semibold text-dravik-dark">
+          {statusText}
+        </div>
+      )}
+
+      {previewDoc && (
+        <div aria-label="Document preview" className="rounded-2xl border border-line bg-white p-4 shadow-sm">
+          <div className="flex items-start gap-3">
+            <div className="w-9 h-9 rounded-xl bg-surface-2 flex items-center justify-center flex-shrink-0">
+              <ExternalLink size={14} className="text-gold" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-xs font-bold text-dravik-dark">Previewing {previewDoc.name}</p>
+              <p className="text-[10px] text-gray-400 mt-0.5">
+                Uploaded {previewDoc.uploadedAt} · {previewDoc.signed ? "Signed" : "Open"}
+              </p>
+            </div>
+            <button
+              onClick={() => setPreviewDoc(null)}
+              className="text-xs font-semibold text-gray-400 hover:text-dravik-dark transition-colors"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Document grid */}
       <div className="space-y-2">
-        {docs.map((d) => {
+        {localDocs.map((d) => {
           const Icon = DOC_ICON[d.type];
           return (
             <div key={d.id} className="flex items-center gap-3 p-3 bg-white rounded-xl border border-line hover:border-gold/30 transition-colors group">
@@ -192,9 +249,13 @@ function DocumentsTab({ docs }: { docs: TransactionDocument[] }) {
                   </span>
                 ) : null}
                 <button
-                  disabled
-                  title="Document preview coming soon"
-                  className="opacity-0 group-hover:opacity-100 p-1 text-gray-300 cursor-not-allowed transition-all"
+                  onClick={() => {
+                    setPreviewDoc(d);
+                    setStatusText(`Preview opened for ${d.name}.`);
+                  }}
+                  aria-label={`Preview ${d.name}`}
+                  title={`Preview ${d.name}`}
+                  className="opacity-0 group-hover:opacity-100 p-1 text-gray-400 hover:text-gold transition-all"
                 >
                   <ExternalLink size={11} />
                 </button>

@@ -14,4 +14,19 @@ test.describe("transactions", () => {
     await page.getByText("12 Ocean Dr").first().click();
     await expect(page.getByText(/Commission/).first()).toBeVisible();
   });
+
+  test("transaction document actions stage uploads, previews, and signature packets", async ({ page }) => {
+    await page.getByText("28 Brickell Key Dr").first().click();
+    await page.getByRole("button", { name: /Documents/ }).click();
+
+    await page.getByRole("button", { name: "Upload" }).click();
+    await expect(page.getByText("Client Upload Packet staged for this transaction.")).toBeVisible();
+    await expect(page.getByText("Previewing Client Upload Packet")).toBeVisible();
+
+    await page.getByRole("button", { name: "Send for Signature" }).click();
+    await expect(page.getByText("Signature packet queued for 1 pending document.")).toBeVisible();
+
+    await page.getByRole("button", { name: "Preview Closing Disclosure" }).click();
+    await expect(page.getByText("Previewing Closing Disclosure")).toBeVisible();
+  });
 });

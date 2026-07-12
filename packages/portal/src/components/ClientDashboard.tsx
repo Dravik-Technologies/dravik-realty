@@ -74,7 +74,17 @@ function AgentCard({ agent }: { agent: ClientPortalData["agent"] }) {
 }
 
 // ─── Saved property card (module level) ──────────────────
-function PropertyCard({ p, onRemove }: { p: SavedProperty; onRemove: (id: string) => void }) {
+function PropertyCard({
+  p,
+  onRemove,
+  onShare,
+  isShared,
+}: {
+  p: SavedProperty;
+  onRemove: (id: string) => void;
+  onShare: (property: SavedProperty) => void;
+  isShared: boolean;
+}) {
   return (
     <div className="bg-white rounded-2xl border border-line overflow-hidden hover:shadow-md hover:border-gold/20 transition-all group">
       <div className="relative h-36 overflow-hidden">
@@ -115,11 +125,17 @@ function PropertyCard({ p, onRemove }: { p: SavedProperty; onRemove: (id: string
             Remove
           </button>
           <button
-            disabled
-            title="Share coming soon"
-            className="flex items-center justify-center gap-1 px-3 py-1.5 text-[10px] font-semibold text-gold bg-gold-light rounded-lg cursor-not-allowed opacity-70"
+            onClick={() => onShare(p)}
+            aria-pressed={isShared}
+            title={isShared ? "Shared with agent" : "Share with agent"}
+            className={cn(
+              "flex items-center justify-center gap-1 px-3 py-1.5 text-[10px] font-semibold rounded-lg transition-colors",
+              isShared
+                ? "bg-emerald-50 text-emerald-600 border border-emerald-100"
+                : "text-gold bg-gold-light hover:bg-gold hover:text-dravik-dark"
+            )}
           >
-            <Share2 size={10} /> Share
+            <Share2 size={10} /> {isShared ? "Shared" : "Share"}
           </button>
         </div>
       </div>
@@ -316,9 +332,20 @@ function MessagesTab({ data }: { data: ClientPortalData }) {
 // ─── Saved properties tab (module level) ────────────────────
 function SavedPropertiesTab({ data }: { data: ClientPortalData }) {
   const [properties, setProperties] = useState(data.savedProperties);
+  const [sharedIds, setSharedIds] = useState<Set<string>>(new Set());
+  const [sharedProperty, setSharedProperty] = useState<SavedProperty | null>(null);
 
   function handleRemove(id: string) {
     setProperties((prev) => prev.filter((p) => p.id !== id));
+  }
+
+  function handleShare(property: SavedProperty) {
+    setSharedIds((prev) => {
+      const next = new Set(prev);
+      next.add(property.id);
+      return next;
+    });
+    setSharedProperty(property);
   }
 
   if (properties.length === 0) {
@@ -332,10 +359,23 @@ function SavedPropertiesTab({ data }: { data: ClientPortalData }) {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {properties.map((p) => (
-        <PropertyCard key={p.id} p={p} onRemove={handleRemove} />
-      ))}
+    <div className="space-y-4">
+      {sharedProperty && (
+        <div role="status" className="rounded-xl border border-gold/25 bg-gold-light px-3 py-2 text-xs font-semibold text-dravik-dark">
+          {sharedProperty.address} shared with your agent.
+        </div>
+      )}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {properties.map((p) => (
+          <PropertyCard
+            key={p.id}
+            p={p}
+            onRemove={handleRemove}
+            onShare={handleShare}
+            isShared={sharedIds.has(p.id)}
+          />
+        ))}
+      </div>
     </div>
   );
 }

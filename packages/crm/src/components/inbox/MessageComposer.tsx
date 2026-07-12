@@ -52,6 +52,7 @@ export default function MessageComposer({ conversationId, tag, onSend }: Props) 
   const [showTemplates, setShowTemplates] = useState(false);
   const [showAI, setShowAI]           = useState(false);
   const [aiLoading, setAiLoading]     = useState(false);
+  const [attachmentRequested, setAttachmentRequested] = useState(false);
 
   const suggestions = AI_SUGGESTIONS[tag] ?? AI_SUGGESTIONS["lead"];
   const templates   = TEMPLATES[tag] ?? TEMPLATES["default"];
@@ -65,6 +66,7 @@ export default function MessageComposer({ conversationId, tag, onSend }: Props) 
     onSend(conversationId, channel, text.trim(), channel === "email" ? subject.trim() || undefined : undefined);
     setText("");
     setSubject("");
+    setAttachmentRequested(false);
     setShowTemplates(false);
     setShowAI(false);
   }
@@ -179,6 +181,13 @@ export default function MessageComposer({ conversationId, tag, onSend }: Props) 
           )}
         />
 
+        {attachmentRequested && (
+          <div role="status" className="flex items-center gap-2 rounded-xl border border-gold/25 bg-gold-light px-3 py-2 text-[11px] font-semibold text-dravik-dark">
+            <Paperclip size={12} className="text-gold" />
+            Attachment request added to this message.
+          </div>
+        )}
+
         {/* Footer actions */}
         <div className="flex items-center gap-2">
           {/* Templates toggle */}
@@ -206,11 +215,17 @@ export default function MessageComposer({ conversationId, tag, onSend }: Props) 
 
           {/* Attachment (mock) */}
           <button
-            disabled
-            title="Attachments coming soon"
-            className="flex items-center gap-1 px-2.5 py-1.5 text-[11px] font-semibold rounded-lg bg-surface-2 text-gray-400 cursor-not-allowed opacity-50"
+            onClick={() => setAttachmentRequested((v) => !v)}
+            aria-pressed={attachmentRequested}
+            title={attachmentRequested ? "Remove attachment request" : "Add attachment request"}
+            className={cn(
+              "flex items-center gap-1 px-2.5 py-1.5 text-[11px] font-semibold rounded-lg transition-colors",
+              attachmentRequested
+                ? "bg-gold-light text-gold"
+                : "bg-surface-2 text-gray-500 hover:text-gold hover:bg-gold-light"
+            )}
           >
-            <Paperclip size={11} /> Attach
+            <Paperclip size={11} /> {attachmentRequested ? "Attached" : "Attach"}
           </button>
 
           {/* Char counter (SMS only) */}

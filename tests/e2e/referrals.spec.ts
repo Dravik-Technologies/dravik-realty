@@ -18,6 +18,14 @@ test.describe("DRAVIK Partner Network", () => {
     await expect(page.getByText(/Split/).first()).toBeVisible();
   });
 
+  test("referral agreement CTA queues the agreement", async ({ page }) => {
+    await page.getByRole("button", { name: "Start Referral" }).first().click();
+    await page.getByRole("button", { name: "Send Referral Agreement" }).click();
+
+    await expect(page.getByRole("button", { name: "Agreement Queued" })).toBeVisible();
+    await expect(page.getByText(/Agreement queued for/)).toBeVisible();
+  });
+
   test("partner directory includes mortgage lenders", async ({ page }) => {
     await page.getByRole("button", { name: "Filters" }).click();
     await page.getByLabel("Partner type").selectOption("Mortgage Lender");

@@ -4,6 +4,8 @@ import { cn } from "@dravik/shared";
 import {
   createCommandSession,
   getCommandSession,
+  isEntraAreaConfigured,
+  isEntraIdentityEnabled,
   isLocalIdentityEnabled,
 } from "@/auth/server";
 import { BrandLogo } from "@/components/brand/BrandLogo";
@@ -18,6 +20,9 @@ async function signInCommandCenter() {
 export default async function LoginPage() {
   const session = await getCommandSession();
   const localIdentityEnabled = isLocalIdentityEnabled();
+  const entraIdentityEnabled = isEntraIdentityEnabled();
+  const entraConfigured = isEntraAreaConfigured("command-center");
+  const signInEnabled = localIdentityEnabled || (entraIdentityEnabled && entraConfigured);
 
   if (session) {
     redirect("/dashboard");
@@ -42,7 +47,7 @@ export default async function LoginPage() {
             <p className="text-xs text-gray-400 mt-1 leading-relaxed">
               {localIdentityEnabled
                 ? "Temporary staging access for the realtor, broker, and admin workspace."
-                : "Production sign-in will use Microsoft Entra authentication."}
+                : "Production sign-in uses Microsoft Entra authentication."}
             </p>
           </div>
 
@@ -53,7 +58,9 @@ export default async function LoginPage() {
               <p className="text-xs text-gray-400 mt-1 leading-relaxed">
                 {localIdentityEnabled
                   ? "This session shape is the seam that Microsoft Entra will replace in production."
-                  : "Temporary local sessions are disabled in production."}
+                  : entraConfigured
+                    ? "Microsoft Entra is configured. Local demo sessions are disabled."
+                    : "Microsoft Entra settings are required before production sign-in can start."}
               </p>
             </div>
           </div>
@@ -61,16 +68,20 @@ export default async function LoginPage() {
           <form action={signInCommandCenter}>
             <button
               type="submit"
-              disabled={!localIdentityEnabled}
+              disabled={!signInEnabled}
               className={cn(
                 "w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-bold transition-colors",
-                localIdentityEnabled
+                signInEnabled
                   ? "bg-gold text-dravik-dark hover:bg-gold/90"
                   : "bg-surface-2 text-gray-400 cursor-not-allowed"
               )}
             >
               <Building2 size={16} />
-              {localIdentityEnabled ? "Continue as Chris Macabugao" : "Production auth pending"}
+              {localIdentityEnabled
+                ? "Continue as Chris Macabugao"
+                : entraConfigured
+                  ? "Continue with Microsoft Entra"
+                  : "Production auth needs configuration"}
             </button>
           </form>
         </div>

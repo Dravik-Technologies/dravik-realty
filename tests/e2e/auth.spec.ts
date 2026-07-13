@@ -61,4 +61,16 @@ test.describe("identity boundaries", () => {
     await page.goto("/portal");
     await expect(page).toHaveURL(/\/portal\/login$/);
   });
+
+  test("entra routes fall back to existing login screens when not configured", async ({ context, page }) => {
+    await context.clearCookies();
+
+    await page.goto("/auth/command/sign-in");
+    await expect(page).toHaveURL(/\/login$/);
+    await expect(page.getByRole("heading", { name: "Dravik Realty" })).toBeVisible();
+
+    await page.goto("/auth/portal/sign-in");
+    await expect(page).toHaveURL(/\/portal\/login$/);
+    await expect(page.getByRole("heading", { name: "Client Portal" })).toBeVisible();
+  });
 });

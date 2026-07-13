@@ -4,6 +4,8 @@ import { cn, isDemoDataEnvironment } from "@dravik/shared";
 import {
   createClientPortalSession,
   getClientPortalSession,
+  isEntraAreaConfigured,
+  isEntraIdentityEnabled,
   isLocalIdentityEnabled,
 } from "@/auth/server";
 import { LOCAL_CLIENT_SESSIONS } from "@/auth/local-identity";
@@ -20,6 +22,9 @@ async function signInClientPortal(formData: FormData) {
 export default async function PortalLoginPage() {
   const session = await getClientPortalSession();
   const localIdentityEnabled = isLocalIdentityEnabled();
+  const entraIdentityEnabled = isEntraIdentityEnabled();
+  const entraConfigured = isEntraAreaConfigured("client-portal");
+  const signInEnabled = localIdentityEnabled || (entraIdentityEnabled && entraConfigured);
   const localClientSessions = Object.values(LOCAL_CLIENT_SESSIONS);
   const visibleClientSessions = isDemoDataEnvironment
     ? localClientSessions
@@ -48,12 +53,12 @@ export default async function PortalLoginPage() {
             <p className="text-xs text-gray-400 mt-1 leading-relaxed">
               {localIdentityEnabled
                 ? "Temporary staging access for transaction documents, messages, and status updates."
-                : "Production client access will use invitation links."}
+                : "Production client access uses Microsoft Entra invitation links."}
             </p>
           </div>
 
           <form action={signInClientPortal} className="space-y-2">
-            {visibleClientSessions.map((clientSession) => {
+            {localIdentityEnabled ? visibleClientSessions.map((clientSession) => {
               const displayName = isDemoDataEnvironment
                 ? clientSession.user.name
                 : "Staging Client Portal";
@@ -87,8 +92,24 @@ export default async function PortalLoginPage() {
                   <KeyRound size={14} className="text-gray-300" />
                 </button>
               );
-            })}
-            {!localIdentityEnabled && (
+            }) : (
+              <button
+                type="submit"
+                disabled={!signInEnabled}
+                className={cn(
+                  "w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-bold transition-colors",
+                  signInEnabled
+                    ? "bg-gold text-dravik-dark hover:bg-gold/90"
+                    : "bg-surface-2 text-gray-400 cursor-not-allowed"
+                )}
+              >
+                <KeyRound size={15} />
+                {entraConfigured
+                  ? "Continue with secure invitation"
+                  : "Client auth needs configuration"}
+              </button>
+            )}
+            {!localIdentityEnabled && !entraConfigured && (
               <p className="text-xs text-gray-400 text-center pt-2">
                 Client invitation auth is not configured yet.
               </p>

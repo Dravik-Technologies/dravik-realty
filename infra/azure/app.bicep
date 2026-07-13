@@ -20,6 +20,29 @@ param minReplicas int = environmentName == 'prod' ? 2 : 1
 param databaseUrl string = ''
 
 @allowed([
+  'local'
+  'entra'
+])
+param authProvider string = environmentName == 'prod' ? 'entra' : 'local'
+
+@secure()
+param authSessionSecret string = ''
+
+param entraAllowedEmails string = ''
+param entraAuthority string = ''
+param entraBootstrapRole string = 'broker_owner'
+param entraClientId string = ''
+
+@secure()
+param entraClientSecret string = ''
+
+param entraCommandRedirectUri string = ''
+param entraPortalAllowedEmails string = ''
+param entraPortalRedirectUri string = ''
+param entraPostLogoutRedirectUri string = ''
+param entraTenantId string = ''
+
+@allowed([
   '0.5'
   '1.0'
   '2.0'
@@ -46,6 +69,67 @@ var databaseEnvironment = empty(databaseUrl) ? [] : [
     secretRef: 'database-url'
   }
 ]
+var authSecrets = authProvider == 'entra' ? [
+  {
+    name: 'auth-session-secret'
+    value: authSessionSecret
+  }
+  {
+    name: 'entra-client-secret'
+    value: entraClientSecret
+  }
+] : []
+var authEnvironment = concat([
+  {
+    name: 'AUTH_PROVIDER'
+    value: authProvider
+  }
+], authProvider == 'entra' ? [
+  {
+    name: 'AUTH_SESSION_SECRET'
+    secretRef: 'auth-session-secret'
+  }
+  {
+    name: 'ENTRA_ALLOWED_EMAILS'
+    value: entraAllowedEmails
+  }
+  {
+    name: 'ENTRA_AUTHORITY'
+    value: entraAuthority
+  }
+  {
+    name: 'ENTRA_BOOTSTRAP_ROLE'
+    value: entraBootstrapRole
+  }
+  {
+    name: 'ENTRA_CLIENT_ID'
+    value: entraClientId
+  }
+  {
+    name: 'ENTRA_CLIENT_SECRET'
+    secretRef: 'entra-client-secret'
+  }
+  {
+    name: 'ENTRA_COMMAND_REDIRECT_URI'
+    value: entraCommandRedirectUri
+  }
+  {
+    name: 'ENTRA_PORTAL_ALLOWED_EMAILS'
+    value: entraPortalAllowedEmails
+  }
+  {
+    name: 'ENTRA_PORTAL_REDIRECT_URI'
+    value: entraPortalRedirectUri
+  }
+  {
+    name: 'ENTRA_POST_LOGOUT_REDIRECT_URI'
+    value: entraPostLogoutRedirectUri
+  }
+  {
+    name: 'ENTRA_TENANT_ID'
+    value: entraTenantId
+  }
+] : [])
 
 resource containerRegistry 'Microsoft.ContainerRegistry/registries@2023-07-01' existing = {
   name: acrName
@@ -71,7 +155,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
     configuration: {
       activeRevisionsMode: 'Single'
-      secrets: databaseSecrets
+      secrets: concat(databaseSecrets, authSecrets)
       ingress: {
         allowInsecure: false
         external: true
@@ -112,7 +196,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
               name: 'PORT'
               value: '3000'
             }
-          ], databaseEnvironment)
+          ], databaseEnvironment, authEnvironment)
           resources: {
             cpu: json(cpuCores)
             memory: memory

@@ -11,16 +11,30 @@ import {
   LOCAL_COMMAND_SESSION_VALUE,
   SESSION_COOKIE_OPTIONS,
 } from "./cookies";
+import { isEntraAreaConfigured } from "./entra";
 import {
   LOCAL_CLIENT_SESSIONS,
   LOCAL_COMMAND_SESSION,
 } from "./local-identity";
+import {
+  isEntraIdentityEnabled,
+  isLocalIdentityEnabled,
+} from "./provider";
+import {
+  decodeSignedPayload,
+  encodeSignedPayload,
+} from "./session-codec";
 
-export function isLocalIdentityEnabled() {
-  return process.env.APP_ENV !== "prod";
-}
+export { isEntraAreaConfigured, isEntraIdentityEnabled, isLocalIdentityEnabled };
 
 export async function getCommandSession(): Promise<CommandCenterSession | null> {
+  if (isEntraIdentityEnabled()) {
+    const cookieStore = await cookies();
+    return decodeSignedPayload<CommandCenterSession>(
+      cookieStore.get(COMMAND_SESSION_COOKIE)?.value
+    );
+  }
+
   if (!isLocalIdentityEnabled()) {
     return null;
   }
@@ -46,7 +60,11 @@ export async function requireCommandSession(): Promise<CommandCenterSession> {
 }
 
 export async function createCommandSession() {
-  if (!isLocalIdentityEnabled()) {
+  if (isEntraIdentityEnabled()) {
+    if (isEntraAreaConfigured("command-center")) {
+      redirect("/auth/command/sign-in");
+    }
+
     redirect("/login");
   }
 
@@ -58,12 +76,31 @@ export async function createCommandSession() {
   );
 }
 
+export async function setCommandSession(session: CommandCenterSession) {
+  const cookieStore = await cookies();
+  cookieStore.set(
+    COMMAND_SESSION_COOKIE,
+    encodeSignedPayload(session),
+    {
+      ...SESSION_COOKIE_OPTIONS,
+      maxAge: 60 * 60 * 12,
+    }
+  );
+}
+
 export async function clearCommandSession() {
   const cookieStore = await cookies();
   cookieStore.delete(COMMAND_SESSION_COOKIE);
 }
 
 export async function getClientPortalSession(): Promise<ClientPortalSession | null> {
+  if (isEntraIdentityEnabled()) {
+    const cookieStore = await cookies();
+    return decodeSignedPayload<ClientPortalSession>(
+      cookieStore.get(CLIENT_SESSION_COOKIE)?.value
+    );
+  }
+
   if (!isLocalIdentityEnabled()) {
     return null;
   }
@@ -90,7 +127,11 @@ export async function requireClientPortalSession(): Promise<ClientPortalSession>
 }
 
 export async function createClientPortalSession(clientId: string) {
-  if (!isLocalIdentityEnabled()) {
+  if (isEntraIdentityEnabled()) {
+    if (isEntraAreaConfigured("client-portal")) {
+      redirect("/auth/portal/sign-in");
+    }
+
     redirect("/portal/login");
   }
 
@@ -105,6 +146,18 @@ export async function createClientPortalSession(clientId: string) {
     CLIENT_SESSION_COOKIE,
     `${LOCAL_CLIENT_SESSION_PREFIX}${clientId}`,
     SESSION_COOKIE_OPTIONS
+  );
+}
+
+export async function setClientPortalSession(session: ClientPortalSession) {
+  const cookieStore = await cookies();
+  cookieStore.set(
+    CLIENT_SESSION_COOKIE,
+    encodeSignedPayload(session),
+    {
+      ...SESSION_COOKIE_OPTIONS,
+      maxAge: 60 * 60 * 12,
+    }
   );
 }
 

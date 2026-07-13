@@ -141,6 +141,7 @@ jobs:
               managedIdentityName="${{ steps.core.outputs.managed_identity_name }}" \
               imageName="$IMAGE_NAME" \
               imageTag="${{ steps.image.outputs.image_tag }}" \
+              authProvider="local" \
               databaseUrl="${{ steps.database.outputs.url }}" \
             --query properties.outputs \
             -o json)"
@@ -171,6 +172,40 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Verify production auth secrets
+        env:
+          AUTH_SESSION_SECRET: ${{ secrets.AUTH_SESSION_SECRET }}
+          ENTRA_ALLOWED_EMAILS: ${{ secrets.ENTRA_ALLOWED_EMAILS }}
+          ENTRA_AUTHORITY: ${{ secrets.ENTRA_AUTHORITY }}
+          ENTRA_CLIENT_ID: ${{ secrets.ENTRA_CLIENT_ID }}
+          ENTRA_CLIENT_SECRET: ${{ secrets.ENTRA_CLIENT_SECRET }}
+          ENTRA_COMMAND_REDIRECT_URI: ${{ secrets.ENTRA_COMMAND_REDIRECT_URI }}
+          ENTRA_POST_LOGOUT_REDIRECT_URI: ${{ secrets.ENTRA_POST_LOGOUT_REDIRECT_URI }}
+          ENTRA_PORTAL_ALLOWED_EMAILS: ${{ secrets.ENTRA_PORTAL_ALLOWED_EMAILS }}
+          ENTRA_PORTAL_REDIRECT_URI: ${{ secrets.ENTRA_PORTAL_REDIRECT_URI }}
+          ENTRA_TENANT_ID: ${{ secrets.ENTRA_TENANT_ID }}
+        run: |
+          missing=()
+          for key in AUTH_SESSION_SECRET ENTRA_ALLOWED_EMAILS ENTRA_CLIENT_ID ENTRA_CLIENT_SECRET ENTRA_COMMAND_REDIRECT_URI ENTRA_POST_LOGOUT_REDIRECT_URI ENTRA_PORTAL_ALLOWED_EMAILS ENTRA_PORTAL_REDIRECT_URI; do
+            if [ -z "${!key}" ]; then
+              missing+=("$key")
+            fi
+          done
+
+          if [ -z "$ENTRA_AUTHORITY" ] && [ -z "$ENTRA_TENANT_ID" ]; then
+            missing+=("ENTRA_AUTHORITY or ENTRA_TENANT_ID")
+          fi
+
+          if [ -n "$AUTH_SESSION_SECRET" ] && [ "${#AUTH_SESSION_SECRET}" -lt 32 ]; then
+            missing+=("AUTH_SESSION_SECRET length >= 32")
+          fi
+
+          if [ "${#missing[@]}" -gt 0 ]; then
+            printf 'Missing production auth configuration:\n'
+            printf ' - %s\n' "${missing[@]}"
+            exit 1
+          fi
 
       - uses: azure/login@v2
         with:
@@ -272,6 +307,18 @@ jobs:
               managedIdentityName="${{ steps.core.outputs.managed_identity_name }}" \
               imageName="$IMAGE_NAME" \
               imageTag="${{ steps.image.outputs.image_tag }}" \
+              authProvider="entra" \
+              authSessionSecret="${{ secrets.AUTH_SESSION_SECRET }}" \
+              entraAllowedEmails="${{ secrets.ENTRA_ALLOWED_EMAILS }}" \
+              entraAuthority="${{ secrets.ENTRA_AUTHORITY }}" \
+              entraBootstrapRole="${{ secrets.ENTRA_BOOTSTRAP_ROLE || 'broker_owner' }}" \
+              entraClientId="${{ secrets.ENTRA_CLIENT_ID }}" \
+              entraClientSecret="${{ secrets.ENTRA_CLIENT_SECRET }}" \
+              entraCommandRedirectUri="${{ secrets.ENTRA_COMMAND_REDIRECT_URI }}" \
+              entraPortalAllowedEmails="${{ secrets.ENTRA_PORTAL_ALLOWED_EMAILS }}" \
+              entraPortalRedirectUri="${{ secrets.ENTRA_PORTAL_REDIRECT_URI }}" \
+              entraPostLogoutRedirectUri="${{ secrets.ENTRA_POST_LOGOUT_REDIRECT_URI }}" \
+              entraTenantId="${{ secrets.ENTRA_TENANT_ID }}" \
               databaseUrl="${{ steps.database.outputs.url }}" \
             --query properties.outputs \
             -o json)"

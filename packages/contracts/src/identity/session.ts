@@ -10,11 +10,14 @@ export interface TenantIdentity {
 }
 
 export type InternalRole =
+  | "platform_admin"
   | "broker_owner"
   | "broker_admin"
   | "team_lead"
   | "agent"
-  | "loan_officer";
+  | "lending_officer"
+  | "loan_officer"
+  | "marketing_manager";
 
 export interface InternalUserIdentity {
   id: string;

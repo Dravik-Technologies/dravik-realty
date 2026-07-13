@@ -28,6 +28,14 @@ type TenantBrandingContextValue = {
   resetBranding: () => void;
 };
 
+type TenantBrandingResponse = {
+  branding?: Partial<TenantBranding>;
+  persistence?: "database" | "memory";
+};
+
+const TENANT_BRANDING_API_PATH = "/api/tenant/branding";
+const PUBLIC_AUTH_PATHS = new Set(["/login", "/portal/login"]);
+
 const TenantBrandingContext = createContext<TenantBrandingContextValue>({
   branding: DEFAULT_TENANT_BRANDING,
   applyBranding: () => {},
@@ -89,10 +97,36 @@ export function TenantBrandingProvider({ children }: { children: ReactNode }) {
   const [branding, setBranding] = useState<TenantBranding>(DEFAULT_TENANT_BRANDING);
 
   useEffect(() => {
+    let mounted = true;
+
+    async function hydratePersistedBranding() {
+      if (PUBLIC_AUTH_PATHS.has(window.location.pathname)) return;
+
+      try {
+        const response = await fetch(TENANT_BRANDING_API_PATH, { cache: "no-store" });
+        if (!mounted || !response.ok) return;
+
+        const payload = (await response.json()) as TenantBrandingResponse;
+        if (payload.persistence !== "database" || !payload.branding) return;
+
+        const normalized = normalizeTenantBranding(payload.branding);
+        setBranding(normalized);
+        writeTenantBrandingToStorage(normalized);
+        publishTenantBrandingChange(normalized);
+      } catch {
+        // Local storage remains the offline/local fallback.
+      }
+    }
+
     const timer = window.setTimeout(() => {
       setBranding(readTenantBrandingFromStorage());
+      void hydratePersistedBranding();
     }, 0);
-    return () => window.clearTimeout(timer);
+
+    return () => {
+      mounted = false;
+      window.clearTimeout(timer);
+    };
   }, []);
 
   useEffect(() => {

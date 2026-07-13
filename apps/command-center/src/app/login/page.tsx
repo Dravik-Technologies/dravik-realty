@@ -26,12 +26,12 @@ export default async function LoginPage() {
   return (
     <main className="min-h-screen bg-surface flex items-center justify-center px-4 py-10">
       <section className="w-full max-w-md bg-white border border-line rounded-2xl shadow-sm overflow-hidden">
-        <div className="brand-metal-surface px-6 py-7 text-[#FDFDFD] shadow-[0_1px_0_rgba(255,255,255,0.08)_inset]">
+        <div className="brand-metal-surface px-6 py-7 shadow-[0_1px_0_rgba(255,255,255,0.08)_inset]">
           <div className="flex items-center gap-3">
             <BrandLogo variant="mark" className="h-16 w-16 flex-shrink-0" priority />
             <div>
-              <h1 className="text-lg font-bold leading-none">Dravik Realty</h1>
-              <p className="text-xs text-[#D1CFCF] mt-1">Command Center</p>
+              <h1 className="text-lg font-bold leading-none text-[var(--brand-header-text)]">Dravik Realty</h1>
+              <p className="mt-1 text-xs text-[var(--brand-header-muted)]">Command Center</p>
             </div>
           </div>
         </div>

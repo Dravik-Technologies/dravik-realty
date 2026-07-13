@@ -60,13 +60,22 @@ function mixHex(base: string, target: string, targetWeight: number): string {
   )}${toHex(baseB * baseWeight + targetB * targetWeight)}`;
 }
 
+function toRgba(hex: string, alpha: number): string {
+  const [red, green, blue] = hexToRgb(hex);
+  return `rgba(${red}, ${green}, ${blue}, ${alpha})`;
+}
+
 function applyBrandingCss(branding: TenantBranding): void {
   const root = document.documentElement;
   const normalized = normalizeTenantBranding(branding);
+  const headerText = normalized.headerTextColor;
 
   root.style.setProperty("--brand-accent", normalized.accentColor);
   root.style.setProperty("--brand-header", normalized.headerColor);
-  root.style.setProperty("--brand-header-text", normalized.headerTextColor);
+  root.style.setProperty("--brand-header-text", headerText);
+  root.style.setProperty("--brand-header-muted", toRgba(headerText, 0.78));
+  root.style.setProperty("--brand-header-faint", toRgba(headerText, 0.58));
+  root.style.setProperty("--brand-header-hover", toRgba(headerText, 0.1));
   root.style.setProperty("--brand-sidebar", normalized.sidebarColor);
   root.style.setProperty("--brand-font-family", resolveBrandFont(normalized.fontId));
 

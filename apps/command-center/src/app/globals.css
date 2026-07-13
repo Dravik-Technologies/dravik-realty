@@ -12,6 +12,9 @@
   --brand-accent: #C9C3B6;
   --brand-header: #E5E4E2;
   --brand-header-text: #2F2F2F;
+  --brand-header-muted: rgba(47, 47, 47, 0.78);
+  --brand-header-faint: rgba(47, 47, 47, 0.58);
+  --brand-header-hover: rgba(47, 47, 47, 0.1);
   --brand-sidebar: #111418;
   --brand-font-family: var(--font-manrope), Arial, Helvetica, sans-serif;
 }

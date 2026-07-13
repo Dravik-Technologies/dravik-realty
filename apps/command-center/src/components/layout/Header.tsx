@@ -89,7 +89,7 @@ export default function Header({ session }: { session: CommandCenterSession }) {
         <button
           aria-label="Open navigation"
           onClick={openMobileSidebar}
-          className="lg:hidden p-2 rounded-xl text-[var(--brand-header-text)] hover:bg-white/55 transition-colors flex-shrink-0"
+          className="lg:hidden p-2 rounded-xl text-[var(--brand-header-text)] hover:bg-[var(--brand-header-hover)] transition-colors flex-shrink-0"
         >
           <Menu size={20} />
         </button>
@@ -103,7 +103,7 @@ export default function Header({ session }: { session: CommandCenterSession }) {
         <div className="hidden lg:flex items-center gap-3 flex-shrink-0 min-w-0">
           <BrandLogo variant="mark" className="h-11 w-11" priority />
           <div className="min-w-0">
-            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#59616A] leading-tight">
+            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[var(--brand-header-muted)] leading-tight">
               {branding.companyName}
             </p>
             <h1 className="text-sm font-black text-[var(--brand-header-text)] leading-tight truncate">
@@ -130,7 +130,7 @@ export default function Header({ session }: { session: CommandCenterSession }) {
           <button
             aria-label="Open global search"
             onClick={() => setSearchOpen(true)}
-            className="sm:hidden ml-auto p-2 rounded-xl text-[var(--brand-header-text)] hover:bg-white/55 transition-colors"
+            className="sm:hidden ml-auto p-2 rounded-xl text-[var(--brand-header-text)] hover:bg-[var(--brand-header-hover)] transition-colors"
           >
             <Search size={18} />
           </button>
@@ -148,18 +148,18 @@ export default function Header({ session }: { session: CommandCenterSession }) {
               aria-label="User menu"
               aria-expanded={userMenuOpen}
               onClick={() => setUserMenuOpen(v => !v)}
-              className="flex items-center gap-2 pl-1.5 pr-2.5 py-1.5 rounded-xl hover:bg-white/55 transition-colors"
+              className="flex items-center gap-2 pl-1.5 pr-2.5 py-1.5 rounded-xl hover:bg-[var(--brand-header-hover)] transition-colors"
             >
               <div className="w-8 h-8 rounded-lg bg-[var(--brand-sidebar)] border border-[#2F2F2F]/10 flex items-center justify-center flex-shrink-0 shadow-[0_1px_0_rgba(255,255,255,0.12)_inset]">
                 <span className="text-[#E5E4E2] text-xs font-bold leading-none">{session.user.initials}</span>
               </div>
               <div className="hidden sm:block text-left">
                 <p className="text-xs font-semibold text-[var(--brand-header-text)] leading-tight">{session.user.name}</p>
-                <p className="text-[10px] text-[#59616A] leading-tight">{session.tenant.name}</p>
+                <p className="text-[10px] text-[var(--brand-header-muted)] leading-tight">{session.tenant.name}</p>
               </div>
               <ChevronDown
                 size={13}
-                className={cn("hidden sm:block text-[#59616A] transition-transform duration-150", userMenuOpen && "rotate-180")}
+                className={cn("hidden sm:block text-[var(--brand-header-muted)] transition-transform duration-150", userMenuOpen && "rotate-180")}
               />
             </button>
 

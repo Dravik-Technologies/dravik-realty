@@ -108,8 +108,8 @@ function PreviewLogo({
   return (
     <span
       className={cn(
-        "relative flex shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-[linear-gradient(135deg,#FDFDFD_0%,#E5E4E2_38%,#D1CFCF_66%,#AEB6BF_100%)] shadow-[0_8px_18px_rgba(17,20,24,0.14),0_1px_0_rgba(253,253,253,0.8)_inset]",
-        isSmall ? "h-8 w-8" : isLarge ? "h-28 w-40" : "h-12 w-12"
+        "relative flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-[linear-gradient(135deg,#FDFDFD_0%,#E5E4E2_38%,#D1CFCF_66%,#AEB6BF_100%)] shadow-[0_8px_18px_rgba(17,20,24,0.14),0_1px_0_rgba(253,253,253,0.8)_inset]",
+        isSmall ? "h-8 w-8" : isLarge ? "h-32 w-32" : "h-12 w-12"
       )}
     >
       {branding.logoDataUrl ? (
@@ -119,7 +119,7 @@ function PreviewLogo({
           width={isLarge ? 192 : 80}
           height={isLarge ? 128 : 80}
           unoptimized
-          className="h-full w-full object-contain drop-shadow-[0_3px_6px_rgba(17,20,24,0.18)]"
+          className="h-full w-full scale-[1.16] object-cover drop-shadow-[0_3px_6px_rgba(17,20,24,0.18)]"
           draggable={false}
         />
       ) : (
@@ -150,7 +150,7 @@ function ShellPreview({ branding }: { branding: TenantBranding }) {
       >
         <PreviewLogo branding={branding} />
         <div className="min-w-0">
-          <p className="truncate text-[10px] font-bold uppercase tracking-[0.18em] text-gray-500">
+          <p className="truncate text-[10px] font-bold uppercase tracking-[0.18em]" style={{ color: `${branding.headerTextColor}C7` }}>
             {branding.companyName}
           </p>
           <p className="truncate text-sm font-black">Dashboard</p>

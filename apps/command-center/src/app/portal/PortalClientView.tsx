@@ -22,13 +22,13 @@ export default function PortalClientView({ session }: { session: ClientPortalSes
     return (
       <>
         <div className="brand-metal-surface sticky top-0 z-30 border-b border-[#FDFDFD]/10 px-4 py-2 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-xs text-gray-400">
+          <div className="flex items-center gap-2 text-xs text-[var(--brand-header-muted)]">
             <div className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-            Logged in as <span className="text-[#FDFDFD] font-semibold">{sessionDisplayName}</span>
+            Logged in as <span className="font-semibold text-[var(--brand-header-text)]">{sessionDisplayName}</span>
           </div>
           <Link
             href="/portal/logout"
-            className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-[#D1CFCF] hover:text-[#FDFDFD] transition-colors"
+            className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-[var(--brand-header-muted)] hover:text-[var(--brand-header-text)] transition-colors"
           >
             <LogOut size={11} />
             Sign out
@@ -53,14 +53,14 @@ export default function PortalClientView({ session }: { session: ClientPortalSes
   return (
     <>
       <div className="brand-metal-surface sticky top-0 z-30 border-b border-[#FDFDFD]/10 px-4 py-2 flex items-center justify-between">
-        <div className="flex items-center gap-2 text-xs text-gray-400">
+        <div className="flex items-center gap-2 text-xs text-[var(--brand-header-muted)]">
           <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          Logged in as <span className="text-[#FDFDFD] font-semibold">{data.client.name}</span>
+          Logged in as <span className="font-semibold text-[var(--brand-header-text)]">{data.client.name}</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1.5">
-            <Users size={11} className="text-[#D1CFCF]/70" />
-            <span className="text-[10px] text-[#D1CFCF]/70 mr-1 hidden sm:inline">Switch client:</span>
+            <Users size={11} className="text-[var(--brand-header-faint)]" />
+            <span className="text-[10px] text-[var(--brand-header-faint)] mr-1 hidden sm:inline">Switch client:</span>
             <div className="flex gap-1">
               {ALL_CLIENTS.map((c, i) => (
                 <button
@@ -80,7 +80,7 @@ export default function PortalClientView({ session }: { session: ClientPortalSes
           </div>
           <Link
             href="/portal/logout"
-            className="hidden sm:inline-flex items-center gap-1.5 text-[10px] font-semibold text-[#D1CFCF] hover:text-[#FDFDFD] transition-colors"
+            className="hidden sm:inline-flex items-center gap-1.5 text-[10px] font-semibold text-[var(--brand-header-muted)] hover:text-[var(--brand-header-text)] transition-colors"
           >
             <LogOut size={11} />
             Sign out

@@ -79,6 +79,9 @@ export function resolveBrandFont(fontId: BrandFontId): string {
 
 export function normalizeTenantBranding(input: Partial<TenantBranding> | null | undefined): TenantBranding {
   const source = input ?? {};
+  const headerColor = isValidHexColor(source.headerColor ?? "")
+    ? source.headerColor!
+    : DEFAULT_TENANT_BRANDING.headerColor;
   const companyName =
     typeof source.companyName === "string" && source.companyName.trim()
       ? source.companyName.trim().slice(0, 80)
@@ -102,12 +105,8 @@ export function normalizeTenantBranding(input: Partial<TenantBranding> | null | 
     accentColor: isValidHexColor(source.accentColor ?? "")
       ? source.accentColor!
       : DEFAULT_TENANT_BRANDING.accentColor,
-    headerColor: isValidHexColor(source.headerColor ?? "")
-      ? source.headerColor!
-      : DEFAULT_TENANT_BRANDING.headerColor,
-    headerTextColor: isValidHexColor(source.headerTextColor ?? "")
-      ? source.headerTextColor!
-      : DEFAULT_TENANT_BRANDING.headerTextColor,
+    headerColor,
+    headerTextColor: resolveReadableTextColor(headerColor),
     sidebarColor: isValidHexColor(source.sidebarColor ?? "")
       ? source.sidebarColor!
       : DEFAULT_TENANT_BRANDING.sidebarColor,

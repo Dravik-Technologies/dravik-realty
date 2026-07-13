@@ -42,6 +42,9 @@ test.describe("settings", () => {
     await expect(initials).toHaveValue("");
     await initials.pressSequentially("TR");
 
+    const headerBrandLabel = page.locator("header").getByText("Titanium Realty", { exact: true }).first();
+    await expect(headerBrandLabel).toHaveCSS("color", "rgba(253, 253, 253, 0.78)");
+
     await page.getByRole("button", { name: "Editorial Serif" }).click();
 
     await page.getByLabel("Tenant logo upload").setInputFiles({
@@ -57,6 +60,15 @@ test.describe("settings", () => {
     await expect(logoPreview).toBeVisible();
     const logoBox = await logoPreview.boundingBox();
     expect(logoBox?.width).toBeGreaterThan(100);
+
+    const shellLogo = page.locator("header").getByRole("img", { name: "Titanium Realty" }).first();
+    await expect(shellLogo).toHaveCSS("object-fit", "cover");
+    const shellLogoFrame = page.locator("header .brand-logo-frame").first();
+    const shellLogoFrameBox = await shellLogoFrame.boundingBox();
+    const shellLogoRadius = await shellLogoFrame.evaluate((element) =>
+      Number.parseFloat(getComputedStyle(element).borderTopLeftRadius)
+    );
+    expect(shellLogoRadius).toBeGreaterThanOrEqual((shellLogoFrameBox?.width ?? 0) / 2);
 
     await page.getByRole("button", { name: "Save Changes" }).click();
     await page.reload();

@@ -33,13 +33,13 @@ export function BrandLogo({
       <span
         aria-hidden
         className={cn(
-          "pointer-events-none absolute rounded-[1.35rem] bg-[#111418]/20 blur-xl",
+          "pointer-events-none absolute rounded-full bg-[#111418]/20 blur-xl",
           isMark ? "inset-x-1 -bottom-2 top-6" : "left-1 -bottom-2 top-6 w-12"
         )}
       />
       <span
         className={cn(
-          "relative flex h-full shrink-0 items-center justify-center overflow-hidden rounded-[1.35rem]",
+          "brand-logo-frame relative flex h-full shrink-0 items-center justify-center overflow-hidden rounded-full",
           "bg-[linear-gradient(135deg,#FDFDFD_0%,#E5E4E2_38%,#D1CFCF_66%,#AEB6BF_100%)]",
           "shadow-[0_10px_22px_rgba(17,20,24,0.16),0_1px_0_rgba(253,253,253,0.8)_inset,0_-1px_0_rgba(47,47,47,0.12)_inset]",
           isMark ? "w-full" : "aspect-square"
@@ -53,7 +53,7 @@ export function BrandLogo({
             height={96}
             unoptimized
             priority={priority}
-            className="pointer-events-none h-full w-full select-none object-contain drop-shadow-[0_4px_7px_rgba(17,20,24,0.22)]"
+            className="pointer-events-none h-full w-full scale-[1.16] select-none object-cover drop-shadow-[0_4px_7px_rgba(17,20,24,0.22)]"
             draggable={false}
           />
         ) : (
@@ -78,7 +78,7 @@ export function BrandLogo({
           <span className="block truncate text-sm font-black uppercase text-[var(--brand-header-text)]">
             {branding.companyInitials}
           </span>
-          <span className="block truncate text-[11px] font-semibold text-[#59616A]">
+          <span className="block truncate text-[11px] font-semibold text-[var(--brand-header-muted)]">
             {branding.companyName}
           </span>
         </span>

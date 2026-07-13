@@ -311,6 +311,7 @@ jobs:
               authSessionSecret="${{ secrets.AUTH_SESSION_SECRET }}" \
               entraAllowedEmails="${{ secrets.ENTRA_ALLOWED_EMAILS }}" \
               entraAuthority="${{ secrets.ENTRA_AUTHORITY }}" \
+              entraBootstrapEntitlements="${{ secrets.ENTRA_BOOTSTRAP_ENTITLEMENTS || 'crm.enabled,prospecting.enabled,referrals.enabled,idx.enabled,listings.enabled,marketing.enabled,transactions.enabled,portal.enabled,broker.enabled,lending.enabled' }}" \
               entraBootstrapRole="${{ secrets.ENTRA_BOOTSTRAP_ROLE || 'broker_owner' }}" \
               entraClientId="${{ secrets.ENTRA_CLIENT_ID }}" \
               entraClientSecret="${{ secrets.ENTRA_CLIENT_SECRET }}" \

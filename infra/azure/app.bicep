@@ -30,6 +30,7 @@ param authSessionSecret string = ''
 
 param entraAllowedEmails string = ''
 param entraAuthority string = ''
+param entraBootstrapEntitlements string = ''
 param entraBootstrapRole string = 'broker_owner'
 param entraClientId string = ''
 
@@ -96,6 +97,10 @@ var authEnvironment = concat([
   {
     name: 'ENTRA_AUTHORITY'
     value: entraAuthority
+  }
+  {
+    name: 'ENTRA_BOOTSTRAP_ENTITLEMENTS'
+    value: entraBootstrapEntitlements
   }
   {
     name: 'ENTRA_BOOTSTRAP_ROLE'

@@ -325,6 +325,38 @@ jobs:
             -o json)"
 
           echo "fqdn=$(echo "$outputs" | jq -r '.containerAppFqdn.value')" >> "$GITHUB_OUTPUT"
+          echo "app_name=$(echo "$outputs" | jq -r '.containerAppName.value')" >> "$GITHUB_OUTPUT"
+
+      - name: Bind production custom domain
+        env:
+          CONTAINER_APPS_ENVIRONMENT_NAME: ${{ steps.core.outputs.container_apps_environment_name }}
+          CONTAINER_APP_NAME: ${{ steps.app.outputs.app_name }}
+          PRODUCTION_HOSTNAME: dravik-realty.macsys.us
+        run: |
+          hostname_count="$(az containerapp hostname list \
+            --resource-group "$RESOURCE_GROUP" \
+            --name "$CONTAINER_APP_NAME" \
+            --query "[?name=='$PRODUCTION_HOSTNAME'] | length(@)" \
+            --output tsv)"
+
+          if [ "$hostname_count" != "1" ]; then
+            az containerapp hostname add \
+              --resource-group "$RESOURCE_GROUP" \
+              --name "$CONTAINER_APP_NAME" \
+              --hostname "$PRODUCTION_HOSTNAME" \
+              --output none
+          fi
+
+          az containerapp hostname bind \
+            --resource-group "$RESOURCE_GROUP" \
+            --name "$CONTAINER_APP_NAME" \
+            --environment "$CONTAINER_APPS_ENVIRONMENT_NAME" \
+            --hostname "$PRODUCTION_HOSTNAME" \
+            --validation-method CNAME \
+            --output none
 
       - name: Smoke test
         run: curl --fail --retry 6 --retry-delay 10 "https://${{ steps.app.outputs.fqdn }}/login"
+
+      - name: Smoke test custom domain
+        run: curl --fail --retry 12 --retry-delay 10 "https://dravik-realty.macsys.us/login"

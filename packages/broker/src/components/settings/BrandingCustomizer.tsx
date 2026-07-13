@@ -11,13 +11,15 @@ import {
   normalizeTenantBranding,
   publishTenantBrandingChange,
   readTenantBrandingFromStorage,
+  resolveReadableTextColor,
   writeTenantBrandingToStorage,
   cn,
   type BrandFontId,
   type TenantBranding,
 } from "@dravik/shared";
 
-const MAX_LOGO_BYTES = 900_000;
+const MAX_LOGO_BYTES = 3_000_000;
+export const APPEARANCE_SAVE_EVENT = "dravik:appearance-save";
 
 function findTheme(branding: TenantBranding) {
   return COLOR_THEMES.find(
@@ -28,11 +30,34 @@ function findTheme(branding: TenantBranding) {
 }
 
 function buildThemeBranding(theme: ColorTheme, current: TenantBranding): TenantBranding {
-  return normalizeTenantBranding({
+  const headerColor = theme.id === "gold" ? DEFAULT_TENANT_BRANDING.headerColor : theme.primary;
+
+  return {
     ...current,
     accentColor: theme.primary,
+    headerColor,
+    headerTextColor: resolveReadableTextColor(headerColor),
     sidebarColor: theme.dark,
+  };
+}
+
+function commitTenantBranding(draft: TenantBranding): TenantBranding {
+  const normalized = normalizeTenantBranding({
+    ...draft,
+    headerTextColor: resolveReadableTextColor(draft.headerColor),
   });
+  writeTenantBrandingToStorage(normalized);
+  publishTenantBrandingChange(normalized);
+  return normalized;
+}
+
+function publishBrandingPreview(draft: TenantBranding): void {
+  publishTenantBrandingChange(
+    normalizeTenantBranding({
+      ...draft,
+      headerTextColor: resolveReadableTextColor(draft.headerColor),
+    })
+  );
 }
 
 // Color swatch
@@ -70,22 +95,31 @@ function Swatch({
   );
 }
 
-function PreviewLogo({ branding, small = false }: { branding: TenantBranding; small?: boolean }) {
+function PreviewLogo({
+  branding,
+  size = "md",
+}: {
+  branding: TenantBranding;
+  size?: "sm" | "md" | "lg";
+}) {
+  const isSmall = size === "sm";
+  const isLarge = size === "lg";
+
   return (
     <span
       className={cn(
         "relative flex shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-[linear-gradient(135deg,#FDFDFD_0%,#E5E4E2_38%,#D1CFCF_66%,#AEB6BF_100%)] shadow-[0_8px_18px_rgba(17,20,24,0.14),0_1px_0_rgba(253,253,253,0.8)_inset]",
-        small ? "h-8 w-8" : "h-12 w-12"
+        isSmall ? "h-8 w-8" : isLarge ? "h-28 w-40" : "h-12 w-12"
       )}
     >
       {branding.logoDataUrl ? (
         <Image
           src={branding.logoDataUrl}
-          alt={branding.companyName}
-          width={80}
-          height={80}
+          alt={branding.companyName || "Company logo"}
+          width={isLarge ? 192 : 80}
+          height={isLarge ? 128 : 80}
           unoptimized
-          className="h-[82%] w-[82%] object-contain drop-shadow-[0_3px_6px_rgba(17,20,24,0.18)]"
+          className="h-full w-full object-contain drop-shadow-[0_3px_6px_rgba(17,20,24,0.18)]"
           draggable={false}
         />
       ) : (
@@ -93,10 +127,10 @@ function PreviewLogo({ branding, small = false }: { branding: TenantBranding; sm
           aria-hidden
           className={cn(
             "font-black leading-none text-[#2F2F2F]",
-            small ? "text-sm" : "text-[1.35rem]"
+            isSmall ? "text-sm" : isLarge ? "text-4xl" : "text-[1.35rem]"
           )}
         >
-          {branding.companyInitials}
+          {branding.companyInitials || DEFAULT_TENANT_BRANDING.companyInitials}
         </span>
       )}
       <span
@@ -159,7 +193,7 @@ function EmailPreview({ branding }: { branding: TenantBranding }) {
       </p>
       <div className="overflow-hidden rounded-xl border border-line bg-white shadow-sm">
         <div className="flex h-10 items-center gap-2 px-4" style={{ background: branding.sidebarColor }}>
-          <PreviewLogo branding={branding} small />
+          <PreviewLogo branding={branding} size="sm" />
           <span className="text-xs font-bold text-white/90">{branding.companyName}</span>
         </div>
         <div className="space-y-2 px-5 py-4">
@@ -183,6 +217,8 @@ function EmailPreview({ branding }: { branding: TenantBranding }) {
 
 export default function BrandingCustomizer({ onSave }: { onSave: () => void }) {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const previewReadyRef = useRef(false);
+  const skipNextPreviewRef = useRef(true);
   const [draft, setDraft] = useState<TenantBranding>(DEFAULT_TENANT_BRANDING);
   const [activeTheme, setActiveTheme] = useState("gold");
   const [useCustom, setUseCustom] = useState(false);
@@ -194,10 +230,23 @@ export default function BrandingCustomizer({ onSave }: { onSave: () => void }) {
     setDraft(stored);
     setActiveTheme(matched?.id ?? "gold");
     setUseCustom(!matched);
+    publishTenantBrandingChange(stored);
+    previewReadyRef.current = true;
+    skipNextPreviewRef.current = true;
   }, []);
 
+  useEffect(() => {
+    if (!previewReadyRef.current) return;
+    if (skipNextPreviewRef.current) {
+      skipNextPreviewRef.current = false;
+      return;
+    }
+
+    publishBrandingPreview(draft);
+  }, [draft]);
+
   function updateDraft(update: Partial<TenantBranding>) {
-    setDraft((current) => normalizeTenantBranding({ ...current, ...update }));
+    setDraft((current) => ({ ...current, ...update }));
   }
 
   function handleThemeSelect(id: string) {
@@ -213,6 +262,15 @@ export default function BrandingCustomizer({ onSave }: { onSave: () => void }) {
     updateDraft({ accentColor: value });
   }
 
+  useEffect(() => {
+    function handleExternalSave() {
+      setDraft(commitTenantBranding(draft));
+    }
+
+    window.addEventListener(APPEARANCE_SAVE_EVENT, handleExternalSave);
+    return () => window.removeEventListener(APPEARANCE_SAVE_EVENT, handleExternalSave);
+  }, [draft]);
+
   function handleLogoFile(file: File | undefined) {
     if (!file) return;
     if (!file.type.startsWith("image/")) {
@@ -220,7 +278,7 @@ export default function BrandingCustomizer({ onSave }: { onSave: () => void }) {
       return;
     }
     if (file.size > MAX_LOGO_BYTES) {
-      setLogoError("Choose an image under 900KB.");
+      setLogoError("Choose an image under 3MB.");
       return;
     }
 
@@ -234,10 +292,7 @@ export default function BrandingCustomizer({ onSave }: { onSave: () => void }) {
   }
 
   function handleApply() {
-    const normalized = normalizeTenantBranding(draft);
-    setDraft(normalized);
-    writeTenantBrandingToStorage(normalized);
-    publishTenantBrandingChange(normalized);
+    setDraft(commitTenantBranding(draft));
     onSave();
   }
 
@@ -296,7 +351,13 @@ export default function BrandingCustomizer({ onSave }: { onSave: () => void }) {
                     aria-label="Header color"
                     type="color"
                     value={draft.headerColor}
-                    onChange={(event) => updateDraft({ headerColor: event.target.value })}
+                    onChange={(event) => {
+                      const headerColor = event.target.value;
+                      updateDraft({
+                        headerColor,
+                        headerTextColor: resolveReadableTextColor(headerColor),
+                      });
+                    }}
                     className="h-8 w-12 cursor-pointer rounded border border-line bg-white"
                   />
                   <span className="font-mono text-xs text-gray-500">{draft.headerColor.toUpperCase()}</span>
@@ -357,9 +418,12 @@ export default function BrandingCustomizer({ onSave }: { onSave: () => void }) {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 gap-4 lg:grid-cols-[12rem_minmax(0,1fr)]">
-              <div className="flex min-h-36 items-center justify-center rounded-2xl border border-line bg-surface-2">
-                <PreviewLogo branding={draft} />
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-[14rem_minmax(0,1fr)]">
+              <div
+                aria-label="Logo preview"
+                className="flex min-h-44 items-center justify-center rounded-2xl border border-line bg-surface-2 p-4"
+              >
+                <PreviewLogo branding={draft} size="lg" />
               </div>
               <div className="space-y-4">
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-[minmax(0,1fr)_8rem]">
@@ -375,7 +439,7 @@ export default function BrandingCustomizer({ onSave }: { onSave: () => void }) {
                     <span className="mb-1.5 block text-xs font-semibold text-dravik-dark">Initials</span>
                     <input
                       value={draft.companyInitials}
-                      onChange={(event) => updateDraft({ companyInitials: event.target.value })}
+                      onChange={(event) => updateDraft({ companyInitials: event.target.value.toUpperCase() })}
                       maxLength={4}
                       className="w-full rounded-xl border border-line bg-white px-3 py-2 text-sm font-bold uppercase tracking-[0.08em] text-dravik-dark outline-none transition-colors focus:border-gold"
                     />

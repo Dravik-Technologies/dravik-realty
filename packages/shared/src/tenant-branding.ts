@@ -59,6 +59,17 @@ export function isValidHexColor(value: string): boolean {
   return HEX_COLOR_RE.test(value);
 }
 
+export function resolveReadableTextColor(backgroundHex: string): "#2F2F2F" | "#FDFDFD" {
+  if (!isValidHexColor(backgroundHex)) return "#2F2F2F";
+
+  const red = Number.parseInt(backgroundHex.slice(1, 3), 16) / 255;
+  const green = Number.parseInt(backgroundHex.slice(3, 5), 16) / 255;
+  const blue = Number.parseInt(backgroundHex.slice(5, 7), 16) / 255;
+  const luminance = 0.2126 * red + 0.7152 * green + 0.0722 * blue;
+
+  return luminance > 0.58 ? "#2F2F2F" : "#FDFDFD";
+}
+
 export function resolveBrandFont(fontId: BrandFontId): string {
   return (
     BRAND_FONT_OPTIONS.find((option) => option.id === fontId)?.cssFamily ??

@@ -9,7 +9,7 @@ import PermissionsManager from "./PermissionsManager";
 import CommissionBilling  from "./CommissionBilling";
 import IntegrationStatus  from "./IntegrationStatus";
 import CompliancePanel    from "./CompliancePanel";
-import BrandingCustomizer from "./BrandingCustomizer";
+import BrandingCustomizer, { APPEARANCE_SAVE_EVENT } from "./BrandingCustomizer";
 import NotificationsPanel from "./NotificationsPanel";
 import SecurityAuditLog   from "./SecurityAuditLog";
 import { cn } from "@dravik/shared";
@@ -48,10 +48,17 @@ export default function SettingsDashboard() {
   const [toast,    setToast]    = useState(false);
   const [resetKey, setResetKey] = useState(0);
 
-  const handleSave = useCallback(() => {
+  const showSavedToast = useCallback(() => {
     setToast(true);
     setTimeout(() => setToast(false), 3000);
   }, []);
+
+  const handleSave = useCallback(() => {
+    if (section === "appearance") {
+      window.dispatchEvent(new Event(APPEARANCE_SAVE_EVENT));
+    }
+    showSavedToast();
+  }, [section, showSavedToast]);
 
   const handleDiscard = useCallback(() => setResetKey((k) => k + 1), []);
 
@@ -112,7 +119,7 @@ export default function SettingsDashboard() {
             <CompliancePanel />
           </div>
           <div hidden={section !== "appearance"}>
-            <BrandingCustomizer onSave={handleSave} />
+            <BrandingCustomizer onSave={showSavedToast} />
           </div>
           <div hidden={section !== "notifications"}>
             <NotificationsPanel onSave={handleSave} />

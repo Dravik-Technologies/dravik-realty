@@ -25,9 +25,23 @@ test.describe("settings", () => {
   test("appearance panel applies tenant branding to the app shell", async ({ page }) => {
     await page.getByRole("button", { name: "Appearance", exact: true }).click();
 
-    await page.getByLabel("Company Name").fill("Titanium Realty");
-    await page.getByLabel("Initials").fill("TR");
-    await page.getByLabel("Header color").fill("#D1CFCF");
+    await page.getByRole("button", { name: "Rose & Charcoal" }).click();
+    await expect(page.locator("header")).toHaveCSS("background-color", "rgb(225, 29, 72)");
+
+    const companyName = page.getByLabel("Company Name");
+    await companyName.focus();
+    await page.keyboard.press("Control+A");
+    await page.keyboard.press("Backspace");
+    await expect(companyName).toHaveValue("");
+    await companyName.pressSequentially("Titanium Realty");
+
+    const initials = page.getByLabel("Initials");
+    await initials.focus();
+    await page.keyboard.press("Control+A");
+    await page.keyboard.press("Backspace");
+    await expect(initials).toHaveValue("");
+    await initials.pressSequentially("TR");
+
     await page.getByRole("button", { name: "Editorial Serif" }).click();
 
     await page.getByLabel("Tenant logo upload").setInputFiles({
@@ -39,10 +53,15 @@ test.describe("settings", () => {
       ),
     });
 
-    await expect(page.getByRole("img", { name: "Titanium Realty" }).first()).toBeVisible();
-    await page.getByRole("button", { name: "Apply Theme" }).click();
+    const logoPreview = page.getByLabel("Logo preview").getByRole("img", { name: "Titanium Realty" });
+    await expect(logoPreview).toBeVisible();
+    const logoBox = await logoPreview.boundingBox();
+    expect(logoBox?.width).toBeGreaterThan(100);
 
-    await expect(page.locator("header")).toHaveCSS("background-color", "rgb(209, 207, 207)");
+    await page.getByRole("button", { name: "Save Changes" }).click();
+    await page.reload();
+
+    await expect(page.locator("header")).toHaveCSS("background-color", "rgb(225, 29, 72)");
     await expect(page.locator("header")).toContainText("Titanium Realty");
     await expect(page.locator("body")).toHaveCSS("font-family", /Georgia/);
     await expect(page.locator("header").getByRole("img", { name: "Titanium Realty" })).toBeVisible();

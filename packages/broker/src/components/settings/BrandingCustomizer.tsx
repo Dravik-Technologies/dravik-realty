@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Check, ImagePlus, Mail, Palette, RotateCcw, Type, Upload, X } from "lucide-react";
 import { COLOR_THEMES } from "../../data/settings";
@@ -20,6 +20,12 @@ import {
 
 const MAX_LOGO_BYTES = 3_000_000;
 export const APPEARANCE_SAVE_EVENT = "dravik:appearance-save";
+const TENANT_BRANDING_API_PATH = "/api/tenant/branding";
+
+type TenantBrandingResponse = {
+  branding?: Partial<TenantBranding>;
+  persistence?: "database" | "memory";
+};
 
 function findTheme(branding: TenantBranding) {
   return COLOR_THEMES.find(
@@ -58,6 +64,45 @@ function publishBrandingPreview(draft: TenantBranding): void {
       headerTextColor: resolveReadableTextColor(draft.headerColor),
     })
   );
+}
+
+async function fetchPersistedTenantBranding(): Promise<TenantBranding | null> {
+  try {
+    const response = await fetch(TENANT_BRANDING_API_PATH, { cache: "no-store" });
+    if (!response.ok) return null;
+
+    const payload = (await response.json()) as TenantBrandingResponse;
+    if (payload.persistence !== "database" || !payload.branding) return null;
+
+    return commitTenantBranding(normalizeTenantBranding(payload.branding));
+  } catch {
+    return null;
+  }
+}
+
+async function persistTenantBranding(draft: TenantBranding): Promise<TenantBranding> {
+  const normalized = commitTenantBranding(draft);
+
+  try {
+    const response = await fetch(TENANT_BRANDING_API_PATH, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ branding: normalized }),
+    });
+
+    if (!response.ok) {
+      return normalized;
+    }
+
+    const payload = (await response.json()) as TenantBrandingResponse;
+    if (!payload.branding) {
+      return normalized;
+    }
+
+    return commitTenantBranding(normalizeTenantBranding(payload.branding));
+  } catch {
+    return normalized;
+  }
 }
 
 // Color swatch
@@ -224,16 +269,32 @@ export default function BrandingCustomizer({ onSave }: { onSave: () => void }) {
   const [useCustom, setUseCustom] = useState(false);
   const [logoError, setLogoError] = useState("");
 
-  useEffect(() => {
-    const stored = readTenantBrandingFromStorage();
-    const matched = findTheme(stored);
-    setDraft(stored);
+  const syncThemeState = useCallback((nextBranding: TenantBranding) => {
+    const matched = findTheme(nextBranding);
     setActiveTheme(matched?.id ?? "gold");
     setUseCustom(!matched);
+  }, []);
+
+  useEffect(() => {
+    let mounted = true;
+    const stored = readTenantBrandingFromStorage();
+    setDraft(stored);
+    syncThemeState(stored);
     publishTenantBrandingChange(stored);
     previewReadyRef.current = true;
     skipNextPreviewRef.current = true;
-  }, []);
+
+    void fetchPersistedTenantBranding().then((persisted) => {
+      if (!mounted || !persisted) return;
+      skipNextPreviewRef.current = true;
+      setDraft(persisted);
+      syncThemeState(persisted);
+    });
+
+    return () => {
+      mounted = false;
+    };
+  }, [syncThemeState]);
 
   useEffect(() => {
     if (!previewReadyRef.current) return;
@@ -243,7 +304,7 @@ export default function BrandingCustomizer({ onSave }: { onSave: () => void }) {
     }
 
     publishBrandingPreview(draft);
-  }, [draft]);
+  }, [draft, syncThemeState]);
 
   function updateDraft(update: Partial<TenantBranding>) {
     setDraft((current) => ({ ...current, ...update }));
@@ -264,7 +325,10 @@ export default function BrandingCustomizer({ onSave }: { onSave: () => void }) {
 
   useEffect(() => {
     function handleExternalSave() {
-      setDraft(commitTenantBranding(draft));
+      void persistTenantBranding(draft).then((saved) => {
+        setDraft(saved);
+        syncThemeState(saved);
+      });
     }
 
     window.addEventListener(APPEARANCE_SAVE_EVENT, handleExternalSave);
@@ -292,8 +356,11 @@ export default function BrandingCustomizer({ onSave }: { onSave: () => void }) {
   }
 
   function handleApply() {
-    setDraft(commitTenantBranding(draft));
-    onSave();
+    void persistTenantBranding(draft).then((saved) => {
+      setDraft(saved);
+      syncThemeState(saved);
+      onSave();
+    });
   }
 
   function handleReset() {
@@ -301,8 +368,7 @@ export default function BrandingCustomizer({ onSave }: { onSave: () => void }) {
     setActiveTheme("gold");
     setUseCustom(false);
     setLogoError("");
-    writeTenantBrandingToStorage(DEFAULT_TENANT_BRANDING);
-    publishTenantBrandingChange(DEFAULT_TENANT_BRANDING);
+    void persistTenantBranding(DEFAULT_TENANT_BRANDING);
     onSave();
   }
 

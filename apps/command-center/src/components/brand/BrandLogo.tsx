@@ -53,7 +53,7 @@ export function BrandLogo({
             height={96}
             unoptimized
             priority={priority}
-            className="pointer-events-none h-[82%] w-[82%] select-none object-contain drop-shadow-[0_4px_7px_rgba(17,20,24,0.22)]"
+            className="pointer-events-none h-full w-full select-none object-contain drop-shadow-[0_4px_7px_rgba(17,20,24,0.22)]"
             draggable={false}
           />
         ) : (

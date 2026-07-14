@@ -13,9 +13,11 @@ test.describe("identity boundaries", () => {
 
     await page.goto("/dashboard");
     await expect(page).toHaveURL(/\/login$/);
-    await expect(page.getByRole("heading", { name: "Dravik Realty" })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Run leads, listings, referrals, and closings from one command center." })
+    ).toBeVisible();
 
-    await page.getByRole("button", { name: "Continue as Chris Macabugao" }).click();
+    await page.getByRole("button", { name: "Continue to Local Workspace" }).click();
     await expect(page).toHaveURL(/\/dashboard$/);
     await expect(page.getByRole("heading", { name: /, Chris\./ })).toBeVisible();
   });
@@ -67,7 +69,9 @@ test.describe("identity boundaries", () => {
 
     await page.goto("/auth/command/sign-in");
     await expect(page).toHaveURL(/\/login$/);
-    await expect(page.getByRole("heading", { name: "Dravik Realty" })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Run leads, listings, referrals, and closings from one command center." })
+    ).toBeVisible();
 
     await page.goto("/auth/portal/sign-in");
     await expect(page).toHaveURL(/\/portal\/login$/);

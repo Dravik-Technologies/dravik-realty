@@ -1,6 +1,6 @@
 "use client";
 
-import { MapPin, Star, ArrowUpRight, BadgeCheck } from "lucide-react";
+import { MapPin, Star, ArrowUpRight, BadgeCheck, Edit3, Trash2 } from "lucide-react";
 import type { Agent, CertificationType, PartnerRole } from "@dravik/contracts/referrals";
 import { getPartnerTier, getPartnerTierLabel, getPartnerTierStyles } from "../data/partnerTiers";
 import { cn, formatCurrency } from "@dravik/shared";
@@ -83,9 +83,11 @@ function Stars({ score }: { score: number }) {
 interface AgentCardProps {
   agent: Agent;
   onInitiate: (agent: Agent) => void;
+  onEdit?: (agent: Agent) => void;
+  onDelete?: (agent: Agent) => void;
 }
 
-export default function AgentCard({ agent, onInitiate }: AgentCardProps) {
+export default function AgentCard({ agent, onInitiate, onEdit, onDelete }: AgentCardProps) {
   const cert = CERT_CONFIG[agent.certification];
   const role = ROLE_CONFIG[agent.partnerRole];
   const tier = getPartnerTier(agent);
@@ -198,16 +200,38 @@ export default function AgentCard({ agent, onInitiate }: AgentCardProps) {
         </div>
 
         {/* ── CTA ── */}
-        <button
-          onClick={() => onInitiate(agent)}
-          className="mt-auto w-full flex items-center justify-center gap-2 bg-dravik-dark hover:bg-dravik-navy text-white text-sm font-bold py-2.5 rounded-xl transition-colors shadow-sm group"
-        >
-          Start Referral
-          <ArrowUpRight
-            size={15}
-            className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-          />
-        </button>
+        <div className="mt-auto grid grid-cols-2 gap-2">
+          <button
+            onClick={() => onInitiate(agent)}
+            className="col-span-2 flex w-full items-center justify-center gap-2 bg-dravik-dark hover:bg-dravik-navy text-white text-sm font-bold py-2.5 rounded-xl transition-colors shadow-sm group"
+          >
+            Start Referral
+            <ArrowUpRight
+              size={15}
+              className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
+          </button>
+          {onEdit && (
+            <button
+              type="button"
+              onClick={() => onEdit(agent)}
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-line px-3 py-2 text-xs font-bold text-gray-600 transition-colors hover:bg-surface"
+            >
+              <Edit3 size={13} />
+              Edit
+            </button>
+          )}
+          {onDelete && (
+            <button
+              type="button"
+              onClick={() => onDelete(agent)}
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-rose-100 px-3 py-2 text-xs font-bold text-rose-500 transition-colors hover:bg-rose-50"
+            >
+              <Trash2 size={13} />
+              Archive
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

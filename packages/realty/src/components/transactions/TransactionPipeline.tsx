@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   DndContext, closestCorners, DragOverlay,
   useSensor, useSensors, PointerSensor, KeyboardSensor,
@@ -124,6 +124,10 @@ export default function TransactionPipeline({
   const [txns, setTxns]       = useState<Transaction[]>(initialTransactions);
   const [activeId, setActiveId] = useState<string | null>(null);
   const dragOriginStage         = useRef<PipelineStage | null>(null);
+
+  useEffect(() => {
+    setTxns(initialTransactions);
+  }, [initialTransactions]);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),

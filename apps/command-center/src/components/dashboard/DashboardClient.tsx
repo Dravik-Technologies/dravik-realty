@@ -11,12 +11,11 @@ import type { CommandCenterSession } from "@dravik/contracts/identity";
 import { SAMPLE_LEADS } from "@dravik/crm";
 import { SAMPLE_TRANSACTIONS } from "@dravik/realty";
 import { MORTGAGE_APPS } from "@dravik/lending";
-import { formatCurrency, cn, isLocalDemoEnvironment } from "@dravik/shared";
+import { fetchOperationalRecords, formatCurrency, cn, isLocalDemoEnvironment } from "@dravik/shared";
 import { canAccessHref, filterDashboardModules } from "@/modules/registry";
 
 // ─── Module-level precomputed data ────────────────────────────
 const totalLeads  = SAMPLE_LEADS.length;
-const pipelineVol = SAMPLE_TRANSACTIONS.reduce((s, t) => s + t.contractPrice, 0);
 const activeApps  = MORTGAGE_APPS.filter(a => a.stage !== "declined").length;
 
 const LEAD_STAGES = [
@@ -39,15 +38,6 @@ const leadCounts    = LEAD_STAGES.map(s => ({ ...s, count: SAMPLE_LEADS.filter(l
 const mortgageCounts = MORT_STAGES.map(s => ({ ...s, count: MORTGAGE_APPS.filter(a => a.stage === s.key).length }));
 
 const approvedClosing = mortgageCounts[3].count + mortgageCounts[4].count;
-const closingsMtd = SAMPLE_TRANSACTIONS.filter((t) => t.status === "Closed").length;
-
-const KPIS = [
-  { label: "Active Leads",    value: String(totalLeads),                sub: isLocalDemoEnvironment ? "+8 this week" : "No records yet", accent: "#4A90A4", href: "/crm/leads" },
-  { label: "Pipeline Volume", value: formatCurrency(pipelineVol),        sub: `${SAMPLE_TRANSACTIONS.length} active deals`, accent: "#C9C3B6", href: "/realty/transactions" },
-  { label: "Closings MTD",    value: String(closingsMtd),               sub: isLocalDemoEnvironment ? "On target for May" : "No closed deals", accent: "#4A7A4A", href: "/realty/transactions" },
-  { label: "Mortgage Apps",   value: String(activeApps),                sub: `${approvedClosing} approved/closing`, accent: "#C0786C", href: "/lending" },
-];
-
 interface ActivityItem {
   id:     string;
   icon:   React.ElementType;
@@ -84,19 +74,24 @@ const HELP_LINKS = [
 ];
 
 const GOAL     = 10_000_000;
-const GOAL_PCT = Math.min(100, Math.round((pipelineVol / GOAL) * 100));
+
+type DashboardLeadRecord = { id: string };
+type DashboardTransactionRecord = { id: string; contractPrice: number; status: string };
 
 // ─── KpiCard ──────────────────────────────────────────────────
-function KpiCard({ label, value, sub, accent }: { label:string; value:string; sub:string; accent:string }) {
+function KpiCard({ label, value, sub, accent, href }: { label:string; value:string; sub:string; accent:string; href:string }) {
   return (
-    <div className="bg-white rounded-2xl border border-line p-5 space-y-2">
+    <Link href={href} className="group block bg-white rounded-2xl border border-line p-5 space-y-2 transition-all hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-md">
       <div className="w-2.5 h-2.5 rounded-full" style={{ background: accent }} />
       <p className="text-2xl font-bold text-dravik-dark leading-none">{value}</p>
       <div>
         <p className="text-xs font-semibold text-dravik-dark">{label}</p>
         <p className="text-[11px] text-gray-400 mt-0.5">{sub}</p>
       </div>
-    </div>
+      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-gold opacity-0 transition-opacity group-hover:opacity-100">
+        View records <ArrowRight size={10} />
+      </span>
+    </Link>
   );
 }
 
@@ -247,10 +242,21 @@ export default function DashboardClient({ session }: { session: CommandCenterSes
   const [greeting, setGreeting] = useState("Good morning");
   const [dateStr,  setDateStr]  = useState("");
   const [showHelp, setShowHelp] = useState(false);
+  const [liveLeadCount, setLiveLeadCount] = useState(totalLeads);
+  const [liveTransactions, setLiveTransactions] = useState<DashboardTransactionRecord[]>(SAMPLE_TRANSACTIONS);
   const closeHelp = useCallback(() => setShowHelp(false), []);
   const dashboardModules = filterDashboardModules(session);
   const visibleHelpLinks = HELP_LINKS.filter((link) => canAccessHref(session, link.href));
-  const visibleKpis = KPIS.filter((kpi) => canAccessHref(session, kpi.href));
+  const livePipelineVol = liveTransactions.reduce((sum, transaction) => sum + transaction.contractPrice, 0);
+  const liveClosingsMtd = liveTransactions.filter((transaction) => transaction.status === "Closed").length;
+  const liveGoalPct = Math.min(100, Math.round((livePipelineVol / GOAL) * 100));
+  const kpis = [
+    { label: "Active Leads",    value: String(liveLeadCount),             sub: isLocalDemoEnvironment ? "+8 this week" : "Open Lead Engine", accent: "#4A90A4", href: "/crm/leads" },
+    { label: "Pipeline Volume", value: formatCurrency(livePipelineVol),    sub: `${liveTransactions.length} active deals`, accent: "#C9C3B6", href: "/realty/transactions" },
+    { label: "Closings MTD",    value: String(liveClosingsMtd),           sub: isLocalDemoEnvironment ? "On target for May" : "Open transactions", accent: "#4A7A4A", href: "/realty/transactions" },
+    { label: "Mortgage Apps",   value: String(activeApps),                sub: `${approvedClosing} approved/closing`, accent: "#C0786C", href: "/lending" },
+  ];
+  const visibleKpis = kpis.filter((kpi) => canAccessHref(session, kpi.href));
   const visibleActivity = ACTIVITY.filter((item) => canAccessHref(session, item.href));
   const showLeadPipeline = canAccessHref(session, "/crm/leads");
   const showMortgagePipeline = canAccessHref(session, "/lending");
@@ -258,7 +264,7 @@ export default function DashboardClient({ session }: { session: CommandCenterSes
   const quickStats = [
     {
       label: "Avg Deal Size",
-      value: formatCurrency(pipelineVol / Math.max(SAMPLE_TRANSACTIONS.length, 1)),
+      value: formatCurrency(livePipelineVol / Math.max(liveTransactions.length, 1)),
       icon:  TrendingUp,
       color: "text-gold",
       href: "/realty/transactions",
@@ -272,7 +278,7 @@ export default function DashboardClient({ session }: { session: CommandCenterSes
     },
     {
       label: "Active Transactions",
-      value: String(SAMPLE_TRANSACTIONS.length),
+      value: String(liveTransactions.length),
       icon:  Receipt,
       color: "text-blue-500",
       href: "/realty/transactions",
@@ -288,6 +294,27 @@ export default function DashboardClient({ session }: { session: CommandCenterSes
       }));
     });
     return () => cancelAnimationFrame(id);
+  }, []);
+
+  useEffect(() => {
+    let mounted = true;
+
+    async function loadDashboardRecords() {
+      try {
+        const [leadPayload, transactionPayload] = await Promise.all([
+          fetchOperationalRecords<DashboardLeadRecord>("leads"),
+          fetchOperationalRecords<DashboardTransactionRecord>("transactions"),
+        ]);
+        if (!mounted) return;
+        setLiveLeadCount(leadPayload.records.length);
+        setLiveTransactions(transactionPayload.records);
+      } catch {
+        // Dashboard falls back to module fixtures/local empty state.
+      }
+    }
+
+    void loadDashboardRecords();
+    return () => { mounted = false; };
   }, []);
 
   const leadMax    = Math.max(...leadCounts.map(s => s.count), 1);
@@ -417,21 +444,21 @@ export default function DashboardClient({ session }: { session: CommandCenterSes
         {/* Production widget — 1/3 */}
         <div className="space-y-4">
           {showProduction && (
-          <div className="bg-dravik-dark rounded-2xl p-5">
+          <Link href="/realty/transactions" className="block bg-dravik-dark rounded-2xl p-5 transition-all hover:-translate-y-0.5 hover:shadow-lg">
             <div className="flex items-center gap-2 mb-4">
               <Target size={14} className="text-gold" />
               <p className="text-xs font-bold text-white">Monthly Production</p>
             </div>
-            <p className="text-3xl font-bold text-white leading-none">{formatCurrency(pipelineVol)}</p>
+            <p className="text-3xl font-bold text-white leading-none">{formatCurrency(livePipelineVol)}</p>
             <p className="text-xs text-gray-400 mt-1 mb-4">of {formatCurrency(GOAL)} goal · May 2026</p>
             <div className="h-2 bg-white/10 rounded-full overflow-hidden mb-2">
-              <div className="h-full bg-gold rounded-full" style={{ width: `${GOAL_PCT}%` }} />
+              <div className="h-full bg-gold rounded-full" style={{ width: `${liveGoalPct}%` }} />
             </div>
             <div className="flex items-center justify-between text-[11px]">
-              <span className="text-gold font-bold">{GOAL_PCT}% achieved</span>
-              <span className="text-gray-400">{SAMPLE_TRANSACTIONS.length} active deals</span>
+              <span className="text-gold font-bold">{liveGoalPct}% achieved</span>
+              <span className="text-gray-400">{liveTransactions.length} active deals</span>
             </div>
-          </div>
+          </Link>
           )}
 
           {quickStats.length > 0 && (
@@ -440,13 +467,13 @@ export default function DashboardClient({ session }: { session: CommandCenterSes
             {quickStats.map(stat => {
               const Icon = stat.icon;
               return (
-                <div key={stat.label} className="flex items-center justify-between">
+                <Link key={stat.label} href={stat.href} className="flex items-center justify-between rounded-xl px-2 py-1.5 transition-colors hover:bg-surface">
                   <div className="flex items-center gap-2">
                     <Icon size={13} className={cn("flex-shrink-0", stat.color)} />
                     <span className="text-[11px] text-gray-500">{stat.label}</span>
                   </div>
                   <span className="text-xs font-bold text-dravik-dark">{stat.value}</span>
-                </div>
+                </Link>
               );
             })}
           </div>

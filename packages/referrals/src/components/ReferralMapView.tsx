@@ -7,7 +7,6 @@ import {
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { Search, X, MapPin, ChevronRight, Target, SlidersHorizontal } from "lucide-react";
-import { AGENTS } from "../data/agents";
 import { MILITARY_BASES, BRANCH_COLOR, type MilitaryBase } from "../data/militaryBases";
 import { getPartnerTier, getPartnerTierLabel, getPartnerTierStyles } from "../data/partnerTiers";
 import type { Agent, CertificationType, PartnerRole } from "@dravik/contracts/referrals";
@@ -203,13 +202,14 @@ function AgentListItem({ agent, dist, onInitiate }: {
 
 // ─── Main component ───────────────────────────────────────────
 interface ReferralMapViewProps {
+  agents: Agent[];
   onInitiateReferral: (agent: Agent) => void;
 }
 
 const INITIAL_CENTER: [number, number] = [20, 0];
 const INITIAL_ZOOM = 2;
 
-export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewProps) {
+export default function ReferralMapView({ agents, onInitiateReferral }: ReferralMapViewProps) {
   const [searchQuery,      setSearchQuery]      = useState("");
   const [showDrop,         setShowDrop]         = useState(false);
   const [dropCursor,       setDropCursor]       = useState(-1);
@@ -224,8 +224,8 @@ export default function ReferralMapView({ onInitiateReferral }: ReferralMapViewP
 
   // Agents with coordinates
   const geoAgents = useMemo(
-    () => AGENTS.filter(a => a.location.lat !== undefined && a.location.lng !== undefined),
-    []
+    () => agents.filter(a => a.location.lat !== undefined && a.location.lng !== undefined),
+    [agents]
   );
 
   // Agents within radius + cert filter

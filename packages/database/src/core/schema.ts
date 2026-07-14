@@ -11,6 +11,7 @@ export const CORE_TABLES = [
   "role_assignment",
   "invitation",
   "listing",
+  "operational_record",
   "audit_event",
   "outbox",
 ] as const;
@@ -25,6 +26,7 @@ export const TENANT_SCOPED_CORE_TABLES = [
   "role_assignment",
   "invitation",
   "listing",
+  "operational_record",
   "audit_event",
   "outbox",
 ] as const satisfies readonly CoreTable[];
@@ -46,6 +48,11 @@ export const CORE_MIGRATIONS = [
     id: "0003_listing_network_exchange",
     schema: CORE_SCHEMA,
     path: "db/migrations/core/0003_listing_network_exchange.sql",
+  },
+  {
+    id: "0004_operational_records",
+    schema: CORE_SCHEMA,
+    path: "db/migrations/core/0004_operational_records.sql",
   },
 ] as const;
 

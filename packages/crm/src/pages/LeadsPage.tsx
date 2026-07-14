@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect, type FormEvent } from "react";
 import {
   AlertTriangle,
   CheckCircle2,
@@ -12,13 +12,22 @@ import {
   Search,
   Upload,
   X,
+  Plus,
+  Edit3,
+  Loader2,
 } from "lucide-react";
 import LeadPipeline from "../components/leads/LeadPipeline";
 import LeadDetailPanel from "../components/leads/LeadDetailPanel";
 import { SAMPLE_LEADS } from "../data/leads";
 import type { ClientType, Lead, LeadSource, LeadStatus, SubNavTab } from "@dravik/contracts/crm";
 import { KANBAN_COLUMNS, SUBNAV_TABS } from "@dravik/contracts/crm";
-import { cn } from "@dravik/shared";
+import {
+  archiveOperationalRecord,
+  cn,
+  createOperationalRecord,
+  fetchOperationalRecords,
+  updateOperationalRecord,
+} from "@dravik/shared";
 
 type ImportedLead = Lead & {
   duplicate: boolean;
@@ -41,6 +50,32 @@ const LEAD_SOURCES: LeadSource[] = [
 const CLIENT_TYPES: ClientType[] = ["Buyer", "Seller", "Dual"];
 const STATUS_OPTIONS = KANBAN_COLUMNS.map((column) => column.id);
 const AVATAR_COLORS = ["#4A90A4", "#7C6A9E", "#C0786C", "#4A7A4A", "#B87333", "#1A6B8A"];
+
+type LeadFormState = {
+  name: string;
+  email: string;
+  phone: string;
+  source: LeadSource;
+  clientType: ClientType;
+  status: LeadStatus;
+  assignedTo: string;
+  priceMin: string;
+  priceMax: string;
+  notes: string;
+};
+
+const EMPTY_LEAD_FORM: LeadFormState = {
+  name: "",
+  email: "",
+  phone: "",
+  source: "Website",
+  clientType: "Buyer",
+  status: "New Lead",
+  assignedTo: "Chris M.",
+  priceMin: "",
+  priceMax: "",
+  notes: "",
+};
 
 const FIELD_ALIASES = {
   name: ["name", "full name", "contact", "contact name", "client", "client name", "lead", "lead name"],
@@ -138,6 +173,66 @@ function normalizeClientType(value: string): ClientType {
 function parseCurrency(value: string): number {
   const parsed = Number(value.replace(/[$,\s]/g, ""));
   return Number.isFinite(parsed) && parsed > 0 ? Math.round(parsed) : 0;
+}
+
+function createTempId(prefix: string) {
+  return typeof crypto !== "undefined" && "randomUUID" in crypto
+    ? crypto.randomUUID()
+    : `${prefix}-${Date.now()}`;
+}
+
+function leadToForm(lead: Lead): LeadFormState {
+  return {
+    name: lead.name,
+    email: lead.email,
+    phone: lead.phone,
+    source: lead.source,
+    clientType: lead.clientType,
+    status: lead.status,
+    assignedTo: lead.assignedTo,
+    priceMin: lead.priceMin ? String(lead.priceMin) : "",
+    priceMax: lead.priceMax ? String(lead.priceMax) : "",
+    notes: lead.notes,
+  };
+}
+
+function formToLead(form: LeadFormState, existing?: Lead): Lead {
+  const now = new Date().toISOString();
+  const name = form.name.trim() || "New Lead";
+
+  return {
+    id: existing?.id ?? createTempId("lead"),
+    name,
+    initials: initialsFor(name),
+    avatarColor: existing?.avatarColor ?? AVATAR_COLORS[Math.floor(Math.random() * AVATAR_COLORS.length)],
+    email: form.email.trim(),
+    phone: form.phone.trim(),
+    source: form.source,
+    clientType: form.clientType,
+    status: form.status,
+    behaviorScore: existing?.behaviorScore ?? 50,
+    lastTouchpoint: now,
+    assignedTo: form.assignedTo.trim(),
+    createdAt: existing?.createdAt ?? now,
+    notes: form.notes.trim(),
+    priceMin: parseCurrency(form.priceMin),
+    priceMax: parseCurrency(form.priceMax),
+    savedProperties: existing?.savedProperties ?? 0,
+    viewedThisWeek: existing?.viewedThisWeek ?? 0,
+    preApproval: existing?.preApproval ?? "Not Started",
+    creditPull: existing?.creditPull ?? "Not Pulled",
+    maxBudget: existing?.maxBudget,
+    mortgageOfficer: existing?.mortgageOfficer,
+    activities: existing?.activities ?? [
+      {
+        id: `activity-${createTempId("lead")}`,
+        type: "note",
+        description: "Lead created in Dravik Realty.",
+        timestamp: now,
+        by: "Dravik Realty",
+      },
+    ],
+  };
 }
 
 function phoneKey(phone: string): string {
@@ -409,6 +504,171 @@ function LeadImportModal({
   );
 }
 
+function LeadFormModal({
+  open,
+  mode,
+  form,
+  submitting,
+  onChange,
+  onClose,
+  onSubmit,
+}: {
+  open: boolean;
+  mode: "add" | "edit";
+  form: LeadFormState;
+  submitting: boolean;
+  onChange: (patch: Partial<LeadFormState>) => void;
+  onClose: () => void;
+  onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+}) {
+  if (!open) return null;
+
+  return (
+    <div className="fixed inset-0 z-[1200] flex items-center justify-center p-4 animate-fade-in">
+      <button className="absolute inset-0 bg-dravik-dark/60 backdrop-blur-sm" aria-label="Close lead form" onClick={onClose} />
+      <form
+        onSubmit={onSubmit}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="lead-form-title"
+        className="relative flex max-h-[calc(100vh-2rem)] w-full max-w-2xl flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-2xl animate-slide-up"
+      >
+        <div className="flex items-center justify-between gap-4 border-b border-line px-6 py-5">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-gold/20 bg-gold-light">
+              {mode === "add" ? <Plus size={18} className="text-gold-dark" /> : <Edit3 size={18} className="text-gold-dark" />}
+            </div>
+            <div>
+              <h2 id="lead-form-title" className="text-base font-bold text-dravik-dark">{mode === "add" ? "Add Lead" : "Edit Lead"}</h2>
+              <p className="mt-0.5 text-xs text-gray-400">Contact details, pipeline stage, assignment, and notes.</p>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close"
+            className="rounded-lg p-1.5 text-gray-400 transition-colors hover:bg-surface-2 hover:text-dravik-dark"
+          >
+            <X size={16} />
+          </button>
+        </div>
+
+        <div className="grid min-h-0 grid-cols-1 gap-4 overflow-y-auto p-6 sm:grid-cols-2">
+          <label className="sm:col-span-2">
+            <span className="text-xs font-bold text-gray-500">Name</span>
+            <input
+              required
+              value={form.name}
+              onChange={(event) => onChange({ name: event.target.value })}
+              className="mt-1 w-full rounded-xl border border-line px-3 py-2.5 text-sm text-dravik-dark focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20"
+            />
+          </label>
+          <label>
+            <span className="text-xs font-bold text-gray-500">Email</span>
+            <input
+              type="email"
+              value={form.email}
+              onChange={(event) => onChange({ email: event.target.value })}
+              className="mt-1 w-full rounded-xl border border-line px-3 py-2.5 text-sm text-dravik-dark focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20"
+            />
+          </label>
+          <label>
+            <span className="text-xs font-bold text-gray-500">Phone</span>
+            <input
+              value={form.phone}
+              onChange={(event) => onChange({ phone: event.target.value })}
+              className="mt-1 w-full rounded-xl border border-line px-3 py-2.5 text-sm text-dravik-dark focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20"
+            />
+          </label>
+          <label>
+            <span className="text-xs font-bold text-gray-500">Source</span>
+            <select
+              value={form.source}
+              onChange={(event) => onChange({ source: event.target.value as LeadSource })}
+              className="mt-1 w-full rounded-xl border border-line px-3 py-2.5 text-sm text-dravik-dark focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20"
+            >
+              {LEAD_SOURCES.map((source) => <option key={source} value={source}>{source}</option>)}
+            </select>
+          </label>
+          <label>
+            <span className="text-xs font-bold text-gray-500">Client Type</span>
+            <select
+              value={form.clientType}
+              onChange={(event) => onChange({ clientType: event.target.value as ClientType })}
+              className="mt-1 w-full rounded-xl border border-line px-3 py-2.5 text-sm text-dravik-dark focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20"
+            >
+              {CLIENT_TYPES.map((type) => <option key={type} value={type}>{type}</option>)}
+            </select>
+          </label>
+          <label>
+            <span className="text-xs font-bold text-gray-500">Status</span>
+            <select
+              value={form.status}
+              onChange={(event) => onChange({ status: event.target.value as LeadStatus })}
+              className="mt-1 w-full rounded-xl border border-line px-3 py-2.5 text-sm text-dravik-dark focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20"
+            >
+              {STATUS_OPTIONS.map((status) => <option key={status} value={status}>{status}</option>)}
+            </select>
+          </label>
+          <label>
+            <span className="text-xs font-bold text-gray-500">Assigned To</span>
+            <input
+              value={form.assignedTo}
+              onChange={(event) => onChange({ assignedTo: event.target.value })}
+              className="mt-1 w-full rounded-xl border border-line px-3 py-2.5 text-sm text-dravik-dark focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20"
+            />
+          </label>
+          <label>
+            <span className="text-xs font-bold text-gray-500">Min Budget</span>
+            <input
+              inputMode="numeric"
+              value={form.priceMin}
+              onChange={(event) => onChange({ priceMin: event.target.value })}
+              className="mt-1 w-full rounded-xl border border-line px-3 py-2.5 text-sm text-dravik-dark focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20"
+            />
+          </label>
+          <label>
+            <span className="text-xs font-bold text-gray-500">Max Budget</span>
+            <input
+              inputMode="numeric"
+              value={form.priceMax}
+              onChange={(event) => onChange({ priceMax: event.target.value })}
+              className="mt-1 w-full rounded-xl border border-line px-3 py-2.5 text-sm text-dravik-dark focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20"
+            />
+          </label>
+          <label className="sm:col-span-2">
+            <span className="text-xs font-bold text-gray-500">Notes</span>
+            <textarea
+              rows={4}
+              value={form.notes}
+              onChange={(event) => onChange({ notes: event.target.value })}
+              className="mt-1 w-full resize-none rounded-xl border border-line px-3 py-2.5 text-sm text-dravik-dark focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20"
+            />
+          </label>
+        </div>
+
+        <div className="flex flex-shrink-0 items-center justify-end gap-3 border-t border-line bg-surface px-6 py-4">
+          <button
+            type="button"
+            onClick={onClose}
+            className="rounded-xl border border-line bg-white px-4 py-2 text-sm font-semibold text-gray-500 transition-colors hover:text-dravik-dark"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            disabled={submitting}
+            className="inline-flex items-center gap-2 rounded-xl bg-dravik-dark px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-black disabled:cursor-wait disabled:opacity-60"
+          >
+            {submitting ? <Loader2 size={14} className="animate-spin" /> : <Plus size={14} />}
+            {submitting ? "Saving..." : "Save Lead"}
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+}
+
 // ─── Page ─────────────────────────────────────────────────────
 export default function LeadsPage() {
   const [leads, setLeads]         = useState<Lead[]>(SAMPLE_LEADS);
@@ -417,7 +677,31 @@ export default function LeadsPage() {
   const [selectedLead, setSelectedLead]   = useState<Lead | null>(null);
   const [panelOpen, setPanelOpen] = useState(false);
   const [importOpen, setImportOpen] = useState(false);
+  const [formOpen, setFormOpen] = useState(false);
+  const [formMode, setFormMode] = useState<"add" | "edit">("add");
+  const [editingLead, setEditingLead] = useState<Lead | null>(null);
+  const [form, setForm] = useState<LeadFormState>(EMPTY_LEAD_FORM);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [now] = useState(() => Date.now());
+
+  useEffect(() => {
+    let mounted = true;
+
+    async function loadLeads() {
+      try {
+        const payload = await fetchOperationalRecords<Lead>("leads");
+        if (!mounted) return;
+        setLeads(payload.records);
+      } catch (loadError) {
+        if (!mounted) return;
+        setError(loadError instanceof Error ? loadError.message : "Unable to load leads.");
+      }
+    }
+
+    void loadLeads();
+    return () => { mounted = false; };
+  }, []);
 
   // ── Tab filtering ─────────────────────────────────────────
   const tabFiltered = useMemo(() => {
@@ -475,10 +759,76 @@ export default function LeadsPage() {
 
   const handleImportLeads = useCallback((importedLeads: Lead[]) => {
     if (!importedLeads.length) return;
-    setLeads((current) => [...importedLeads, ...current]);
-    setActiveTab("All Leads");
-    setQuery("");
+    setError(null);
+
+    void Promise.all(importedLeads.map((lead) => createOperationalRecord<Lead>("leads", lead)))
+      .then((payloads) => {
+        setLeads((current) => [...payloads.map((payload) => payload.record), ...current]);
+        setActiveTab("All Leads");
+      })
+      .catch((importError) => {
+        setError(importError instanceof Error ? importError.message : "Unable to import leads.");
+      });
   }, []);
+
+  function updateForm(patch: Partial<LeadFormState>) {
+    setForm((current) => ({ ...current, ...patch }));
+  }
+
+  function openAddLead() {
+    setFormMode("add");
+    setEditingLead(null);
+    setForm(EMPTY_LEAD_FORM);
+    setFormOpen(true);
+  }
+
+  function openEditLead(lead: Lead) {
+    setFormMode("edit");
+    setEditingLead(lead);
+    setForm(leadToForm(lead));
+    setFormOpen(true);
+  }
+
+  async function handleSubmitLead(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setSubmitting(true);
+    setError(null);
+
+    try {
+      const nextLead = formToLead(form, editingLead ?? undefined);
+
+      if (formMode === "edit" && editingLead) {
+        const payload = await updateOperationalRecord<Lead>("leads", editingLead.id, nextLead);
+        setLeads((current) => current.map((lead) => lead.id === editingLead.id ? payload.record : lead));
+        setSelectedLead(payload.record);
+      } else {
+        const payload = await createOperationalRecord<Lead>("leads", nextLead);
+        setLeads((current) => [payload.record, ...current]);
+        setSelectedLead(payload.record);
+        setPanelOpen(true);
+      }
+
+      setActiveTab("All Leads");
+      setFormOpen(false);
+    } catch (saveError) {
+      setError(saveError instanceof Error ? saveError.message : "Unable to save lead.");
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  async function handleDeleteLead(lead: Lead) {
+    setError(null);
+
+    try {
+      await archiveOperationalRecord("leads", lead.id);
+      setLeads((current) => current.filter((item) => item.id !== lead.id));
+      setSelectedLead(null);
+      setPanelOpen(false);
+    } catch (deleteError) {
+      setError(deleteError instanceof Error ? deleteError.message : "Unable to archive lead.");
+    }
+  }
 
   return (
     <>
@@ -529,6 +879,16 @@ export default function LeadsPage() {
               >
                 <Upload size={14} />
                 Import Leads
+              </button>
+            </div>
+            <div className="px-4 py-2.5">
+              <button
+                type="button"
+                onClick={openAddLead}
+                className="inline-flex items-center gap-2 rounded-xl border border-line bg-white px-3.5 py-2 text-sm font-semibold text-dravik-dark hover:border-gold hover:text-gold transition-colors whitespace-nowrap"
+              >
+                <Plus size={14} />
+                New Lead
               </button>
             </div>
 
@@ -595,6 +955,12 @@ export default function LeadsPage() {
           </div>
         </div>
 
+        {error && (
+          <div className="flex-shrink-0 border-b border-rose-200 bg-rose-50 px-5 py-3 text-sm font-semibold text-rose-700">
+            {error}
+          </div>
+        )}
+
         {/* ── Kanban pipeline ───────────────────────────────── */}
         <div className="flex-1 min-h-0 overflow-hidden">
           {visibleLeads.length === 0 && query ? (
@@ -625,6 +991,8 @@ export default function LeadsPage() {
         lead={selectedLead}
         open={panelOpen}
         onClose={handleClosePanel}
+        onEdit={openEditLead}
+        onDelete={(lead) => void handleDeleteLead(lead)}
       />
 
       {importOpen && (
@@ -634,6 +1002,16 @@ export default function LeadsPage() {
           onImport={handleImportLeads}
         />
       )}
+
+      <LeadFormModal
+        open={formOpen}
+        mode={formMode}
+        form={form}
+        submitting={submitting}
+        onChange={updateForm}
+        onClose={() => setFormOpen(false)}
+        onSubmit={handleSubmitLead}
+      />
     </>
   );
 }

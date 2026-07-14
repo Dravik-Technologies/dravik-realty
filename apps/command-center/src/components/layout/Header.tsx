@@ -6,11 +6,10 @@ import { usePathname } from "next/navigation";
 import { Menu, Search, ChevronDown, User, LogOut } from "lucide-react";
 import type { CommandCenterSession } from "@dravik/contracts/identity";
 import { useShell } from "./ShellProvider";
-import { BrandLogo } from "@/components/brand/BrandLogo";
-import { useTenantBranding } from "@/components/brand/TenantBrandingProvider";
 import GlobalSearch       from "./GlobalSearch";
 import NotificationCenter from "./NotificationCenter";
 import { cn } from "@dravik/shared";
+import { useTenantBranding } from "@/components/brand/TenantBrandingProvider";
 
 const PAGE_TITLES: Record<string, string> = {
   "/dashboard":        "Dashboard",
@@ -48,10 +47,11 @@ function resolveTitle(pathname: string): string {
 }
 
 export default function Header({ session }: { session: CommandCenterSession }) {
-  const { branding } = useTenantBranding();
   const { openMobileSidebar } = useShell();
+  const { branding } = useTenantBranding();
   const pathname  = usePathname();
   const pageTitle = resolveTitle(pathname);
+  const tenantName = branding.companyName || session.tenant.name;
   const hideGlobalSearch = pathname === "/referrals";
 
   const [userMenuOpen, setUserMenuOpen] = useState(false);
@@ -94,22 +94,11 @@ export default function Header({ session }: { session: CommandCenterSession }) {
           <Menu size={20} />
         </button>
 
-        {/* Mobile logo mark */}
-        <div className="lg:hidden flex items-center flex-shrink-0">
-          <BrandLogo variant="mark" className="h-11 w-11" priority />
-        </div>
-
-        {/* Page title — desktop */}
-        <div className="hidden lg:flex items-center gap-3 flex-shrink-0 min-w-0">
-          <BrandLogo variant="mark" className="h-11 w-11" priority />
-          <div className="min-w-0">
-            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[var(--brand-header-muted)] leading-tight">
-              {branding.companyName}
-            </p>
-            <h1 className="text-sm font-black text-[var(--brand-header-text)] leading-tight truncate">
-              {pageTitle}
-            </h1>
-          </div>
+        {/* Page title */}
+        <div className="flex items-center flex-shrink-0 min-w-0">
+          <h1 className="text-sm font-black text-[var(--brand-header-text)] leading-tight truncate">
+            {pageTitle}
+          </h1>
         </div>
 
         {!hideGlobalSearch && (
@@ -155,7 +144,7 @@ export default function Header({ session }: { session: CommandCenterSession }) {
               </div>
               <div className="hidden sm:block text-left">
                 <p className="text-xs font-semibold text-[var(--brand-header-text)] leading-tight">{session.user.name}</p>
-                <p className="text-[10px] text-[var(--brand-header-muted)] leading-tight">{session.tenant.name}</p>
+                <p className="text-[10px] text-[var(--brand-header-muted)] leading-tight">{tenantName}</p>
               </div>
               <ChevronDown
                 size={13}
@@ -167,7 +156,7 @@ export default function Header({ session }: { session: CommandCenterSession }) {
               <div className="absolute right-0 top-full mt-2 w-56 bg-white border border-line rounded-2xl shadow-xl overflow-hidden animate-fade-in z-50">
                 <div className="px-4 py-3.5 border-b border-line">
                   <p className="text-sm font-bold text-dravik-dark">{session.user.name}</p>
-                  <p className="text-xs text-gray-400 mt-0.5">{session.user.title} · {session.tenant.name}</p>
+                  <p className="text-xs text-gray-400 mt-0.5">{session.user.title} · {tenantName}</p>
                 </div>
                 <div className="py-1">
                   <Link

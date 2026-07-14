@@ -21,6 +21,8 @@ import {
   Calendar,
   ArrowRightLeft,
   Info,
+  Edit3,
+  Trash2,
 } from "lucide-react";
 import type { Lead, ActivityType } from "@dravik/contracts/crm";
 import { SOURCE_STYLES } from "@dravik/contracts/crm";
@@ -71,12 +73,16 @@ interface LeadDetailPanelProps {
   lead: Lead | null;
   open: boolean;
   onClose: () => void;
+  onEdit: (lead: Lead) => void;
+  onDelete: (lead: Lead) => void;
 }
 
 export default function LeadDetailPanel({
   lead,
   open,
   onClose,
+  onEdit,
+  onDelete,
 }: LeadDetailPanelProps) {
   const panelRef    = useRef<HTMLDivElement>(null);
   const closeRef    = useRef<HTMLButtonElement>(null);
@@ -219,6 +225,20 @@ export default function LeadDetailPanel({
                 <span className="text-xs text-gray-400 truncate">{lead.email}</span>
               </div>
               <div className="flex gap-2 mt-2.5">
+                <button
+                  onClick={() => onEdit(lead)}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-gold hover:text-dravik-dark text-white text-xs font-semibold transition-all"
+                >
+                  <Edit3 size={13} />
+                  Edit
+                </button>
+                <button
+                  onClick={() => onDelete(lead)}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-rose-500 text-white text-xs font-semibold transition-all"
+                >
+                  <Trash2 size={13} />
+                  Archive
+                </button>
                 {[
                   { icon: Phone,         label: "Call"  },
                   { icon: MessageSquare, label: "SMS"   },

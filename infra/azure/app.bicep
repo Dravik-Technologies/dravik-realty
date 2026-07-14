@@ -14,7 +14,7 @@ param imageName string = 'command-center'
 param imageTag string
 param managedIdentityName string
 param maxReplicas int = environmentName == 'prod' ? 20 : 5
-param minReplicas int = environmentName == 'prod' ? 2 : 1
+param minReplicas int = 0
 
 @secure()
 param databaseUrl string = ''

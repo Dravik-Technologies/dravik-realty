@@ -44,6 +44,7 @@ test.describe("settings", () => {
 
     const headerBrandLabel = page.locator("header").getByText("Titanium Realty", { exact: true }).first();
     await expect(headerBrandLabel).toHaveCSS("color", "rgba(253, 253, 253, 0.78)");
+    await expect(page.locator("header .brand-logo-field")).toHaveCount(0);
 
     await page.getByRole("button", { name: "Editorial Serif" }).click();
 
@@ -61,9 +62,10 @@ test.describe("settings", () => {
     const logoBox = await logoPreview.boundingBox();
     expect(logoBox?.width).toBeGreaterThan(100);
 
-    const shellLogo = page.locator("header").getByRole("img", { name: "Titanium Realty" }).first();
+    const shellSidebar = page.locator("aside").first();
+    const shellLogo = shellSidebar.getByRole("img", { name: "Titanium Realty" }).first();
     await expect(shellLogo).toHaveCSS("object-fit", "cover");
-    const shellLogoFrame = page.locator("header .brand-logo-frame").first();
+    const shellLogoFrame = shellSidebar.locator(".brand-logo-frame").first();
     const shellLogoFrameBox = await shellLogoFrame.boundingBox();
     const shellLogoRadius = await shellLogoFrame.evaluate((element) =>
       Number.parseFloat(getComputedStyle(element).borderTopLeftRadius)
@@ -76,7 +78,8 @@ test.describe("settings", () => {
     await expect(page.locator("header")).toHaveCSS("background-color", "rgb(225, 29, 72)");
     await expect(page.locator("header")).toContainText("Titanium Realty");
     await expect(page.locator("body")).toHaveCSS("font-family", /Georgia/);
-    await expect(page.locator("header").getByRole("img", { name: "Titanium Realty" })).toBeVisible();
+    await expect(page.locator("header .brand-logo-field")).toHaveCount(0);
+    await expect(page.locator("aside").first().getByRole("img", { name: "Titanium Realty" })).toBeVisible();
   });
 
   test("appearance panel hydrates and saves tenant branding through the tenant API", async ({ page }) => {

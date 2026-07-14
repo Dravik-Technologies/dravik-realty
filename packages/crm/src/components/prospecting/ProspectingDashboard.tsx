@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   BarChart3,
   Building2,
@@ -21,7 +21,7 @@ import PowerDialer from "./PowerDialer";
 import CampaignsTab from "./CampaignsTab";
 import { SELLER_LEADS } from "../../data/prospecting";
 import type { SellerLead } from "@dravik/contracts/crm";
-import { cn } from "@dravik/shared";
+import { cn, fetchOperationalRecords } from "@dravik/shared";
 
 const GeoFarmingMap = dynamic(() => import("./GeoFarmingMap"), {
   ssr: false,
@@ -70,24 +70,44 @@ function KpiCard({
 
 export default function ProspectingDashboard() {
   const [activeTab, setActiveTab] = useState<ProspectingTab>("seller-leads");
+  const [sellerLeads, setSellerLeads] = useState<SellerLead[]>(SELLER_LEADS);
   const [farmFilter, setFarmFilter] = useState<Set<string> | null>(null);
   const [dialQueue, setDialQueue] = useState<string[]>([]);
   const [convertedLeadIds, setConvertedLeadIds] = useState<Set<string>>(new Set());
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+
+    async function loadSellerLeads() {
+      try {
+        const payload = await fetchOperationalRecords<SellerLead>("seller-leads");
+        if (!mounted) return;
+        setSellerLeads(payload.records);
+      } catch (loadError) {
+        if (!mounted) return;
+        setError(loadError instanceof Error ? loadError.message : "Unable to load seller leads.");
+      }
+    }
+
+    void loadSellerLeads();
+    return () => { mounted = false; };
+  }, []);
 
   const queueLeads = useMemo(
-    () => SELLER_LEADS.filter((lead) => dialQueue.includes(lead.id)),
-    [dialQueue]
+    () => sellerLeads.filter((lead) => dialQueue.includes(lead.id)),
+    [dialQueue, sellerLeads]
   );
 
   const kpis = useMemo(() => {
-    const expiredsToday = SELLER_LEADS.filter((lead) => lead.leadType === "Expired" && lead.daysSinceEvent <= 1).length;
-    const fsbos = SELLER_LEADS.filter((lead) => lead.leadType === "FSBO").length;
-    const frbos = SELLER_LEADS.filter((lead) => lead.leadType === "FRBO").length;
-    const highEquity = SELLER_LEADS.filter((lead) => lead.leadType === "High Equity").length;
-    const contactedThisWeek = SELLER_LEADS.filter((lead) => lead.lastContacted).length;
+    const expiredsToday = sellerLeads.filter((lead) => lead.leadType === "Expired" && lead.daysSinceEvent <= 1).length;
+    const fsbos = sellerLeads.filter((lead) => lead.leadType === "FSBO").length;
+    const frbos = sellerLeads.filter((lead) => lead.leadType === "FRBO").length;
+    const highEquity = sellerLeads.filter((lead) => lead.leadType === "High Equity").length;
+    const contactedThisWeek = sellerLeads.filter((lead) => lead.lastContacted).length;
 
     return { expiredsToday, fsbos, frbos, highEquity, contactedThisWeek };
-  }, []);
+  }, [sellerLeads]);
 
   function handleToggleQueue(id: string) {
     setDialQueue((prev) => (
@@ -151,6 +171,12 @@ export default function ProspectingDashboard() {
           </div>
         </div>
 
+        {error && (
+          <div className="border-t border-rose-200 bg-rose-50 px-6 py-3 text-sm font-semibold text-rose-700">
+            {error}
+          </div>
+        )}
+
         <div className="px-6 border-t border-line flex items-center gap-1 overflow-x-auto">
           {TABS.map(({ id, label, icon: Icon }) => (
             <button
@@ -183,8 +209,16 @@ export default function ProspectingDashboard() {
         {activeTab === "seller-leads" && (
           <div className="h-full bg-white">
             <SellerLeadsTable
+              leads={sellerLeads}
               farmFilter={farmFilter}
               dialQueue={dialQueue}
+              onCreateLead={(lead) => setSellerLeads((current) => [lead, ...current])}
+              onUpdateLead={(lead) => setSellerLeads((current) => current.map((item) => item.id === lead.id ? lead : item))}
+              onDeleteLead={(id) => {
+                setSellerLeads((current) => current.filter((item) => item.id !== id));
+                setDialQueue((current) => current.filter((queueId) => queueId !== id));
+              }}
+              onError={setError}
               onToggleQueue={handleToggleQueue}
               onConvert={handleConvert}
               onStartDialing={() => setActiveTab("power-dialer")}
